@@ -117,15 +117,15 @@ public class NetworkingPlayer : NetworkBehaviour
         localRightHand = GameObject.FindWithTag("RightHand");
 
         //not sure if these tracked are neccary, delete later
-        /*trackedObjRight = localRightHand.GetComponent<SteamVR_TrackedObject>();
-        trackedObjLeft = localLeftHand.GetComponent<SteamVR_TrackedObject>();*/
+        trackedObjRight = localRightHand.GetComponent<SteamVR_TrackedObject>();
+        trackedObjLeft = localLeftHand.GetComponent<SteamVR_TrackedObject>();
 
         cL = localLeftHand.GetComponent<SteamVR_Behaviour_Pose>();
         cR = localRightHand.GetComponent<SteamVR_Behaviour_Pose>();
 
 
 
-        Debug.Log("server active" + NetworkServer.active);
+        Debug.Log("server active?" + NetworkServer.active);
     }
 
    
