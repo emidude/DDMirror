@@ -53,7 +53,7 @@ public class NetworkingPlayer : NetworkBehaviour
 
     void Update()
     {
-        if (isLocalPlayer)
+     /*   if (isLocalPlayer)
         {
             if (spawned == false)
             {
@@ -70,7 +70,7 @@ public class NetworkingPlayer : NetworkBehaviour
                 }
             }
 
-        }
+        }*/
 
 
         updateHeadAndHands();
@@ -124,7 +124,7 @@ public class NetworkingPlayer : NetworkBehaviour
         cR = localRightHand.GetComponent<SteamVR_Behaviour_Pose>();
 
 
-
+        CmdSpawnCubes();
         Debug.Log("server active?" + NetworkServer.active);
     }
 
@@ -195,6 +195,11 @@ public class NetworkingPlayer : NetworkBehaviour
       
             cube.transform.position = v3;
 
+    }
+
+    void UpdateCubes(Vector3 vL, Vector3 vR)
+    {
+       // GraphLocal.SimpleSin()
     }
 
 }
