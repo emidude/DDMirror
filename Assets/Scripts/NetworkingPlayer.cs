@@ -27,8 +27,15 @@ public class NetworkingPlayer : NetworkBehaviour
     SteamVR_Behaviour_Pose cL, cR;
 
     public GameObject cube, cubePf;
+    
 
     bool spawned = false;
+
+    //maybe clean up and put in graphsscript later
+    [Range(10, 100)]
+    public int resolution = 10;
+    GameObject[] points;
+
 
     private void Start()
     {
@@ -64,8 +71,7 @@ public class NetworkingPlayer : NetworkBehaviour
             }
             else
             {
-                CmdUpdateCubes(cL.GetVelocity());
-                //UpdateCubes(cL.GetVelocity());
+                CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
             }
         }
         
@@ -163,19 +169,51 @@ public class NetworkingPlayer : NetworkBehaviour
     [Command]
     void CmdSpawnCubes()
     {
-        cube = Instantiate(cubePf);
+        //cube = Instantiate(cubePf);
+
         if (!cube)
         {
             Debug.Log("CUBE IS NULL");
         }
-        NetworkServer.Spawn(cube);
+        //NetworkServer.Spawn(cube);
+
+        float step = 2f / resolution;
+        Vector3 scale = Vector3.one * step;
+        transform.position = localHead.transform.position;
+
+        //points = new Transform[resolution * resolution];
+        points = new GameObject[resolution * resolution];
+        for (int i = 0; i < points.Length; i++)
+        {
+            GameObject point = Instantiate(cube);
+            point.transform.localScale = scale;
+            point.transform.SetParent(transform, false);
+            points[i] = point;
+            NetworkServer.Spawn(point);
+
+        }
+
+
     }
 
     [Command]
-    void CmdUpdateCubes(Vector3 v3)
+    void CmdUpdateCubes(Vector3 vL, Vector3 vR)
     {
-      
-            cube.transform.position = v3;
+
+        float t = Time.time;
+        float step = 2f / resolution;
+        for (int i = 0, z = 0; z < resolution; z++)
+        {
+            float v = (z + 0.5f) * step - 1f;
+            for (int x = 0; x < resolution; x++, i++)
+            {
+                float u = (x + 0.5f) * step - 1f;
+
+
+                    points[i].transform.localPosition = Graphs.SimpleSin(vL, vR, u, v, t) * 5;
+               
+            }
+        }
 
     }
 

@@ -67,6 +67,7 @@ MonoBehaviour:
     type: 3}
   cube: {fileID: 0}
   cubePf: {fileID: 1223016012747116, guid: 16c2e13a22648d544ba10e09297cd061, type: 3}
+  testpf: {fileID: 4085835571985460, guid: 16c2e13a22648d544ba10e09297cd061, type: 3}
 --- !u!114 &1973644640722397171
 MonoBehaviour:
   m_ObjectHideFlags: 0
