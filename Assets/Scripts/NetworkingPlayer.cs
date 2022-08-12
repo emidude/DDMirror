@@ -30,6 +30,10 @@ public class NetworkingPlayer : NetworkBehaviour
 
     bool spawned = false;
 
+    [Range(10, 100)]
+    public int resolution = 10;
+    GameObject[] points;
+
     private void Start()
     {
         
@@ -64,7 +68,7 @@ public class NetworkingPlayer : NetworkBehaviour
             }
             else
             {
-                CmdUpdateCubes(cL.GetVelocity());
+               // CmdUpdateCubes(cL.GetVelocity());
                 //UpdateCubes(cL.GetVelocity());
             }
         }
@@ -163,12 +167,27 @@ public class NetworkingPlayer : NetworkBehaviour
     [Command]
     void CmdSpawnCubes()
     {
-        cube = Instantiate(cubePf);
+        /*cube = Instantiate(cubePf);
         if (!cube)
         {
             Debug.Log("CUBE IS NULL");
         }
-        NetworkServer.Spawn(cube);
+        NetworkServer.Spawn(cube);*/
+        float step = 2f / resolution;
+        Vector3 scale = Vector3.one * step;
+        transform.position = localHead.transform.position;
+
+        //points = new Transform[resolution * resolution];
+        points = new GameObject[resolution * resolution];
+        for (int i = 0; i < points.Length; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            point.transform.SetParent(transform, false);
+            points[i] = point;
+            NetworkServer.Spawn(point);
+
+        }
     }
 
     [Command]
