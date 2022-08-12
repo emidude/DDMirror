@@ -64,8 +64,8 @@ public class NetworkingPlayer : NetworkBehaviour
             }
             else
             {
-                //CmdUpdateCubes(cL.GetVelocity());
-                UpdateCubes(cL.GetVelocity());
+                CmdUpdateCubes(cL.GetVelocity());
+                //UpdateCubes(cL.GetVelocity());
             }
         }
         
