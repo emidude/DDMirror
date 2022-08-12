@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a26182d8-baa5-4a20-b7be-9b91334b40a8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PlayerNet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/PlayerNet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.DDMirror/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DDMirror/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/NetworkingPlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NetworkingPlayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SteamVR_Resources/Resources/SteamVR_Settings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SteamVR_Resources/Resources/SteamVR_Settings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SteamVR_Resources/Resources/SteamVR_Settings.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SteamVR_Resources/Resources/SteamVR_Settings.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/XR/Settings/Open VR Settings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/XR/Settings/Open VR Settings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,43 +12,255 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/NetworkingPlayer.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="85" column="49" lean-forward="true" selection-start-line="85" selection-start-column="11" selection-end-line="85" selection-end-column="49" />
+            <state relative-caret-position="437">
+              <caret line="97" column="8" selection-start-line="97" selection-start-column="8" selection-end-line="97" selection-end-column="8" />
               <folding>
-                <marker date="1660268334298" expanded="true" signature="6:108" ph="..." />
-                <marker date="1660268334298" expanded="true" signature="159:6063" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="1012:1033" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="1038:1280" ph="/* void Start() ... */" />
-                <marker date="1660268334298" expanded="true" signature="1280:1520" ph="/* networkedHead.GetComponent&lt;MeshRenderer&gt;().enabled = false; //commented out for testing ... */" />
-                <marker date="1660268334298" expanded="true" signature="1520:1530" ph="/* } ... */" />
-                <marker date="1660268334298" expanded="true" signature="1549:2402" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="1582:2031" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="1626:2020" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="1683:1796" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="1817:2006" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="2091:2387" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="2220:2282" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="2299:2377" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="2450:3926" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="2465:2529" ph="/* this is ONLY called on local player ... */" />
-                <marker date="1660268334298" expanded="true" signature="2745:2855" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="2866:3111" ph="/* now link localHMD, localHands to the Rig so that they are ... */" />
-                <marker date="1660268334298" expanded="true" signature="3962:5746" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="3997:4083" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="4096:5740" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="4119:4429" ph="/* we are the local player. ... */" />
-                <marker date="1660268334298" expanded="true" signature="4464:4752" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="5048:5254" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="5271:5353" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="5420:5630" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="5647:5730" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="5786:5947" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="5847:5906" ph="{...}" />
-                <marker date="1660268334298" expanded="true" signature="5998:6060" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="6:108" ph="..." />
+                <marker date="1660347293880" expanded="true" signature="159:6460" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="1091:1112" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="1117:1359" ph="/* void Start() ... */" />
+                <marker date="1660347293880" expanded="true" signature="1359:1599" ph="/* networkedHead.GetComponent&lt;MeshRenderer&gt;().enabled = false; //commented out for testing ... */" />
+                <marker date="1660347293880" expanded="true" signature="1599:1609" ph="/* } ... */" />
+                <marker date="1660347293880" expanded="true" signature="1628:2076" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="1643:1686" ph="/* TODO: FIX ... */" />
+                <marker date="1660347293880" expanded="true" signature="1714:2061" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="1843:1905" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="1922:2051" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="1952:2037" ph="/* CmdUpdateCubes(cL.GetVelocity()); ... */" />
+                <marker date="1660347293880" expanded="true" signature="2124:3628" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="2139:2203" ph="/* this is ONLY called on local player ... */" />
+                <marker date="1660347293880" expanded="true" signature="2419:2529" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="2540:2785" ph="/* now link localHMD, localHands to the Rig so that they are ... */" />
+                <marker date="1660347293880" expanded="true" signature="3246:3399" ph="/* trackedObjRight = localRightHand.GetComponent&lt;SteamVR_TrackedObject&gt;(); ... */" />
+                <marker date="1660347293880" expanded="true" signature="3715:5499" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="3750:3836" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="3849:5493" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="3872:4182" ph="/* we are the local player. ... */" />
+                <marker date="1660347293880" expanded="true" signature="4217:4505" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="4801:5007" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="5024:5106" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="5173:5383" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="5400:5483" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="5539:6260" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="5554:5698" ph="/* cube = Instantiate(cubePf); ... */" />
+                <marker date="1660347293880" expanded="true" signature="6005:6254" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="6311:6373" ph="{...}" />
+                <marker date="1660347293880" expanded="true" signature="6407:6457" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Mirror/Runtime/NetworkIdentity.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-401">
+              <caret line="792" selection-start-line="792" selection-end-line="792" />
+              <folding>
+                <marker date="1660265382168" expanded="false" signature="6:240" ph="..." />
+                <marker date="1660265382168" expanded="true" signature="364:59987" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="371:594" ph="/* Default = use interest management ... */" />
+                <marker date="1660265382168" expanded="true" signature="706:911" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="1031:1154" ph="/* NetworkIdentity.Awake initializes all NetworkComponents. ... */" />
+                <marker date="1660265382168" expanded="true" signature="1380:59985" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="1503:2035" ph="/* IMPORTANT: ... */" />
+                <marker date="1660265382168" expanded="true" signature="2192:2790" ph="/* IMPORTANT: ... */" />
+                <marker date="1660265382168" expanded="true" signature="2954:3501" ph="/* IMPORTANT: ... */" />
+                <marker date="1660265382168" expanded="true" signature="4153:4283" ph="/* note: null until OnStartServer was called. this is necessary for ... */" />
+                <marker date="1660265382168" expanded="true" signature="5074:5174" ph="/* Set before Destroy is called so that OnDestroy doesn't try to destroy ... */" />
+                <marker date="1660265382168" expanded="true" signature="5721:6000" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="5796:5990" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="6168:6462" ph="/* server sees ALL spawned ones. ... */" />
+                <marker date="1660265382168" expanded="true" signature="6728:7449" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="6754:7439" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="6785:6888" ph="/* server / host mode: use the one from server. ... */" />
+                <marker date="1660265382168" expanded="true" signature="7077:7300" ph="/* neither: then we are testing. ... */" />
+                <marker date="1660265382168" expanded="true" signature="7581:7944" ph="/* current visibility ... */" />
+                <marker date="1660265382168" expanded="true" signature="8248:8699" ph="/* broadcasting serializes all entities around a player for each player. ... */" />
+                <marker date="1660265382168" expanded="true" signature="8798:8906" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="9002:9658" ph="/* The AssetId trick: ... */" />
+                <marker date="1660265382168" expanded="true" signature="9686:11455" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="9712:10209" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="9990:10099" ph="/* convert string to Guid and use .Empty to avoid exception if ... */" />
+                <marker date="1660265382168" expanded="true" signature="10234:11445" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="10509:10573" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="10671:10871" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="10971:11239" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="11715:11881" ph="/* reset only client sided statics. ... */" />
+                <marker date="1660265382168" expanded="true" signature="11931:12035" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="12086:12137" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="12147:12293" ph="/* RuntimeInitializeOnLoadMethod -&gt; fast playmode without domain reload ... */" />
+                <marker date="1660265382168" expanded="true" signature="12420:12541" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="12841:13256" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="12978:13156" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="14112:14329" ph="/* NetworkBehaviour components are initialized in Awake once. ... */" />
+                <marker date="1660265382168" expanded="true" signature="14381:15087" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="14404:14500" ph="/* Get all NetworkBehaviours ... */" />
+                <marker date="1660265382168" expanded="true" signature="14890:15077" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="15097:15195" ph="/* Awake is only called in Play mode. ... */" />
+                <marker date="1660265382168" expanded="true" signature="15225:15983" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="15248:15500" ph="/* initialize NetworkBehaviour components. ... */" />
+                <marker date="1660265382168" expanded="true" signature="15572:15942" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="16010:16245" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="16033:16154" ph="/* OnValidate is not called when using Instantiate, so we can use ... */" />
+                <marker date="1660265382168" expanded="true" signature="16303:16526" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="16637:19185" ph="/* persistent sceneId assignment ... */" />
+                <marker date="1660265382168" expanded="true" signature="19214:21930" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="19237:19502" ph="/* we only ever assign sceneIds at edit time, never at runtime. ... */" />
+                <marker date="1660265382168" expanded="true" signature="19790:21684" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="19928:20356" ph="/* if a scene was never opened and we are building it, then a ... */" />
+                <marker date="1660265382168" expanded="true" signature="20623:21025" ph="/* if we generate the sceneId then we MUST be sure to set dirty ... */" />
+                <marker date="1660265382168" expanded="true" signature="21234:21339" ph="/* only assign if not a duplicate of an existing scene id ... */" />
+                <marker date="1660265382168" expanded="true" signature="21485:21670" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="21698:21882" ph="/* add to sceneIds dict no matter what ... */" />
+                <marker date="1660265382168" expanded="true" signature="21940:22641" ph="/* copy scene path hash into sceneId for scene objects. ... */" />
+                <marker date="1660265382168" expanded="true" signature="22695:23831" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="22718:23222" ph="/* Use `ToLower` to that because BuildPipeline.BuildPlayer is case insensitive but hash is case sensitive ... */" />
+                <marker date="1660265382168" expanded="true" signature="23629:23821" ph="/* log it. this is incredibly useful to debug sceneId issues. ... */" />
+                <marker date="1660265382168" expanded="true" signature="23856:27298" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="23943:24082" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="24095:24657" ph="/* are we currently in prefab editing mode? aka prefab stage ... */" />
+                <marker date="1660265382168" expanded="true" signature="24730:25992" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="24761:25231" ph="/* when modifying a prefab in prefab stage, Unity calls ... */" />
+                <marker date="1660265382168" expanded="true" signature="25306:25978" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="25421:25691" ph="/* Debug.Log($&quot;{name} scene:{gameObject.scene.name} sceneid reset to 0 because CurrentPrefabStage={PrefabStageUti ... */" />
+                <marker date="1660265382168" expanded="true" signature="26143:26243" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="26260:27288" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="26325:26910" ph="/* IMPORTANT: DO NOT clear assetId at runtime! ... */" />
+                <marker date="1660265382168" expanded="true" signature="26960:27032" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="27049:27274" ph="/* don't log. would show a lot when pressing play in uMMORPG/uSurvival/etc. ... */" />
+                <marker date="1660265382168" expanded="true" signature="27315:27657" ph="/* OnDestroy is called for all SPAWNED NetworkIdentities ... */" />
+                <marker date="1660265382168" expanded="true" signature="27682:29647" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="27705:27863" ph="/* Objects spawned from Instantiate are not allowed so are destroyed right away ... */" />
+                <marker date="1660265382168" expanded="true" signature="27941:28117" ph="/* If false the object has already been unspawned ... */" />
+                <marker date="1660265382168" expanded="true" signature="28161:28298" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="28330:29637" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="28361:29514" ph="/* previously there was a bug where isLocalPlayer was ... */" />
+                <marker date="1660265382168" expanded="true" signature="29686:32329" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="29868:30179" ph="/* set isLocalPlayer earlier, in case OnStartLocalplayer is called ... */" />
+                <marker date="1660265382168" expanded="true" signature="30230:30296" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="30310:30713" ph="/* If the instance/net ID is invalid here then this is an object instantiated from a prefab and the server should ... */" />
+                <marker date="1660265382168" expanded="true" signature="30741:31035" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="30772:30997" ph="/* This object has already been spawned, this method might be called again ... */" />
+                <marker date="1660265382168" expanded="true" signature="31164:31375" ph="/* Debug.Log($&quot;OnStartServer {this} NetId:{netId} SceneId:{sceneId:X}&quot;); ... */" />
+                <marker date="1660265382168" expanded="true" signature="31438:31565" ph="/* in host mode we set isClient true before calling OnStartServer, ... */" />
+                <marker date="1660265382168" expanded="true" signature="31603:31664" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="31730:32319" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="31761:32086" ph="/* an exception in OnStartServer should be caught, so that one ... */" />
+                <marker date="1660265382168" expanded="true" signature="32106:32184" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="32220:32305" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="32367:33040" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="32442:33030" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="32473:32798" ph="/* an exception in OnStartServer should be caught, so that one ... */" />
+                <marker date="1660265382168" expanded="true" signature="32818:32895" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="32931:33016" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="33107:34462" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="33250:33561" ph="/* set isLocalPlayer earlier, in case OnStartLocalplayer is called ... */" />
+                <marker date="1660265382168" expanded="true" signature="33612:33678" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="33815:34452" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="33846:34171" ph="/* an exception in OnStartClient should be caught, so that one ... */" />
+                <marker date="1660265382168" expanded="true" signature="34191:34317" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="34353:34438" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="34500:35172" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="34575:35162" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="34606:34930" ph="/* an exception in OnStopClient should be caught, so that ... */" />
+                <marker date="1660265382168" expanded="true" signature="34950:35027" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="35063:35148" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="35182:35922" ph="/* TODO any way to make this not static? ... */" />
+                <marker date="1660265382168" expanded="true" signature="36033:36862" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="36253:36852" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="36284:36614" ph="/* an exception in OnStartLocalPlayer should be caught, so that ... */" />
+                <marker date="1660265382168" expanded="true" signature="36634:36717" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="36753:36838" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="36905:37587" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="36980:37577" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="37011:37340" ph="/* an exception in OnStopLocalPlayer should be caught, so that ... */" />
+                <marker date="1660265382168" expanded="true" signature="37360:37442" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="37478:37563" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="37655:37881" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="37923:38603" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="37998:38593" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="38029:38357" ph="/* an exception in OnStartAuthority should be caught, so that one ... */" />
+                <marker date="1660265382168" expanded="true" signature="38377:38458" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="38494:38579" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="38644:39322" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="38719:39312" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="38750:39077" ph="/* an exception in OnStopAuthority should be caught, so that one ... */" />
+                <marker date="1660265382168" expanded="true" signature="39097:39177" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="39213:39298" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="39332:39745" ph="/* vis2k: readstring bug prevention: https://github.com/vis2k/Mirror/issues/2617 ... */" />
+                <marker date="1660265382168" expanded="true" signature="39840:41194" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="39863:40049" ph="/* write placeholder length bytes ... */" />
+                <marker date="1660265382168" expanded="true" signature="40327:40420" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="40452:40687" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="41204:41478" ph="/* serialize all components using dirtyComponentsMask ... */" />
+                <marker date="1660265382168" expanded="true" signature="41598:44055" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="41621:41724" ph="/* check if components are in byte.MaxRange just to be 100% sure ... */" />
+                <marker date="1660265382168" expanded="true" signature="42063:44045" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="42094:42333" ph="/* is this component dirty? ... */" />
+                <marker date="1660265382168" expanded="true" signature="42440:44031" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="42479:42692" ph="/* Debug.Log($&quot;OnSerializeAllSafely: {name} -&gt; {comp.GetType()} initial:{ initialState}&quot;); ... */" />
+                <marker date="1660265382168" expanded="true" signature="42881:42971" ph="/* serialize into ownerWriter first ... */" />
+                <marker date="1660265382168" expanded="true" signature="43065:43660" ph="/* copy into observersWriter too if SyncMode.Observers ... */" />
+                <marker date="1660265382168" expanded="true" signature="43721:44013" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="44065:44213" ph="/* get cached serialization for this tick (or serialize if none yet) ... */" />
+                <marker date="1660265382168" expanded="true" signature="44292:46514" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="44315:44674" ph="/* only rebuild serialization once per tick. reuse otherwise. ... */" />
+                <marker date="1660265382168" expanded="true" signature="44748:46440" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="45144:46209" ph="/* clear dirty bits for the components that we serialized. ... */" />
+                <marker date="1660265382168" expanded="true" signature="46612:48933" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="46863:46997" ph="/* call OnDeserialize and wrap it in a try-catch block so there's no ... */" />
+                <marker date="1660265382168" expanded="true" signature="47013:47233" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="47265:48215" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="48229:48354" ph="/* now the reader should be EXACTLY at 'before + size'. ... */" />
+                <marker date="1660265382168" expanded="true" signature="48399:48923" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="49020:50035" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="49073:49521" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="49687:50025" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="49843:50011" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="50267:51257" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="50363:50531" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="50658:50807" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="51009:51247" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="51324:53270" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="51369:51508" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="51567:51769" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="51598:51731" ph="/* if we try to add a connectionId that was already added, then ... */" />
+                <marker date="1660265382168" expanded="true" signature="51783:53058" ph="/* Debug.Log($&quot;Added observer: {conn.address} added for {gameObject}&quot;); ... */" />
+                <marker date="1660265382168" expanded="true" signature="53096:53171" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="53432:53502" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="53594:53883" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="53639:53873" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="53730:53824" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="54000:54508" ph="/* This causes hasAuthority to be set on the client that owns the object, ... */" />
+                <marker date="1660265382168" expanded="true" signature="54582:55534" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="54619:54788" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="54819:55011" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="55086:55276" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="55608:55816" ph="/* Applies to objects that had authority set by AssignClientAuthority, ... */" />
+                <marker date="1660265382168" expanded="true" signature="55860:56629" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="55897:56060" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="56115:56268" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="56313:56619" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="56639:57338" ph="/* Reset is called when the user hits the Reset button in the ... */" />
+                <marker date="1660265382168" expanded="true" signature="57368:58566" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="57636:57796" ph="/* isLocalPlayer = false; &lt;- cleared AFTER ClearLocalPlayer below! ... */" />
+                <marker date="1660265382168" expanded="true" signature="58008:58108" ph="/* clear local player if it was the local player, ... */" />
+                <marker date="1660265382168" expanded="true" signature="58139:58480" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="58170:58357" ph="/* only clear NetworkClient.localPlayer IF IT POINTS TO US! ... */" />
+                <marker date="1660265382168" expanded="true" signature="58678:58833" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="58753:58823" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="58843:59196" ph="/* Clear only dirty component's dirty bits. ignores components which ... */" />
+                <marker date="1660265382168" expanded="true" signature="59250:59481" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="59325:59471" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="59375:59457" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="59514:59979" ph="{...}" />
+                <marker date="1660265382168" expanded="true" signature="59537:59767" ph="/* ResetSyncObjects is called by Reset, which is called by Unity. ... */" />
+                <marker date="1660265382168" expanded="true" signature="59900:59969" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -65,6 +273,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/NetworkingPlayer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Mirror/Runtime/NetworkIdentity.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -92,17 +301,28 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="FileSystemExplorer" />
       <pane id="AssemblyExplorer" />
       <pane id="SolutionExplorer">
         <option name="show-all-files" value="false" />
       </pane>
+      <pane id="FileSystemExplorer" />
       <pane id="UnityExplorer">
         <subPane>
           <expand>
             <path>
               <item name="" type="e068e287:UnityExplorerRootNode" />
               <item name="Assets" type="8711f2a6:AssetsRoot" />
+            </path>
+            <path>
+              <item name="" type="e068e287:UnityExplorerRootNode" />
+              <item name="Assets" type="8711f2a6:AssetsRoot" />
+              <item name="Mirror" type="1045f7f1:UnityExplorerNode" />
+            </path>
+            <path>
+              <item name="" type="e068e287:UnityExplorerRootNode" />
+              <item name="Assets" type="8711f2a6:AssetsRoot" />
+              <item name="Mirror" type="1045f7f1:UnityExplorerNode" />
+              <item name="Runtime" type="1045f7f1:UnityExplorerNode" />
             </path>
             <path>
               <item name="" type="e068e287:UnityExplorerRootNode" />
@@ -167,7 +387,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="246000" />
+    <option name="totallyTimeSpent" value="385000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -182,17 +402,9 @@
     <frame x="108" y="37" width="1801" height="1100" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2498564" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2527283" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="NuGet" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Unit Tests" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Performance Profiler" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -200,12 +412,20 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Errors In Solution" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Unit Tests Coverage" />
+      <window_info anchor="bottom" id="NuGet" order="7" />
+      <window_info anchor="bottom" id="Performance Profiler" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info anchor="bottom" id="Unit Tests" order="12" />
+      <window_info anchor="bottom" id="Terminal" order="13" />
+      <window_info anchor="bottom" id="Event Log" order="14" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Errors In Solution" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Unit Tests Coverage" order="5" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,41 +444,251 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Assets/Mirror/Runtime/NetworkIdentity.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-401">
+          <caret line="792" selection-start-line="792" selection-end-line="792" />
+          <folding>
+            <marker date="1660265382168" expanded="false" signature="6:240" ph="..." />
+            <marker date="1660265382168" expanded="true" signature="364:59987" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="371:594" ph="/* Default = use interest management ... */" />
+            <marker date="1660265382168" expanded="true" signature="706:911" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="1031:1154" ph="/* NetworkIdentity.Awake initializes all NetworkComponents. ... */" />
+            <marker date="1660265382168" expanded="true" signature="1380:59985" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="1503:2035" ph="/* IMPORTANT: ... */" />
+            <marker date="1660265382168" expanded="true" signature="2192:2790" ph="/* IMPORTANT: ... */" />
+            <marker date="1660265382168" expanded="true" signature="2954:3501" ph="/* IMPORTANT: ... */" />
+            <marker date="1660265382168" expanded="true" signature="4153:4283" ph="/* note: null until OnStartServer was called. this is necessary for ... */" />
+            <marker date="1660265382168" expanded="true" signature="5074:5174" ph="/* Set before Destroy is called so that OnDestroy doesn't try to destroy ... */" />
+            <marker date="1660265382168" expanded="true" signature="5721:6000" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="5796:5990" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="6168:6462" ph="/* server sees ALL spawned ones. ... */" />
+            <marker date="1660265382168" expanded="true" signature="6728:7449" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="6754:7439" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="6785:6888" ph="/* server / host mode: use the one from server. ... */" />
+            <marker date="1660265382168" expanded="true" signature="7077:7300" ph="/* neither: then we are testing. ... */" />
+            <marker date="1660265382168" expanded="true" signature="7581:7944" ph="/* current visibility ... */" />
+            <marker date="1660265382168" expanded="true" signature="8248:8699" ph="/* broadcasting serializes all entities around a player for each player. ... */" />
+            <marker date="1660265382168" expanded="true" signature="8798:8906" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="9002:9658" ph="/* The AssetId trick: ... */" />
+            <marker date="1660265382168" expanded="true" signature="9686:11455" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="9712:10209" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="9990:10099" ph="/* convert string to Guid and use .Empty to avoid exception if ... */" />
+            <marker date="1660265382168" expanded="true" signature="10234:11445" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="10509:10573" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="10671:10871" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="10971:11239" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="11715:11881" ph="/* reset only client sided statics. ... */" />
+            <marker date="1660265382168" expanded="true" signature="11931:12035" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="12086:12137" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="12147:12293" ph="/* RuntimeInitializeOnLoadMethod -&gt; fast playmode without domain reload ... */" />
+            <marker date="1660265382168" expanded="true" signature="12420:12541" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="12841:13256" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="12978:13156" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="14112:14329" ph="/* NetworkBehaviour components are initialized in Awake once. ... */" />
+            <marker date="1660265382168" expanded="true" signature="14381:15087" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="14404:14500" ph="/* Get all NetworkBehaviours ... */" />
+            <marker date="1660265382168" expanded="true" signature="14890:15077" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="15097:15195" ph="/* Awake is only called in Play mode. ... */" />
+            <marker date="1660265382168" expanded="true" signature="15225:15983" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="15248:15500" ph="/* initialize NetworkBehaviour components. ... */" />
+            <marker date="1660265382168" expanded="true" signature="15572:15942" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="16010:16245" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="16033:16154" ph="/* OnValidate is not called when using Instantiate, so we can use ... */" />
+            <marker date="1660265382168" expanded="true" signature="16303:16526" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="16637:19185" ph="/* persistent sceneId assignment ... */" />
+            <marker date="1660265382168" expanded="true" signature="19214:21930" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="19237:19502" ph="/* we only ever assign sceneIds at edit time, never at runtime. ... */" />
+            <marker date="1660265382168" expanded="true" signature="19790:21684" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="19928:20356" ph="/* if a scene was never opened and we are building it, then a ... */" />
+            <marker date="1660265382168" expanded="true" signature="20623:21025" ph="/* if we generate the sceneId then we MUST be sure to set dirty ... */" />
+            <marker date="1660265382168" expanded="true" signature="21234:21339" ph="/* only assign if not a duplicate of an existing scene id ... */" />
+            <marker date="1660265382168" expanded="true" signature="21485:21670" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="21698:21882" ph="/* add to sceneIds dict no matter what ... */" />
+            <marker date="1660265382168" expanded="true" signature="21940:22641" ph="/* copy scene path hash into sceneId for scene objects. ... */" />
+            <marker date="1660265382168" expanded="true" signature="22695:23831" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="22718:23222" ph="/* Use `ToLower` to that because BuildPipeline.BuildPlayer is case insensitive but hash is case sensitive ... */" />
+            <marker date="1660265382168" expanded="true" signature="23629:23821" ph="/* log it. this is incredibly useful to debug sceneId issues. ... */" />
+            <marker date="1660265382168" expanded="true" signature="23856:27298" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="23943:24082" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="24095:24657" ph="/* are we currently in prefab editing mode? aka prefab stage ... */" />
+            <marker date="1660265382168" expanded="true" signature="24730:25992" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="24761:25231" ph="/* when modifying a prefab in prefab stage, Unity calls ... */" />
+            <marker date="1660265382168" expanded="true" signature="25306:25978" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="25421:25691" ph="/* Debug.Log($&quot;{name} scene:{gameObject.scene.name} sceneid reset to 0 because CurrentPrefabStage={PrefabStageUti ... */" />
+            <marker date="1660265382168" expanded="true" signature="26143:26243" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="26260:27288" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="26325:26910" ph="/* IMPORTANT: DO NOT clear assetId at runtime! ... */" />
+            <marker date="1660265382168" expanded="true" signature="26960:27032" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="27049:27274" ph="/* don't log. would show a lot when pressing play in uMMORPG/uSurvival/etc. ... */" />
+            <marker date="1660265382168" expanded="true" signature="27315:27657" ph="/* OnDestroy is called for all SPAWNED NetworkIdentities ... */" />
+            <marker date="1660265382168" expanded="true" signature="27682:29647" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="27705:27863" ph="/* Objects spawned from Instantiate are not allowed so are destroyed right away ... */" />
+            <marker date="1660265382168" expanded="true" signature="27941:28117" ph="/* If false the object has already been unspawned ... */" />
+            <marker date="1660265382168" expanded="true" signature="28161:28298" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="28330:29637" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="28361:29514" ph="/* previously there was a bug where isLocalPlayer was ... */" />
+            <marker date="1660265382168" expanded="true" signature="29686:32329" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="29868:30179" ph="/* set isLocalPlayer earlier, in case OnStartLocalplayer is called ... */" />
+            <marker date="1660265382168" expanded="true" signature="30230:30296" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="30310:30713" ph="/* If the instance/net ID is invalid here then this is an object instantiated from a prefab and the server should ... */" />
+            <marker date="1660265382168" expanded="true" signature="30741:31035" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="30772:30997" ph="/* This object has already been spawned, this method might be called again ... */" />
+            <marker date="1660265382168" expanded="true" signature="31164:31375" ph="/* Debug.Log($&quot;OnStartServer {this} NetId:{netId} SceneId:{sceneId:X}&quot;); ... */" />
+            <marker date="1660265382168" expanded="true" signature="31438:31565" ph="/* in host mode we set isClient true before calling OnStartServer, ... */" />
+            <marker date="1660265382168" expanded="true" signature="31603:31664" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="31730:32319" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="31761:32086" ph="/* an exception in OnStartServer should be caught, so that one ... */" />
+            <marker date="1660265382168" expanded="true" signature="32106:32184" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="32220:32305" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="32367:33040" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="32442:33030" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="32473:32798" ph="/* an exception in OnStartServer should be caught, so that one ... */" />
+            <marker date="1660265382168" expanded="true" signature="32818:32895" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="32931:33016" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="33107:34462" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="33250:33561" ph="/* set isLocalPlayer earlier, in case OnStartLocalplayer is called ... */" />
+            <marker date="1660265382168" expanded="true" signature="33612:33678" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="33815:34452" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="33846:34171" ph="/* an exception in OnStartClient should be caught, so that one ... */" />
+            <marker date="1660265382168" expanded="true" signature="34191:34317" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="34353:34438" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="34500:35172" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="34575:35162" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="34606:34930" ph="/* an exception in OnStopClient should be caught, so that ... */" />
+            <marker date="1660265382168" expanded="true" signature="34950:35027" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="35063:35148" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="35182:35922" ph="/* TODO any way to make this not static? ... */" />
+            <marker date="1660265382168" expanded="true" signature="36033:36862" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="36253:36852" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="36284:36614" ph="/* an exception in OnStartLocalPlayer should be caught, so that ... */" />
+            <marker date="1660265382168" expanded="true" signature="36634:36717" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="36753:36838" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="36905:37587" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="36980:37577" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="37011:37340" ph="/* an exception in OnStopLocalPlayer should be caught, so that ... */" />
+            <marker date="1660265382168" expanded="true" signature="37360:37442" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="37478:37563" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="37655:37881" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="37923:38603" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="37998:38593" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="38029:38357" ph="/* an exception in OnStartAuthority should be caught, so that one ... */" />
+            <marker date="1660265382168" expanded="true" signature="38377:38458" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="38494:38579" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="38644:39322" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="38719:39312" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="38750:39077" ph="/* an exception in OnStopAuthority should be caught, so that one ... */" />
+            <marker date="1660265382168" expanded="true" signature="39097:39177" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="39213:39298" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="39332:39745" ph="/* vis2k: readstring bug prevention: https://github.com/vis2k/Mirror/issues/2617 ... */" />
+            <marker date="1660265382168" expanded="true" signature="39840:41194" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="39863:40049" ph="/* write placeholder length bytes ... */" />
+            <marker date="1660265382168" expanded="true" signature="40327:40420" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="40452:40687" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="41204:41478" ph="/* serialize all components using dirtyComponentsMask ... */" />
+            <marker date="1660265382168" expanded="true" signature="41598:44055" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="41621:41724" ph="/* check if components are in byte.MaxRange just to be 100% sure ... */" />
+            <marker date="1660265382168" expanded="true" signature="42063:44045" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="42094:42333" ph="/* is this component dirty? ... */" />
+            <marker date="1660265382168" expanded="true" signature="42440:44031" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="42479:42692" ph="/* Debug.Log($&quot;OnSerializeAllSafely: {name} -&gt; {comp.GetType()} initial:{ initialState}&quot;); ... */" />
+            <marker date="1660265382168" expanded="true" signature="42881:42971" ph="/* serialize into ownerWriter first ... */" />
+            <marker date="1660265382168" expanded="true" signature="43065:43660" ph="/* copy into observersWriter too if SyncMode.Observers ... */" />
+            <marker date="1660265382168" expanded="true" signature="43721:44013" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="44065:44213" ph="/* get cached serialization for this tick (or serialize if none yet) ... */" />
+            <marker date="1660265382168" expanded="true" signature="44292:46514" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="44315:44674" ph="/* only rebuild serialization once per tick. reuse otherwise. ... */" />
+            <marker date="1660265382168" expanded="true" signature="44748:46440" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="45144:46209" ph="/* clear dirty bits for the components that we serialized. ... */" />
+            <marker date="1660265382168" expanded="true" signature="46612:48933" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="46863:46997" ph="/* call OnDeserialize and wrap it in a try-catch block so there's no ... */" />
+            <marker date="1660265382168" expanded="true" signature="47013:47233" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="47265:48215" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="48229:48354" ph="/* now the reader should be EXACTLY at 'before + size'. ... */" />
+            <marker date="1660265382168" expanded="true" signature="48399:48923" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="49020:50035" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="49073:49521" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="49687:50025" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="49843:50011" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="50267:51257" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="50363:50531" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="50658:50807" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="51009:51247" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="51324:53270" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="51369:51508" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="51567:51769" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="51598:51731" ph="/* if we try to add a connectionId that was already added, then ... */" />
+            <marker date="1660265382168" expanded="true" signature="51783:53058" ph="/* Debug.Log($&quot;Added observer: {conn.address} added for {gameObject}&quot;); ... */" />
+            <marker date="1660265382168" expanded="true" signature="53096:53171" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="53432:53502" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="53594:53883" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="53639:53873" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="53730:53824" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="54000:54508" ph="/* This causes hasAuthority to be set on the client that owns the object, ... */" />
+            <marker date="1660265382168" expanded="true" signature="54582:55534" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="54619:54788" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="54819:55011" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="55086:55276" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="55608:55816" ph="/* Applies to objects that had authority set by AssignClientAuthority, ... */" />
+            <marker date="1660265382168" expanded="true" signature="55860:56629" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="55897:56060" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="56115:56268" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="56313:56619" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="56639:57338" ph="/* Reset is called when the user hits the Reset button in the ... */" />
+            <marker date="1660265382168" expanded="true" signature="57368:58566" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="57636:57796" ph="/* isLocalPlayer = false; &lt;- cleared AFTER ClearLocalPlayer below! ... */" />
+            <marker date="1660265382168" expanded="true" signature="58008:58108" ph="/* clear local player if it was the local player, ... */" />
+            <marker date="1660265382168" expanded="true" signature="58139:58480" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="58170:58357" ph="/* only clear NetworkClient.localPlayer IF IT POINTS TO US! ... */" />
+            <marker date="1660265382168" expanded="true" signature="58678:58833" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="58753:58823" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="58843:59196" ph="/* Clear only dirty component's dirty bits. ignores components which ... */" />
+            <marker date="1660265382168" expanded="true" signature="59250:59481" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="59325:59471" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="59375:59457" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="59514:59979" ph="{...}" />
+            <marker date="1660265382168" expanded="true" signature="59537:59767" ph="/* ResetSyncObjects is called by Reset, which is called by Unity. ... */" />
+            <marker date="1660265382168" expanded="true" signature="59900:59969" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/NetworkingPlayer.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="85" column="49" lean-forward="true" selection-start-line="85" selection-start-column="11" selection-end-line="85" selection-end-column="49" />
+        <state relative-caret-position="437">
+          <caret line="97" column="8" selection-start-line="97" selection-start-column="8" selection-end-line="97" selection-end-column="8" />
           <folding>
-            <marker date="1660268334298" expanded="true" signature="6:108" ph="..." />
-            <marker date="1660268334298" expanded="true" signature="159:6063" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="1012:1033" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="1038:1280" ph="/* void Start() ... */" />
-            <marker date="1660268334298" expanded="true" signature="1280:1520" ph="/* networkedHead.GetComponent&lt;MeshRenderer&gt;().enabled = false; //commented out for testing ... */" />
-            <marker date="1660268334298" expanded="true" signature="1520:1530" ph="/* } ... */" />
-            <marker date="1660268334298" expanded="true" signature="1549:2402" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="1582:2031" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="1626:2020" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="1683:1796" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="1817:2006" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="2091:2387" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="2220:2282" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="2299:2377" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="2450:3926" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="2465:2529" ph="/* this is ONLY called on local player ... */" />
-            <marker date="1660268334298" expanded="true" signature="2745:2855" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="2866:3111" ph="/* now link localHMD, localHands to the Rig so that they are ... */" />
-            <marker date="1660268334298" expanded="true" signature="3962:5746" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="3997:4083" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="4096:5740" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="4119:4429" ph="/* we are the local player. ... */" />
-            <marker date="1660268334298" expanded="true" signature="4464:4752" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="5048:5254" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="5271:5353" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="5420:5630" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="5647:5730" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="5786:5947" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="5847:5906" ph="{...}" />
-            <marker date="1660268334298" expanded="true" signature="5998:6060" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="6:108" ph="..." />
+            <marker date="1660347293880" expanded="true" signature="159:6460" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="1091:1112" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="1117:1359" ph="/* void Start() ... */" />
+            <marker date="1660347293880" expanded="true" signature="1359:1599" ph="/* networkedHead.GetComponent&lt;MeshRenderer&gt;().enabled = false; //commented out for testing ... */" />
+            <marker date="1660347293880" expanded="true" signature="1599:1609" ph="/* } ... */" />
+            <marker date="1660347293880" expanded="true" signature="1628:2076" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="1643:1686" ph="/* TODO: FIX ... */" />
+            <marker date="1660347293880" expanded="true" signature="1714:2061" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="1843:1905" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="1922:2051" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="1952:2037" ph="/* CmdUpdateCubes(cL.GetVelocity()); ... */" />
+            <marker date="1660347293880" expanded="true" signature="2124:3628" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="2139:2203" ph="/* this is ONLY called on local player ... */" />
+            <marker date="1660347293880" expanded="true" signature="2419:2529" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="2540:2785" ph="/* now link localHMD, localHands to the Rig so that they are ... */" />
+            <marker date="1660347293880" expanded="true" signature="3246:3399" ph="/* trackedObjRight = localRightHand.GetComponent&lt;SteamVR_TrackedObject&gt;(); ... */" />
+            <marker date="1660347293880" expanded="true" signature="3715:5499" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="3750:3836" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="3849:5493" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="3872:4182" ph="/* we are the local player. ... */" />
+            <marker date="1660347293880" expanded="true" signature="4217:4505" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="4801:5007" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="5024:5106" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="5173:5383" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="5400:5483" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="5539:6260" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="5554:5698" ph="/* cube = Instantiate(cubePf); ... */" />
+            <marker date="1660347293880" expanded="true" signature="6005:6254" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="6311:6373" ph="{...}" />
+            <marker date="1660347293880" expanded="true" signature="6407:6457" ph="{...}" />
           </folding>
         </state>
       </provider>
