@@ -53,27 +53,8 @@ public class NetworkingPlayer : NetworkBehaviour
 
     void Update()
     {
-     /*   if (isLocalPlayer)
-        {
-            if (spawned == false)
-            {
-                if (!NetworkServer.active)
-                {
-                    Debug.Log("not active yet");
-                    return;
-                }
-                else
-                {
-                    Debug.Log("NetworkServer.active?=" + NetworkServer.active);
-                    CmdSpawnCubes();
-                    spawned = true;
-                }
-            }
-
-        }*/
-
-
-        updateHeadAndHands();
+        //TODO: FIX
+        //updateHeadAndHands();
 
         if (isLocalPlayer)
         {
@@ -83,7 +64,8 @@ public class NetworkingPlayer : NetworkBehaviour
             }
             else
             {
-                CmdUpdateCubes(cL.GetVelocity());
+                //CmdUpdateCubes(cL.GetVelocity());
+                UpdateCubes(cL.GetVelocity());
             }
         }
         
@@ -117,8 +99,8 @@ public class NetworkingPlayer : NetworkBehaviour
         localRightHand = GameObject.FindWithTag("RightHand");
 
         //not sure if these tracked are neccary, delete later
-        trackedObjRight = localRightHand.GetComponent<SteamVR_TrackedObject>();
-        trackedObjLeft = localLeftHand.GetComponent<SteamVR_TrackedObject>();
+        /*trackedObjRight = localRightHand.GetComponent<SteamVR_TrackedObject>();
+        trackedObjLeft = localLeftHand.GetComponent<SteamVR_TrackedObject>();*/
 
         cL = localLeftHand.GetComponent<SteamVR_Behaviour_Pose>();
         cR = localRightHand.GetComponent<SteamVR_Behaviour_Pose>();
@@ -129,7 +111,7 @@ public class NetworkingPlayer : NetworkBehaviour
     }
 
    
-
+    //TODO: need to fix head and hands not updating
     void updateHeadAndHands()
     {
 
@@ -197,9 +179,9 @@ public class NetworkingPlayer : NetworkBehaviour
 
     }
 
-    void UpdateCubes(Vector3 vL, Vector3 vR)
+    void UpdateCubes(Vector3 vL)
     {
-       // GraphLocal.SimpleSin()
+        cube.transform.position = vL;
     }
 
 }
