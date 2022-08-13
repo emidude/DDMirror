@@ -34,10 +34,6 @@ public class NetworkingPlayer : NetworkBehaviour
     GameObject[] points;
 
 
-    private void Start()
-    {
-        
-    }
     /*void Start()
     {
 
@@ -72,9 +68,9 @@ public class NetworkingPlayer : NetworkBehaviour
             }
         }
 
-        Debug.Log("head trandfoprm = " + localHead.transform.position + " nwhead= " + networkedHead.transform.position);
+        /*Debug.Log("head trandfoprm = " + localHead.transform.position + " nwhead= " + networkedHead.transform.position);
         Debug.Log("left hand= " + localLeftHand.transform.position + " nwLH =" + networkedLeftHand.transform.position);
-        Debug.Log("right hand=" + localRightHand.transform.position + " nwRH =" + networkedRightHand.transform.position);
+        Debug.Log("right hand=" + localRightHand.transform.position + " nwRH =" + networkedRightHand.transform.position);*/
         
     }
 
@@ -85,7 +81,6 @@ public class NetworkingPlayer : NetworkBehaviour
         // connect to rig
 
         Debug.Log(gameObject.name + "Entered local start player, locating rig objects");
-        isLinkedToVR = true; 
 
         // find the gaming rig in the scene and link to it
         if (theLocalPlayer == null)
