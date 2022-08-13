@@ -26,6 +26,7 @@ public class NetworkingPlayer : NetworkBehaviour
     
     SteamVR_Behaviour_Pose cL, cR;
 
+<<<<<<< HEAD
     public GameObject cube, cubePf;
     
 
@@ -37,6 +38,15 @@ public class NetworkingPlayer : NetworkBehaviour
     GameObject[] points;
 
 
+=======
+    public GameObject cubePf;
+
+    bool spawned = false;
+
+    int resolution = 10;
+    GameObject[] points;
+
+>>>>>>> tryAgain
     private void Start()
     {
         
@@ -72,6 +82,10 @@ public class NetworkingPlayer : NetworkBehaviour
             else
             {
                 CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
+<<<<<<< HEAD
+=======
+                //UpdateCubes(cL.GetVelocity());
+>>>>>>> tryAgain
             }
         }
         
@@ -169,12 +183,17 @@ public class NetworkingPlayer : NetworkBehaviour
     [Command]
     void CmdSpawnCubes()
     {
+<<<<<<< HEAD
         //cube = Instantiate(cubePf);
 
+=======
+        /*cube = Instantiate(cubePf);
+>>>>>>> tryAgain
         if (!cube)
         {
             Debug.Log("CUBE IS NULL");
         }
+<<<<<<< HEAD
         //NetworkServer.Spawn(cube);
 
         float step = 2f / resolution;
@@ -186,19 +205,39 @@ public class NetworkingPlayer : NetworkBehaviour
         for (int i = 0; i < points.Length; i++)
         {
             GameObject point = Instantiate(cube);
+=======
+        NetworkServer.Spawn(cube);*/
+
+
+        float step = 2f / resolution;
+        Vector3 scale = Vector3.one * step;
+        //transform.position = head.position; <-TODO:  need to fix
+        transform.position = Vector3.zero;
+
+        points = new GameObject[resolution * resolution];
+        for (int i = 0; i < points.Length; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+>>>>>>> tryAgain
             point.transform.localScale = scale;
             point.transform.SetParent(transform, false);
             points[i] = point;
             NetworkServer.Spawn(point);
+<<<<<<< HEAD
 
         }
 
 
+=======
+        }
+
+>>>>>>> tryAgain
     }
 
     [Command]
     void CmdUpdateCubes(Vector3 vL, Vector3 vR)
     {
+<<<<<<< HEAD
 
         float t = Time.time;
         float step = 2f / resolution;
@@ -214,12 +253,24 @@ public class NetworkingPlayer : NetworkBehaviour
                
             }
         }
+=======
+        float t = Time.time;
+>>>>>>> tryAgain
 
-    }
+        float step = 2f / resolution;
+        for (int i = 0, z = 0; z < resolution; z++)
+        {
+            float v = (z + 0.5f) * step - 1f;
+            for (int x = 0; x < resolution; x++, i++)
+            {
+                float u = (x + 0.5f) * step - 1f;
 
-    void UpdateCubes(Vector3 vL)
-    {
-        cube.transform.position = vL;
+                //TODO: if only 2 or 1 clients also need additonal automatic update of cubes to compensate for players
+                points[i].transform.localPosition = Graphs.SimpleSin(vL, vR, u, v, t) * 5;
+                
+                
+            }
+        }
     }
 
 }
