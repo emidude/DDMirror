@@ -186,6 +186,7 @@ public class NetworkingPlayer : NetworkBehaviour
             point.transform.localScale = scale;
             point.transform.SetParent(transform, false);
             points[i] = point;
+            NetworkServer.Spawn(point);
         }
 
     }
