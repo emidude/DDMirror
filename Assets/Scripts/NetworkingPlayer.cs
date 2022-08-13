@@ -26,7 +26,7 @@ public class NetworkingPlayer : NetworkBehaviour
     
     SteamVR_Behaviour_Pose cL, cR;
 
-    public GameObject cube, cubePf;
+    public GameObject cubePf;
 
     bool spawned = false;
 
@@ -67,7 +67,7 @@ public class NetworkingPlayer : NetworkBehaviour
             }
             else
             {
-                CmdUpdateCubes(cL.GetVelocity());
+                //CmdUpdateCubes(cL.GetVelocity());
                 //UpdateCubes(cL.GetVelocity());
             }
         }
@@ -190,7 +190,7 @@ public class NetworkingPlayer : NetworkBehaviour
 
     }
 
-    [Command]
+    /*[Command]
     void CmdUpdateCubes(Vector3 v3)
     {
       
@@ -201,6 +201,6 @@ public class NetworkingPlayer : NetworkBehaviour
     void UpdateCubes(Vector3 vL)
     {
         cube.transform.position = vL;
-    }
+    }*/
 
 }
