@@ -67,7 +67,7 @@ public class NetworkingPlayer : NetworkBehaviour
             }
             else
             {
-                //CmdUpdateCubes(cL.GetVelocity());
+                CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
                 //UpdateCubes(cL.GetVelocity());
             }
         }
@@ -191,17 +191,25 @@ public class NetworkingPlayer : NetworkBehaviour
 
     }
 
-    /*[Command]
-    void CmdUpdateCubes(Vector3 v3)
+    [Command]
+    void CmdUpdateCubes(Vector3 vL, Vector3 vR)
     {
-      
-            cube.transform.position = v3;
+        float t = Time.time;
 
+        float step = 2f / resolution;
+        for (int i = 0, z = 0; z < resolution; z++)
+        {
+            float v = (z + 0.5f) * step - 1f;
+            for (int x = 0; x < resolution; x++, i++)
+            {
+                float u = (x + 0.5f) * step - 1f;
+
+                //TODO: if only 2 or 1 clients also need additonal automatic update of cubes to compensate for players
+                points[i].transform.localPosition = Graphs.SimpleSin(vL, vR, u, v, t) * 5;
+                
+                
+            }
+        }
     }
-
-    void UpdateCubes(Vector3 vL)
-    {
-        cube.transform.position = vL;
-    }*/
 
 }
