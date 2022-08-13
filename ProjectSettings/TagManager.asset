@@ -11,6 +11,10 @@ TagManager:
   - projectile
   - FxTemporaire
   - Main Canvas
+  - test
+  - zero
+  - one
+  - two
   layers:
   - Default
   - TransparentFX
