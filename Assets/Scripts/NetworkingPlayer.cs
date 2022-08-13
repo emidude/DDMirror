@@ -71,6 +71,10 @@ public class NetworkingPlayer : NetworkBehaviour
                 CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
             }
         }
+
+        Debug.Log("head trandfoprm = " + localHead.transform.position);
+        Debug.Log("left hand= " + localLeftHand.transform.position);
+        Debug.Log("right hand=" + localRightHand.transform.position);
         
     }
 
@@ -95,6 +99,7 @@ public class NetworkingPlayer : NetworkBehaviour
         localHead = Camera.main.gameObject; // get HMD
         //localHead = theLocalPlayer.transform.Find("FolowHead").gameObject;
         //localHead = GameObject.FindWithTag("FolowHead");
+        localHead = theLocalPlayer.transform.Find("MainCamera").gameObject;
         Debug.Log("local head = " + localHead);
         //localLeftHand = theLocalPlayer.transform.Find("LeftHand").gameObject;
         localLeftHand = GameObject.FindWithTag("LeftHand");
@@ -102,8 +107,8 @@ public class NetworkingPlayer : NetworkBehaviour
         localRightHand = GameObject.FindWithTag("RightHand");
 
         //not sure if these tracked are neccary, delete later
-        /*trackedObjRight = localRightHand.GetComponent<SteamVR_TrackedObject>();
-        trackedObjLeft = localLeftHand.GetComponent<SteamVR_TrackedObject>();*/
+        trackedObjRight = localRightHand.GetComponent<SteamVR_TrackedObject>();
+        trackedObjLeft = localLeftHand.GetComponent<SteamVR_TrackedObject>();
 
         cL = localLeftHand.GetComponent<SteamVR_Behaviour_Pose>();
         cR = localRightHand.GetComponent<SteamVR_Behaviour_Pose>();
@@ -113,8 +118,9 @@ public class NetworkingPlayer : NetworkBehaviour
         Debug.Log("server active?" + NetworkServer.active);
     }
 
-   
+
     //TODO: need to fix head and hands not updating
+    //https://forum.unity.com/threads/multiplayer-with-steamvr.535321/
     void updateHeadAndHands()
     {
 
