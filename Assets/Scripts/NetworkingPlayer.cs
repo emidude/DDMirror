@@ -58,7 +58,7 @@ public class NetworkingPlayer : NetworkBehaviour
     void Update()
     {
         //TODO: FIX
-        //updateHeadAndHands();
+        updateHeadAndHands();
 
         if (isLocalPlayer)
         {
@@ -72,9 +72,9 @@ public class NetworkingPlayer : NetworkBehaviour
             }
         }
 
-        Debug.Log("head trandfoprm = " + localHead.transform.position);
-        Debug.Log("left hand= " + localLeftHand.transform.position);
-        Debug.Log("right hand=" + localRightHand.transform.position);
+        Debug.Log("head trandfoprm = " + localHead.transform.position + " nwhead= " + networkedHead.transform.position);
+        Debug.Log("left hand= " + localLeftHand.transform.position + " nwLH =" + networkedLeftHand.transform.position);
+        Debug.Log("right hand=" + localRightHand.transform.position + " nwRH =" + networkedRightHand.transform.position);
         
     }
 
@@ -99,7 +99,7 @@ public class NetworkingPlayer : NetworkBehaviour
         localHead = Camera.main.gameObject; // get HMD
         //localHead = theLocalPlayer.transform.Find("FolowHead").gameObject;
         //localHead = GameObject.FindWithTag("FolowHead");
-        localHead = theLocalPlayer.transform.Find("MainCamera").gameObject;
+        //localHead = theLocalPlayer.transform.Find("MainCamera").gameObject;
         Debug.Log("local head = " + localHead);
         //localLeftHand = theLocalPlayer.transform.Find("LeftHand").gameObject;
         localLeftHand = GameObject.FindWithTag("LeftHand");
