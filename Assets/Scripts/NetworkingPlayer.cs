@@ -30,6 +30,9 @@ public class NetworkingPlayer : NetworkBehaviour
 
     bool spawned = false;
 
+    int resolution = 10;
+    GameObject[] points;
+
     private void Start()
     {
         
@@ -163,12 +166,28 @@ public class NetworkingPlayer : NetworkBehaviour
     [Command]
     void CmdSpawnCubes()
     {
-        cube = Instantiate(cubePf);
+        /*cube = Instantiate(cubePf);
         if (!cube)
         {
             Debug.Log("CUBE IS NULL");
         }
-        NetworkServer.Spawn(cube);
+        NetworkServer.Spawn(cube);*/
+
+
+        float step = 2f / resolution;
+        Vector3 scale = Vector3.one * step;
+        //transform.position = head.position; <-TODO:  need to fix
+        transform.position = Vector3.zero;
+
+        points = new GameObject[resolution * resolution];
+        for (int i = 0; i < points.Length; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            point.transform.SetParent(transform, false);
+            points[i] = point;
+        }
+
     }
 
     [Command]
