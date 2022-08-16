@@ -30,8 +30,6 @@ public class SceneHandler : NetworkBehaviour
 
     void Awake()
     {
-        
-
         laserPointer.PointerIn += PointerInside;
         laserPointer.PointerOut += PointerOutside;
         laserPointer.PointerClick += PointerClick;

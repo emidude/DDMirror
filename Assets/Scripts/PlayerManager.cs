@@ -10,7 +10,7 @@ public class PlayerManager : NetworkBehaviour
     int[] songOrdering = new int[12];
     private System.Random _random = new System.Random();
     [SerializeField] AudioClip audio;
-    bool readyToStart = false;
+    //bool readyToStart = false;
     GameObject audioObject;
     AudioHandler AudioHandler;
     int songIndx = 0;
@@ -128,6 +128,7 @@ public class PlayerManager : NetworkBehaviour
         if (isServer)
         {
             numberOfTimesReadyClicked++;
+            Debug.Log("numberOfTimesReadyClicked= " + numberOfTimesReadyClicked);
 
             if (numberOfTimesReadyClicked >= NetworkServer.connections.Count)
             {
@@ -184,12 +185,12 @@ public class PlayerManager : NetworkBehaviour
     }*/
 
 
-    [ClientRpc]
+    /*[ClientRpc]
     void RpcSetNooneReady()
     {
         readyToStart = false;
     }
-
+*/
 
     /*[Command]
     public void CmdSyncQuiet(string songName)
