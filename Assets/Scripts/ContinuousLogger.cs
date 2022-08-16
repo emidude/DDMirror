@@ -12,6 +12,7 @@ public class ContinuousLogger : MonoBehaviour {
     public Transform rightHand;*/
     public SteamVR_Behaviour_Pose leftHand, rightHand;
 
+
     private StreamWriter continuousWriter;
     private string[] continuousHeader = {
         "t",

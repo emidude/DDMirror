@@ -203,4 +203,30 @@ public class NetworkingPlayer : NetworkBehaviour
         }
     }
 
+    [Command]
+    void CmdReadyForNextSong()
+    {
+        if (isLocalPlayer)
+        {
+          //get player id, set ready on server
+          
+           //when all ready server does rpc - play next song
+        }
+    }
+
+    [ClientRpc]
+    void RpcPlayNextSong()
+    {
+        //get next song from list
+
+        //sync start time in synclogger
+
+        //start ctslogger with song in title
+
+        //divide players into rooms
+
+        //start song
+    }
+
+
 }

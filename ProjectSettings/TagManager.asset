@@ -14,7 +14,11 @@ TagManager:
   - test
   - zero
   - one
+  - Undefined
+  - submit
   - two
+  - slider
+  - audioHndlr
   layers:
   - Default
   - TransparentFX

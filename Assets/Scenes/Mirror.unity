@@ -454,7 +454,7 @@ MonoBehaviour:
   runInBackground: 1
   autoStartServerBuild: 1
   serverTickRate: 30
-  offlineScene: Assets/SteamVR/InteractionSystem/Samples/Interactions_Example.unity
+  offlineScene: Assets/Scenes/OfflineScene.unity
   onlineScene: Assets/Scenes/OnlineScene.unity
   transport: {fileID: 1060168145}
   networkAddress: localhost
