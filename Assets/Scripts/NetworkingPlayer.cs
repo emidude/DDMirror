@@ -77,6 +77,8 @@ public class NetworkingPlayer : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
+        base.OnStartLocalPlayer();
+
         // this is ONLY called on local player
         // connect to rig
 

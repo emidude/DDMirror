@@ -40,7 +40,7 @@ public class AudioHandler : MonoBehaviour
 
                 curentSoundInfo = soundList[i];
 
-                StartCoroutine(playSequencely());
+                //StartCoroutine(playSequencely());
 
                 return;
 

@@ -16,7 +16,7 @@ public class SceneHandler : NetworkBehaviour
 
     public SteamVR_LaserPointer laserPointer;
     public LinearMapping linMap;
-    public GameObject canvs;
+    public GameObject panelParent;
     public GameObject panelstart;
     public GameObject numPlayersPanel;
     public GameObject musicPrefPanel;
@@ -34,7 +34,7 @@ public class SceneHandler : NetworkBehaviour
         laserPointer.PointerOut += PointerOutside;
         laserPointer.PointerClick += PointerClick;
 
-        canvs.SetActive(true);
+        panelParent.SetActive(true);
         panelstart.SetActive(true);
     }
 
@@ -85,14 +85,13 @@ public class SceneHandler : NetworkBehaviour
             if (preFirstSong)
             {
                 panelstart.SetActive(false);
-                canvs.SetActive(false);
+                panelParent.SetActive(false);
 
                 //player is ready to start
                 //need issue cmd to play first song to all players
 
                 NetworkIdentity networkIdentity = NetworkClient.connection.identity;
                 playerManager = networkIdentity.GetComponent<PlayerManager>();
-                //playerManager.CmdNextSong();
                 playerManager.CmdClickedSubmit();
             }
             else if(currentQn==1){
@@ -101,6 +100,7 @@ public class SceneHandler : NetworkBehaviour
                 //TODO: coroutine here
                 dancePrefPanel.SetActive(true);
                 //LOGANSWER
+
                 currentQn++;
             }
             else if (currentQn == 2)
@@ -113,15 +113,12 @@ public class SceneHandler : NetworkBehaviour
             else if (currentQn == 3)
             {
                 answeredQnPanel.SetActive(false);
-                canvs.SetActive(false);
+                panelParent.SetActive(false);
 
                 //server play next song
             }
-
-
         }
     }
-
 
     public void PointerInside(object sender, PointerEventArgs e)
     {
@@ -176,7 +173,14 @@ public class SceneHandler : NetworkBehaviour
 
     }
 
+    public void FinishedSong()
+    {
+        panelParent.SetActive(true);
+        numPlayersPanel.SetActive(true);
 
+        //disable visuals script;
+
+    }
     
 
 

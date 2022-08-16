@@ -19,6 +19,7 @@ TagManager:
   - two
   - slider
   - audioHndlr
+  - PanelParent
   layers:
   - Default
   - TransparentFX

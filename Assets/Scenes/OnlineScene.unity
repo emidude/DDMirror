@@ -1601,7 +1601,7 @@ GameObject:
   - component: {fileID: 444838686}
   m_Layer: 0
   m_Name: pnl_parent
-  m_TagString: Untagged
+  m_TagString: PanelParent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1702,7 +1702,7 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   laserPointer: {fileID: 148761558}
   linMap: {fileID: 29712460}
-  canvs: {fileID: 1827819858}
+  panelParent: {fileID: 444838680}
   panelstart: {fileID: 1790507763}
   numPlayersPanel: {fileID: 1252130303}
   musicPrefPanel: {fileID: 184317866}
@@ -3924,7 +3924,19 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 9180c820df25fb5429deb7e993cf4c52, type: 3}
     onStop:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 444838680}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - name: Yumeno Hajima Ring Ring
     ID: 1
     About: Kyary Pamyu Pamyu - Medium

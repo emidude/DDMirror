@@ -15,6 +15,8 @@ public class PlayerManager : NetworkBehaviour
     AudioHandler AudioHandler;
     int songIndx = 0;
     int numberOfTimesReadyClicked = 0;
+    public GameObject guiObject;
+    public SceneHandler SceneHandler;
     
     [Server]
     public override void OnStartServer()
@@ -67,11 +69,18 @@ public class PlayerManager : NetworkBehaviour
         for (int i = 0; i < combinations.Length; i++)
         {
             Debug.Log(combinations[i]);
-        }
+        }        
+    }
 
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
         //AUDIO:
         audioObject = GameObject.FindGameObjectWithTag("audioHndlr");
         AudioHandler = audioObject.GetComponent<AudioHandler>();
+        //PANELS/////////////////////MISTAEK BELOW IDK?
+        guiObject = GameObject.FindGameObjectWithTag("PanelParent");
+        SceneHandler = guiObject.GetComponent<SceneHandler>();
     }
 
     void Shuffle(int[] array)
@@ -103,13 +112,14 @@ public class PlayerManager : NetworkBehaviour
     [ClientRpc]
     void RpcPlaySong(int songIndex)
     {
+        Debug.Log("rpc playing song");
         //sync in logger time
         if (hasAuthority)
         {
             //int songIndex = songIndx;
-            int songID = AudioHandler.soundList[songIndex].ID; ;
+            int songID = AudioHandler.soundList[songIndex].ID; 
             string msg = "Syncing " + AudioHandler.soundList[songIndex].name;
-            Logger.Event(msg);
+            //Logger.Event(msg);
             AudioHandler.SetAudioToPlay(songID);
         }
     }
@@ -129,9 +139,10 @@ public class PlayerManager : NetworkBehaviour
         {
             numberOfTimesReadyClicked++;
             Debug.Log("numberOfTimesReadyClicked= " + numberOfTimesReadyClicked);
-
+            Debug.Log("NetworkServer.connections.Count= " + NetworkServer.connections.Count);
             if (numberOfTimesReadyClicked >= NetworkServer.connections.Count)
             {
+                Debug.Log("about to rpcplaysong");
                 //three readys! letsGo!
                 RpcPlaySong(songIndx);
 
