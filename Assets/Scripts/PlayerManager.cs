@@ -6,8 +6,8 @@ using Mirror;
 public class PlayerManager : NetworkBehaviour
 {
     public PlayerSync playerSync;
-    int[] combinations = new int[12];
-    int[] songOrdering = new int[12];
+    public int[] combinations = new int[12];
+    public int[] songOrdering = new int[12];
     private System.Random _random = new System.Random();
     [SerializeField] AudioClip audio;
     //bool readyToStart = false;
@@ -23,53 +23,79 @@ public class PlayerManager : NetworkBehaviour
     {
         base.OnStartServer();
 
-        //set song ordering for this session
-        for (int i = 0; i < 12; i++)
-        {
-            songOrdering[i] = i;
+        NetworkIdentity networkIdentity = NetworkClient.connection.identity;
+        Debug.Log("NetworkIdentity " + networkIdentity);
+
+        if (networkIdentity.netId == 0) {
+
+            //set song ordering for this session
+            for (int i = 0; i < 12; i++)
+            {
+                songOrdering[i] = i;
+            }
+            //randomise Song order:
+            Shuffle(songOrdering);
+            Debug.Log("song ordering is :");
+            for (int i = 0; i < songOrdering.Length; i++)
+            {
+                Debug.Log(songOrdering[i]);
+            }
+
+            //set Player combinations for 10 songs, each player will do: 4 '3 player' songs, 4 '2 player' songs and 4 '1 player' songs.
+            //numerical code for combinations array:
+            //0 means all players are dancing together
+            //1 => player 1 is dancing alone, player 2 & 3 dancing together
+            //2 => p2 alone, 3=> p3 alone,
+            //4 => all players dancing alone
+            for (int i = 0; i < 4; i++)
+            {
+                combinations[i] = 0;
+            }
+            for (int i = 4; i < 6; i++)
+            {
+                combinations[i] = 1;
+            }
+            for (int i = 6; i < 8; i++)
+            {
+                combinations[i] = 2;
+            }
+            for (int i = 8; i < 10; i++)
+            {
+                combinations[i] = 3;
+            }
+            for (int i = 10; i < 12; i++)
+            {
+                combinations[i] = 4;
+            }
+
+            //randomise player combinations 
+            Shuffle(combinations);
+            Debug.Log("player combinations ordering is :");
+            for (int i = 0; i < combinations.Length; i++)
+            {
+                Debug.Log(combinations[i]);
+            }
+
         }
-        //randomise Song order:
-        Shuffle(songOrdering);
-        Debug.Log("song ordering is :");
-        for (int i = 0; i < songOrdering.Length; i++)
+        else
         {
-            Debug.Log(songOrdering[i]);
+            //get song and combination ordering from host player
+            songOrdering = NetworkServer.connections[0].identity.GetComponent<PlayerManager>().songOrdering;
+            combinations = NetworkServer.connections[0].identity.GetComponent<PlayerManager>().combinations;
+
+            Debug.Log("song ordering on remote is :");
+            for (int i = 0; i < songOrdering.Length; i++)
+            {
+                Debug.Log(songOrdering[i]);
+            }
+            Debug.Log("player combinations remote is :");
+            for (int i = 0; i < combinations.Length; i++)
+            {
+                Debug.Log(combinations[i]);
+            }
         }
 
-        //set Player combinations for 10 songs, each player will do: 4 '3 player' songs, 4 '2 player' songs and 4 '1 player' songs.
-        //numerical code for combinations array:
-        //0 means all players are dancing together
-        //1 => player 1 is dancing alone, player 2 & 3 dancing together
-        //2 => p2 alone, 3=> p3 alone,
-        //4 => all players dancing alone
-        for (int i = 0; i < 4; i++)
-        {
-            combinations[i] = 0;
-        }
-        for (int i = 4; i < 6; i++)
-        {
-            combinations[i] = 1;
-        }
-        for (int i = 6; i < 8; i++)
-        {
-            combinations[i] = 2;
-        }
-        for (int i = 8; i < 10; i++)
-        {
-            combinations[i] = 3;
-        }
-        for (int i = 10; i < 12; i++)
-        {
-            combinations[i] = 4;
-        }
-
-        //randomise player combinations 
-        Shuffle(combinations);
-        Debug.Log("player combinations ordering is :");
-        for (int i = 0; i < combinations.Length; i++)
-        {
-            Debug.Log(combinations[i]);
-        }        
+       
     }
 
     public override void OnStartLocalPlayer()
