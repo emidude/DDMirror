@@ -17,17 +17,33 @@ public class PlayerManager : NetworkBehaviour
     int numberOfTimesReadyClicked = 0;
     public GameObject guiObject;
     public SceneHandler SceneHandler;
-    
+    [SyncVar]
+    public bool started = false;
+    NetworkIdentity firstNetworkId;
+
     [Server]
     public override void OnStartServer()
     {
         base.OnStartServer();
 
+
+
+        if (!started) {
+            firstNetworkId = NetworkClient.connection.identity;
+            started = true;
+            Debug.Log("setting firstnetwork id");
+        }
+        else {
+            firstNetworkId = NetworkServer.connections[0].identity;
+        }
+
         NetworkIdentity networkIdentity = NetworkClient.connection.identity;
-        Debug.Log("NetworkIdentity " + networkIdentity);
+        Debug.Log("NetworkIdentity " + networkIdentity.netId);
 
-        if (networkIdentity.netId == 0) {
-
+        if (networkIdentity.netId == firstNetworkId.netId) 
+        //if (!started)
+        {
+                Debug.Log("networkIdentity.netId == firstNetworkId.netId");
             //set song ordering for this session
             for (int i = 0; i < 12; i++)
             {
@@ -141,7 +157,7 @@ public class PlayerManager : NetworkBehaviour
         //sync in logger time
         if (hasAuthority)
         {
-            Debug.Log("rpc playing song" + AudioHandler.soundList[songIndex].name + " index=" + songIndex);
+             Debug.Log("rpc playing song" + AudioHandler.soundList[songIndex].name + " index=" +songIndex);
             //int songIndex = songIndx;
             int songID = AudioHandler.soundList[songIndex].ID; 
             string msg = "Syncing " + AudioHandler.soundList[songIndex].name;
