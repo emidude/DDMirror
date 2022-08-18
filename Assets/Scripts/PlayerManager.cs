@@ -28,17 +28,25 @@ public class PlayerManager : NetworkBehaviour
 
 
 
-        if (!started) {
-            firstNetworkId = NetworkClient.connection.identity;
-            started = true;
-            Debug.Log("setting firstnetwork id");
+        if (isLocalPlayer)
+        {
+            //firstNetworkId = NetworkClient.connection.identity;
+            //started = true;
+            Debug.Log("setting firstnetwork id" + NetworkClient.connection.identity.netId +
+                " NetworkServer.connections[0].identity=" + NetworkServer.connections[0].identity.netId);
         }
-        else {
+            
+        else 
+        {
+            Debug.Log("not local player, firstNetworkId = " + firstNetworkId.netId+ " NetworkServer.connections[0].identity="+ NetworkServer.connections[0].identity.netId);
+            Debug.Log("LOCAL (REMOTE) NET id" + NetworkClient.connection.identity.netId +
+               " NetworkServer.connections[0].identity=" + NetworkServer.connections[0].identity +
+               "NetworkServer.connections[1].identity" + NetworkServer.connections[1].identity);
             firstNetworkId = NetworkServer.connections[0].identity;
         }
 
         NetworkIdentity networkIdentity = NetworkClient.connection.identity;
-        Debug.Log("NetworkIdentity " + networkIdentity.netId);
+        Debug.Log("NetworkIdentity local" + networkIdentity.netId);
 
         if (networkIdentity.netId == firstNetworkId.netId) 
         //if (!started)
