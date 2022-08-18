@@ -138,10 +138,10 @@ public class PlayerManager : NetworkBehaviour
     [ClientRpc]
     void RpcPlaySong(int songIndex)
     {
-        Debug.Log("rpc playing song");
         //sync in logger time
         if (hasAuthority)
         {
+            Debug.Log("rpc playing song" + AudioHandler.soundList[songIndex].name + " index=" + songIndex);
             //int songIndex = songIndx;
             int songID = AudioHandler.soundList[songIndex].ID; 
             string msg = "Syncing " + AudioHandler.soundList[songIndex].name;
