@@ -38,7 +38,7 @@ public class PlayerManager : NetworkBehaviour
             
         else 
         {
-            Debug.Log("not local player, firstNetworkId = " + firstNetworkId.netId+ " NetworkServer.connections[0].identity="+ NetworkServer.connections[0].identity.netId);
+            Debug.Log(" NetworkServer.connections[0].identity="+ NetworkServer.connections[0].identity.netId);
             Debug.Log("LOCAL (REMOTE) NET id" + NetworkClient.connection.identity.netId +
                " NetworkServer.connections[0].identity=" + NetworkServer.connections[0].identity +
                "NetworkServer.connections[1].identity" + NetworkServer.connections[1].identity);
