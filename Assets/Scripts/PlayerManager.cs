@@ -41,7 +41,7 @@ public class PlayerManager : NetworkBehaviour
         {
             Debug.Log(" NetworkServer.connections.count="+ NetworkServer.connections.Count);
             Debug.Log("LOCAL (REMOTE) NET id" + NetworkClient.connection.identity.netId +
-               " NetworkServer.connections[0].identity=" + NetworkServer.connections[0].identity);
+               " NetworkServer.connections[1].identity=" + NetworkServer.connections[1].identity.netId);
             firstNetworkId = NetworkServer.connections[0].identity;
         }
 
