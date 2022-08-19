@@ -34,14 +34,14 @@ public class PlayerManager : NetworkBehaviour
             //started = true;
             Debug.Log("setting firstnetwork id" + NetworkClient.connection.identity.netId +
                 " NetworkServer.connections[0].identity=" + NetworkServer.connections[0].identity.netId);
+            firstNetworkId = NetworkServer.connections[0].identity;
         }
             
         else 
         {
-            Debug.Log(" NetworkServer.connections[0].identity="+ NetworkServer.connections[1].identity.netId);
+            Debug.Log(" NetworkServer.connections.count="+ NetworkServer.connections.Count);
             Debug.Log("LOCAL (REMOTE) NET id" + NetworkClient.connection.identity.netId +
-               " NetworkServer.connections[0].identity=" + NetworkServer.connections[0].identity +
-               "NetworkServer.connections[1].identity" + NetworkServer.connections[1].identity);
+               " NetworkServer.connections[0].identity=" + NetworkServer.connections[0].identity);
             firstNetworkId = NetworkServer.connections[0].identity;
         }
 
