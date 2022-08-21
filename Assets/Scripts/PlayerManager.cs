@@ -47,6 +47,7 @@ public class PlayerManager : NetworkBehaviour
             
         else 
         {
+            CmdSetTest();
             Debug.Log("server is starting and i do not have authority, test=" + test);
             Debug.Log(" NetworkConnectionToServer.LocalConnectionId = " + NetworkConnectionToServer.LocalConnectionId);
             Debug.Log(" NetworkConnectionToClient.LocalConnectionId = " + NetworkConnectionToClient.LocalConnectionId);
@@ -131,6 +132,20 @@ public class PlayerManager : NetworkBehaviour
         }
 
        
+    }
+
+    [Command]
+    void CmdSetTest()
+    {
+        if (hasAuthority)
+        {
+            RpcSetTest();
+        }
+    }
+    [ClientRpc]
+    void RpcSetTest()
+    {
+        test = NetworkServer.connections[0].identity.GetComponent<PlayerManager>().test;
     }
 
     public override void OnStartClient()
