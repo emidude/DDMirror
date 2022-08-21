@@ -22,7 +22,12 @@ public class PlayerManager : NetworkBehaviour
     NetworkIdentity firstNetworkId;
     int test;
 
-    
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+        CmdSetTest();
+
+    }
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -142,6 +147,10 @@ public class PlayerManager : NetworkBehaviour
             Debug.Log("I have authority on cmd set test, test =" + test);
             int t = test;
             RpcSetTest(t);
+        }
+        else
+        {
+            Debug.Log("i have no authroity on cmdset test");
         }
     }
     [ClientRpc]
