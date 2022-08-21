@@ -22,12 +22,7 @@ public class PlayerManager : NetworkBehaviour
     NetworkIdentity firstNetworkId;
     int test;
 
-    public override void OnStartLocalPlayer()
-    {
-        base.OnStartLocalPlayer();
-        CmdSetTest();
-
-    }
+   
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -176,6 +171,8 @@ public class PlayerManager : NetworkBehaviour
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
         SceneHandler = guiObject.GetComponent<SceneHandler>();
+
+        CmdSetTest();
     }
 
     void Shuffle(int[] array)
