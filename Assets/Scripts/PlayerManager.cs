@@ -139,13 +139,14 @@ public class PlayerManager : NetworkBehaviour
     {
         if (hasAuthority)
         {
-            RpcSetTest();
+            int t = test;
+            RpcSetTest(t);
         }
     }
     [ClientRpc]
-    void RpcSetTest()
+    void RpcSetTest(int t)
     {
-        test = NetworkServer.connections[0].identity.GetComponent<PlayerManager>().test;
+        test = t;
     }
 
     public override void OnStartClient()
