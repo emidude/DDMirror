@@ -30,8 +30,12 @@ public class PlayerManager : NetworkBehaviour
       
         if (hasAuthority)
         {
-            Debug.Log("I have authrotiy on server starting,  test=" + test);
             test = 5;
+            Debug.Log("I have authrotiy on server starting,  test=" + test);
+            Debug.Log(" NetworkConnectionToServer.LocalConnectionId = " + NetworkConnectionToServer.LocalConnectionId);
+            Debug.Log(" NetworkConnectionToClient.LocalConnectionId = " + NetworkConnectionToClient.LocalConnectionId);
+           
+            
            /* //firstNetworkId = NetworkClient.connection.identity;
             //started = true;
             Debug.Log("setting firstnetwork id" + NetworkClient.connection.identity.netId +
@@ -43,6 +47,8 @@ public class PlayerManager : NetworkBehaviour
         else 
         {
             Debug.Log("server is starting and i do not have authority, test=" + test);
+            Debug.Log(" NetworkConnectionToServer.LocalConnectionId = " + NetworkConnectionToServer.LocalConnectionId);
+            Debug.Log(" NetworkConnectionToClient.LocalConnectionId = " + NetworkConnectionToClient.LocalConnectionId);
             /*Debug.Log(" NetworkServer.connections.count="+ NetworkServer.connections.Count);
             Debug.Log("LOCAL (REMOTE) NET id" + NetworkClient.connection.identity.netId + " test="+test);
             firstNetworkId = NetworkServer.connections[0].identity;*/
