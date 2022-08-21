@@ -22,7 +22,7 @@ public class PlayerManager : NetworkBehaviour
     NetworkIdentity firstNetworkId;
     int test;
 
-    [Server]
+    
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -32,8 +32,9 @@ public class PlayerManager : NetworkBehaviour
         {
             test = 5;
             Debug.Log("I have authrotiy on server starting,  test=" + test);
-            Debug.Log(" NetworkConnectionToServer.LocalConnectionId = " + NetworkConnectionToServer.LocalConnectionId);
+            Debug.Log(" NetworkConnectionToServer.LocalConnectionId = " + NetworkClient.connection.identity.assetId);
             Debug.Log(" NetworkConnectionToClient.LocalConnectionId = " + NetworkConnectionToClient.LocalConnectionId);
+            Debug.Log("NetworkClient.connection.identity.assetId" + NetworkClient.connection.identity.assetId);
            
             
            /* //firstNetworkId = NetworkClient.connection.identity;
@@ -49,6 +50,7 @@ public class PlayerManager : NetworkBehaviour
             Debug.Log("server is starting and i do not have authority, test=" + test);
             Debug.Log(" NetworkConnectionToServer.LocalConnectionId = " + NetworkConnectionToServer.LocalConnectionId);
             Debug.Log(" NetworkConnectionToClient.LocalConnectionId = " + NetworkConnectionToClient.LocalConnectionId);
+            Debug.Log("NetworkClient.connection.identity.assetId" + NetworkClient.connection.identity.assetId);
             /*Debug.Log(" NetworkServer.connections.count="+ NetworkServer.connections.Count);
             Debug.Log("LOCAL (REMOTE) NET id" + NetworkClient.connection.identity.netId + " test="+test);
             firstNetworkId = NetworkServer.connections[0].identity;*/
