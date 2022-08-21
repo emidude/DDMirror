@@ -20,12 +20,12 @@ public class PlayerManager : NetworkBehaviour
     [SyncVar]
     public bool started = false;
     NetworkIdentity firstNetworkId;
+    int test;
 
     [Server]
     public override void OnStartServer()
     {
         base.OnStartServer();
-
 
 
         if (isLocalPlayer)
@@ -35,13 +35,13 @@ public class PlayerManager : NetworkBehaviour
             Debug.Log("setting firstnetwork id" + NetworkClient.connection.identity.netId +
                 " NetworkServer.connections[0].identity=" + NetworkServer.connections[0].identity.netId);
             firstNetworkId = NetworkServer.connections[0].identity;
+            test = 5;
         }
             
         else 
         {
             Debug.Log(" NetworkServer.connections.count="+ NetworkServer.connections.Count);
-            Debug.Log("LOCAL (REMOTE) NET id" + NetworkClient.connection.identity.netId +
-               " NetworkServer.connections[1].identity=" + NetworkServer.connections[1].identity.netId);
+            Debug.Log("LOCAL (REMOTE) NET id" + NetworkClient.connection.identity.netId + " test="+test);
             firstNetworkId = NetworkServer.connections[0].identity;
         }
 
@@ -120,6 +120,14 @@ public class PlayerManager : NetworkBehaviour
         }
 
        
+    }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        Debug.Log("called on start client: NetworkServer.connections.count=" + NetworkServer.connections.Count);
+        Debug.Log("LOCAL (REMOTE) NET id??" + NetworkClient.connection.identity.netId);
+        Debug.Log("on start clinet test =" + test);
     }
 
     public override void OnStartLocalPlayer()
