@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ordering : MonoBehaviour
+public class Ordering
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int[] combinations = new int[12];
+    public int[] songOrdering = new int[12];
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void setSongOrdering
 }

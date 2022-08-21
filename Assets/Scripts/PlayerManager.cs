@@ -139,6 +139,7 @@ public class PlayerManager : NetworkBehaviour
     {
         if (hasAuthority)
         {
+            Debug.Log("I have authority on cmd set test, test =" + test);
             int t = test;
             RpcSetTest(t);
         }
