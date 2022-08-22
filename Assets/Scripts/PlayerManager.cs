@@ -55,7 +55,7 @@ public class PlayerManager : NetworkBehaviour
         base.OnStartLocalPlayer();
 
         //SET ORDERING:
-        songOrdering = new int[] { 1, 0, 2, 3, 6, 9};
+        songOrdering = new int[] { 2, 0, 2, 3, 6, 9};
         combinations = new int[] { 4, 2, 1, 3, 0, 0};
 
         //AUDIO:

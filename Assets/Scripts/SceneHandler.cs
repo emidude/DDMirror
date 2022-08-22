@@ -44,7 +44,7 @@ public class SceneHandler : NetworkBehaviour
     {
         if(e.target.tag == "identifiercube")
         {
-            Debug.Log("id cube clicked");
+           /* Debug.Log("id cube clicked");
 
             NetworkIdentity targetNetworkIdentity = e.target.gameObject.transform.root.GetComponent<NetworkIdentity>();
 
@@ -78,7 +78,7 @@ public class SceneHandler : NetworkBehaviour
             for (int i = 0; i < playerManager.PlayersNetIds.Count; i++)
             {
                 Debug.Log(playerManager.PlayersNetIds[i]);
-            }
+            }*/
         }
 
         if (e.target.tag == "zero")
