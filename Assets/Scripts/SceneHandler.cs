@@ -71,14 +71,14 @@ public class SceneHandler : NetworkBehaviour
 
                 playerManager.PlayersNetIds.Add(targetNetworkIdentity);
             }
-           
 
 
-            /*Debug.Log("playernet id in player manager count= " + playerManager.PlayersNetIds.Count);
+
+            Debug.Log("playernet id in player manager count= " + playerManager.PlayersNetIds.Count);
             for (int i = 0; i < playerManager.PlayersNetIds.Count; i++)
             {
                 Debug.Log(playerManager.PlayersNetIds[i]);
-            }*/
+            }
         }
 
         if (e.target.tag == "zero")
@@ -146,8 +146,8 @@ public class SceneHandler : NetworkBehaviour
 
                 if(numOtherPlayersReady == PlayersNetIds_SH.Count)
                 {
-                    NetworkIdentity networkIdentity = NetworkClient.connection.identity;
-                    playerManager = networkIdentity.GetComponent<PlayerManager>();
+                   /* NetworkIdentity networkIdentity = NetworkClient.connection.identity;
+                    playerManager = networkIdentity.GetComponent<PlayerManager>();*/
                     playerManager.CmdClickedSubmit();
                 }
                 
