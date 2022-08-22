@@ -91,15 +91,15 @@ public class PlayerManager : NetworkBehaviour
     void RpcPlaySong(int songIndex)
     {
         //sync in logger time
-        if (hasAuthority)
-        {
+        /*if (hasAuthority)
+        {*/
              Debug.Log("rpc playing song" + AudioHandler.soundList[songIndex].name + " index=" +songIndex);
             //int songIndex = songIndx;
             int songID = AudioHandler.soundList[songIndex].ID; 
             string msg = "Syncing " + AudioHandler.soundList[songIndex].name;
             //Logger.Event(msg);
             AudioHandler.SetAudioToPlay(songID);
-        }
+       // }
     }
 
     [Command]
@@ -141,7 +141,7 @@ public class PlayerManager : NetworkBehaviour
             RpcPlaySong(songOrdering[songIndx]);
 
             songIndx++;
-            numPlayersready = 0;
+            numPlayersready = 1;
         }
        
 
