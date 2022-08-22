@@ -112,46 +112,41 @@ public class PlayerManager : NetworkBehaviour
         //this client is ready (the script attached to this local client palyer)
         //in scene handler, getting local client is used to call the script
         //specific to each player to run this code on :
-        
+
         //is everyone ready?
+        Debug.Log("playernetids count=" + PlayersNetIds.Count);
+
+        int numPlayersready = 1;
+
         for (int i = 0; i < PlayersNetIds.Count; i++)
         {
             if (!PlayersNetIds[i].GetComponent<PlayerManager>().ready)
             {
-                return;
+                Debug.Log("NOT READY SHOULD RETURN");
+                //return;
+                numPlayersready = 0;//resert;
+            }
+            else { Debug.Log("plr ready");
+                numPlayersready++;
             }
         }
-        Debug.Log("EVERYONE READY!!!");
-        
-        
-
-                Debug.Log("about to rpcplaysong, song index = " + songIndx);
-                //three readys! letsGo!
-                RpcPlaySong(songOrdering[songIndx]);
-
-                songIndx++;
-
-              
-            
-       // }
-        
-
-        /*if (RpcIsAnyoneNotReady())
+        if (numPlayersready == NetworkServer.connections.Count)
         {
-            //do not do anything, still waiting for others
-        }
-        else
-        {
-            //noone is not ready! lets go!
-     
-            RpcPlaySong(songIndx);
+            Debug.Log("EVERYONE READY!!!");
+
+
+
+            Debug.Log("about to rpcplaysong, song index = " + songOrdering[songIndx]);
+            //three readys! letsGo!
+            RpcPlaySong(songOrdering[songIndx]);
 
             songIndx++;
+            numPlayersready = 0;
+        }
+       
 
-            //turn everyones readyToStarts back to false
-            RpcSetNooneReady();
-            
-        }*/
+              
+  
     }
 
     /*[ClientRpc]

@@ -73,11 +73,11 @@ public class SceneHandler : NetworkBehaviour
            
 
 
-            Debug.Log("playernet id in player manager count= " + playerManager.PlayersNetIds.Count);
+            /*Debug.Log("playernet id in player manager count= " + playerManager.PlayersNetIds.Count);
             for (int i = 0; i < playerManager.PlayersNetIds.Count; i++)
             {
                 Debug.Log(playerManager.PlayersNetIds[i]);
-            }
+            }*/
         }
 
         if (e.target.tag == "zero")
