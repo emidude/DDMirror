@@ -48,15 +48,32 @@ public class SceneHandler : NetworkBehaviour
             NetworkIdentity networkIdentity = e.target.gameObject.transform.root.GetComponent<NetworkIdentity>();
 
             Debug.Log("netid - " + networkIdentity);
-            PlayersNetIds.Add(networkIdentity);
+            if (PlayersNetIds.Count == 0)
+            {
+                PlayersNetIds.Add(networkIdentity);
+            }
+            else
+            {
+                for (int i = 0; i < PlayersNetIds.Count; i++)
+                {
+                    if(PlayersNetIds[i] == networkIdentity)
+                    {
+                        return;
+                    }
+                }
+                Debug.Log("should be unige net id added= "+ networkIdentity);
+                PlayersNetIds.Add(networkIdentity);
+            }
+           
 
 
-            Debug.Log("playernet ids = ");
+            Debug.Log("playernet id count= " + PlayersNetIds.Count);
             for (int i = 0; i < PlayersNetIds.Count; i++)
             {
                 Debug.Log(PlayersNetIds[i]);
             }
         }
+
         if (e.target.tag == "zero")
         {
          
