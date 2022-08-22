@@ -23,7 +23,8 @@ public class PlayerManager : NetworkBehaviour
     NetworkIdentity firstNetworkId;
     int test;
 
-    public GameObject PlayerNetIDListGO;
+    public List<NetworkIdentity> PlayersNetIds = new List<NetworkIdentity>();
+    bool ready = false;
    
  /*   public override void OnStartServer()
     {
@@ -64,16 +65,7 @@ public class PlayerManager : NetworkBehaviour
         SceneHandler = guiObject.GetComponent<SceneHandler>();
 
         //GET Netid:
-        PlayerNetIDListGO = GameObject.FindGameObjectWithTag("netman");
-        
-        NetworkIdentity networkIdentity = NetworkClient.connection.identity;
-
-        PlayerNetIDListGO.GetComponent<Matches>().playerNetIDs.Add(networkIdentity);
-
-       foreach(NetworkIdentity nId in PlayerNetIDListGO.GetComponent<Matches>().playerNetIDs)
-        {
-            Debug.Log(nId);
-        }
+       
 
 
     }
@@ -120,9 +112,14 @@ public class PlayerManager : NetworkBehaviour
         //in scene handler, getting local client is used to call the script
         //specific to each player to run this code on :
 
-        //readyToStart = true;
+        
+        
+        
+        
+        
         /*if (isServer)
         {*/
+
         
 
 
@@ -176,13 +173,6 @@ public class PlayerManager : NetworkBehaviour
          else return false;
      }*/
 
-    /*[ClientRpc]
-    void RpcIsAnyoneNotReady()
-    {
-        if (readyToStart == true)
-        {
-        }
-    }*/
 
 
     /*[ClientRpc]
@@ -203,14 +193,14 @@ public class PlayerManager : NetworkBehaviour
         RpcSyncQuiet(songName);
     }*/
 
-        /*
-            [ClientRpc]
-            void RpcSyncQuiet(string songName)
-            {
-                string msg = "Syncing " + songName;
-                Logger.Event(msg);
+    /*
+        [ClientRpc]
+        void RpcSyncQuiet(string songName)
+        {
+            string msg = "Syncing " + songName;
+            Logger.Event(msg);
 
-            }*/
+        }*/
 
 
 }

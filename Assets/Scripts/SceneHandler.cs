@@ -25,7 +25,8 @@ public class SceneHandler : NetworkBehaviour
     int currentSong = 0;
     int currentQn = 0;
     bool preFirstSong = true;
-    
+
+    public List<NetworkIdentity> PlayersNetIds = new List<NetworkIdentity>();
 
 
     void Awake()
@@ -40,6 +41,20 @@ public class SceneHandler : NetworkBehaviour
 
     public void PointerClick(object sender, PointerEventArgs e)
     {
+        if(e.target.tag == "identifiercube")
+        {
+            Debug.Log("id cube clicked");
+            
+            NetworkIdentity networkIdentity = e.target.gameObject.GetComponent<NetworkIdentity>();
+            PlayersNetIds.Add(networkIdentity);
+
+
+            Debug.Log("playernet ids = ");
+            for (int i = 0; i < PlayersNetIds.Count; i++)
+            {
+                Debug.Log(PlayersNetIds[i]);
+            }
+        }
         if (e.target.tag == "zero")
         {
          

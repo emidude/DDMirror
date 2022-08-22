@@ -21,6 +21,7 @@ TagManager:
   - audioHndlr
   - PanelParent
   - netman
+  - identifiercube
   layers:
   - Default
   - TransparentFX
