@@ -126,14 +126,14 @@ public class SceneHandler : NetworkBehaviour
             if (preFirstSong)
             {
                 preFirstSong = false;
-                readyToGo = true;
+                //readyToGo = true;
                 panelstart.SetActive(false);
                 panelParent.SetActive(false);
 
                 //player is ready to start
                 //need issue cmd to play first song to all players
                 //DONT NEEB BELWO COS ALREADY SET PLAYER MANAGER IN CLICKLING EACH OTHER SCENE
-                Debug.Log("PlayersNetIds_SH.Count=" + PlayersNetIds_SH.Count);
+                /*ebug.Log("PlayersNetIds_SH.Count=" + PlayersNetIds_SH.Count);
                 int numOtherPlayersReady = 0;
                 for(int i = 0; i < PlayersNetIds_SH.Count; i++)
                 {
@@ -143,13 +143,13 @@ public class SceneHandler : NetworkBehaviour
                         numOtherPlayersReady++;
                     }
                 }
-
-                if(numOtherPlayersReady == PlayersNetIds_SH.Count)
-                {
+*/
+                /*if(numOtherPlayersReady == PlayersNetIds_SH.Count)
+                {*/
                    /* NetworkIdentity networkIdentity = NetworkClient.connection.identity;
                     playerManager = networkIdentity.GetComponent<PlayerManager>();*/
                     playerManager.CmdClickedSubmit();
-                }
+               // }
                 
             }
             else if(currentQn==1){
