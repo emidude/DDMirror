@@ -29,6 +29,8 @@ public class SceneHandler : NetworkBehaviour
 
     public List<NetworkIdentity> PlayersNetIds_SH = new List<NetworkIdentity>();
 
+    NetworkingPlayer NP;
+
 
     void Awake()
     {
@@ -38,6 +40,14 @@ public class SceneHandler : NetworkBehaviour
 
         panelParent.SetActive(true);
         panelstart.SetActive(true);
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+        NetworkIdentity networkIdentity = NetworkClient.connection.identity;
+        NP = networkIdentity.GetComponent<NetworkingPlayer>();
+       
     }
 
     public void PointerClick(object sender, PointerEventArgs e)
@@ -149,6 +159,8 @@ public class SceneHandler : NetworkBehaviour
                     NetworkIdentity networkIdentity = NetworkClient.connection.identity;
                     playerManager = networkIdentity.GetComponent<PlayerManager>();
                     playerManager.CmdClickedSubmit();
+
+                NP.DisactiveateBodyMarkers();
                // }
                 
             }

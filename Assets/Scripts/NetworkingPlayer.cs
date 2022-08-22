@@ -74,6 +74,13 @@ public class NetworkingPlayer : NetworkBehaviour
         
     }
 
+    public void DisactiveateBodyMarkers()
+    {
+        networkedHead.SetActive(false);
+        networkedLeftHand.SetActive(false);
+        networkedRightHand.SetActive(false);
+        CmdSpawnCubes();
+    }
 
     public override void OnStartLocalPlayer()
     {
@@ -111,7 +118,7 @@ public class NetworkingPlayer : NetworkBehaviour
         cR = localRightHand.GetComponent<SteamVR_Behaviour_Pose>();
 
 
-        CmdSpawnCubes();
+        //CmdSpawnCubes();
         Debug.Log("server active?" + NetworkServer.active);
     }
 
