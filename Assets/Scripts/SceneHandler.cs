@@ -25,6 +25,7 @@ public class SceneHandler : NetworkBehaviour
     int currentSong = 0;
     int currentQn = 0;
     bool preFirstSong = true;
+    bool readyToGo = false;
 
     public List<NetworkIdentity> PlayersNetIds_SH = new List<NetworkIdentity>();
 
@@ -125,16 +126,31 @@ public class SceneHandler : NetworkBehaviour
             if (preFirstSong)
             {
                 preFirstSong = false;
-
+                readyToGo = true;
                 panelstart.SetActive(false);
                 panelParent.SetActive(false);
 
                 //player is ready to start
                 //need issue cmd to play first song to all players
                 //DONT NEEB BELWO COS ALREADY SET PLAYER MANAGER IN CLICKLING EACH OTHER SCENE
-                NetworkIdentity networkIdentity = NetworkClient.connection.identity;
-                playerManager = networkIdentity.GetComponent<PlayerManager>();
-                playerManager.CmdClickedSubmit();
+                Debug.Log("PlayersNetIds_SH.Count=" + PlayersNetIds_SH.Count);
+                int numOtherPlayersReady = 0;
+                for(int i = 0; i < PlayersNetIds_SH.Count; i++)
+                {
+                    if (PlayersNetIds_SH[i].GetComponent<SceneHandler>().readyToGo)
+                    {
+                        Debug.Log("ready in scen handler");
+                        numOtherPlayersReady++;
+                    }
+                }
+
+                if(numOtherPlayersReady == PlayersNetIds_SH.Count)
+                {
+                    NetworkIdentity networkIdentity = NetworkClient.connection.identity;
+                    playerManager = networkIdentity.GetComponent<PlayerManager>();
+                    playerManager.CmdClickedSubmit();
+                }
+                
             }
             else if(currentQn==1){
                 //just answered numplayers qn, now on music pref panel

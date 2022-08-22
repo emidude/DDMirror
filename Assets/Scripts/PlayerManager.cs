@@ -25,7 +25,8 @@ public class PlayerManager : NetworkBehaviour
 
     public List<NetworkIdentity> PlayersNetIds = new List<NetworkIdentity>();
     bool ready = false;
-   
+    int numPlayersready;
+
  /*   public override void OnStartServer()
     {
         base.OnStartServer();
@@ -39,14 +40,14 @@ public class PlayerManager : NetworkBehaviour
     }*/
 
 
-  /*  public override void OnStartClient()
-    {
-        base.OnStartClient();
-        *//*Debug.Log("called on start client: NetworkServer.connections.count=" + NetworkServer.connections.Count);
-        Debug.Log("LOCAL (REMOTE) NET id??" + NetworkClient.connection.identity.netId);
-        Debug.Log("on start clinet test =" + test);*//*
-    }*/
-   
+    /*  public override void OnStartClient()
+      {
+          base.OnStartClient();
+          *//*Debug.Log("called on start client: NetworkServer.connections.count=" + NetworkServer.connections.Count);
+          Debug.Log("LOCAL (REMOTE) NET id??" + NetworkClient.connection.identity.netId);
+          Debug.Log("on start clinet test =" + test);*//*
+      }*/
+
 
 
     public override void OnStartLocalPlayer()
@@ -91,15 +92,15 @@ public class PlayerManager : NetworkBehaviour
     void RpcPlaySong(int songIndex)
     {
         //sync in logger time
-        /*if (hasAuthority)
-        {*/
-             Debug.Log("rpc playing song" + AudioHandler.soundList[songIndex].name + " index=" +songIndex);
+        if (hasAuthority)
+        {
+            Debug.Log("rpc playing song" + AudioHandler.soundList[songIndex].name + " index=" +songIndex);
             //int songIndex = songIndx;
             int songID = AudioHandler.soundList[songIndex].ID; 
             string msg = "Syncing " + AudioHandler.soundList[songIndex].name;
             //Logger.Event(msg);
             AudioHandler.SetAudioToPlay(songID);
-       // }
+        }
     }
 
     [Command]
@@ -116,37 +117,41 @@ public class PlayerManager : NetworkBehaviour
         //is everyone ready?
         Debug.Log("playernetids count=" + PlayersNetIds.Count);
 
-        int numPlayersready = 1;
+        /* numPlayersready = 1;
 
-        for (int i = 0; i < PlayersNetIds.Count; i++)
-        {
-            if (!PlayersNetIds[i].GetComponent<PlayerManager>().ready)
-            {
-                Debug.Log("NOT READY SHOULD RETURN");
-                //return;
-                numPlayersready = 1;//resert;
-            }
-            else { Debug.Log("plr ready");
-                numPlayersready++;
-            }
-        }
-        if (numPlayersready == NetworkServer.connections.Count)
-        {
-            Debug.Log("EVERYONE READY!!!");
+         for (int i = 0; i < PlayersNetIds.Count; i++)
+         {
+             if (PlayersNetIds[i].GetComponent<PlayerManager>().ready)
+             {
+                 Debug.Log("plr ready");
+                 numPlayersready++;
 
 
+             }
+             else {
+                 Debug.Log("NOT READY SHOULD RETURN");
+                 //return;
+                 numPlayersready = 1;//resert;
+                 return;
+             }
+         }
+         if (numPlayersready == NetworkServer.connections.Count)
+         {
+             Debug.Log("EVERYONE READY!!!");
 
-            Debug.Log("about to rpcplaysong, song index = " + songOrdering[songIndx]);
-            //three readys! letsGo!
-            RpcPlaySong(songOrdering[songIndx]);
 
-            songIndx++;
-            numPlayersready = 1;
-        }
-       
 
-              
-  
+             Debug.Log("about to rpcplaysong, song index = " + songOrdering[songIndx]);
+             //three readys! letsGo!
+
+             numPlayersready = 1;
+         }*/
+
+        RpcPlaySong(songOrdering[songIndx]);
+
+        songIndx++;
+
+
     }
 
     /*[ClientRpc]
