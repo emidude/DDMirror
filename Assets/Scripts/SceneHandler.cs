@@ -84,6 +84,8 @@ public class SceneHandler : NetworkBehaviour
 
             if (preFirstSong)
             {
+                preFirstSong = false;
+
                 panelstart.SetActive(false);
                 panelParent.SetActive(false);
 
@@ -114,8 +116,12 @@ public class SceneHandler : NetworkBehaviour
             {
                 answeredQnPanel.SetActive(false);
                 panelParent.SetActive(false);
-
+                //reset qns
+                currentQn = 0;
                 //server play next song
+                NetworkIdentity networkIdentity = NetworkClient.connection.identity;
+                playerManager = networkIdentity.GetComponent<PlayerManager>();
+                playerManager.CmdClickedSubmit();
             }
         }
     }

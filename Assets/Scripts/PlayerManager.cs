@@ -49,7 +49,7 @@ public class PlayerManager : NetworkBehaviour
         base.OnStartLocalPlayer();
 
         //SET ORDERING:
-        songOrdering = new int[] { 8, 5, 1, 3, 6, 9};
+        songOrdering = new int[] { 1, 0, 2, 3, 6, 9};
         combinations = new int[] { 4, 2, 1, 3, 0, 0};
 
         //AUDIO:
@@ -66,10 +66,10 @@ public class PlayerManager : NetworkBehaviour
     [Command] //client tells server to run this method
     public void CmdNextSong()
     {
-        
+
 
         //play next song
-        
+        Debug.Log("songOrdering[songIndx]=" + songOrdering[songIndx]);
         RpcPlaySong(songOrdering[songIndx]);
         Debug.Log("song Index = " + songIndx);
         songIndx++;
@@ -112,7 +112,7 @@ public class PlayerManager : NetworkBehaviour
             {
                 Debug.Log("about to rpcplaysong");
                 //three readys! letsGo!
-                RpcPlaySong(songIndx);
+                RpcPlaySong(songOrdering[songIndx]);
 
                 songIndx++;
 
