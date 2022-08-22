@@ -108,35 +108,31 @@ public class PlayerManager : NetworkBehaviour
         //get player indentity of clicker ?
 
         //set ready
+        ready = true;
         //this client is ready (the script attached to this local client palyer)
         //in scene handler, getting local client is used to call the script
         //specific to each player to run this code on :
-
         
-        
-        
-        
-        
-        /*if (isServer)
-        {*/
-
-        
-
-
-            numberOfTimesReadyClicked++;
-            Debug.Log("numberOfTimesReadyClicked= " + numberOfTimesReadyClicked);
-            Debug.Log("NetworkServer.connections.Count= " + NetworkServer.connections.Count);
-            if (numberOfTimesReadyClicked >= NetworkServer.connections.Count)
+        //is everyone ready?
+        for (int i = 0; i < PlayersNetIds.Count; i++)
+        {
+            if (!PlayersNetIds[i].GetComponent<PlayerManager>().ready)
             {
+                return;
+            }
+        }
+        Debug.Log("EVERYONE READY!!!");
+        
+        
+
                 Debug.Log("about to rpcplaysong");
                 //three readys! letsGo!
                 RpcPlaySong(songOrdering[songIndx]);
 
                 songIndx++;
 
-                //reset counter
-                numberOfTimesReadyClicked = 0;
-            }
+              
+            
        // }
         
 

@@ -26,7 +26,7 @@ public class SceneHandler : NetworkBehaviour
     int currentQn = 0;
     bool preFirstSong = true;
 
-    public List<NetworkIdentity> PlayersNetIds = new List<NetworkIdentity>();
+    public List<NetworkIdentity> PlayersNetIds_SH = new List<NetworkIdentity>();
 
 
     void Awake()
@@ -45,32 +45,38 @@ public class SceneHandler : NetworkBehaviour
         {
             Debug.Log("id cube clicked");
 
-            NetworkIdentity networkIdentity = e.target.gameObject.transform.root.GetComponent<NetworkIdentity>();
+            NetworkIdentity targetNetworkIdentity = e.target.gameObject.transform.root.GetComponent<NetworkIdentity>();
 
-            Debug.Log("netid - " + networkIdentity);
-            if (PlayersNetIds.Count == 0)
+            playerManager = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+
+            Debug.Log("netid - " + targetNetworkIdentity);
+            if (PlayersNetIds_SH.Count == 0)
             {
-                PlayersNetIds.Add(networkIdentity);
+                PlayersNetIds_SH.Add(targetNetworkIdentity);
+                
+                playerManager.PlayersNetIds.Add(targetNetworkIdentity);
             }
             else
             {
-                for (int i = 0; i < PlayersNetIds.Count; i++)
+                for (int i = 0; i < PlayersNetIds_SH.Count; i++)
                 {
-                    if(PlayersNetIds[i] == networkIdentity)
+                    if(PlayersNetIds_SH[i] == targetNetworkIdentity)
                     {
                         return;
                     }
                 }
-                Debug.Log("should be unige net id added= "+ networkIdentity);
-                PlayersNetIds.Add(networkIdentity);
+                Debug.Log("should be unige net id added= "+ targetNetworkIdentity);
+                PlayersNetIds_SH.Add(targetNetworkIdentity);
+
+                playerManager.PlayersNetIds.Add(targetNetworkIdentity);
             }
            
 
 
-            Debug.Log("playernet id count= " + PlayersNetIds.Count);
-            for (int i = 0; i < PlayersNetIds.Count; i++)
+            Debug.Log("playernet id in player manager count= " + playerManager.PlayersNetIds.Count);
+            for (int i = 0; i < playerManager.PlayersNetIds.Count; i++)
             {
-                Debug.Log(PlayersNetIds[i]);
+                Debug.Log(playerManager.PlayersNetIds[i]);
             }
         }
 
@@ -125,7 +131,7 @@ public class SceneHandler : NetworkBehaviour
 
                 //player is ready to start
                 //need issue cmd to play first song to all players
-
+                //DONT NEEB BELWO COS ALREADY SET PLAYER MANAGER IN CLICKLING EACH OTHER SCENE
                 NetworkIdentity networkIdentity = NetworkClient.connection.identity;
                 playerManager = networkIdentity.GetComponent<PlayerManager>();
                 playerManager.CmdClickedSubmit();
