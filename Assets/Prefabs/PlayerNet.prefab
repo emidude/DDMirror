@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2001434533138923839}
   - component: {fileID: 6349749736277093210}
   - component: {fileID: 5412953645057215747}
+  - component: {fileID: 758776140057396983}
   m_Layer: 0
   m_Name: PlayerNet
   m_TagString: Untagged
@@ -40,7 +41,6 @@ Transform:
   - {fileID: 8425520599172257428}
   - {fileID: 8425520600003480411}
   - {fileID: 8425520598223998758}
-  - {fileID: 1123382566244941978}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -353,6 +353,41 @@ MonoBehaviour:
   SceneHandler: {fileID: 0}
   started: 0
   PlayersNetIds: []
+--- !u!114 &758776140057396983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955319492908329235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  sendInterval: 0.05
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 0
+  bufferTimeMultiplier: 1
+  bufferSizeLimit: 64
+  catchupThreshold: 4
+  catchupMultiplier: 0.1
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  target: {fileID: 1123382566244941978}
 --- !u!1 &8425520598223998757
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,6 +449,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6529672145111582005}
+  - {fileID: 1123382566244941978}
   m_Father: {fileID: 1955319492908329263}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -475,13 +511,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8824015308828579531}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.37}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1955319492908329263}
-  m_RootOrder: 3
+  m_Father: {fileID: 8425520599172257428}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2619433788093866792
 MeshFilter:

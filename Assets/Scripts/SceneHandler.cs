@@ -46,6 +46,7 @@ public class SceneHandler : NetworkBehaviour
             Debug.Log("id cube clicked");
             
             NetworkIdentity networkIdentity = e.target.gameObject.GetComponent<NetworkIdentity>();
+            Debug.Log("netid - " + networkIdentity);
             PlayersNetIds.Add(networkIdentity);
 
 
