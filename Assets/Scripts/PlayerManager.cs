@@ -8,13 +8,13 @@ public class PlayerManager : NetworkBehaviour
     public PlayerSync playerSync;
     public int[] combinations = new int[6];
     public int[] songOrdering = new int[6];
-   //private System.Random _random = new System.Random();
+    //private System.Random _random = new System.Random();
     [SerializeField] AudioClip audio;
     //bool readyToStart = false;
     GameObject audioObject;
     AudioHandler AudioHandler;
     int songIndx = 0;
-    [SyncVar]
+    //[SyncVar]
     int numberOfTimesReadyClicked = 0;
     public GameObject guiObject;
     public SceneHandler SceneHandler;
@@ -23,6 +23,7 @@ public class PlayerManager : NetworkBehaviour
     NetworkIdentity firstNetworkId;
     int test;
 
+    public GameObject PlayerNetIDListGO;
    
  /*   public override void OnStartServer()
     {
@@ -44,6 +45,8 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("LOCAL (REMOTE) NET id??" + NetworkClient.connection.identity.netId);
         Debug.Log("on start clinet test =" + test);*//*
     }*/
+   
+
 
     public override void OnStartLocalPlayer()
     {
@@ -60,8 +63,22 @@ public class PlayerManager : NetworkBehaviour
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
         SceneHandler = guiObject.GetComponent<SceneHandler>();
 
-       
+        //GET Netid:
+        PlayerNetIDListGO = GameObject.FindGameObjectWithTag("netman");
+        
+        NetworkIdentity networkIdentity = NetworkClient.connection.identity;
+
+        PlayerNetIDListGO.GetComponent<Matches>().playerNetIDs.Add(networkIdentity);
+
+       foreach(NetworkIdentity nId in PlayerNetIDListGO.GetComponent<Matches>().playerNetIDs)
+        {
+            Debug.Log(nId);
+        }
+
+
     }
+
+   
 
 
     [Command] //client tells server to run this method
@@ -106,6 +123,9 @@ public class PlayerManager : NetworkBehaviour
         //readyToStart = true;
         /*if (isServer)
         {*/
+        
+
+
             numberOfTimesReadyClicked++;
             Debug.Log("numberOfTimesReadyClicked= " + numberOfTimesReadyClicked);
             Debug.Log("NetworkServer.connections.Count= " + NetworkServer.connections.Count);

@@ -20,6 +20,7 @@ TagManager:
   - slider
   - audioHndlr
   - PanelParent
+  - netman
   layers:
   - Default
   - TransparentFX
