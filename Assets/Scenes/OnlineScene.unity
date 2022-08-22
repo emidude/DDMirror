@@ -1708,6 +1708,7 @@ MonoBehaviour:
   musicPrefPanel: {fileID: 184317866}
   dancePrefPanel: {fileID: 961613894}
   answeredQnPanel: {fileID: 303753768}
+  PlayersNetIds_SH: []
 --- !u!114 &444838686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4009,7 +4010,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.068
+  m_Volume: 0.235
   m_Pitch: 1
   Loop: 0
   Mute: 0

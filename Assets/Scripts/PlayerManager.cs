@@ -13,7 +13,7 @@ public class PlayerManager : NetworkBehaviour
     //bool readyToStart = false;
     GameObject audioObject;
     AudioHandler AudioHandler;
-    int songIndx = 0;
+    int songIndx = 1;
     //[SyncVar]
     int numberOfTimesReadyClicked = 0;
     public GameObject guiObject;
@@ -125,7 +125,7 @@ public class PlayerManager : NetworkBehaviour
         
         
 
-                Debug.Log("about to rpcplaysong");
+                Debug.Log("about to rpcplaysong, song index = " + songIndx);
                 //three readys! letsGo!
                 RpcPlaySong(songOrdering[songIndx]);
 
