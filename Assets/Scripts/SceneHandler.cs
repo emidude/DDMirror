@@ -146,8 +146,8 @@ public class SceneHandler : NetworkBehaviour
 */
                 /*if(numOtherPlayersReady == PlayersNetIds_SH.Count)
                 {*/
-                   /* NetworkIdentity networkIdentity = NetworkClient.connection.identity;
-                    playerManager = networkIdentity.GetComponent<PlayerManager>();*/
+                    NetworkIdentity networkIdentity = NetworkClient.connection.identity;
+                    playerManager = networkIdentity.GetComponent<PlayerManager>();
                     playerManager.CmdClickedSubmit();
                // }
                 
