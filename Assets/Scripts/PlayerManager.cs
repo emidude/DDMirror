@@ -124,7 +124,7 @@ public class PlayerManager : NetworkBehaviour
             {
                 Debug.Log("NOT READY SHOULD RETURN");
                 //return;
-                numPlayersready = 0;//resert;
+                numPlayersready = 1;//resert;
             }
             else { Debug.Log("plr ready");
                 numPlayersready++;
