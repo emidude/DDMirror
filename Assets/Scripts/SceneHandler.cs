@@ -42,13 +42,7 @@ public class SceneHandler : NetworkBehaviour
         panelstart.SetActive(true);
     }
 
-    public override void OnStartLocalPlayer()
-    {
-        base.OnStartLocalPlayer();
-        NetworkIdentity networkIdentity = NetworkClient.connection.identity;
-        NP = networkIdentity.GetComponent<NetworkingPlayer>();
-       
-    }
+   
 
     public void PointerClick(object sender, PointerEventArgs e)
     {
@@ -159,7 +153,8 @@ public class SceneHandler : NetworkBehaviour
                     NetworkIdentity networkIdentity = NetworkClient.connection.identity;
                     playerManager = networkIdentity.GetComponent<PlayerManager>();
                     playerManager.CmdClickedSubmit();
-
+               
+                NP = networkIdentity.GetComponent<NetworkingPlayer>();
                 NP.DisactiveateBodyMarkers();
                // }
                 
