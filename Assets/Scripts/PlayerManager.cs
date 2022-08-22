@@ -6,9 +6,9 @@ using Mirror;
 public class PlayerManager : NetworkBehaviour
 {
     public PlayerSync playerSync;
-    public int[] combinations = new int[12];
-    public int[] songOrdering = new int[12];
-    private System.Random _random = new System.Random();
+    public int[] combinations = new int[6];
+    public int[] songOrdering = new int[6];
+   //private System.Random _random = new System.Random();
     [SerializeField] AudioClip audio;
     //bool readyToStart = false;
     GameObject audioObject;
@@ -23,148 +23,35 @@ public class PlayerManager : NetworkBehaviour
     int test;
 
    
-    public override void OnStartServer()
+ /*   public override void OnStartServer()
     {
         base.OnStartServer();
 
-      
-        if (hasAuthority)
-        {
-            test = 5;
-            Debug.Log("I have authrotiy on server starting,  test=" + test);
-            Debug.Log(" NetworkConnectionToServer.LocalConnectionId = " + NetworkClient.connection.identity.assetId);
-            Debug.Log(" NetworkConnectionToClient.LocalConnectionId = " + NetworkConnectionToClient.LocalConnectionId);
-            Debug.Log("NetworkClient.connection.identity.assetId" + NetworkClient.connection.identity.assetId);
-           
-            
-           /* //firstNetworkId = NetworkClient.connection.identity;
-            //started = true;
-            Debug.Log("setting firstnetwork id" + NetworkClient.connection.identity.netId +
-                " NetworkServer.connections[0].identity=" + NetworkServer.connections[0].identity.netId);
-            firstNetworkId = NetworkServer.connections[0].identity;
-            test = 5;*/
-        }
-            
-        else 
-        {
-            CmdSetTest();
-            Debug.Log("server is starting and i do not have authority, test=" + test);
-            Debug.Log(" NetworkConnectionToServer.LocalConnectionId = " + NetworkConnectionToServer.LocalConnectionId);
-            Debug.Log(" NetworkConnectionToClient.LocalConnectionId = " + NetworkConnectionToClient.LocalConnectionId);
-            Debug.Log("NetworkClient.connection.identity.assetId" + NetworkClient.connection.identity.assetId);
-            /*Debug.Log(" NetworkServer.connections.count="+ NetworkServer.connections.Count);
-            Debug.Log("LOCAL (REMOTE) NET id" + NetworkClient.connection.identity.netId + " test="+test);
-            firstNetworkId = NetworkServer.connections[0].identity;*/
-        }
 
         NetworkIdentity networkIdentity = NetworkClient.connection.identity;
         Debug.Log("NetworkIdentity local" + networkIdentity.netId);
 
-        if (networkIdentity.netId == firstNetworkId.netId) 
-        //if (!started)
-        {
-                Debug.Log("networkIdentity.netId == firstNetworkId.netId");
-            //set song ordering for this session
-            for (int i = 0; i < 12; i++)
-            {
-                songOrdering[i] = i;
-            }
-            //randomise Song order:
-            Shuffle(songOrdering);
-            Debug.Log("song ordering is :");
-            for (int i = 0; i < songOrdering.Length; i++)
-            {
-                Debug.Log(songOrdering[i]);
-            }
-
-            //set Player combinations for 10 songs, each player will do: 4 '3 player' songs, 4 '2 player' songs and 4 '1 player' songs.
-            //numerical code for combinations array:
-            //0 means all players are dancing together
-            //1 => player 1 is dancing alone, player 2 & 3 dancing together
-            //2 => p2 alone, 3=> p3 alone,
-            //4 => all players dancing alone
-            for (int i = 0; i < 4; i++)
-            {
-                combinations[i] = 0;
-            }
-            for (int i = 4; i < 6; i++)
-            {
-                combinations[i] = 1;
-            }
-            for (int i = 6; i < 8; i++)
-            {
-                combinations[i] = 2;
-            }
-            for (int i = 8; i < 10; i++)
-            {
-                combinations[i] = 3;
-            }
-            for (int i = 10; i < 12; i++)
-            {
-                combinations[i] = 4;
-            }
-
-            //randomise player combinations 
-            Shuffle(combinations);
-            Debug.Log("player combinations ordering is :");
-            for (int i = 0; i < combinations.Length; i++)
-            {
-                Debug.Log(combinations[i]);
-            }
-
-        }
-        else
-        {
-            //get song and combination ordering from host player
-            songOrdering = NetworkServer.connections[0].identity.GetComponent<PlayerManager>().songOrdering;
-            combinations = NetworkServer.connections[0].identity.GetComponent<PlayerManager>().combinations;
-
-            Debug.Log("song ordering on remote is :");
-            for (int i = 0; i < songOrdering.Length; i++)
-            {
-                Debug.Log(songOrdering[i]);
-            }
-            Debug.Log("player combinations remote is :");
-            for (int i = 0; i < combinations.Length; i++)
-            {
-                Debug.Log(combinations[i]);
-            }
-        }
-
+  
        
-    }
+    }*/
 
-    [Command]
-    void CmdSetTest()
-    {
-        if (hasAuthority)
-        {
-            Debug.Log("I have authority on cmd set test, test =" + test);
-            int t = test;
-            RpcSetTest(t);
-        }
-        else
-        {
-            Debug.Log("i have no authroity on cmdset test");
-        }
-    }
-    [ClientRpc]
-    void RpcSetTest(int t)
-    {
-        test = t;
-    }
 
-    public override void OnStartClient()
+  /*  public override void OnStartClient()
     {
         base.OnStartClient();
-        /*Debug.Log("called on start client: NetworkServer.connections.count=" + NetworkServer.connections.Count);
+        *//*Debug.Log("called on start client: NetworkServer.connections.count=" + NetworkServer.connections.Count);
         Debug.Log("LOCAL (REMOTE) NET id??" + NetworkClient.connection.identity.netId);
-        Debug.Log("on start clinet test =" + test);*/
-    }
+        Debug.Log("on start clinet test =" + test);*//*
+    }*/
 
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
+
+        //SET ORDERING:
+        songOrdering = new int[] { 8, 5, 1, 3, 6, 9};
+        combinations = new int[] { 4, 2, 1, 3, 0, 0};
+
         //AUDIO:
         audioObject = GameObject.FindGameObjectWithTag("audioHndlr");
         AudioHandler = audioObject.GetComponent<AudioHandler>();
@@ -172,20 +59,9 @@ public class PlayerManager : NetworkBehaviour
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
         SceneHandler = guiObject.GetComponent<SceneHandler>();
 
-        CmdSetTest();
+       
     }
 
-    void Shuffle(int[] array)
-    {
-        int p = array.Length;
-        for (int n = p - 1; n > 0; n--)
-        {
-            int r = _random.Next(0, n + 1);
-            int t = array[r];
-            array[r] = array[n];
-            array[n] = t;
-        }
-    }
 
     [Command] //client tells server to run this method
     public void CmdNextSong()
