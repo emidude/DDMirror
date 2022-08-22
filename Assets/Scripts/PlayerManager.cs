@@ -14,6 +14,7 @@ public class PlayerManager : NetworkBehaviour
     GameObject audioObject;
     AudioHandler AudioHandler;
     int songIndx = 0;
+    [SyncVar]
     int numberOfTimesReadyClicked = 0;
     public GameObject guiObject;
     public SceneHandler SceneHandler;
@@ -103,8 +104,8 @@ public class PlayerManager : NetworkBehaviour
         //specific to each player to run this code on :
 
         //readyToStart = true;
-        if (isServer)
-        {
+        /*if (isServer)
+        {*/
             numberOfTimesReadyClicked++;
             Debug.Log("numberOfTimesReadyClicked= " + numberOfTimesReadyClicked);
             Debug.Log("NetworkServer.connections.Count= " + NetworkServer.connections.Count);
@@ -119,7 +120,7 @@ public class PlayerManager : NetworkBehaviour
                 //reset counter
                 numberOfTimesReadyClicked = 0;
             }
-        }
+       // }
         
 
         /*if (RpcIsAnyoneNotReady())
