@@ -1708,6 +1708,8 @@ MonoBehaviour:
   musicPrefPanel: {fileID: 184317866}
   dancePrefPanel: {fileID: 961613894}
   answeredQnPanel: {fileID: 303753768}
+  spawnableObjForSync: {fileID: 7349070715371195132, guid: 096528a27f1f56145b4bad35687e3972,
+    type: 3}
 --- !u!114 &444838686
 MonoBehaviour:
   m_ObjectHideFlags: 0

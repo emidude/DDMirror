@@ -25,11 +25,17 @@ public class SceneHandler : NetworkBehaviour
     int currentSong = 0;
     int currentQn = 0;
     bool preFirstSong = true;
-    
 
+    //public GameObject spawnedSyncObj;
+    
+    [SerializeField] GameObject spawnableObjForSync;
+    GameObject syncObj;
 
     void Awake()
     {
+        
+
+
         laserPointer.PointerIn += PointerInside;
         laserPointer.PointerOut += PointerOutside;
         laserPointer.PointerClick += PointerClick;
@@ -91,10 +97,20 @@ public class SceneHandler : NetworkBehaviour
 
                 //player is ready to start
                 //need issue cmd to play first song to all players
+                
+                if (syncObj == null) 
+                {
+                    Debug.Log("no spawn obj");
+                }
+                //syncObj.GetComponent<IncrementClick>().IncrementClicks();
+
 
                 NetworkIdentity networkIdentity = NetworkClient.connection.identity;
                 playerManager = networkIdentity.GetComponent<PlayerManager>();
                 playerManager.CmdClickedSubmit();
+                playerManager.CmdIncrementClick(syncObj);
+                
+                
             }
             else if(currentQn==1){
                 //just answered numplayers qn, now on music pref panel
@@ -186,6 +202,14 @@ public class SceneHandler : NetworkBehaviour
 
         //disable visuals script;
 
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+
+        syncObj = Instantiate(spawnableObjForSync);
+        NetworkServer.Spawn(syncObj);
     }
     
 

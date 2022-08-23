@@ -64,6 +64,8 @@ MonoBehaviour:
   networkedLeftHand: {fileID: 8425520600003480410}
   networkedRightHand: {fileID: 8425520598223998757}
   cubePf: {fileID: 1223016012747116, guid: 16c2e13a22648d544ba10e09297cd061, type: 3}
+  spawnableObjForSync: {fileID: 7349070715371195132, guid: 096528a27f1f56145b4bad35687e3972,
+    type: 3}
 --- !u!114 &1973644640722397171
 MonoBehaviour:
   m_ObjectHideFlags: 0

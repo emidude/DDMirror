@@ -33,6 +33,8 @@ public class NetworkingPlayer : NetworkBehaviour
     int resolution = 10;
     GameObject[] points;
 
+    [SerializeField] GameObject spawnableObjForSync;
+    GameObject syncObj;
 
 
     void Update()
@@ -97,6 +99,9 @@ public class NetworkingPlayer : NetworkBehaviour
 
         CmdSpawnCubes();
         Debug.Log("server active?" + NetworkServer.active);
+
+        syncObj = Instantiate(spawnableObjForSync);
+        NetworkServer.Spawn(syncObj);
     }
 
 

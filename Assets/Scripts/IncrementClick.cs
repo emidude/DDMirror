@@ -12,6 +12,7 @@ public class IncrementClick : NetworkBehaviour
 
     public void IncrementClicks()
     {
+        Debug.Log("clicking");
         NetworkIdentity netowrkIdentity = NetworkClient.connection.identity;
         PlayerManager = netowrkIdentity.GetComponent<PlayerManager>();
         PlayerManager.CmdIncrementClick(gameObject);

@@ -57,8 +57,8 @@ public class PlayerManager : NetworkBehaviour
         audioObject = GameObject.FindGameObjectWithTag("audioHndlr");
         AudioHandler = audioObject.GetComponent<AudioHandler>();
         //PANELS/////////////////////MISTAEK BELOW IDK?
-        guiObject = GameObject.FindGameObjectWithTag("PanelParent");
-        SceneHandler = guiObject.GetComponent<SceneHandler>();
+        /*guiObject = GameObject.FindGameObjectWithTag("PanelParent");
+        SceneHandler = guiObject.GetComponent<SceneHandler>();*/
 
        
     }
@@ -107,7 +107,7 @@ public class PlayerManager : NetworkBehaviour
         /*if (isServer)
         {*/
             numberOfTimesReadyClicked++;
-            Debug.Log("numberOfTimesReadyClicked= " + numberOfTimesReadyClicked);
+            //Debug.Log("numberOfTimesReadyClicked= " + numberOfTimesReadyClicked);
             Debug.Log("NetworkServer.connections.Count= " + NetworkServer.connections.Count);
             if (numberOfTimesReadyClicked >= NetworkServer.connections.Count)
             {

@@ -21,6 +21,7 @@ TagManager:
   - audioHndlr
   - PanelParent
   - playerNet
+  - spawnedsync
   layers:
   - Default
   - TransparentFX
