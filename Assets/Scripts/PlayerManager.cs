@@ -122,6 +122,9 @@ public class PlayerManager : NetworkBehaviour
             }
        // }
         
+        
+
+
 
         /*if (RpcIsAnyoneNotReady())
         {
@@ -139,6 +142,20 @@ public class PlayerManager : NetworkBehaviour
             RpcSetNooneReady();
             
         }*/
+    }
+
+    [Command]
+
+    public void CmdIncrementClick(GameObject card)
+    {
+        RpcIncrementClick(card);
+    }
+
+    [ClientRpc]
+    public void RpcIncrementClick(GameObject card)
+    {
+        card.GetComponent<IncrementClick>().numberOfClicks++;
+        Debug.Log("this has been clicked " + card.GetComponent<IncrementClick>().numberOfClicks + " times") ;
     }
 
     /*[ClientRpc]
@@ -183,14 +200,14 @@ public class PlayerManager : NetworkBehaviour
         RpcSyncQuiet(songName);
     }*/
 
-        /*
-            [ClientRpc]
-            void RpcSyncQuiet(string songName)
-            {
-                string msg = "Syncing " + songName;
-                Logger.Event(msg);
+    /*
+        [ClientRpc]
+        void RpcSyncQuiet(string songName)
+        {
+            string msg = "Syncing " + songName;
+            Logger.Event(msg);
 
-            }*/
+        }*/
 
 
 }

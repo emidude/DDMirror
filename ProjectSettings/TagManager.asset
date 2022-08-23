@@ -20,6 +20,7 @@ TagManager:
   - slider
   - audioHndlr
   - PanelParent
+  - playerNet
   layers:
   - Default
   - TransparentFX

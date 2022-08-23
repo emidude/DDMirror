@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 5412953645057215747}
   m_Layer: 0
   m_Name: PlayerNet
-  m_TagString: Untagged
+  m_TagString: playerNet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -345,7 +345,12 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerSync: {fileID: 1973644640722397171}
+  combinations: 000000000000000000000000000000000000000000000000
+  songOrdering: 000000000000000000000000000000000000000000000000
   audio: {fileID: 0}
+  guiObject: {fileID: 0}
+  SceneHandler: {fileID: 0}
+  started: 0
 --- !u!1 &8425520598223998757
 GameObject:
   m_ObjectHideFlags: 0
