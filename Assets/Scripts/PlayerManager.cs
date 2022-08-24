@@ -275,7 +275,13 @@ public class PlayerManager : NetworkBehaviour
         {
             RpcResetPlayers();
             numPlayersReady = 0;
-            ready = false; //THIS IS ALSO ON SERVER SCRIPT
+            //ready = false; //THIS ONLY GETS CALLED ONCE FROM THE LAST PLAYER WHO WAS READY LAST TIME
+            for (int i = 0; i < playersList.Count; i++)
+            {
+                playersList[i].ready = false;
+            }
+
+
             Debug.Log("FINALLY EVERYONE READY!!!!!!! (songOrdering[songIndx]="+songOrdering[songIndx]);
             RpcPlaySong();
         }     
@@ -288,7 +294,7 @@ public class PlayerManager : NetworkBehaviour
         SceneHandler SH = PM.SceneHndlr;
         SH.SetCanvasInactive();
 
-        PM.ready = false;
+        PM.ready = false; //might no longer need
     }
 
 
