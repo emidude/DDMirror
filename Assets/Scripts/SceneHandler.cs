@@ -25,7 +25,7 @@ public class SceneHandler : NetworkBehaviour
     int currentSong = 0;
     int currentQn = 0;
     bool preFirstSong = true;
-    
+
 
 
     void Awake()
@@ -42,9 +42,8 @@ public class SceneHandler : NetworkBehaviour
     {
         if (e.target.tag == "zero")
         {
-         
-            Debug.Log("Zero was clicked");
-            e.target.gameObject.GetComponent<Image>().color = Color.red;
+
+            e.target.gameObject.GetComponent<Image>().color = Color.white;
             //log answer
 
 
@@ -56,31 +55,23 @@ public class SceneHandler : NetworkBehaviour
         }
         else if (e.target.tag == "one")
         {
-            e.target.gameObject.GetComponent<Image>().color = Color.red;
+            e.target.gameObject.GetComponent<Image>().color = Color.white;
 
-            Debug.Log("Button 1 was clicked");
             numPlayersPanel.SetActive(false);
             musicPrefPanel.SetActive(true);
             currentQn++;
-
-            
-
         }
         else if (e.target.tag == "two")
         {
-            e.target.gameObject.GetComponent<Image>().color = Color.red;
+            e.target.gameObject.GetComponent<Image>().color = Color.white;
 
-            Debug.Log("2 clicked");
             numPlayersPanel.SetActive(false);
             musicPrefPanel.SetActive(true);
             currentQn++;
-
-            
-
         }
         else if (e.target.tag == "submit")
         {
-            e.target.gameObject.GetComponent<Image>().color = Color.red;
+            e.target.gameObject.GetComponent<Image>().color = Color.white;
 
             if (preFirstSong)
             {
@@ -96,7 +87,8 @@ public class SceneHandler : NetworkBehaviour
                 playerManager = networkIdentity.GetComponent<PlayerManager>();
                 playerManager.CmdClickedSubmit();
             }
-            else if(currentQn==1){
+
+            else if (currentQn == 1) {
                 //just answered numplayers qn, now on music pref panel
                 musicPrefPanel.SetActive(false);
                 //TODO: coroutine here
@@ -110,20 +102,19 @@ public class SceneHandler : NetworkBehaviour
                 //LOGANSWER
                 dancePrefPanel.SetActive(false);
                 answeredQnPanel.SetActive(true);
-                currentQn++;
-            }
-            else if (currentQn == 3)
-            {
-                answeredQnPanel.SetActive(false);
-                panelParent.SetActive(false);
-                //reset qns
                 currentQn = 0;
-                //server play next song
                 NetworkIdentity networkIdentity = NetworkClient.connection.identity;
                 playerManager = networkIdentity.GetComponent<PlayerManager>();
                 playerManager.CmdClickedSubmit();
             }
+
         }
+    }
+
+    public void SetCanvasInactive()
+    {
+        answeredQnPanel.SetActive(true);
+        panelParent.SetActive(false);
     }
 
     public void PointerInside(object sender, PointerEventArgs e)
@@ -131,18 +122,15 @@ public class SceneHandler : NetworkBehaviour
        
         if (e.target.tag == "zero")
         {
-            Debug.Log("zero inside");
             e.target.gameObject.GetComponent<Image>().color = Color.yellow;
 
         }
         else if (e.target.tag == "one")
         {
-            Debug.Log("Button 1 was clicked");
             e.target.gameObject.GetComponent<Image>().color = Color.yellow;
         }
         else if (e.target.tag == "two")
         {
-            Debug.Log("2 clicked");
             e.target.gameObject.GetComponent<Image>().color = Color.yellow;
         }
         else if(e.target.tag == "submit")
@@ -154,21 +142,17 @@ public class SceneHandler : NetworkBehaviour
 
     public void PointerOutside(object sender, PointerEventArgs e)
     {
-        //e.target.gameObject.GetComponent<Image>().color = Color.blue;
         if (e.target.tag == "zero")
         {
-            Debug.Log("zero inside");
             e.target.gameObject.GetComponent<Image>().color = Color.white;
 
         }
         else if (e.target.tag == "one")
         {
-            Debug.Log("Button 1 was clicked");
             e.target.gameObject.GetComponent<Image>().color = Color.white;
         }
         else if (e.target.tag == "two")
         {
-            Debug.Log("2 clicked");
             e.target.gameObject.GetComponent<Image>().color = Color.white;
         }
         

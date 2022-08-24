@@ -17,7 +17,7 @@ public class PlayerManager : NetworkBehaviour
     int songIndx = 0;
    
     public GameObject guiObject;
-    public SceneHandler SceneHandler;
+    public SceneHandler SceneHndlr;
     [SyncVar]
     public bool started = false;
 
@@ -83,7 +83,7 @@ public class PlayerManager : NetworkBehaviour
         AudioHandler = audioObject.GetComponent<AudioHandler>();
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
-        SceneHandler = guiObject.GetComponent<SceneHandler>();
+        SceneHndlr = guiObject.GetComponent<SceneHandler>();
 
 
         // find the gaming rig in the scene and link to it
@@ -232,44 +232,25 @@ public class PlayerManager : NetworkBehaviour
     [Command] //client tells server to run this method
     public void CmdNextSong()
     {
-
-
-        //play next song
-        Debug.Log("songOrdering[songIndx]=" + songOrdering[songIndx]);
-        //RpcPlaySong(songOrdering[songIndx]);
         RpcPlaySong();
-        Debug.Log("song Index = " + songIndx);
-        //songIndx++;
-        
-
     }
 
     [ClientRpc]
     void RpcPlaySong()
     {
         //sync in logger time
-
-        /*NetworkIdentity networkIdentity = NetworkClient.connection.identity;
-        AudioHandler AH = networkIdentity.GetComponent<PlayerManager>().AudioHandler;*/
-
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
         AudioHandler AH = PM.AudioHandler;
+        SceneHandler SH = PM.SceneHndlr;
+        SH.SetCanvasInactive();
 
-
-        //int songIndex = songOrdering[songIdx];
         int songIndex = PM.songOrdering[PM.songIndx];
-        Debug.Log("PM.songIndx=" + PM.songIndx);
 
-
-        //Debug.Log("rpc playing song" + AudioHandler.soundList[songIndex].name + " index=" +songIndex);
         Debug.Log("rpc playing song" + AH.soundList[songIndex].name + " index=" + songIndex);
-        //int songID = AudioHandler.soundList[songIndex].ID; 
-         int songID = AH.soundList[songIndex].ID;
+        int songID = AH.soundList[songIndex].ID;
         // string msg = "Syncing " + AudioHandler.soundList[songIndex].name;
         //Logger.Event(msg);
 
-
-        // AudioHandler.SetAudioToPlay(songID);
         AH.SetAudioToPlay(songID);
         PM.songIndx++;
 
@@ -278,16 +259,6 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     public void CmdClickedSubmit()
     {
-        //get player indentity of clicker ?
-
-        //set ready
-        //this client is ready (the script attached to this local client palyer)
-        //in scene handler, getting local client is used to call the script
-        //specific to each player to run this code on :
-
-        //readyToStart = true;
-        /*if (isServer)
-        {*/
         ready = true;
         int numPlayersReady = 0;
         Debug.Log("num connections = " + NetworkServer.connections.Count);
@@ -302,9 +273,6 @@ public class PlayerManager : NetworkBehaviour
         if(numPlayersReady == NetworkServer.connections.Count)
         {
             Debug.Log("FINALLY EVERYONE READY!!!!!!! (songOrdering[songIndx]="+songOrdering[songIndx]);
-
-            /* RpcPlaySong(songIndx);
-             songIndx++;*/
             RpcPlaySong();
         }
 
