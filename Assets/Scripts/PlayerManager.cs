@@ -241,9 +241,7 @@ public class PlayerManager : NetworkBehaviour
         //sync in logger time
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
         AudioHandler AH = PM.AudioHandler;
-        SceneHandler SH = PM.SceneHndlr;
-        SH.SetCanvasInactive();
-
+        
         int songIndex = PM.songOrdering[PM.songIndx];
 
         Debug.Log("rpc playing song" + AH.soundList[songIndex].name + " index=" + songIndex);
@@ -261,27 +259,36 @@ public class PlayerManager : NetworkBehaviour
     {
         ready = true;
         int numPlayersReady = 0;
-        Debug.Log("num connections = " + NetworkServer.connections.Count);
+
+        Debug.Log("Clicked Submit. num connections = " + NetworkServer.connections.Count);
 
         for (int i = 0; i< playersList.Count;i++)
         {
             if (playersList[i].ready)
             {
+                Debug.Log("player list " + i + " = " +  playersList[i] + ", is ready? = " + playersList[i].ready);
                 numPlayersReady++;
             }
         }
         Debug.Log("num player ready = " + numPlayersReady);
         if(numPlayersReady == NetworkServer.connections.Count)
         {
+            RpcResetPlayers();
             numPlayersReady = 0;
-            ready = false;
+            //ready = false;
             Debug.Log("FINALLY EVERYONE READY!!!!!!! (songOrdering[songIndx]="+songOrdering[songIndx]);
             RpcPlaySong();
-        }
+        }     
+    }
 
+    [ClientRpc]
+    void RpcResetPlayers()
+    {
+        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+        SceneHandler SH = PM.SceneHndlr;
+        SH.SetCanvasInactive();
 
-       
-           
+        PM.ready = false;
     }
 
 

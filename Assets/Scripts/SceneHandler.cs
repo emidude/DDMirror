@@ -123,7 +123,6 @@ public class SceneHandler : NetworkBehaviour
         if (e.target.tag == "zero")
         {
             e.target.gameObject.GetComponent<Image>().color = Color.yellow;
-
         }
         else if (e.target.tag == "one")
         {
