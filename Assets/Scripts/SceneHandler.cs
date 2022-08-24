@@ -165,7 +165,14 @@ public class SceneHandler : NetworkBehaviour
 
     public void FinishedSong()
     {
+        Debug.Log("finished song");
         panelParent.SetActive(true);
+
+        panelstart.SetActive(false);
+        musicPrefPanel.SetActive(false);
+        dancePrefPanel.SetActive(false);
+        answeredQnPanel.SetActive(false);
+
         numPlayersPanel.SetActive(true);
 
         //disable visuals script;

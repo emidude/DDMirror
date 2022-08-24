@@ -1464,7 +1464,7 @@ GameObject:
   - component: {fileID: 406897199}
   m_Layer: 5
   m_Name: two_btn
-  m_TagString: Undefined
+  m_TagString: two
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3937,11 +3937,11 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - name: Yumeno Hajima Ring Ring
+  - name: Things We Lost In The Fire
     ID: 1
-    About: Kyary Pamyu Pamyu - Medium
+    About: Bastille
     clipsToPlay:
-    - {fileID: 8300000, guid: b2f91976b87d19c4196162a64f30f61f, type: 3}
+    - {fileID: 8300000, guid: 1694499b65e8c30448730b75592d8921, type: 3}
     onStop:
       m_PersistentCalls:
         m_Calls:
@@ -3958,7 +3958,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - name: Yumeno Hajima Ring Ring
-    ID: 1
+    ID: 2
     About: Kyary Pamyu Pamyu - High
     clipsToPlay:
     - {fileID: 8300000, guid: d176b41905840744f93dbebb364791a9, type: 3}
@@ -3978,7 +3978,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - name: Chu_MV
-    ID: 2
+    ID: 3
     About: f(x) - medium
     clipsToPlay:
     - {fileID: 8300000, guid: a4d6c1cab4c0e274e8f87402606a9803, type: 3}
