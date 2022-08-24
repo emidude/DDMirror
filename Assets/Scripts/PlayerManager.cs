@@ -45,7 +45,7 @@ public class PlayerManager : NetworkBehaviour
 
     public GameObject cubePf;
 
-    bool spawned = false;
+    public bool ready = false;
 
     int resolution = 10;
     GameObject[] points;
@@ -271,6 +271,19 @@ public class PlayerManager : NetworkBehaviour
         //readyToStart = true;
         /*if (isServer)
         {*/
+        ready = true;
+        int numPlayersReady = 0;
+        Debug.Log("num connections = " + NetworkServer.connections.Count);
+        for (int i = 0; i< playersList.Count;i++)
+        {
+            if (playersList[i].ready)
+            {
+                numPlayersReady++;
+            }
+        }
+        Debug.Log("num player ready = " + numPlayersReady);
+
+
         numberOfTimesReadyClicked++;
         Debug.Log("numberOfTimesReadyClicked= " + numberOfTimesReadyClicked);
         Debug.Log("NetworkServer.connections.Count= " + NetworkServer.connections.Count);
