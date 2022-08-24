@@ -248,16 +248,18 @@ public class PlayerManager : NetworkBehaviour
     void RpcPlaySong(int songIdx)
     {
         //sync in logger time
-        /*if (hasAuthority)
-        {*/
+        if (isLocalPlayer)
+        {
             int songIndex = songOrdering[songIdx];
             Debug.Log("rpc playing song" + AudioHandler.soundList[songIndex].name + " index=" +songIndex);
 
             int songID = AudioHandler.soundList[songIndex].ID; 
             string msg = "Syncing " + AudioHandler.soundList[songIndex].name;
             //Logger.Event(msg);
+
+            
             AudioHandler.SetAudioToPlay(songID);
-        //}
+        }
     }
 
     [Command]
