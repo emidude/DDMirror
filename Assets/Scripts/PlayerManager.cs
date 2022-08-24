@@ -116,7 +116,8 @@ public class PlayerManager : NetworkBehaviour
 
         CmdSpawnCubes();
         Debug.Log("server active?" + NetworkServer.active);
-
+        Debug.Log("song idx = " + songIndx);
+        Debug.Log("song ordering(idx)=" +songOrdering[songIndx]);
 
     }
 
