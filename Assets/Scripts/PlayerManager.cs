@@ -282,22 +282,16 @@ public class PlayerManager : NetworkBehaviour
             }
         }
         Debug.Log("num player ready = " + numPlayersReady);
-
-
-        numberOfTimesReadyClicked++;
-        Debug.Log("numberOfTimesReadyClicked= " + numberOfTimesReadyClicked);
-        Debug.Log("NetworkServer.connections.Count= " + NetworkServer.connections.Count);
-        if (numberOfTimesReadyClicked >= NetworkServer.connections.Count)
+        if(numPlayersReady == NetworkServer.connections.Count)
         {
-            Debug.Log("about to rpcplaysong");
-            //three readys! letsGo!
+            Debug.Log("FINALLY EVERYONE READY!!!!!!!");
             RpcPlaySong(songOrdering[songIndx]);
-
             songIndx++;
-
-            //reset counter
-            numberOfTimesReadyClicked = 0;
         }
+
+
+       
+           
     }
 
 
