@@ -257,7 +257,7 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     public void CmdClickedSubmit()
     {
-        ready = true;
+        ready = true; //THIS IS ON SERVER SCRIPT
         int numPlayersReady = 0;
 
         Debug.Log("Clicked Submit. num connections = " + NetworkServer.connections.Count);
@@ -275,7 +275,7 @@ public class PlayerManager : NetworkBehaviour
         {
             RpcResetPlayers();
             numPlayersReady = 0;
-            //ready = false;
+            ready = false; //THIS IS ALSO ON SERVER SCRIPT
             Debug.Log("FINALLY EVERYONE READY!!!!!!! (songOrdering[songIndx]="+songOrdering[songIndx]);
             RpcPlaySong();
         }     
