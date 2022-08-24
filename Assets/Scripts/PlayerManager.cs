@@ -129,7 +129,7 @@ public class PlayerManager : NetworkBehaviour
         {
             if (float.IsNaN(cL.GetVelocity().x) || float.IsNaN(cL.GetVelocity().y) || float.IsNaN(cL.GetVelocity().z))
             {
-                Debug.Log("NAN");
+               // Debug.Log("NAN");
             }
             else
             {
@@ -284,7 +284,8 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("num player ready = " + numPlayersReady);
         if(numPlayersReady == NetworkServer.connections.Count)
         {
-            Debug.Log("FINALLY EVERYONE READY!!!!!!!");
+            Debug.Log("FINALLY EVERYONE READY!!!!!!! (songOrdering[songIndx]="+songOrdering[songIndx]);
+
             RpcPlaySong(songOrdering[songIndx]);
             songIndx++;
         }
