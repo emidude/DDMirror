@@ -245,7 +245,6 @@ public class PlayerManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    //void RpcPlaySong(int songIdx)
     void RpcPlaySong()
     {
         //sync in logger time
