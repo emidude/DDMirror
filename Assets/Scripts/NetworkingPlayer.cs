@@ -34,23 +34,6 @@ public class NetworkingPlayer : NetworkBehaviour
     GameObject[] points;
 
 
-    /*void Start()
-    {
-
-        if (!isLocalPlayer)
-        {
-            return;
-        }
-
-
-        Debug.Log("Start of the vr player");
-
-        //disabled conroller meshes at VR player side so it cannont be viewed by local player
-        *//*networkedHead.GetComponent<MeshRenderer>().enabled = false; //commented out for testing    
-        networkedLeftHand.GetComponent<MeshRenderer>().enabled = false;
-        networkedRightHand.GetComponent<MeshRenderer>().enabled = false;*//*
-    }*/
-
     void Update()
     {
         //TODO: FIX
