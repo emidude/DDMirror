@@ -3997,6 +3997,26 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - name: ShortAudioTest
+    ID: 4
+    About: short audio test
+    clipsToPlay:
+    - {fileID: 8300000, guid: 4aeab48fe4a99274b9020380c65267d4, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!82 &1847834354
 AudioSource:
   m_ObjectHideFlags: 0
