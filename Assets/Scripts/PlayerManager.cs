@@ -144,19 +144,7 @@ public class PlayerManager : NetworkBehaviour
         }*/
     }
 
-    [Command]
-
-    public void CmdIncrementClick(GameObject card)
-    {
-        RpcIncrementClick(card);
-    }
-
-    [ClientRpc]
-    public void RpcIncrementClick(GameObject card)
-    {
-        card.GetComponent<IncrementClick>().numberOfClicks++;
-        Debug.Log("this has been clicked " + card.GetComponent<IncrementClick>().numberOfClicks + " times") ;
-    }
+   
 
     /*[ClientRpc]
      bool RpcIsAnyoneNotReady()

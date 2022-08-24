@@ -98,17 +98,19 @@ public class SceneHandler : NetworkBehaviour
                 //player is ready to start
                 //need issue cmd to play first song to all players
                 
-                if (syncObj == null) 
+               /* if (syncObj == null) 
                 {
                     Debug.Log("no spawn obj");
                 }
-                //syncObj.GetComponent<IncrementClick>().IncrementClicks();
+                syncObj.GetComponent<IncrementClick>().IncrementClicks();*/
 
 
                 NetworkIdentity networkIdentity = NetworkClient.connection.identity;
                 playerManager = networkIdentity.GetComponent<PlayerManager>();
                 playerManager.CmdClickedSubmit();
-                playerManager.CmdIncrementClick(syncObj);
+                //playerManager.CmdIncrementClick(syncObj);
+
+                networkIdentity.GetComponent<NetworkingPlayer>().CmdIncrementClick(syncObj);
                 
                 
             }
