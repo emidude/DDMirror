@@ -173,7 +173,7 @@ public class PlayerManager : NetworkBehaviour
     {
         for (int i = 0; i < points.Length; i++)
         {
-            NetworkServer.UnSpawn(points[i]);
+            NetworkServer.UnSpawn(points[i]); //THIS UNSPAWNS FROM SERVER BUT OBJECTS STILL INSTANTIATED LOCALLY
         }
     }
 
