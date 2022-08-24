@@ -102,13 +102,13 @@ public class SceneHandler : NetworkBehaviour
                 {
                     Debug.Log("no spawn obj");
                 }
-                //syncObj.GetComponent<IncrementClick>().IncrementClicks();
+                syncObj.GetComponent<IncrementClick>().IncrementClicks();
 
 
                 NetworkIdentity networkIdentity = NetworkClient.connection.identity;
                 playerManager = networkIdentity.GetComponent<PlayerManager>();
                 playerManager.CmdClickedSubmit();
-                playerManager.CmdIncrementClick(syncObj);
+                //playerManager.CmdIncrementClick(syncObj);
                 
                 
             }
@@ -206,7 +206,7 @@ public class SceneHandler : NetworkBehaviour
 
     public override void OnStartServer()
     {
-        base.OnStartServer();
+        //base.OnStartServer();
 
         syncObj = Instantiate(spawnableObjForSync);
         NetworkServer.Spawn(syncObj);
