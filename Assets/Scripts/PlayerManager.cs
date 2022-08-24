@@ -15,8 +15,7 @@ public class PlayerManager : NetworkBehaviour
     GameObject audioObject;
     AudioHandler AudioHandler;
     int songIndx = 0;
-    [SyncVar]
-    int numberOfTimesReadyClicked = 0;
+   
     public GameObject guiObject;
     public SceneHandler SceneHandler;
     [SyncVar]
@@ -76,7 +75,7 @@ public class PlayerManager : NetworkBehaviour
         base.OnStartLocalPlayer();
 
         //SET ORDERING:
-        songOrdering = new int[] { 1, 0, 2, 3, 6, 9};
+        songOrdering = new int[] { 1, 2, 2, 3, 6, 9};
         combinations = new int[] { 4, 2, 1, 3, 0, 0};
 
         //AUDIO:
