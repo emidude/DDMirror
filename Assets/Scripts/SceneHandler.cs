@@ -113,7 +113,7 @@ public class SceneHandler : NetworkBehaviour
 
     public void SetCanvasInactive()
     {
-        answeredQnPanel.SetActive(true);
+        answeredQnPanel.SetActive(false);
         panelParent.SetActive(false);
     }
 

@@ -272,6 +272,7 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("num player ready = " + numPlayersReady);
         if(numPlayersReady == NetworkServer.connections.Count)
         {
+            ready = false;
             Debug.Log("FINALLY EVERYONE READY!!!!!!! (songOrdering[songIndx]="+songOrdering[songIndx]);
             RpcPlaySong();
         }
