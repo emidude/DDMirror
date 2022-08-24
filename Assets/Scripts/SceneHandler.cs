@@ -22,7 +22,7 @@ public class SceneHandler : NetworkBehaviour
     public GameObject musicPrefPanel;
     public GameObject dancePrefPanel;
     public GameObject answeredQnPanel;
-    int currentSong = 0;
+
     int currentQn = 0;
     bool preFirstSong = true;
 

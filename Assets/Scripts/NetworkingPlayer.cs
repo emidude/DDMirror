@@ -28,8 +28,6 @@ public class NetworkingPlayer : NetworkBehaviour
 
     public GameObject cubePf;
 
-    bool spawned = false;
-
     int resolution = 10;
     GameObject[] points;
 
