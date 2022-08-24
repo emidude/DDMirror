@@ -236,21 +236,32 @@ public class PlayerManager : NetworkBehaviour
 
         //play next song
         Debug.Log("songOrdering[songIndx]=" + songOrdering[songIndx]);
-        RpcPlaySong(songOrdering[songIndx]);
+        //RpcPlaySong(songOrdering[songIndx]);
+        RpcPlaySong();
         Debug.Log("song Index = " + songIndx);
-        songIndx++;
+        //songIndx++;
         
 
     }
 
     [ClientRpc]
-    void RpcPlaySong(int songIdx)
+    //void RpcPlaySong(int songIdx)
+    void RpcPlaySong()
     {
         //sync in logger time
 
-        NetworkIdentity networkIdentity = NetworkClient.connection.identity;
-        AudioHandler AH = networkIdentity.GetComponent<PlayerManager>().AudioHandler;
-        int songIndex = songOrdering[songIdx];
+        /*NetworkIdentity networkIdentity = NetworkClient.connection.identity;
+        AudioHandler AH = networkIdentity.GetComponent<PlayerManager>().AudioHandler;*/
+
+        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+        AudioHandler AH = PM.AudioHandler;
+
+
+        //int songIndex = songOrdering[songIdx];
+        int songIndex = PM.songOrdering[PM.songIndx];
+        Debug.Log("PM.songIndx=" + PM.songIndx);
+
+
         //Debug.Log("rpc playing song" + AudioHandler.soundList[songIndex].name + " index=" +songIndex);
         Debug.Log("rpc playing song" + AH.soundList[songIndex].name + " index=" + songIndex);
         //int songID = AudioHandler.soundList[songIndex].ID; 
@@ -261,7 +272,7 @@ public class PlayerManager : NetworkBehaviour
 
         // AudioHandler.SetAudioToPlay(songID);
         AH.SetAudioToPlay(songID);
-
+        PM.songIndx++;
 
     }
 
@@ -293,8 +304,9 @@ public class PlayerManager : NetworkBehaviour
         {
             Debug.Log("FINALLY EVERYONE READY!!!!!!! (songOrdering[songIndx]="+songOrdering[songIndx]);
 
-            RpcPlaySong(songIndx);
-            songIndx++;
+            /* RpcPlaySong(songIndx);
+             songIndx++;*/
+            RpcPlaySong();
         }
 
 
