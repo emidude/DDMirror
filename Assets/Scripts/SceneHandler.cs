@@ -97,11 +97,8 @@ public class SceneHandler : NetworkBehaviour
 
                 //player is ready to start
                 //need issue cmd to play first song to all players
-                
-                if (syncObj == null) 
-                {
-                    Debug.Log("no spawn obj");
-                }
+
+               
                 syncObj.GetComponent<IncrementClick>().IncrementClicks();
 
 
@@ -204,14 +201,17 @@ public class SceneHandler : NetworkBehaviour
 
     }
 
-    public override void OnStartServer()
+    public override void OnStartClient()
     {
-        //base.OnStartServer();
-
-        syncObj = Instantiate(spawnableObjForSync);
+        base.OnStartLocalPlayer();
+        syncObj = Instantiate(spawnableObjForSync, Vector3.zero, Quaternion.identity);
         NetworkServer.Spawn(syncObj);
+        if (syncObj == null)
+        {
+            Debug.Log("no spawn obj");
+        }
+
     }
-    
 
 
 
