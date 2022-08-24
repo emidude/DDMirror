@@ -58,6 +58,9 @@ public class PlayerManager : NetworkBehaviour
     // Players List to manage playerNumber
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
 
+    bool embodiedCondition = true;
+    int numOfOtherDancers = 0;
+
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -81,6 +84,7 @@ public class PlayerManager : NetworkBehaviour
         //AUDIO:
         audioObject = GameObject.FindGameObjectWithTag("audioHndlr");
         AudioHandler = audioObject.GetComponent<AudioHandler>();
+
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
         SceneHndlr = guiObject.GetComponent<SceneHandler>();
@@ -117,25 +121,31 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("server active?" + NetworkServer.active);
         Debug.Log("song idx = " + songIndx);
         Debug.Log("song ordering(idx)=" +songOrdering[songIndx]);
+        CmdUnspawnCubes();
 
     }
 
     void Update()
     {
-        //TODO: FIX
-        updateHeadAndHands();
-
-        if (isLocalPlayer)
+        if (embodiedCondition)
         {
-            if (float.IsNaN(cL.GetVelocity().x) || float.IsNaN(cL.GetVelocity().y) || float.IsNaN(cL.GetVelocity().z))
-            {
-               // Debug.Log("NAN");
-            }
-            else
-            {
-                CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
-            }
+            updateHeadAndHands();
         }
+        //TODO: FIX
+        
+            if (isLocalPlayer)
+            {
+                if (float.IsNaN(cL.GetVelocity().x) || float.IsNaN(cL.GetVelocity().y) || float.IsNaN(cL.GetVelocity().z))
+                {
+                    // Debug.Log("NAN");
+                }
+                else
+                {
+                    CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
+                }
+            }
+        
+       
 
     }
 
@@ -155,6 +165,15 @@ public class PlayerManager : NetworkBehaviour
             point.transform.SetParent(transform, false);
             points[i] = point;
             NetworkServer.Spawn(point);
+        }
+    }
+
+    [Command]
+    void CmdUnspawnCubes()
+    {
+        for (int i = 0; i < points.Length; i++)
+        {
+            NetworkServer.UnSpawn(points[i]);
         }
     }
 
