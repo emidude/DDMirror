@@ -57,6 +57,7 @@ public class PlayerManager : NetworkBehaviour
 
     // Players List to manage playerNumber
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
+    static readonly List<PlayerManager> localPlayersList = new List<PlayerManager>();
 
     public override void OnStartServer()
     {
@@ -73,6 +74,12 @@ public class PlayerManager : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
+        localPlayersList.Add(this);
+        Debug.Log("local players list = ");
+        for (int i = 0; i < localPlayersList.Count; i++)
+        {
+            Debug.Log(localPlayersList[i].netIdentity);
+        }
 
         //SET ORDERING:
         songOrdering = new int[] { 4, 2, 2, 3, 6, 9};
