@@ -175,6 +175,17 @@ public class SceneHandler : NetworkBehaviour
         numPlayersPanel.SetActive(true);
 
         //disable visuals script;
+        NetworkIdentity networkIdentity = NetworkClient.connection.identity;
+        playerManager = networkIdentity.GetComponent<PlayerManager>();
+        if (playerManager.sharing) //TODO: updaqt to also deal with avatar based ball tracking
+        {
+            playerManager.CmdDestroyCubes();
+        }
+        else
+        {
+            playerManager.LocalDestroyCubes();
+        }
+        
 
     }
     

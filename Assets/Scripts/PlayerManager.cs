@@ -58,16 +58,22 @@ public class PlayerManager : NetworkBehaviour
     // Players List to manage playerNumber
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
 
+    public int PlayerID;
+    public bool sharing;
+
     public override void OnStartServer()
     {
         base.OnStartServer();
         // Add this to the static Players List
+
         playersList.Add(this);
         Debug.Log("players list, count: " + playersList.Count);
         for (int i = 0; i < playersList.Count;i++)
         {
             Debug.Log(playersList[i].netIdentity);
         }
+        this.PlayerID = playersList.Count;
+        Debug.Log("this.PlayerID ="+ this.PlayerID);
     }
 
     public override void OnStartLocalPlayer()
@@ -76,7 +82,7 @@ public class PlayerManager : NetworkBehaviour
 
         //SET ORDERING:
         songOrdering = new int[] { 4, 2, 2, 3, 6, 9};
-        combinations = new int[] { 4, 2, 1, 3, 0, 0};
+        combinations = new int[] { 2, 4, 1, 3, 0, 0};
 
         //AUDIO:
         audioObject = GameObject.FindGameObjectWithTag("audioHndlr");
@@ -113,7 +119,7 @@ public class PlayerManager : NetworkBehaviour
         cR = localRightHand.GetComponent<SteamVR_Behaviour_Pose>();
 
 
-        CmdSpawnCubes();
+        //CmdSpawnCubes();
         /*Debug.Log("server active?" + NetworkServer.active);
         Debug.Log("song idx = " + songIndx);
         Debug.Log("song ordering(idx)=" +songOrdering[songIndx]);*/
@@ -131,9 +137,13 @@ public class PlayerManager : NetworkBehaviour
             {
                // Debug.Log("NAN");
             }
-            else
+            else if (sharing)
             {
                 CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
+            }
+            else
+            {
+                LocalUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
             }
         }
 
@@ -159,7 +169,61 @@ public class PlayerManager : NetworkBehaviour
     }
 
     [Command]
+    public void CmdDestroyCubes()
+    {
+        for (int i = 0; i < points.Length; i++)
+        {
+            //NetworkServer.UnSpawn(points[i]);
+            NetworkServer.Destroy(points[i]);
+        }
+    }
+
+    public void LocalDestroyCubes()
+    {
+        for (int i = 0; i < points.Length; i++)
+        {
+            GameObject.Destroy(points[i]);
+        }
+    }
+
+    [Command]
     void CmdUpdateCubes(Vector3 vL, Vector3 vR)
+    {
+        float t = Time.time;
+        float step = 2f / resolution;
+        for (int i = 0, z = 0; z < resolution; z++)
+        {
+            float v = (z + 0.5f) * step - 1f;
+            for (int x = 0; x < resolution; x++, i++)
+            {
+                float u = (x + 0.5f) * step - 1f;
+
+                //TODO: if only 2 or 1 clients also need additonal automatic update of cubes to compensate for players
+                points[i].transform.localPosition = Graphs.SimpleSin(vL, vR, u, v, t) * 5;
+
+
+            }
+        }
+    }
+
+    void LocalInstantiateCubes()
+    {
+        float step = 2f / resolution;
+        Vector3 scale = Vector3.one * step;
+        //transform.position = head.position; <-TODO:  need to fix
+        transform.position = Vector3.zero;
+
+        points = new GameObject[resolution * resolution];
+        for (int i = 0; i < points.Length; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            point.transform.SetParent(transform, false);
+            points[i] = point;
+        }
+    }
+
+    void LocalUpdateCubes(Vector3 vL, Vector3 vR)
     {
         float t = Time.time;
         float step = 2f / resolution;
@@ -282,8 +346,11 @@ public class PlayerManager : NetworkBehaviour
             }
 
 
-            Debug.Log("FINALLY EVERYONE READY!!!!!!! (songOrdering[songIndx]="+songOrdering[songIndx]);
+            Debug.Log("FINALLY EVERYONE READY!!!!!!! (songOrdering[songIndx]=" + songOrdering[songIndx]);
+            
             RpcPlaySong();
+
+            RpcSetNetworkedObjects();
         }     
     }
 
@@ -295,6 +362,35 @@ public class PlayerManager : NetworkBehaviour
         SH.SetCanvasInactive();
 
         PM.ready = false; //might no longer need
+    }
+
+    [ClientRpc]
+    void RpcSetNetworkedObjects()
+    {
+        Debug.Log("RpcSetNetworkedObjects()");
+        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+        if (PM.PlayerID == combinations[songIndx])
+        {
+            //this player is the player to dance alone
+            PM.sharing = false;
+            PM.LocalInstantiateCubes();
+
+        }
+        else if (combinations[songIndx] == 0)
+        {
+            //everyone dancing together
+            CmdSpawnCubes();
+        }
+        else if (combinations[songIndx] == 4)
+        {
+            //everyone dancing alone
+            PM.sharing = false;
+            PM.LocalInstantiateCubes();
+        }
+        else
+        {
+            Debug.Log("error song index not inclucded, songIndx= " + songIndx);
+        }
     }
 
 
