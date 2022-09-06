@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Valve.VR;
+using System;
 
 public class PlayerManager : NetworkBehaviour
 {
@@ -49,6 +50,9 @@ public class PlayerManager : NetworkBehaviour
     int resolution = 10;
     GameObject[] points;
 
+    public Guid SoloMatchID = System.Guid.NewGuid();
+    public int PlayerMatchNumber;
+
     /// <summary>
     /// //
     ///
@@ -63,12 +67,18 @@ public class PlayerManager : NetworkBehaviour
         base.OnStartServer();
         // Add this to the static Players List
         playersList.Add(this);
+        
+        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+        PM.PlayerMatchNumber = playersList.Count; //player match number starts at 1
+
         Debug.Log("players list, count: " + playersList.Count);
         for (int i = 0; i < playersList.Count;i++)
         {
             Debug.Log(i + ": ");
             Debug.Log(playersList[i].netIdentity);
+            playersList[i].GetComponent<NetworkMatch>().matchId = SoloMatchID;
             Debug.Log(playersList[i].GetComponent<NetworkMatch>().matchId);
+
         }
     }
 
