@@ -50,8 +50,10 @@ public class PlayerManager : NetworkBehaviour
     int resolution = 10;
     GameObject[] points;
 
-    public Guid SoloMatchID = System.Guid.NewGuid();
+    public Guid SoloMatchID;
+    public Guid SharingMatchID;
     public int PlayerMatchNumber;
+    public bool embodied;
 
     /// <summary>
     /// //
@@ -75,11 +77,17 @@ public class PlayerManager : NetworkBehaviour
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
         PM.PlayerMatchNumber = playersList.Count; //player match number starts at 1
 
+        SoloMatchID = System.Guid.NewGuid();
+
         Debug.Log("players list, count: " + playersList.Count);
         for (int i = 0; i < playersList.Count;i++)
         {
             Debug.Log(i + ": ");
             Debug.Log(playersList[i].netIdentity);
+
+            //saves good match id for later
+            Guid SharingMatchID = playersList[i].GetComponent<NetworkMatch>().matchId;
+
             playersList[i].GetComponent<NetworkMatch>().matchId = SoloMatchID;
             Debug.Log(playersList[i].GetComponent<NetworkMatch>().matchId);
 
@@ -93,8 +101,8 @@ public class PlayerManager : NetworkBehaviour
         base.OnStartLocalPlayer();
 
         //SET ORDERING:
-        songOrdering = new int[] { 4, 2, 2, 3, 6, 9};
-        combinations = new int[] { 2, 4, 1, 3, 0, 0};
+        songOrdering = new int[] { 4, 2, 1, 3, 6, 9};
+        combinations = new int[] { 0, 4, 0, 1, 2, 0};
 
         //AUDIO:
         audioObject = GameObject.FindGameObjectWithTag("audioHndlr");
@@ -359,10 +367,12 @@ public class PlayerManager : NetworkBehaviour
 
 
             Debug.Log("FINALLY EVERYONE READY!!!!!!! (songOrdering[songIndx]=" + songOrdering[songIndx]);
-            
+
+            RpcSetNetworkedObjects(); //this nbeeds to go before rpcplaysong becasue uses songinx for combinations positioning 
+            //which is ++ in rpcplaysong
             RpcPlaySong();
 
-            RpcSetNetworkedObjects();
+            
         }     
     }
 
@@ -385,18 +395,30 @@ public class PlayerManager : NetworkBehaviour
         {
             //this player is the player to dance alone
             PM.sharing = false;
-            PM.LocalInstantiateCubes();
+            PM.GetComponent<NetworkMatch>().matchId = PM.SoloMatchID;
+            if(embodied)
+            {
+                //Instantiate balls and moving non human balls
+            }
+            else
+            {
+                PM.LocalInstantiateCubes();
+            }
+           
 
         }
         else if (combinations[songIndx] == 0)
         {
             //everyone dancing together
+            PM.sharing = true;
+            PM.GetComponent<NetworkMatch>().matchId = PM.SharingMatchID;
             CmdSpawnCubes();
         }
         else if (combinations[songIndx] == 4)
         {
             //everyone dancing alone
             PM.sharing = false;
+            PM.GetComponent<NetworkMatch>().matchId = PM.SoloMatchID;
             PM.LocalInstantiateCubes();
         }
         else
