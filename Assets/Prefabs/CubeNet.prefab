@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23741962281847528}
   - component: {fileID: 4525603395655738245}
   - component: {fileID: 2015898975263784065}
+  - component: {fileID: -3542331084243068395}
   m_Layer: 0
   m_Name: CubeNet
   m_TagString: Untagged
@@ -136,3 +137,17 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &-3542331084243068395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223016012747116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d17e718851449a6879986e45c458fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1

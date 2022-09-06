@@ -66,7 +66,9 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("players list, count: " + playersList.Count);
         for (int i = 0; i < playersList.Count;i++)
         {
+            Debug.Log(i + ": ");
             Debug.Log(playersList[i].netIdentity);
+            Debug.Log(playersList[i].GetComponent<NetworkMatch>().matchId);
         }
     }
 
