@@ -144,6 +144,7 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     void CmdSpawnCubes()
     {
+        Debug.Log("spoawing cubes");
         float step = 2f / resolution;
         Vector3 scale = Vector3.one * step;
         //transform.position = head.position; <-TODO:  need to fix
@@ -324,6 +325,7 @@ public class PlayerManager : NetworkBehaviour
         }
         else
         {
+            Debug.Log("vchecki1");
             CmdSpawnCubes();
         }
     }
