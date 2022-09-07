@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2001434533138923839}
   - component: {fileID: 6349749736277093210}
   - component: {fileID: 5412953645057215747}
+  - component: {fileID: 6012152289282942761}
   m_Layer: 0
   m_Name: PlayerNet
   m_TagString: Untagged
@@ -349,7 +350,7 @@ MonoBehaviour:
   songOrdering: 000000000000000000000000000000000000000000000000
   audio: {fileID: 0}
   guiObject: {fileID: 0}
-  SceneHandler: {fileID: 0}
+  SceneHndlr: {fileID: 0}
   started: 0
   localHead: {fileID: 0}
   localLeftHand: {fileID: 0}
@@ -358,6 +359,21 @@ MonoBehaviour:
   networkedLeftHand: {fileID: 8425520600003480410}
   networkedRightHand: {fileID: 8425520598223998757}
   cubePf: {fileID: 1223016012747116, guid: 16c2e13a22648d544ba10e09297cd061, type: 3}
+  ready: 0
+--- !u!114 &6012152289282942761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955319492908329235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d17e718851449a6879986e45c458fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1 &8425520598223998757
 GameObject:
   m_ObjectHideFlags: 0

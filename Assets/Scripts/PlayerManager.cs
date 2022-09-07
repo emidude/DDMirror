@@ -127,7 +127,7 @@ public class PlayerManager : NetworkBehaviour
 
         if (isLocalPlayer)
         {
-            if (float.IsNaN(cL.GetVelocity().x) || float.IsNaN(cL.GetVelocity().y) || float.IsNaN(cL.GetVelocity().z))
+            if (float.IsNaN(cL.GetVelocity().x) || float.IsNaN(cL.GetVelocity().y) || float.IsNaN(cL.GetVelocity().z) || float.IsNaN(cR.GetVelocity().x) || float.IsNaN(cR.GetVelocity().y) || float.IsNaN(cR.GetVelocity().z))
             {
                // Debug.Log("NAN");
             }
