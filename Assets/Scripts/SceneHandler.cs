@@ -117,6 +117,12 @@ public class SceneHandler : NetworkBehaviour
         panelParent.SetActive(false);
     }
 
+    public void SetCanvasActivePrePlay()
+    {
+        panelParent.SetActive(true);
+        panelstart.SetActive(true);
+    }
+
     public void PointerInside(object sender, PointerEventArgs e)
     {
        

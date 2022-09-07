@@ -84,6 +84,7 @@ public class PlayerManager : NetworkBehaviour
         //PANELS/////////////////////MISTAEK BELOW IDK?
 
         SceneHndlr = NetworkClient.connection.identity.GetComponent<SceneHandler>();
+        SceneHndlr.SetCanvasActivePrePlay();
         //guiObject = GameObject.FindGameObjectWithTag("PanelParent");
         //SceneHndlr = guiObject.GetComponent<SceneHandler>(); //testing git hellow changes
 
@@ -293,8 +294,9 @@ public class PlayerManager : NetworkBehaviour
     void RpcResetPlayers()
     {
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
-        SceneHandler SH = PM.SceneHndlr;
-        SH.SetCanvasInactive();
+        /* SceneHandler SH = PM.SceneHndlr;
+         SH.SetCanvasInactive();*/
+        NetworkClient.connection.identity.GetComponent<SceneHandler>().SetCanvasInactive();
 
         PM.ready = false; //might no longer need
     }
