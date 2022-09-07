@@ -49,7 +49,7 @@ public class PlayerManager : NetworkBehaviour
     int resolution = 10;
     GameObject[] points;
 
-    public bool bodyShapes;
+    public bool bodyShapes = false;
     public bool questionTime = true;
 
     // Players List to manage playerNumber
@@ -285,8 +285,7 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("num player ready = " + numPlayersReady);
         if(numPlayersReady == NetworkServer.connections.Count)
         {
-            questionTime = false;
-            SetPlayersDanceMode();
+            RpcSetPlayersDanceMode();
             numPlayersReady = 0;
             //ready = false; //THIS ONLY GETS CALLED ONCE FROM THE LAST PLAYER WHO WAS READY LAST TIME
             for (int i = 0; i < playersList.Count; i++)
@@ -301,12 +300,12 @@ public class PlayerManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    void SetPlayersDanceMode()
+    void RpcSetPlayersDanceMode()
     {
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
         SceneHandler SH = PM.SceneHndlr;
         SH.SetCanvasInactive();
-
+        PM.questionTime = false;
         PM.ready = false; //might no longer need
 
         if (bodyShapes)
