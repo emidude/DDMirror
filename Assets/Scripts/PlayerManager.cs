@@ -287,6 +287,7 @@ public class PlayerManager : NetworkBehaviour
                 localLeftHand = defaultLeftHand;
                 localRightHand = defaultRightHand;
                 Debug.Log("HEADLESS detected");
+                localHead = Camera.main.gameObject; 
             }
 
             networkedHead.transform.position = localHead.transform.position;
