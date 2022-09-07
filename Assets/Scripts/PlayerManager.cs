@@ -177,23 +177,27 @@ public class PlayerManager : NetworkBehaviour
     {
         if (points == null)
         {
-            Debug.Log("points array null");
+            Debug.Log("points array nullhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         }
-        float t = Time.time;
-        float step = 2f / resolution;
-        for (int i = 0, z = 0; z < resolution; z++)
+        else
         {
-            float v = (z + 0.5f) * step - 1f;
-            for (int x = 0; x < resolution; x++, i++)
+            float t = Time.time;
+            float step = 2f / resolution;
+            for (int i = 0, z = 0; z < resolution; z++)
             {
-                float u = (x + 0.5f) * step - 1f;
+                float v = (z + 0.5f) * step - 1f;
+                for (int x = 0; x < resolution; x++, i++)
+                {
+                    float u = (x + 0.5f) * step - 1f;
 
-                //TODO: if only 2 or 1 clients also need additonal automatic update of cubes to compensate for players
-                points[i].transform.localPosition = Graphs.SimpleSin(vL, vR, u, v, t) * 5;
+                    //TODO: if only 2 or 1 clients also need additonal automatic update of cubes to compensate for players
+                    points[i].transform.localPosition = Graphs.SimpleSin(vL, vR, u, v, t) * 5;
 
 
+                }
             }
         }
+        
     }
 
     //from this thread
