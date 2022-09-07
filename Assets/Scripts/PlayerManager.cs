@@ -7,7 +7,7 @@ using Valve.VR;
 public class PlayerManager : NetworkBehaviour
 {
     public PlayerSync playerSync;
-    public int[] combinations = new int[6];
+    //public int[] combinations = new int[6];
     public int[] songOrdering = new int[6];
    //private System.Random _random = new System.Random();
     [SerializeField] AudioClip audio;
@@ -49,11 +49,8 @@ public class PlayerManager : NetworkBehaviour
     int resolution = 10;
     GameObject[] points;
 
-    /// <summary>
-    /// //
-    ///
-    /// </summary>
-
+    public bool bodyShapes;
+    public bool questionTime = true;
 
     // Players List to manage playerNumber
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
@@ -76,7 +73,7 @@ public class PlayerManager : NetworkBehaviour
 
         //SET ORDERING:
         songOrdering = new int[] { 4, 2, 2, 3, 6, 9};
-        combinations = new int[] { 4, 2, 1, 3, 0, 0};
+        //combinations = new int[] { 4, 2, 1, 3, 0, 0};
 
         //AUDIO:
         audioObject = GameObject.FindGameObjectWithTag("audioHndlr");
@@ -106,37 +103,42 @@ public class PlayerManager : NetworkBehaviour
         localRightHand = GameObject.FindWithTag("RightHand");
 
         //not sure if these tracked are neccary, delete later
-        trackedObjRight = localRightHand.GetComponent<SteamVR_TrackedObject>();
-        trackedObjLeft = localLeftHand.GetComponent<SteamVR_TrackedObject>();
+        /*trackedObjRight = localRightHand.GetComponent<SteamVR_TrackedObject>();
+        trackedObjLeft = localLeftHand.GetComponent<SteamVR_TrackedObject>();*/
 
         cL = localLeftHand.GetComponent<SteamVR_Behaviour_Pose>();
         cR = localRightHand.GetComponent<SteamVR_Behaviour_Pose>();
 
 
-        CmdSpawnCubes();
+        //CmdSpawnCubes();
         /*Debug.Log("server active?" + NetworkServer.active);
         Debug.Log("song idx = " + songIndx);
         Debug.Log("song ordering(idx)=" +songOrdering[songIndx]);*/
 
+        CmdDeactivateBodyShapes();
     }
 
     void Update()
     {
-        //TODO: FIX
-        updateHeadAndHands();
 
         if (isLocalPlayer)
         {
-            if (float.IsNaN(cL.GetVelocity().x) || float.IsNaN(cL.GetVelocity().y) || float.IsNaN(cL.GetVelocity().z))
+            if (!questionTime)
             {
-               // Debug.Log("NAN");
-            }
-            else
-            {
-                CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
-            }
+                if (float.IsNaN(cL.GetVelocity().x) || float.IsNaN(cL.GetVelocity().y) || float.IsNaN(cL.GetVelocity().z) || float.IsNaN(cR.GetVelocity().x) || float.IsNaN(cR.GetVelocity().y) || float.IsNaN(cR.GetVelocity().z))
+                {
+                    Debug.Log("NAN");
+                }
+                else if (bodyShapes)
+                {
+                    updateHeadAndHands();
+                }
+                else
+                {
+                    CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
+                }
+            }           
         }
-
     }
 
     [Command]
@@ -155,6 +157,16 @@ public class PlayerManager : NetworkBehaviour
             point.transform.SetParent(transform, false);
             points[i] = point;
             NetworkServer.Spawn(point);
+        }
+    }
+
+    [Command]
+    public void CmdDestroyCubes()
+    {
+        for (int i = 0; i < points.Length; i++)
+        {
+            //NetworkServer.UnSpawn(points[i]);
+            NetworkServer.Destroy(points[i]);
         }
     }
 
@@ -178,7 +190,7 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
-    //TODO: need to fix head and hands not updating
+    //from this thread
     //https://forum.unity.com/threads/multiplayer-with-steamvr.535321/
     void updateHeadAndHands()
     {
@@ -273,7 +285,8 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("num player ready = " + numPlayersReady);
         if(numPlayersReady == NetworkServer.connections.Count)
         {
-            RpcResetPlayers();
+            questionTime = false;
+            SetPlayersDanceMode();
             numPlayersReady = 0;
             //ready = false; //THIS ONLY GETS CALLED ONCE FROM THE LAST PLAYER WHO WAS READY LAST TIME
             for (int i = 0; i < playersList.Count; i++)
@@ -288,13 +301,38 @@ public class PlayerManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    void RpcResetPlayers()
+    void SetPlayersDanceMode()
     {
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
         SceneHandler SH = PM.SceneHndlr;
         SH.SetCanvasInactive();
 
         PM.ready = false; //might no longer need
+
+        if (bodyShapes)
+        {
+            CmdActivateBodyShapes();
+        }
+        else
+        {
+            CmdSpawnCubes();
+        }
+    }
+
+    [Command]
+    public void CmdDeactivateBodyShapes()
+    {
+        networkedHead.gameObject.SetActive(false);
+        networkedLeftHand.gameObject.SetActive(false);
+        networkedRightHand.gameObject.SetActive(false);
+    }
+
+    [Command]
+    void CmdActivateBodyShapes()
+    {
+        networkedHead.gameObject.SetActive(true);
+        networkedLeftHand.gameObject.SetActive(true);
+        networkedRightHand.gameObject.SetActive(true);
     }
 
 

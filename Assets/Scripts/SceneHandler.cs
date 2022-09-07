@@ -174,7 +174,18 @@ public class SceneHandler : NetworkBehaviour
 
         numPlayersPanel.SetActive(true);
 
-        //disable visuals script;
+        //disable visuals;
+        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+        PM.questionTime = true;
+        if (PM.bodyShapes)
+        {
+            //destroy body shapes
+            PM.CmdDeactivateBodyShapes();
+        }
+        else
+        {
+            PM.CmdDestroyCubes();
+        }
 
     }
     
