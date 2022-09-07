@@ -159,6 +159,15 @@ public class PlayerManager : NetworkBehaviour
             points[i] = point;
             NetworkServer.Spawn(point);
         }
+        if(points == null)
+        {
+            Debug.Log("points == nulll");
+            for(int i = 0; i < points.Length; i++)
+            {
+                Debug.Log("put in points i x corrd= " + points[i].transform.position.x);
+            }
+        }
+        
     }
 
     [Command]
@@ -325,7 +334,6 @@ public class PlayerManager : NetworkBehaviour
         }
         else
         {
-            Debug.Log("vchecki1");
             CmdSpawnCubes();
         }
     }
