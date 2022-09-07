@@ -83,7 +83,7 @@ public class PlayerManager : NetworkBehaviour
         AudioHandler = audioObject.GetComponent<AudioHandler>();
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
-        SceneHndlr = guiObject.GetComponent<SceneHandler>();
+        SceneHndlr = guiObject.GetComponent<SceneHandler>(); //testing git hellow changes
 
 
         // find the gaming rig in the scene and link to it
