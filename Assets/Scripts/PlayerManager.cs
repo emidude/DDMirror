@@ -83,11 +83,12 @@ public class PlayerManager : NetworkBehaviour
         AudioHandler = audioObject.GetComponent<AudioHandler>();
         //PANELS/////////////////////MISTAEK BELOW IDK?
 
-        SceneHndlr = NetworkClient.connection.identity.GetComponent<SceneHandler>();
-        SceneHndlr.SetCanvasActivePrePlay();
-        //guiObject = GameObject.FindGameObjectWithTag("PanelParent");
-        //SceneHndlr = guiObject.GetComponent<SceneHandler>(); //testing git hellow changes
+        /*SceneHndlr = NetworkClient.connection.identity.GetComponent<SceneHandler>();
+        ;*/
 
+        guiObject = GameObject.FindGameObjectWithTag("PanelParent");
+        SceneHndlr = guiObject.GetComponent<SceneHandler>(); //testing git hellow changes
+        SceneHndlr.SetCanvasActivePrePlay();
 
         // find the gaming rig in the scene and link to it
         if (theLocalPlayer == null)
@@ -98,9 +99,9 @@ public class PlayerManager : NetworkBehaviour
 
         // now link localHMD, localHands to the Rig so that they are
         // automatically filled when the rig moves
-        localHead = Camera.main.gameObject; // get HMD
-        //localHead = theLocalPlayer.transform.Find("FolowHead").gameObject;
-        //localHead = GameObject.FindWithTag("FolowHead");
+       //localHead = Camera.main.gameObject; // get HMD/////////////////////////<-previous, worked before match id bs
+       
+        localHead = GameObject.FindWithTag("FolowHead");
         //localHead = theLocalPlayer.transform.Find("MainCamera").gameObject;
         Debug.Log("local head = " + localHead);
         //localLeftHand = theLocalPlayer.transform.Find("LeftHand").gameObject;
@@ -206,6 +207,7 @@ public class PlayerManager : NetworkBehaviour
                 Debug.Log("HEADLESS detected");
 
                 localHead = Camera.main.gameObject;
+               // NetworkClient.connection.identity.
             }
 
             networkedHead.transform.position = localHead.transform.position;
