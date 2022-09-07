@@ -165,14 +165,20 @@ public class PlayerManager : NetworkBehaviour
     {
         for (int i = 0; i < points.Length; i++)
         {
-            //NetworkServer.UnSpawn(points[i]);
+         //   NetworkServer.UnSpawn(points[i]);
             NetworkServer.Destroy(points[i]);
         }
     }
 
+    
+
     [Command]
     void CmdUpdateCubes(Vector3 vL, Vector3 vR)
     {
+        if (points == null)
+        {
+            Debug.Log("points array null");
+        }
         float t = Time.time;
         float step = 2f / resolution;
         for (int i = 0, z = 0; z < resolution; z++)
