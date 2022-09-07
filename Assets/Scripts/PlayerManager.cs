@@ -77,7 +77,6 @@ public class PlayerManager : NetworkBehaviour
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
         PM.PlayerMatchNumber = playersList.Count; //player match number starts at 1
 
-        SoloMatchID = System.Guid.NewGuid();
 
         Debug.Log("players list, count: " + playersList.Count);
         for (int i = 0; i < playersList.Count;i++)
@@ -99,6 +98,9 @@ public class PlayerManager : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
+
+        SoloMatchID = System.Guid.NewGuid();
+        Debug.Log("on start local player solo match id" + SoloMatchID);
 
         //SET ORDERING:
         songOrdering = new int[] { 4, 2, 1, 3, 6, 9};
