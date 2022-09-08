@@ -323,6 +323,7 @@ public class PlayerManager : NetworkBehaviour
     [ClientRpc]
     void RpcSetPlayersDanceMode()
     {
+        
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
         SceneHandler SH = PM.SceneHndlr;
         SH.SetCanvasInactive();
@@ -331,11 +332,11 @@ public class PlayerManager : NetworkBehaviour
 
         if (bodyShapes)
         {
-            CmdActivateBodyShapes();
+            PM.CmdActivateBodyShapes();
         }
         else
         {
-            CmdSpawnCubes();
+            PM.CmdSpawnCubes();
         }
     }
 
