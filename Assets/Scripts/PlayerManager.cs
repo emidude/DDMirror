@@ -156,9 +156,13 @@ public class PlayerManager : NetworkBehaviour
         {
             Debug.Log("head = null");
         }
-        if(networkedHead = null)
+        else if(networkedHead = null)
         {
             Debug.Log("netgowerked head = null");
+        }
+        else
+        {
+            Debug.Log("nothing not null");
         }
         NetworkServer.Spawn(HeadPf);
 
