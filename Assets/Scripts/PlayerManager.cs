@@ -294,7 +294,7 @@ public class PlayerManager : NetworkBehaviour
        
         //TODO: test these with cL, cR and additonal velcity and ang velocity to check smoothness
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
-        if (localHead)
+        if (PM.localHead)
         {
             PM.HeadPf.transform.position = PM.localHead.transform.position;
             PM.HeadPf.transform.rotation = PM.localHead.transform.rotation;
@@ -307,7 +307,7 @@ public class PlayerManager : NetworkBehaviour
             Debug.Log("HEADLESS detected");
         } 
 
-        if (localLeftHand) //we need to check in case player left the hand unconnected, should return true if left controller connected
+        if (PM.localLeftHand) //we need to check in case player left the hand unconnected, should return true if left controller connected
         {
             PM.LeftHandPf.transform.position = PM.localLeftHand.transform.position;
             PM.LeftHandPf.transform.rotation = PM.localLeftHand.transform.rotation;
@@ -317,7 +317,7 @@ public class PlayerManager : NetworkBehaviour
             Debug.Log("left hand not connected");
         }
 
-        if (localRightHand)// only if right hand is connected
+        if (PM.localRightHand)// only if right hand is connected
         {
             PM.RightHandPf.transform.position = PM.localRightHand.transform.position;
             PM.RightHandPf.transform.rotation = PM.localRightHand.transform.rotation;
