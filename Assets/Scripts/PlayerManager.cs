@@ -73,7 +73,7 @@ public class PlayerManager : NetworkBehaviour
         base.OnStartLocalPlayer();
 
         //SET ORDERING:
-        songOrdering = new int[] { 4, 2, 2, 3, 6, 9};
+        songOrdering = new int[] { 2, 2, 2, 3, 6, 9};
         //combinations = new int[] { 4, 2, 1, 3, 0, 0};
 
         //AUDIO:
@@ -296,8 +296,8 @@ public class PlayerManager : NetworkBehaviour
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
         if (localHead)
         {
-            HeadPf.transform.position = PM.localHead.transform.position;
-            HeadPf.transform.rotation = PM.localHead.transform.rotation;
+            PM.HeadPf.transform.position = PM.localHead.transform.position;
+            PM.HeadPf.transform.rotation = PM.localHead.transform.rotation;
         }
         else
         {
@@ -309,8 +309,8 @@ public class PlayerManager : NetworkBehaviour
 
         if (localLeftHand) //we need to check in case player left the hand unconnected, should return true if left controller connected
         {
-            LeftHandPf.transform.position = PM.localLeftHand.transform.position;
-            LeftHandPf.transform.rotation = PM.localLeftHand.transform.rotation;
+            PM.LeftHandPf.transform.position = PM.localLeftHand.transform.position;
+            PM.LeftHandPf.transform.rotation = PM.localLeftHand.transform.rotation;
         }
         else
         {
@@ -319,8 +319,8 @@ public class PlayerManager : NetworkBehaviour
 
         if (localRightHand)// only if right hand is connected
         {
-            RightHandPf.transform.position = PM.localRightHand.transform.position;
-            RightHandPf.transform.rotation = PM.localRightHand.transform.rotation;
+            PM.RightHandPf.transform.position = PM.localRightHand.transform.position;
+            PM.RightHandPf.transform.rotation = PM.localRightHand.transform.rotation;
         }
         else
         {
