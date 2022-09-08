@@ -292,14 +292,14 @@ public class PlayerManager : NetworkBehaviour
     void CmdUpdateHeadAndHands(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     {
        
-        //TODO: test these with cL, cR and additonal velcity and ang velocity to check smoothness
-        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
-        if (PM.localHead)
+       
+        //PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+        if (localHead)
         {
             /*PM.HeadPf.transform.position = PM.localHead.transform.position;
             PM.HeadPf.transform.rotation = PM.localHead.transform.rotation;*/
-            PM.HeadPf.transform.position = HPos;
-            PM.HeadPf.transform.rotation = HRot;
+            HeadPf.transform.position = HPos;
+            HeadPf.transform.rotation = HRot;
         }
         else
         {
@@ -309,24 +309,24 @@ public class PlayerManager : NetworkBehaviour
             Debug.Log("HEADLESS detected");
         } 
 
-        if (PM.localLeftHand) //we need to check in case player left the hand unconnected, should return true if left controller connected
+        if (localLeftHand) //we need to check in case player left the hand unconnected, should return true if left controller connected
         {
             /*PM.LeftHandPf.transform.position = PM.localLeftHand.transform.position;
             PM.LeftHandPf.transform.rotation = PM.localLeftHand.transform.rotation;*/
-            PM.LeftHandPf.transform.position = cLPos;
-            PM.LeftHandPf.transform.rotation = cLRot;
+            LeftHandPf.transform.position = cLPos;
+            LeftHandPf.transform.rotation = cLRot;
         }
         else
         {
             Debug.Log("left hand not connected");
         }
 
-        if (PM.localRightHand)// only if right hand is connected
+        if (localRightHand)// only if right hand is connected
         {
             /*PM.RightHandPf.transform.position = PM.localRightHand.transform.position;
             PM.RightHandPf.transform.rotation = PM.localRightHand.transform.rotation;*/
-            PM.RightHandPf.transform.position = cRPos;
-            PM.RightHandPf.transform.rotation = cRRot;
+            RightHandPf.transform.position = cRPos;
+            RightHandPf.transform.rotation = cRRot;
         }
         else
         {
