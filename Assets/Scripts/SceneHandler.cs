@@ -180,6 +180,7 @@ public class SceneHandler : NetworkBehaviour
         if (PM.bodyShapes)
         {
             //destroy body shapes
+
             PM.CmdDeactivateBodyShapes();
         }
         else

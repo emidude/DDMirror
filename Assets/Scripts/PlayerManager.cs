@@ -346,10 +346,13 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     public void CmdDeactivateBodyShapes()
     {
-        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
-        PM.networkedHead.gameObject.SetActive(false);
-        PM.networkedLeftHand.gameObject.SetActive(false);
-        PM.networkedRightHand.gameObject.SetActive(false);
+        for (int i = 0; i < playersList.Count; i++)
+        {
+            playersList[i].networkedHead.gameObject.SetActive(false);
+            playersList[i].networkedLeftHand.gameObject.SetActive(false);
+            playersList[i].networkedRightHand.gameObject.SetActive(false);
+        }
+        
     }
 
     [Command]
