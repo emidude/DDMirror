@@ -136,7 +136,7 @@ public class PlayerManager : NetworkBehaviour
                 else if (bodyShapes)
                 {
                     //Debug.Log("updating head and hands");
-                    CmdUpdateHeadAndHands();
+                    CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                 }
                 else
                 {
@@ -289,15 +289,17 @@ public class PlayerManager : NetworkBehaviour
     }
 
     [Command]
-    void CmdUpdateHeadAndHands()
+    void CmdUpdateHeadAndHands(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     {
        
         //TODO: test these with cL, cR and additonal velcity and ang velocity to check smoothness
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
         if (PM.localHead)
         {
-            PM.HeadPf.transform.position = PM.localHead.transform.position;
-            PM.HeadPf.transform.rotation = PM.localHead.transform.rotation;
+            /*PM.HeadPf.transform.position = PM.localHead.transform.position;
+            PM.HeadPf.transform.rotation = PM.localHead.transform.rotation;*/
+            PM.HeadPf.transform.position = HPos;
+            PM.HeadPf.transform.rotation = HRot;
         }
         else
         {
@@ -309,8 +311,10 @@ public class PlayerManager : NetworkBehaviour
 
         if (PM.localLeftHand) //we need to check in case player left the hand unconnected, should return true if left controller connected
         {
-            PM.LeftHandPf.transform.position = PM.localLeftHand.transform.position;
-            PM.LeftHandPf.transform.rotation = PM.localLeftHand.transform.rotation;
+            /*PM.LeftHandPf.transform.position = PM.localLeftHand.transform.position;
+            PM.LeftHandPf.transform.rotation = PM.localLeftHand.transform.rotation;*/
+            PM.LeftHandPf.transform.position = cLPos;
+            PM.LeftHandPf.transform.rotation = cLRot;
         }
         else
         {
@@ -319,8 +323,10 @@ public class PlayerManager : NetworkBehaviour
 
         if (PM.localRightHand)// only if right hand is connected
         {
-            PM.RightHandPf.transform.position = PM.localRightHand.transform.position;
-            PM.RightHandPf.transform.rotation = PM.localRightHand.transform.rotation;
+            /*PM.RightHandPf.transform.position = PM.localRightHand.transform.position;
+            PM.RightHandPf.transform.rotation = PM.localRightHand.transform.rotation;*/
+            PM.RightHandPf.transform.position = cRPos;
+            PM.RightHandPf.transform.rotation = cRRot;
         }
         else
         {
