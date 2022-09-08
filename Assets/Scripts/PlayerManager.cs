@@ -320,7 +320,7 @@ public class PlayerManager : NetworkBehaviour
         }     
     }
 
-    [ClientRpc]
+    [ClientRpc]  
     void RpcSetPlayersDanceMode()
     {
         
