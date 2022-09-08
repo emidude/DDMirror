@@ -210,7 +210,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955319492908329235}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955319492908329235}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
@@ -280,7 +280,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955319492908329235}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
   m_Name: 
@@ -331,9 +331,12 @@ MonoBehaviour:
   localHead: {fileID: 0}
   localLeftHand: {fileID: 0}
   localRightHand: {fileID: 0}
-  networkedHead: {fileID: 8425520599172257427}
-  networkedLeftHand: {fileID: 8425520600003480410}
-  networkedRightHand: {fileID: 8425520598223998757}
+  networkedHead: {fileID: 1390009182272369197, guid: cd4298867b0c7e645a8df313473b1c48,
+    type: 3}
+  networkedLeftHand: {fileID: 7404361123693541656, guid: d7d2400d6edac6841bbe59863c24f066,
+    type: 3}
+  networkedRightHand: {fileID: 6920451147500346153, guid: 4e1a378f949f6b04badd9fd8cb7367d8,
+    type: 3}
   cubePf: {fileID: 1223016012747116, guid: 16c2e13a22648d544ba10e09297cd061, type: 3}
   ready: 0
   bodyShapes: 1
@@ -353,7 +356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8425520598223998758
 Transform:
   m_ObjectHideFlags: 0
@@ -385,7 +388,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8425520599172257428
 Transform:
   m_ObjectHideFlags: 0
@@ -417,7 +420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8425520600003480411
 Transform:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ public class PlayerManager : NetworkBehaviour
     bool isLinkedToVR;
 
     GameObject defaultHead, defaultLeftHand, defaultRightHand;
-
+    GameObject HeadPf, LeftHandPf, RightHandPf;
 
     SteamVR_Behaviour_Pose cL, cR;
 
@@ -117,7 +117,9 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("song idx = " + songIndx);
         Debug.Log("song ordering(idx)=" +songOrdering[songIndx]);*/
 
-        CmdDeactivateBodyShapes();
+        CmdSpawnHeadAndHands();
+        CmdDestroyHeadAndHands();
+       // CmdDeactivateBodyShapes();
     }
 
     void Update()
@@ -134,7 +136,7 @@ public class PlayerManager : NetworkBehaviour
                 else if (bodyShapes)
                 {
                     Debug.Log("updating head and hands");
-                    updateHeadAndHands();
+                    CmdUpdateHeadAndHands();
                 }
                 else
                 {
@@ -144,6 +146,28 @@ public class PlayerManager : NetworkBehaviour
             }           
         }
     }
+
+    [Command]
+    void CmdSpawnHeadAndHands()
+    {
+        HeadPf = Instantiate(networkedHead);
+        NetworkServer.Spawn(HeadPf);
+
+        LeftHandPf = Instantiate(networkedLeftHand);
+        NetworkServer.Spawn(LeftHandPf);
+
+        RightHandPf = Instantiate(networkedRightHand);
+        NetworkServer.Spawn(RightHandPf);
+    }
+
+    [Command]
+    public void CmdDestroyHeadAndHands()
+    {
+        NetworkServer.Destroy(HeadPf);
+        NetworkServer.Destroy(LeftHandPf);
+        NetworkServer.Destroy(RightHandPf);
+    }
+
 
     [Command]
     void CmdSpawnCubes()
@@ -264,6 +288,42 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
+    [Command]
+    void CmdUpdateHeadAndHands()
+    {
+        if (localHead)
+        {
+            networkedHead.transform.position = localHead.transform.position;
+            networkedHead.transform.rotation = localHead.transform.rotation;
+        }
+        else
+        {
+            localHead = defaultHead;// when running as headless, provide default non-moving objects instead
+            localLeftHand = defaultLeftHand;
+            localRightHand = defaultRightHand;
+            Debug.Log("HEADLESS detected");
+        }
+
+        if (localLeftHand) //we need to check in case player left the hand unconnected, should return true if left controller connected
+        {
+            networkedLeftHand.transform.position = localLeftHand.transform.position;
+            networkedLeftHand.transform.rotation = localLeftHand.transform.rotation;
+        }
+        else
+        {
+            Debug.Log("left hand not connected");
+        }
+
+        if (localRightHand)// only if right hand is connected
+        {
+            networkedRightHand.transform.position = localRightHand.transform.position;
+            networkedRightHand.transform.rotation = localRightHand.transform.rotation;
+        }
+        else
+        {
+            Debug.Log("right hand not connected");
+        }
+    }
 
     [Command] //client tells server to run this method
     public void CmdNextSong()
@@ -335,7 +395,8 @@ public class PlayerManager : NetworkBehaviour
 
         if (PM.bodyShapes)
         {
-            PM.CmdActivateBodyShapes();
+            //PM.CmdActivateBodyShapes();
+            PM.CmdSpawnHeadAndHands();
         }
         else
         {

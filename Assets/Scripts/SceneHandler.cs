@@ -180,7 +180,8 @@ public class SceneHandler : NetworkBehaviour
         if (PM.bodyShapes)
         {
             //destroy body shapes
-            PM.CmdDeactivateBodyShapes();
+            //PM.CmdDeactivateBodyShapes(); //did not deacviate on remote client for some reason
+            PM.CmdDestroyHeadAndHands();
         }
         else
         {
