@@ -291,7 +291,7 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     void CmdUpdateHeadAndHands()
     {
-        if (!isLocalPlayer) return;
+       
         //TODO: test these with cL, cR and additonal velcity and ang velocity to check smoothness
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
         if (localHead)
