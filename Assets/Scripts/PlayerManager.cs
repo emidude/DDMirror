@@ -53,7 +53,7 @@ public class PlayerManager : NetworkBehaviour
     public bool bodyShapes = true;
     public bool questionTime = true;
 
-    // Players List to manage playerNumber
+    // Players List to manage playerNumber  
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
 
     public override void OnStartServer()
