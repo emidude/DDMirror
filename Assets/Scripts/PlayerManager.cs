@@ -135,7 +135,7 @@ public class PlayerManager : NetworkBehaviour
                 }
                 else if (bodyShapes)
                 {
-                    //Debug.Log("updating head and hands");
+                    Debug.Log("updating head and hands");
                     CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                 }
                 else
@@ -150,11 +150,29 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     void CmdSpawnHeadAndHands()
     {
+        Debug.Log("spawning head n hands");
         HeadPf = Instantiate(networkedHead);
+        if (HeadPf == null)
+        {
+            Debug.Log("head = null");
+        }
+        if(networkedHead = null)
+        {
+            Debug.Log("netgowerked head = null");
+        }
         NetworkServer.Spawn(HeadPf);
 
         LeftHandPf = Instantiate(networkedLeftHand);
         NetworkServer.Spawn(LeftHandPf);
+
+        if (LeftHandPf == null)
+        {
+            Debug.Log("LeftHandPf  = null");
+        }
+        if (networkedLeftHand = null)
+        {
+            Debug.Log("netgowerked networkedLeftHand = null");
+        }
 
         RightHandPf = Instantiate(networkedRightHand);
         NetworkServer.Spawn(RightHandPf);
@@ -298,7 +316,7 @@ public class PlayerManager : NetworkBehaviour
         {
             /*PM.HeadPf.transform.position = PM.localHead.transform.position;
             PM.HeadPf.transform.rotation = PM.localHead.transform.rotation;*/
-            HeadPf.transform.position = HPos;
+            HeadPf.transform.localPosition = HPos;
             HeadPf.transform.rotation = HRot;
         }
         else
@@ -313,7 +331,7 @@ public class PlayerManager : NetworkBehaviour
         {
             /*PM.LeftHandPf.transform.position = PM.localLeftHand.transform.position;
             PM.LeftHandPf.transform.rotation = PM.localLeftHand.transform.rotation;*/
-            LeftHandPf.transform.position = cLPos;
+            LeftHandPf.transform.localPosition = cLPos;
             LeftHandPf.transform.rotation = cLRot;
         }
         else
