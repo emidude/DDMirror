@@ -291,23 +291,24 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     void CmdUpdateHeadAndHands()
     {
+        //TODO: test these with cL, cR and additonal velcity and ang velocity to check smoothness
         if (localHead)
         {
-            networkedHead.transform.position = localHead.transform.position;
-            networkedHead.transform.rotation = localHead.transform.rotation;
+            HeadPf.transform.position = localHead.transform.position;
+            HeadPf.transform.rotation = localHead.transform.rotation;
         }
         else
         {
-            localHead = defaultHead;// when running as headless, provide default non-moving objects instead
+            /*localHead = defaultHead;// when running as headless, provide default non-moving objects instead
             localLeftHand = defaultLeftHand;
-            localRightHand = defaultRightHand;
+            localRightHand = defaultRightHand;*/
             Debug.Log("HEADLESS detected");
-        }
+        } 
 
         if (localLeftHand) //we need to check in case player left the hand unconnected, should return true if left controller connected
         {
-            networkedLeftHand.transform.position = localLeftHand.transform.position;
-            networkedLeftHand.transform.rotation = localLeftHand.transform.rotation;
+            LeftHandPf.transform.position = localLeftHand.transform.position;
+            LeftHandPf.transform.rotation = localLeftHand.transform.rotation;
         }
         else
         {
@@ -316,8 +317,8 @@ public class PlayerManager : NetworkBehaviour
 
         if (localRightHand)// only if right hand is connected
         {
-            networkedRightHand.transform.position = localRightHand.transform.position;
-            networkedRightHand.transform.rotation = localRightHand.transform.rotation;
+            RightHandPf.transform.position = localRightHand.transform.position;
+            RightHandPf.transform.rotation = localRightHand.transform.rotation;
         }
         else
         {
