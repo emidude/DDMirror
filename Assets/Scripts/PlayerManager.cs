@@ -110,7 +110,8 @@ public class PlayerManager : NetworkBehaviour
         cR = localRightHand.GetComponent<SteamVR_Behaviour_Pose>();
 
 
-        //CmdSpawnCubes();
+        CmdSpawnCubes();
+        CmdDestroyCubes();
         /*Debug.Log("server active?" + NetworkServer.active);
         Debug.Log("song idx = " + songIndx);
         Debug.Log("song ordering(idx)=" +songOrdering[songIndx]);*/
@@ -175,7 +176,7 @@ public class PlayerManager : NetworkBehaviour
     {
         for (int i = 0; i < points.Length; i++)
         {
-         //   NetworkServer.UnSpawn(points[i]);
+         //   NetworkServer.UnSpawn(points[i]); //leaves visibele but unresponsive
             NetworkServer.Destroy(points[i]);
         }
     }
