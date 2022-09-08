@@ -336,7 +336,7 @@ MonoBehaviour:
   networkedRightHand: {fileID: 8425520598223998757}
   cubePf: {fileID: 1223016012747116, guid: 16c2e13a22648d544ba10e09297cd061, type: 3}
   ready: 0
-  bodyShapes: 0
+  bodyShapes: 1
   questionTime: 1
 --- !u!1 &8425520598223998757
 GameObject:

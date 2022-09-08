@@ -133,10 +133,12 @@ public class PlayerManager : NetworkBehaviour
                 }
                 else if (bodyShapes)
                 {
+                    Debug.Log("updating head and hands");
                     updateHeadAndHands();
                 }
                 else
                 {
+                    Debug.Log("still doing cubes, bodyShapes = " + bodyShapes);
                     CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
                 }
             }           
@@ -331,7 +333,7 @@ public class PlayerManager : NetworkBehaviour
         PM.questionTime = false;
         PM.ready = false; //might no longer need
 
-        if (bodyShapes)
+        if (PM.bodyShapes)
         {
             PM.CmdActivateBodyShapes();
         }
