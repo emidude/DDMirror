@@ -351,11 +351,14 @@ public class PlayerManager : NetworkBehaviour
     [ClientRpc]
     public void RpcDeactivateBodyShapes()
     {
-                   PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
-            PM.networkedHead.gameObject.SetActive(false);
-            PM.networkedLeftHand.gameObject.SetActive(false);
-            PM.networkedRightHand.gameObject.SetActive(false);
-       
+        /* PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+  PM.networkedHead.gameObject.SetActive(false);
+  PM.networkedLeftHand.gameObject.SetActive(false);
+  PM.networkedRightHand.gameObject.SetActive(false);
+*/
+        networkedHead.gameObject.SetActive(false);
+        networkedLeftHand.gameObject.SetActive(false);
+        networkedRightHand.gameObject.SetActive(false);
     }
 
     [Command]
