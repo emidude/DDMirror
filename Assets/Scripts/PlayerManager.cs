@@ -133,12 +133,12 @@ public class PlayerManager : NetworkBehaviour
                 }
                 else if (bodyShapes)
                 {
-                    Debug.Log("updating head and hands");
+                    //Debug.Log("updating head and hands");
                     updateHeadAndHands();
                 }
                 else
                 {
-                    Debug.Log("still doing cubes, bodyShapes = " + bodyShapes);
+                    //Debug.Log("still doing cubes, bodyShapes = " + bodyShapes);
                     CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
                 }
             }           
@@ -346,17 +346,19 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     public void CmdDeactivateBodyShapes()
     {
-        networkedHead.gameObject.SetActive(false);
-        networkedLeftHand.gameObject.SetActive(false);
-        networkedRightHand.gameObject.SetActive(false);
+        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+        PM.networkedHead.gameObject.SetActive(false);
+        PM.networkedLeftHand.gameObject.SetActive(false);
+        PM.networkedRightHand.gameObject.SetActive(false);
     }
 
     [Command]
     void CmdActivateBodyShapes()
     {
-        networkedHead.gameObject.SetActive(true);
-        networkedLeftHand.gameObject.SetActive(true);
-        networkedRightHand.gameObject.SetActive(true);
+        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+        PM.networkedHead.gameObject.SetActive(true);
+        PM.networkedLeftHand.gameObject.SetActive(true);
+        PM.networkedRightHand.gameObject.SetActive(true);
     }
 
 
