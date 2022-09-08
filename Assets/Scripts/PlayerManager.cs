@@ -342,6 +342,12 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
+    [Command]
+    public void CmdDeactivateBodyShapes()
+    {
+        RpcDeactivateBodyShapes();
+    }
+
     [ClientRpc]
     public void RpcDeactivateBodyShapes()
     {
