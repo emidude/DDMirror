@@ -181,7 +181,7 @@ public class SceneHandler : NetworkBehaviour
         {
             //destroy body shapes
 
-            PM.CmdDeactivateBodyShapes();
+            PM.RpcDeactivateBodyShapes();
         }
         else
         {
