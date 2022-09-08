@@ -135,12 +135,12 @@ public class PlayerManager : NetworkBehaviour
                 }
                 else if (bodyShapes)
                 {
-                    Debug.Log("updating head and hands");
+                    //Debug.Log("updating head and hands");
                     CmdUpdateHeadAndHands();
                 }
                 else
                 {
-                    Debug.Log("still doing cubes, bodyShapes = " + bodyShapes);
+                    //Debug.Log("still doing cubes, bodyShapes = " + bodyShapes);
                     CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
                 }
             }           
@@ -291,11 +291,13 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     void CmdUpdateHeadAndHands()
     {
+        if (!isLocalPlayer) return;
         //TODO: test these with cL, cR and additonal velcity and ang velocity to check smoothness
+        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
         if (localHead)
         {
-            HeadPf.transform.position = localHead.transform.position;
-            HeadPf.transform.rotation = localHead.transform.rotation;
+            HeadPf.transform.position = PM.localHead.transform.position;
+            HeadPf.transform.rotation = PM.localHead.transform.rotation;
         }
         else
         {
@@ -307,8 +309,8 @@ public class PlayerManager : NetworkBehaviour
 
         if (localLeftHand) //we need to check in case player left the hand unconnected, should return true if left controller connected
         {
-            LeftHandPf.transform.position = localLeftHand.transform.position;
-            LeftHandPf.transform.rotation = localLeftHand.transform.rotation;
+            LeftHandPf.transform.position = PM.localLeftHand.transform.position;
+            LeftHandPf.transform.rotation = PM.localLeftHand.transform.rotation;
         }
         else
         {
@@ -317,8 +319,8 @@ public class PlayerManager : NetworkBehaviour
 
         if (localRightHand)// only if right hand is connected
         {
-            RightHandPf.transform.position = localRightHand.transform.position;
-            RightHandPf.transform.rotation = localRightHand.transform.rotation;
+            RightHandPf.transform.position = PM.localRightHand.transform.position;
+            RightHandPf.transform.rotation = PM.localRightHand.transform.rotation;
         }
         else
         {
