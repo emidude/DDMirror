@@ -49,7 +49,8 @@ public class PlayerManager : NetworkBehaviour
     int resolution = 10;
     GameObject[] points;
 
-    public bool bodyShapes = false;
+    //public bool bodyShapes = false;
+    public bool bodyShapes = true;
     public bool questionTime = true;
 
     // Players List to manage playerNumber
