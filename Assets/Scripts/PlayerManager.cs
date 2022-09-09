@@ -177,17 +177,17 @@ public class PlayerManager : NetworkBehaviour
     void CmdSpawnHeadAndHands()
     {
         Debug.Log("spawning head n hands");
-        HeadGO = Instantiate(networkedHead);
+        HeadGO = Instantiate(cubePf);
         HeadGO.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         HeadGO.transform.SetParent(transform, false);
         NetworkServer.Spawn(HeadGO);
 
-        LeftHandGO = Instantiate(networkedLeftHand);
+        LeftHandGO = Instantiate(cubePf);
         LeftHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         LeftHandGO.transform.SetParent(transform, false);
         NetworkServer.Spawn(LeftHandGO);
 
-        RightHandGO = Instantiate(networkedRightHand);
+        RightHandGO = Instantiate(cubePf);
         RightHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         RightHandGO.transform.SetParent(transform, false);
         NetworkServer.Spawn(RightHandGO);
