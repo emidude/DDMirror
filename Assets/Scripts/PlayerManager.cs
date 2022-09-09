@@ -142,11 +142,11 @@ public class PlayerManager : NetworkBehaviour
                 else if (bodyShapes)
                 {
                     //Debug.Log("updating head and hands");
-                    //CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                     //CmdUpdateTest(cL.transform.position, cL.transform.rotation);
                     //UpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
 
-                    if (localHead == null)
+                   /* if (localHead == null)
                     {
                         localHead = defaultHead;// when running as headless, provide default non-moving objects instead
                         localLeftHand = defaultLeftHand;
@@ -175,7 +175,7 @@ public class PlayerManager : NetworkBehaviour
                     else
                     {
                         Debug.Log("right hand not connected");
-                    }
+                    }*/
 
                 }
                 else
@@ -210,21 +210,24 @@ public class PlayerManager : NetworkBehaviour
     void CmdSpawnHeadAndHands()
     {
         Debug.Log("spawning head n hands");
-        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
-        /*HeadGO = Instantiate(cubePf);
+        //PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+        HeadGO = Instantiate(cubePf);
         HeadGO.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        HeadGO.transform.SetParent(transform, false);*/
-        NetworkServer.Spawn(PM.HeadGO);
+        HeadGO.transform.SetParent(transform, false);
+        //NetworkServer.Spawn(PM.HeadGO);
+        NetworkServer.Spawn(HeadGO);
 
-        /*LeftHandGO = Instantiate(cubePf);
+        LeftHandGO = Instantiate(cubePf);
         LeftHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        LeftHandGO.transform.SetParent(transform, false);*/
-        NetworkServer.Spawn(PM.LeftHandGO);
+        LeftHandGO.transform.SetParent(transform, false);
+        //NetworkServer.Spawn(PM.LeftHandGO);
+        NetworkServer.Spawn(LeftHandGO);
 
-        /*RightHandGO = Instantiate(cubePf);
+        RightHandGO = Instantiate(cubePf);
         RightHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        RightHandGO.transform.SetParent(transform, false);*/
-        NetworkServer.Spawn(PM.RightHandGO);
+        RightHandGO.transform.SetParent(transform, false);
+        //NetworkServer.Spawn(PM.RightHandGO);
+        NetworkServer.Spawn(RightHandGO);
     }
 
     [Command]
@@ -233,7 +236,7 @@ public class PlayerManager : NetworkBehaviour
         NetworkServer.Destroy(HeadGO);
         NetworkServer.Destroy(LeftHandGO);
         NetworkServer.Destroy(RightHandGO);
-        RpcLocalDestroyHeadAndHands();
+       // RpcLocalDestroyHeadAndHands();
 
 
     }
@@ -460,7 +463,7 @@ void CmdUpdateHeadAndHands(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quatern
 
         if (PM.bodyShapes)
         {
-            PM.HeadGO = Instantiate(cubePf);
+           /* PM.HeadGO = Instantiate(cubePf);
             PM.HeadGO.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             PM.HeadGO.transform.SetParent(transform, false);
             PM.LeftHandGO = Instantiate(cubePf);
@@ -468,7 +471,7 @@ void CmdUpdateHeadAndHands(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quatern
             PM.LeftHandGO.transform.SetParent(transform, false);
             PM.RightHandGO = Instantiate(cubePf);
             PM.RightHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-            PM.RightHandGO.transform.SetParent(transform, false);
+            PM.RightHandGO.transform.SetParent(transform, false);*/
 
             PM.CmdSpawnHeadAndHands();
             //PM.CmdSpawnTest();
