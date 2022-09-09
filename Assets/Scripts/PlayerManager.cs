@@ -56,6 +56,10 @@ public class PlayerManager : NetworkBehaviour
     // Players List to manage playerNumber  
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
 
+    ///test vars:
+    public GameObject testPF;
+    GameObject testGO;
+
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -117,9 +121,11 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("song idx = " + songIndx);
         Debug.Log("song ordering(idx)=" +songOrdering[songIndx]);*/
 
-        CmdSpawnHeadAndHands();
-        CmdDestroyHeadAndHands();
-       // CmdDeactivateBodyShapes();
+        /*CmdSpawnHeadAndHands();
+        CmdDestroyHeadAndHands();*/
+        
+        CmdSpawnTest();
+        CmdDestroyTest();
     }
 
     void Update()
@@ -136,7 +142,8 @@ public class PlayerManager : NetworkBehaviour
                 else if (bodyShapes)
                 {
                     Debug.Log("updating head and hands");
-                    CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    //CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    CmdUpdateTest(cL.transform.position, cL.transform.rotation);
                 }
                 else
                 {
@@ -145,6 +152,25 @@ public class PlayerManager : NetworkBehaviour
                 }
             }           
         }
+    }
+    [Command]
+    void CmdSpawnTest()
+    {
+        testGO = Instantiate(testPF);
+        testGO.transform.localScale = Vector3.one;
+        testGO.transform.SetParent(transform, false);
+        NetworkServer.Spawn(testGO);
+    }
+    [Command]
+    public void CmdDestroyTest()
+    {
+        NetworkServer.Destroy(testGO);
+    }
+    [Command]
+    void CmdUpdateTest(Vector3 pos, Quaternion rot)
+    {
+        testGO.transform.position = pos;
+        testGO.transform.rotation = rot;
     }
 
     [Command]
@@ -427,7 +453,8 @@ public class PlayerManager : NetworkBehaviour
         if (PM.bodyShapes)
         {
             //PM.CmdActivateBodyShapes();
-            PM.CmdSpawnHeadAndHands();
+            //PM.CmdSpawnHeadAndHands();
+            PM.CmdSpawnTest();
         }
         else
         {
@@ -435,21 +462,7 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
-    [Command]
-    public void CmdDeactivateBodyShapes()
-    {
-        networkedHead.gameObject.SetActive(false);
-        networkedLeftHand.gameObject.SetActive(false);
-        networkedRightHand.gameObject.SetActive(false);
-    }
-
-    [Command]
-    void CmdActivateBodyShapes()
-    {
-        networkedHead.gameObject.SetActive(true);
-        networkedLeftHand.gameObject.SetActive(true);
-        networkedRightHand.gameObject.SetActive(true);
-    }
+   
 
 
 }
