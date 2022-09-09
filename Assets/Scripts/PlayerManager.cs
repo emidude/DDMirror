@@ -142,9 +142,18 @@ public class PlayerManager : NetworkBehaviour
                 else if (bodyShapes)
                 {
                     //Debug.Log("updating head and hands");
-                    CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    //CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                     //CmdUpdateTest(cL.transform.position, cL.transform.rotation);
                     //UpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    HeadGO.transform.localPosition = localHead.transform.position;
+                    HeadGO.transform.rotation = localHead.transform.rotation;
+
+                    LeftHandGO.transform.localPosition = cL.transform.position;
+                    LeftHandGO.transform.rotation = cL.transform.rotation;
+
+                    RightHandGO.transform.position = cR.transform.position;
+                    RightHandGO.transform.rotation = cR.transform.rotation;
+
                 }
                 else
                 {
@@ -338,6 +347,7 @@ void CmdUpdateHeadAndHands(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quatern
     
     void UpdateHeadAndHands(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     {
+        if(isLocalPlayer)
         HeadGO.transform.localPosition = HPos;
         HeadGO.transform.rotation = HRot;
 
