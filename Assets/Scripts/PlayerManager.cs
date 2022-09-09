@@ -323,48 +323,15 @@ public class PlayerManager : NetworkBehaviour
 
     [Command]
     void CmdUpdateHeadAndHands(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
-    {
-       
-       
-        //PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
-        if (localHead)
-        {
-            /*PM.HeadPf.transform.position = PM.localHead.transform.position;
-            PM.HeadPf.transform.rotation = PM.localHead.transform.rotation;*/
+    { 
             HeadGO.transform.localPosition = HPos;
             HeadGO.transform.rotation = HRot;
-        }
-        else
-        {
-            /*localHead = defaultHead;// when running as headless, provide default non-moving objects instead
-            localLeftHand = defaultLeftHand;
-            localRightHand = defaultRightHand;*/
-            Debug.Log("HEADLESS detected");
-        } 
-
-        if (localLeftHand) //we need to check in case player left the hand unconnected, should return true if left controller connected
-        {
-            /*PM.LeftHandPf.transform.position = PM.localLeftHand.transform.position;
-            PM.LeftHandPf.transform.rotation = PM.localLeftHand.transform.rotation;*/
+        
             LeftHandGO.transform.localPosition = cLPos;
             LeftHandGO.transform.rotation = cLRot;
-        }
-        else
-        {
-            Debug.Log("left hand not connected");
-        }
-
-        if (localRightHand)// only if right hand is connected
-        {
-            /*PM.RightHandPf.transform.position = PM.localRightHand.transform.position;
-            PM.RightHandPf.transform.rotation = PM.localRightHand.transform.rotation;*/
+       
             RightHandGO.transform.position = cRPos;
-            RightHandGO.transform.rotation = cRRot;
-        }
-        else
-        {
-            Debug.Log("right hand not connected");
-        }
+            RightHandGO.transform.rotation = cRRot;  
     }
 
     [Command] //client tells server to run this method
