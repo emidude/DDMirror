@@ -145,14 +145,37 @@ public class PlayerManager : NetworkBehaviour
                     //CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                     //CmdUpdateTest(cL.transform.position, cL.transform.rotation);
                     //UpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+
+                    if (localHead == null)
+                    {
+                        localHead = defaultHead;// when running as headless, provide default non-moving objects instead
+                        localLeftHand = defaultLeftHand;
+                        localRightHand = defaultRightHand;
+                        Debug.Log("HEADLESS detected");
+                    }
+
                     HeadGO.transform.localPosition = localHead.transform.position;
                     HeadGO.transform.rotation = localHead.transform.rotation;
 
-                    LeftHandGO.transform.localPosition = cL.transform.position;
-                    LeftHandGO.transform.rotation = cL.transform.rotation;
+                    if (localLeftHand) //we need to check in case player left the hand unconnected, should return true if left controller connected
+                    {
+                        LeftHandGO.transform.localPosition = cL.transform.position;
+                        LeftHandGO.transform.rotation = cL.transform.rotation;
+                    }
+                    else
+                    {
+                        Debug.Log("left hand not connected");
+                    }
 
-                    RightHandGO.transform.position = cR.transform.position;
-                    RightHandGO.transform.rotation = cR.transform.rotation;
+                    if (localRightHand)// only if right hand is connected
+                    {
+                        RightHandGO.transform.position = cR.transform.position;
+                        RightHandGO.transform.rotation = cL.transform.rotation;
+                    }
+                    else
+                    {
+                        Debug.Log("right hand not connected");
+                    }
 
                 }
                 else
@@ -347,7 +370,8 @@ void CmdUpdateHeadAndHands(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quatern
     
     void UpdateHeadAndHands(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     {
-        if(isLocalPlayer)
+       
+
         HeadGO.transform.localPosition = HPos;
         HeadGO.transform.rotation = HRot;
 
