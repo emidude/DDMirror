@@ -210,20 +210,21 @@ public class PlayerManager : NetworkBehaviour
     void CmdSpawnHeadAndHands()
     {
         Debug.Log("spawning head n hands");
+        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
         /*HeadGO = Instantiate(cubePf);
         HeadGO.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         HeadGO.transform.SetParent(transform, false);*/
-        NetworkServer.Spawn(HeadGO);
+        NetworkServer.Spawn(PM.HeadGO);
 
         /*LeftHandGO = Instantiate(cubePf);
         LeftHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         LeftHandGO.transform.SetParent(transform, false);*/
-        NetworkServer.Spawn(LeftHandGO);
+        NetworkServer.Spawn(PM.LeftHandGO);
 
         /*RightHandGO = Instantiate(cubePf);
         RightHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         RightHandGO.transform.SetParent(transform, false);*/
-        NetworkServer.Spawn(RightHandGO);
+        NetworkServer.Spawn(PM.RightHandGO);
     }
 
     [Command]
@@ -232,8 +233,20 @@ public class PlayerManager : NetworkBehaviour
         NetworkServer.Destroy(HeadGO);
         NetworkServer.Destroy(LeftHandGO);
         NetworkServer.Destroy(RightHandGO);
+        RpcLocalDestroyHeadAndHands();
+
+
     }
 
+    [ClientRpc]
+    void RpcLocalDestroyHeadAndHands()
+    {
+        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+
+        Destroy(PM.HeadGO);
+        Destroy(PM.LeftHandGO);
+        Destroy(PM.RightHandGO);
+    }
 
     [Command]
     void CmdSpawnCubes()
