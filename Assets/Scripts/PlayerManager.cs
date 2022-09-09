@@ -115,8 +115,8 @@ public class PlayerManager : NetworkBehaviour
         cR = localRightHand.GetComponent<SteamVR_Behaviour_Pose>();
 
 
-        CmdSpawnCubes();
-        CmdDestroyCubes();
+       /* CmdSpawnCubes();
+        CmdDestroyCubes();*/
         /*Debug.Log("server active?" + NetworkServer.active);
         Debug.Log("song idx = " + songIndx);
         Debug.Log("song ordering(idx)=" +songOrdering[songIndx]);*/
@@ -187,9 +187,9 @@ public class PlayerManager : NetworkBehaviour
     void CmdSpawnHeadAndHands()
     {
         Debug.Log("spawning head n hands");
-        HeadGO = Instantiate(cubePf);
+        /*HeadGO = Instantiate(cubePf);
         HeadGO.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        HeadGO.transform.SetParent(transform, false);
+        HeadGO.transform.SetParent(transform, false);*/
         NetworkServer.Spawn(HeadGO);
 
         LeftHandGO = Instantiate(cubePf);
@@ -423,6 +423,9 @@ void CmdUpdateHeadAndHands(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quatern
 
         if (PM.bodyShapes)
         {
+            PM.HeadGO = Instantiate(cubePf);
+            PM.HeadGO.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            PM.HeadGO.transform.SetParent(transform, false);
             PM.CmdSpawnHeadAndHands();
             //PM.CmdSpawnTest();
         }
