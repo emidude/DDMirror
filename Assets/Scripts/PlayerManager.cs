@@ -38,7 +38,7 @@ public class PlayerManager : NetworkBehaviour
     bool isLinkedToVR;
 
     GameObject defaultHead, defaultLeftHand, defaultRightHand;
-    GameObject HeadPf, LeftHandPf, RightHandPf;
+    GameObject HeadGO, LeftHandGO, RightHandGO;
 
     SteamVR_Behaviour_Pose cL, cR;
 
@@ -57,8 +57,8 @@ public class PlayerManager : NetworkBehaviour
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
 
     ///test vars:
-    public GameObject testPF;
-    GameObject testGO;
+    /*public GameObject testPF;
+    GameObject testGO;*/
 
     public override void OnStartServer()
     {
@@ -121,11 +121,11 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("song idx = " + songIndx);
         Debug.Log("song ordering(idx)=" +songOrdering[songIndx]);*/
 
-        /*CmdSpawnHeadAndHands();
-        CmdDestroyHeadAndHands();*/
-        
-        CmdSpawnTest();
-        CmdDestroyTest();
+        CmdSpawnHeadAndHands();
+        CmdDestroyHeadAndHands();
+
+        /*CmdSpawnTest();
+        CmdDestroyTest();*/
     }
 
     void Update()
@@ -141,9 +141,9 @@ public class PlayerManager : NetworkBehaviour
                 }
                 else if (bodyShapes)
                 {
-                    Debug.Log("updating head and hands");
-                    //CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
-                    CmdUpdateTest(cL.transform.position, cL.transform.rotation);
+                    //Debug.Log("updating head and hands");
+                    CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    //CmdUpdateTest(cL.transform.position, cL.transform.rotation);
                 }
                 else
                 {
@@ -153,7 +153,7 @@ public class PlayerManager : NetworkBehaviour
             }           
         }
     }
-    [Command]
+   /* [Command]
     void CmdSpawnTest()
     {
         testGO = Instantiate(testPF);
@@ -171,49 +171,34 @@ public class PlayerManager : NetworkBehaviour
     {
         testGO.transform.position = pos;
         testGO.transform.rotation = rot;
-    }
+    }*/
 
     [Command]
     void CmdSpawnHeadAndHands()
     {
         Debug.Log("spawning head n hands");
-        HeadPf = Instantiate(networkedHead);
-        if (HeadPf == null)
-        {
-            Debug.Log("head = null");
-        }
-        else if(networkedHead = null)
-        {
-            Debug.Log("netgowerked head = null");
-        }
-        else
-        {
-            Debug.Log("nothing not null");
-        }
-        NetworkServer.Spawn(HeadPf);
+        HeadGO = Instantiate(networkedHead);
+        HeadGO.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        HeadGO.transform.SetParent(transform, false);
+        NetworkServer.Spawn(HeadGO);
 
-        LeftHandPf = Instantiate(networkedLeftHand);
-        NetworkServer.Spawn(LeftHandPf);
+        LeftHandGO = Instantiate(networkedLeftHand);
+        LeftHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        LeftHandGO.transform.SetParent(transform, false);
+        NetworkServer.Spawn(LeftHandGO);
 
-        if (LeftHandPf == null)
-        {
-            Debug.Log("LeftHandPf  = null");
-        }
-        if (networkedLeftHand = null)
-        {
-            Debug.Log("netgowerked networkedLeftHand = null");
-        }
-
-        RightHandPf = Instantiate(networkedRightHand);
-        NetworkServer.Spawn(RightHandPf);
+        RightHandGO = Instantiate(networkedRightHand);
+        RightHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        RightHandGO.transform.SetParent(transform, false);
+        NetworkServer.Spawn(RightHandGO);
     }
 
     [Command]
     public void CmdDestroyHeadAndHands()
     {
-        NetworkServer.Destroy(HeadPf);
-        NetworkServer.Destroy(LeftHandPf);
-        NetworkServer.Destroy(RightHandPf);
+        NetworkServer.Destroy(HeadGO);
+        NetworkServer.Destroy(LeftHandGO);
+        NetworkServer.Destroy(RightHandGO);
     }
 
 
@@ -346,8 +331,8 @@ public class PlayerManager : NetworkBehaviour
         {
             /*PM.HeadPf.transform.position = PM.localHead.transform.position;
             PM.HeadPf.transform.rotation = PM.localHead.transform.rotation;*/
-            HeadPf.transform.localPosition = HPos;
-            HeadPf.transform.rotation = HRot;
+            HeadGO.transform.localPosition = HPos;
+            HeadGO.transform.rotation = HRot;
         }
         else
         {
@@ -361,8 +346,8 @@ public class PlayerManager : NetworkBehaviour
         {
             /*PM.LeftHandPf.transform.position = PM.localLeftHand.transform.position;
             PM.LeftHandPf.transform.rotation = PM.localLeftHand.transform.rotation;*/
-            LeftHandPf.transform.localPosition = cLPos;
-            LeftHandPf.transform.rotation = cLRot;
+            LeftHandGO.transform.localPosition = cLPos;
+            LeftHandGO.transform.rotation = cLRot;
         }
         else
         {
@@ -373,8 +358,8 @@ public class PlayerManager : NetworkBehaviour
         {
             /*PM.RightHandPf.transform.position = PM.localRightHand.transform.position;
             PM.RightHandPf.transform.rotation = PM.localRightHand.transform.rotation;*/
-            RightHandPf.transform.position = cRPos;
-            RightHandPf.transform.rotation = cRRot;
+            RightHandGO.transform.position = cRPos;
+            RightHandGO.transform.rotation = cRRot;
         }
         else
         {
@@ -452,9 +437,8 @@ public class PlayerManager : NetworkBehaviour
 
         if (PM.bodyShapes)
         {
-            //PM.CmdActivateBodyShapes();
-            //PM.CmdSpawnHeadAndHands();
-            PM.CmdSpawnTest();
+            PM.CmdSpawnHeadAndHands();
+            //PM.CmdSpawnTest();
         }
         else
         {
