@@ -142,8 +142,9 @@ public class PlayerManager : NetworkBehaviour
                 else if (bodyShapes)
                 {
                     //Debug.Log("updating head and hands");
-                    CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    //CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                     //CmdUpdateTest(cL.transform.position, cL.transform.rotation);
+                    UpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                 }
                 else
                 {
@@ -273,7 +274,7 @@ public class PlayerManager : NetworkBehaviour
 
     //from this thread
     //https://forum.unity.com/threads/multiplayer-with-steamvr.535321/
-    void updateHeadAndHands()
+    /*void updateHeadAndHands()
     {
 
         if (!isLocalPlayer)
@@ -319,10 +320,10 @@ public class PlayerManager : NetworkBehaviour
                 Debug.Log("right hand not connected");
             }
         }
-    }
+    }*/
 
-    [Command]
-    void CmdUpdateHeadAndHands(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
+[Command]//client tells server to run this method
+void CmdUpdateHeadAndHands(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     { 
             HeadGO.transform.localPosition = HPos;
             HeadGO.transform.rotation = HRot;
@@ -334,11 +335,19 @@ public class PlayerManager : NetworkBehaviour
             RightHandGO.transform.rotation = cRRot;  
     }
 
-    [Command] //client tells server to run this method
-    public void CmdNextSong()
+    
+    void UpdateHeadAndHands(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     {
-        RpcPlaySong();
+        HeadGO.transform.localPosition = HPos;
+        HeadGO.transform.rotation = HRot;
+
+        LeftHandGO.transform.localPosition = cLPos;
+        LeftHandGO.transform.rotation = cLRot;
+
+        RightHandGO.transform.position = cRPos;
+        RightHandGO.transform.rotation = cRRot;
     }
+
 
     [ClientRpc]
     void RpcPlaySong()
