@@ -157,7 +157,7 @@ public class PlayerManager : NetworkBehaviour
     void CmdSpawnTest()
     {
         testGO = Instantiate(testPF);
-        testGO.transform.localScale = Vector3.one;
+        testGO.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         testGO.transform.SetParent(transform, false);
         NetworkServer.Spawn(testGO);
     }
