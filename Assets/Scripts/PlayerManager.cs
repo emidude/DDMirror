@@ -121,8 +121,8 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("song idx = " + songIndx);
         Debug.Log("song ordering(idx)=" +songOrdering[songIndx]);*/
 
-        CmdSpawnHeadAndHands();
-        CmdDestroyHeadAndHands();
+        /*CmdSpawnHeadAndHands();
+        CmdDestroyHeadAndHands();*/
 
         /*CmdSpawnTest();
         CmdDestroyTest();*/
@@ -192,14 +192,14 @@ public class PlayerManager : NetworkBehaviour
         HeadGO.transform.SetParent(transform, false);*/
         NetworkServer.Spawn(HeadGO);
 
-        LeftHandGO = Instantiate(cubePf);
+        /*LeftHandGO = Instantiate(cubePf);
         LeftHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        LeftHandGO.transform.SetParent(transform, false);
+        LeftHandGO.transform.SetParent(transform, false);*/
         NetworkServer.Spawn(LeftHandGO);
 
-        RightHandGO = Instantiate(cubePf);
+        /*RightHandGO = Instantiate(cubePf);
         RightHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        RightHandGO.transform.SetParent(transform, false);
+        RightHandGO.transform.SetParent(transform, false);*/
         NetworkServer.Spawn(RightHandGO);
     }
 
@@ -426,6 +426,13 @@ void CmdUpdateHeadAndHands(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quatern
             PM.HeadGO = Instantiate(cubePf);
             PM.HeadGO.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             PM.HeadGO.transform.SetParent(transform, false);
+            PM.LeftHandGO = Instantiate(cubePf);
+            PM.LeftHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            PM.LeftHandGO.transform.SetParent(transform, false);
+            PM.RightHandGO = Instantiate(cubePf);
+            PM.RightHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            PM.RightHandGO.transform.SetParent(transform, false);
+
             PM.CmdSpawnHeadAndHands();
             //PM.CmdSpawnTest();
         }
