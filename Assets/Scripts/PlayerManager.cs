@@ -142,9 +142,9 @@ public class PlayerManager : NetworkBehaviour
                 else if (bodyShapes)
                 {
                     //Debug.Log("updating head and hands");
-                    //CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                     //CmdUpdateTest(cL.transform.position, cL.transform.rotation);
-                    UpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    //UpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                 }
                 else
                 {
