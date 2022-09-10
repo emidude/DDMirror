@@ -1,0 +1,3 @@
+try other method for updating - on oter branch
+
+also, need to turn hands and laser pointer on and off w/qn mode
