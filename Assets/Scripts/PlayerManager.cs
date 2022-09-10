@@ -18,8 +18,8 @@ public class PlayerManager : NetworkBehaviour
    
     public GameObject guiObject;
     public SceneHandler SceneHndlr;
-    [SyncVar]
-    public bool started = false;
+    /*[SyncVar]
+    public bool started = false;*/
 
 
     /// </summary>
