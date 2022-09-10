@@ -117,16 +117,16 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.2
   clientAuthority: 0
-  sendInterval: 0.001
+  sendInterval: 0.0001
   syncPosition: 1
   syncRotation: 1
   syncScale: 0
   interpolatePosition: 1
   interpolateRotation: 1
   interpolateScale: 0
-  bufferTimeMultiplier: 3
+  bufferTimeMultiplier: 1
   bufferSizeLimit: 64
-  catchupThreshold: 6
+  catchupThreshold: 4
   catchupMultiplier: 0.1
   onlySyncOnChange: 0
   bufferResetMultiplier: 5
