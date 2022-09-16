@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 169a1b8f06c17c84e8de491f2bfef986, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.22922112, g: 0.096930355, b: 0.25913075, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -271,6 +271,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f8e9e70f68ee3418ad85992778c116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &46716057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 46716059}
+  - component: {fileID: 46716058}
+  m_Layer: 0
+  m_Name: skyboxrot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &46716058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46716057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad65a03e2ba19b346ad04e5fcb9723f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotationPerSecond: 1
+--- !u!4 &46716059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46716057}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 148.47969, y: 115.69531, z: 6.821169}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &47086574
 GameObject:
   m_ObjectHideFlags: 0
@@ -3959,7 +4004,7 @@ MonoBehaviour:
           m_CallState: 2
   - name: Yumeno Hajima Ring Ring
     ID: 2
-    About: Kyary Pamyu Pamyu - High
+    About: Kyary Pamyu Pamyu h
     clipsToPlay:
     - {fileID: 8300000, guid: d176b41905840744f93dbebb364791a9, type: 3}
     onStop:
@@ -3997,11 +4042,271 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - name: ShortAudioTest
+  - name: Jump Around
     ID: 4
-    About: short audio test
+    About: House Of Pain
     clipsToPlay:
-    - {fileID: 8300000, guid: 4aeab48fe4a99274b9020380c65267d4, type: 3}
+    - {fileID: 8300000, guid: bf6a55b319b6029409d7016774c43b58, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Libertango
+    ID: 5
+    About: Astor Piazzolla
+    clipsToPlay:
+    - {fileID: 8300000, guid: 4fee0c2037f30b34295f8da11ca3e930, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Side To Side
+    ID: 6
+    About: Ariana Grande ft. Nicki Minaj
+    clipsToPlay:
+    - {fileID: 8300000, guid: d68d5be9dea4f7944a7d793f939b58a0, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: BLACKPINK
+    ID: 7
+    About: DDU-DU DDU-DU
+    clipsToPlay:
+    - {fileID: 8300000, guid: 5e0b39bff1086644dbed53c7dd15ae18, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: BLACKPINK
+    ID: 8
+    About: DDU-DU DDU-DU
+    clipsToPlay:
+    - {fileID: 8300000, guid: 5e0b39bff1086644dbed53c7dd15ae18, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Good as Hell
+    ID: 9
+    About: Lizzo
+    clipsToPlay:
+    - {fileID: 8300000, guid: e38a03140542126419f72c433ddac341, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Chandelier
+    ID: 10
+    About: Sia
+    clipsToPlay:
+    - {fileID: 8300000, guid: df740ddd3af1dd7448d58db18568a638, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Alors On Danse
+    ID: 11
+    About: Stromae
+    clipsToPlay:
+    - {fileID: 8300000, guid: 2ebe42b4181fbb04d8b1260848f44994, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Hung Up
+    ID: 12
+    About: Madonna
+    clipsToPlay:
+    - {fileID: 8300000, guid: e709dc24e7e481442ac1fdaf7aadcbaf, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Rockafeller Skank
+    ID: 13
+    About: Fatboy Slim
+    clipsToPlay:
+    - {fileID: 8300000, guid: d3b6981cbc6b0b847a40c4eef85b010b, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: L'AMOUR TOUJOURS
+    ID: 14
+    About: GIGI G'AGOSTINO
+    clipsToPlay:
+    - {fileID: 8300000, guid: 3a79675c1b2208548a3bacdb3e2659c6, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Maji De Koi Suru
+    ID: 15
+    About: GING NANG BOYZ
+    clipsToPlay:
+    - {fileID: 8300000, guid: 27a385c018ded18408e0f9bd24ed1432, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Naive By Choice
+    ID: 16
+    About: GING NANG BOYZ
+    clipsToPlay:
+    - {fileID: 8300000, guid: adb99afb24b32474399fe72e28f6daf3, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Naive By Choice
+    ID: 16
+    About: GING NANG BOYZ
+    clipsToPlay:
+    - {fileID: 8300000, guid: adb99afb24b32474399fe72e28f6daf3, type: 3}
     onStop:
       m_PersistentCalls:
         m_Calls:

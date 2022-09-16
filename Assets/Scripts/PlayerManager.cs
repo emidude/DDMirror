@@ -18,6 +18,8 @@ public class PlayerManager : NetworkBehaviour
    
     public GameObject guiObject;
     public SceneHandler SceneHndlr;
+
+
    
 
 
