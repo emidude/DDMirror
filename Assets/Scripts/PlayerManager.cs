@@ -8,7 +8,11 @@ public class PlayerManager : NetworkBehaviour
 {
     public PlayerSync playerSync;
     //public int[] combinations = new int[6];
-    public int[] songOrdering = new int[6];
+    int[] songOrdering = new int[6];
+    public int pcNumber;
+    public int participantNumber;
+    public int sessionNumber;
+    
    //private System.Random _random = new System.Random();
     [SerializeField] AudioClip audio;
     //bool readyToStart = false;
@@ -57,6 +61,10 @@ public class PlayerManager : NetworkBehaviour
     // Players List to manage playerNumber  
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
 
+    //public NetworkIdentity WhoAmI;
+
+    //public SessionAndSongOrder SessionAndSongOrder;
+
     ///test vars:
     /*public GameObject testPF;
     GameObject testGO;*/
@@ -64,9 +72,13 @@ public class PlayerManager : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer();
+
+        //WhoAmI = this.netIdentity;
+
         // Add this to the static Players List
         playersList.Add(this);
-        Debug.Log("players list, count: " + playersList.Count);
+       
+       Debug.Log("players list, count: " + playersList.Count);
         for (int i = 0; i < playersList.Count;i++)
         {
             Debug.Log(playersList[i].netIdentity);
@@ -77,8 +89,11 @@ public class PlayerManager : NetworkBehaviour
     {
         base.OnStartLocalPlayer();
 
+
         //SET ORDERING:
-        songOrdering = new int[] { 2, 2, 2, 3, 6, 9};
+        songOrdering = new int[] { };
+        
+
         //combinations = new int[] { 4, 2, 1, 3, 0, 0};
 
         //AUDIO:
@@ -127,6 +142,12 @@ public class PlayerManager : NetworkBehaviour
 
         /*CmdSpawnTest();
         CmdDestroyTest();*/
+
+
+        if (pcNumber == null || sessionNumber == null || participantNumber == null)
+        {
+            Debug.Log("************************FORGOT TO INPUT A THING!!!!!!! PC NUM,SESSION NUM OR PARTICPANT NUM; GO BACK AND PUT IN NUMBER******************************************");
+        }
     }
 
     void Update()
@@ -140,17 +161,23 @@ public class PlayerManager : NetworkBehaviour
                 {
                     Debug.Log("NAN");
                 }
-                else if (bodyShapes)
+                if (sessionNumber == 0)//PC1 = Abstract Cubes ; PC2 = AbstractCubes
                 {
-                    //Debug.Log("updating head and hands");
-                    CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
-                    //CmdUpdateTest(cL.transform.position, cL.transform.rotation);
-                }
-                else
-                {
-                    //Debug.Log("still doing cubes, bodyShapes = " + bodyShapes);
                     CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
                 }
+                else if (sessionNumber == 1)//PC1 = Abstract Cubes ; PC2 = Head and Hands Cubes
+                {
+                    if(pcNumber == 1)
+                    {
+                        CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
+                    }
+                    else
+                    {
+                        CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    }
+                }
+                
+                
             }           
         }
     }
@@ -414,7 +441,21 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
-   
+   /*SessionAndSongOrder GetSessionSongOrder()
+    {
+        if (isClientOnly)
+        {
+           for (int i = 0; i < playersList.Count; i++)
+            {
+                //if remote client, get the correct ordering from the but actually do this manually instead
+            }
+        }
+        else
+        {
+            SessionAndSongOrder = GetComponentInParent<SessionAndSongOrder>();
+        }
+        
+    }*/
 
 
 }

@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomiseSongsAndTestConditions : MonoBehaviour
+public class SessionAndSongOrder : MonoBehaviour
 {
     private System.Random _random = new System.Random();
     public int[] testConditions = new int[4]; //4 conditions: 0= abstract + abstract; 1=abstract + head&hands; 2=head&hands+abstract; 3=head&hands+head&hands
     public int[] songOrdering = new int[16];
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        //song orders
         for (int i = 0; i < 16; i++)
         {
             songOrdering[i] = i;
@@ -21,15 +22,11 @@ public class RandomiseSongsAndTestConditions : MonoBehaviour
         {
             testConditions[i] = i;
         }
-        //randomise Song order:
+        //randomise test conditioons - these are AA; AH; HA; HH:
         Shuffle(testConditions);
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void Shuffle(int[] array)
     {
