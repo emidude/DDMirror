@@ -13,12 +13,12 @@ public class ContinuousLogger : MonoBehaviour {
     public SteamVR_Behaviour_Pose leftHand, rightHand;
 
     public string songName;
-     string participantNumber = "10";
-     string sessionString;
+    public string participantNumber;
+    public string sessionString;
     public string condition;
     
-    public int sessionNumber =1;
-    public int pcNumber =1;
+    public int sessionNumber;
+    public int pcNumber;
     
 
 
