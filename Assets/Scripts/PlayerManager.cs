@@ -18,7 +18,7 @@ public class PlayerManager : NetworkBehaviour
    
     public GameObject guiObject;
     public SceneHandler SceneHndlr;
-   
+    ContinuousLogger ContinuousLogger;
 
 
     /// </summary>
@@ -87,6 +87,34 @@ public class PlayerManager : NetworkBehaviour
         //AUDIO:
         audioObject = GameObject.FindGameObjectWithTag("audioHndlr");
         AudioHandler = audioObject.GetComponent<AudioHandler>();
+        //LOGGER:
+        ContinuousLogger = audioObject.GetComponent<ContinuousLogger>();
+        //if(ContinuousLogger.condition == "A")
+        /*if (int.TryParse(ContinuousLogger.participantNumberString, out int participantInt))
+        {
+            Debug.Log("participant int: " + participantInt);
+            participantNumber = participantInt;
+        }*/
+        if(ContinuousLogger.condition == "A")
+        {
+            Debug.Log("ContinuousLogger.condition == A");
+            bodyShapes = false;
+
+        }
+        if (ContinuousLogger.condition == "H")
+        {
+            Debug.Log("ContinuousLogger.condition == H");
+            bodyShapes = true;
+        }
+        /* if (int.TryParse(ContinuousLogger.participantNumber, out int participantInt))
+         {
+             Debug.Log("participant int: " + participantInt);
+             participantNumber = participantInt;
+         }*/
+
+
+
+
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
         SceneHndlr = guiObject.GetComponent<SceneHandler>();
@@ -137,7 +165,7 @@ public class PlayerManager : NetworkBehaviour
 
         //PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
 
-        if (sessionNumber == 0)
+        /*if (sessionNumber == 0)
         {
            bodyShapes = false;
         }
@@ -170,7 +198,7 @@ public class PlayerManager : NetworkBehaviour
         else 
         {
             Debug.Log("ERRPR!!!!!!!!!!!!!!! SESSION NUMBER NOT 0-3");
-        }
+        }*/
     }
 
     void Update()

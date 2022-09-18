@@ -13,9 +13,13 @@ public class ContinuousLogger : MonoBehaviour {
     public SteamVR_Behaviour_Pose leftHand, rightHand;
 
     public string songName;
-    public string participantNumber;
-    public string session;
+     string participantNumber;
+     string sessionString;
     public string condition;
+    
+    public int sessionNumber;
+    public int pcNumber;
+    
 
 
     private StreamWriter continuousWriter;
@@ -36,10 +40,13 @@ public class ContinuousLogger : MonoBehaviour {
 
 
     void Start()
-    {
+    {   
+        sessionString = sessionNumber.ToString();
+        CalculateCondition();
+
         string date = DateTime.Now.ToString("yyyyMMdd_HHmmss");
         //string filename = date+"participantNumber" + participantNumber + "session" + session + "condition" + condition;
-        string filename = date + "participantNumber" + participantNumber + "session" + session + "condition" + condition + ".log";
+        string filename = date + "participantNumber" + participantNumber + "session" + sessionString + "condition" + condition + ".log";
         Logger.filename = filename;
         continuousWriter = new StreamWriter(filename + ".csv");
         continuousWriter.WriteLine(String.Join(",", continuousHeader) + "\n");
@@ -109,6 +116,44 @@ public class ContinuousLogger : MonoBehaviour {
         {
             Debug.Log("destroying cts logger at " + Time.time.ToString());
             continuousWriter.Close();
+        }
+    }
+
+    void CalculateCondition()
+    {
+        if (sessionNumber == 0)
+        {
+            condition = "A";
+        }
+        else if (sessionNumber == 1)
+        {
+            if (pcNumber == 1)
+            {
+                condition = "A";
+            }
+            else
+            {
+                condition = "B";
+            }
+        }
+        else if (sessionNumber == 2)
+        {
+            if (pcNumber == 1)
+            {
+                condition = "B";
+            }
+            else
+            {
+                condition = "A";
+            }
+        }
+        else if (sessionNumber == 3)
+        {
+            condition = "B";
+        }
+        else
+        {
+            Debug.Log("ERRPR!!!!!!!!!!!!!!! SESSION NUMBER NOT 0-3");
         }
     }
 }

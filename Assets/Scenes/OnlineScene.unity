@@ -4236,9 +4236,9 @@ MonoBehaviour:
   leftHand: {fileID: 148761559}
   rightHand: {fileID: 148761561}
   songName: 
-  participantNumber: 1
-  session: AH
-  condition: A
+  condition: 
+  sessionNumber: 2
+  pcNumber: 1
 --- !u!1 &1852613889
 GameObject:
   m_ObjectHideFlags: 0
