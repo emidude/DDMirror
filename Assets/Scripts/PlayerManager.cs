@@ -60,9 +60,9 @@ public class PlayerManager : NetworkBehaviour
     GameObject testGO;*/
     //ContinuousLogger CL;
 
-    public int participantNumber;
-    public int sessionNumber;
-    public int pcNumber;
+    public int participantNumber = 69;
+    public int sessionNumber=2;
+    public int pcNumber=1;
 
     public override void OnStartServer()
     {
