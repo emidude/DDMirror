@@ -19,8 +19,9 @@ public class ContinuousLogger : MonoBehaviour {
     
     public int sessionNumber;
     public int pcNumber;
-    
 
+    private StreamWriter answersWriter;
+    int currentAnswer = 0;
 
     private StreamWriter continuousWriter;
     private string[] continuousHeader = {
@@ -38,6 +39,28 @@ public class ContinuousLogger : MonoBehaviour {
         "rightHandAngVelX","rightHandAngVelY","rightHandAngVelZ",
     };
 
+    static string[] answersHeader = {
+        "particpantNumber",
+        "session",
+        "condition",
+        "songname",
+        "musicPreference",
+        "dancePreference"
+    };
+
+    //string[][] answers = new string[6][];
+
+    struct answer
+    {
+        public string particpantNum;
+        public string sesh;
+        public string cond;
+        public string songnam;
+        public string musicPref;
+        public string dancePref;
+    }
+
+    answer[] answers = new answer[20];
 
     void Start()
     {   
@@ -45,9 +68,15 @@ public class ContinuousLogger : MonoBehaviour {
         CalculateCondition();
 
         string date = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
         //string filename = date+"participantNumber" + participantNumber + "session" + session + "condition" + condition;
         string filename = date + "participantNumber" + participantNumber + "session" + sessionString + "condition" + condition + ".log";
         Logger.filename = filename;
+        /*Logger.songName = songName;
+        Logger.condition = condition;
+        Logger.sessionString = sessionString;
+        Logger.participantNumber = participantNumber;*/
+
         continuousWriter = new StreamWriter(filename + ".csv");
         continuousWriter.WriteLine(String.Join(",", continuousHeader) + "\n");
     }
@@ -117,8 +146,43 @@ public class ContinuousLogger : MonoBehaviour {
             Debug.Log("destroying cts logger at " + Time.time.ToString());
             continuousWriter.Close();
         }
+        //LOG ANSWERS HRERE:
+        LogAnswers();
     }
 
+    void LogAnswers()
+    {
+        string filename = "ANSWERS_" + "participantNumber" + participantNumber + "session" + sessionString + "condition" + condition ;
+        answersWriter = new StreamWriter(filename + ".csv");
+        answersWriter.WriteLine(String.Join(",", answersHeader) + "\n");
+
+        string[] values = new string[6];
+        for (int s = 0; s < 20; s++)
+        {
+            values[0] = answers[s].particpantNum;
+            values[1] = answers[s].sesh;
+            values[2] = answers[s].cond;
+            values[3] = answers[s].songnam;
+            values[4] = answers[s].musicPref;
+            values[5] = answers[s].dancePref;
+
+            string csv = String.Join(",", values);
+            answersWriter.WriteLine(csv + "\n");
+        }
+        answersWriter.Close();
+
+    }
+
+    public void UpdateAnswers(float musicPreference, float dancePreference)
+    {
+        answers[currentAnswer].particpantNum = participantNumber;
+        answers[currentAnswer].sesh = sessionString;
+        answers[currentAnswer].cond = condition;
+        answers[currentAnswer].songnam = songName;
+        answers[currentAnswer].musicPref = musicPreference.ToString();
+        answers[currentAnswer].dancePref = dancePreference.ToString();
+        currentAnswer++;
+    }
     void CalculateCondition()
     {
         Debug.Log("calculating conditions in ctslogger, participant numner " + participantNumber);

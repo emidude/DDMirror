@@ -32,6 +32,8 @@ public class SceneHandler : NetworkBehaviour
 
     /*public AudioHandler AH;
     GameObject AHO;*/
+    public ContinuousLogger CLogger;
+    public LinearMapping musicPreference, dancePreference;
 
     void Awake()
     {
@@ -51,7 +53,8 @@ public class SceneHandler : NetworkBehaviour
 
     public void PointerClick(object sender, PointerEventArgs e)
     {
-        if (e.target.tag == "zero")
+        //FOR MULTIPLE CHOICE PANEL:
+ /*       if (e.target.tag == "zero")
         {
 
             e.target.gameObject.GetComponent<Image>().color = Color.white;
@@ -79,8 +82,8 @@ public class SceneHandler : NetworkBehaviour
             numPlayersPanel.SetActive(false);
             musicPrefPanel.SetActive(true);
             currentQn++;
-        }
-        else if (e.target.tag == "submit")
+        }*/
+        if (e.target.tag == "submit")
         {
             e.target.gameObject.GetComponent<Image>().color = Color.white;
 
@@ -102,18 +105,24 @@ public class SceneHandler : NetworkBehaviour
                 playerManager.CmdClickedSubmit();
             }
 
-            else if (currentQn == 1) {
+            else if (currentQn == 0) {
                 //just answered numplayers qn, now on music pref panel
-                musicPrefPanel.SetActive(false);
-                //TODO: coroutine here
+
+               // musicPreference = 
+                   // musicPrefPanel.gameObject.GetComponentInChildren<LinearMapping>().value;
+
+                musicPrefPanel.SetActive(false);                
                 dancePrefPanel.SetActive(true);
-                //LOGANSWER
+
+                
 
                 currentQn++;
             }
-            else if (currentQn == 2)
+            else if (currentQn == 1)
             {
-                //LOGANSWER
+               
+                CLogger.UpdateAnswers(musicPreference.value, dancePreference.value);
+
                 dancePrefPanel.SetActive(false);
                 answeredQnPanel.SetActive(true);
 
@@ -200,11 +209,11 @@ public class SceneHandler : NetworkBehaviour
         panelParent.SetActive(true);
 
         panelstart.SetActive(false);
-        musicPrefPanel.SetActive(false);
+        musicPrefPanel.SetActive(true);
         dancePrefPanel.SetActive(false);
         answeredQnPanel.SetActive(false);
 
-        numPlayersPanel.SetActive(true);
+        //numPlayersPanel.SetActive(true);
         
         ShowLaserPointer();
 

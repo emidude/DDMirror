@@ -19,6 +19,7 @@ public class PlayerManager : NetworkBehaviour
     public GameObject guiObject;
     public SceneHandler SceneHndlr;
     public ContinuousLogger ContinuousLogger;
+    public Logger AnswersLogger;
 
 
     /// </summary>
