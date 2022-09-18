@@ -223,10 +223,7 @@ public class SceneHandler : NetworkBehaviour
             PM.CmdDestroyCubes();
         }
 
-        /*if (isLocalPlayer)
-        {
-            AH.LogSongNull();
-        }*/
+        
         
 
     }
