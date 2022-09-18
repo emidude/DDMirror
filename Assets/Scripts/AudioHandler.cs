@@ -39,9 +39,9 @@ public class AudioHandler : MonoBehaviour
             {
 
                 curentSoundInfo = soundList[i];
-                Debug.Log("currebt sound info:" + curentSoundInfo.name);
+                //Debug.Log("currebt sound info:" + curentSoundInfo.name);
                 CL.songName = curentSoundInfo.name;
-                Debug.Log(" CL.songName" + CL.songName);
+                //Debug.Log(" CL.songName" + CL.songName);
                 StartCoroutine(playSequencely());
 
                 return;
@@ -50,6 +50,11 @@ public class AudioHandler : MonoBehaviour
 
         }
 
+    }
+
+    public void LogSongNull()
+    {
+        CL.songName = "";
     }
 
     IEnumerator playSequencely()

@@ -26,7 +26,8 @@ public class SceneHandler : NetworkBehaviour
     int currentQn = 0;
     bool preFirstSong = true;
 
-
+    public AudioHandler AH;
+    GameObject AHO;
 
     void Awake()
     {
@@ -36,6 +37,13 @@ public class SceneHandler : NetworkBehaviour
 
         panelParent.SetActive(true);
         panelstart.SetActive(true);
+
+        if (isLocalPlayer)
+        {
+            AHO = GameObject.FindWithTag("audioHndlr");
+            AH = AHO.GetComponent<AudioHandler>();
+        }
+       
     }
 
     public void PointerClick(object sender, PointerEventArgs e)
@@ -188,6 +196,8 @@ public class SceneHandler : NetworkBehaviour
         {
             PM.CmdDestroyCubes();
         }
+
+        AH.LogSongNull();
 
     }
     
