@@ -45,8 +45,8 @@ public class ContinuousLogger : MonoBehaviour {
     {
         Debug.Log("songName =" + songName);
         string[] values = {
-            songName.ToString(),
             Time.time.ToString(),
+            songName,
             //head
             head.position.x.ToString(),
             head.position.y.ToString(),
