@@ -86,8 +86,8 @@ public class SceneHandler : NetworkBehaviour
 
                 panelstart.SetActive(false);
                 panelParent.SetActive(false);
-                //laserPointer.GetComponent<RenderModel>().Hide();
-                laserPointer.gameObject.SetActive(false);
+                laserPointer.GetComponent<RenderModel>().Hide();
+                //laserPointer.gameObject.SetActive(false);
 
                 //player is ready to start
                 //need issue cmd to play first song to all players
@@ -111,8 +111,8 @@ public class SceneHandler : NetworkBehaviour
                 //LOGANSWER
                 dancePrefPanel.SetActive(false);
                 answeredQnPanel.SetActive(true);
-                //laserPointer.GetComponent<RenderModel>().Hide();
-                laserPointer.gameObject.SetActive(false);
+                laserPointer.GetComponent<RenderModel>().Hide();
+                //laserPointer.gameObject.SetActive(false);
 
                 currentQn = 0;
                 NetworkIdentity networkIdentity = NetworkClient.connection.identity;
@@ -185,8 +185,8 @@ public class SceneHandler : NetworkBehaviour
         answeredQnPanel.SetActive(false);
 
         numPlayersPanel.SetActive(true);
-        //laserPointer.GetComponent<RenderModel>().Show(); //might need to changer .Show(true);  SetVisibility(true, overrideDefault);
-        laserPointer.gameObject.SetActive(true);
+        laserPointer.GetComponent<RenderModel>().Show(); //might need to changer .Show(true);  SetVisibility(true, overrideDefault);
+        //laserPointer.gameObject.SetActive(true);
 
         //disable visuals;
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
