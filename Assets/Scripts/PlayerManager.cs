@@ -135,37 +135,37 @@ public class PlayerManager : NetworkBehaviour
         /*CmdSpawnTest();
         CmdDestroyTest();*/
 
-        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+        //PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
 
-        if (PM.sessionNumber == 0)
+        if (sessionNumber == 0)
         {
-            PM.bodyShapes = false;
+           bodyShapes = false;
         }
-        else if (PM.sessionNumber == 1)
+        else if (sessionNumber == 1)
         {
-            if (PM.pcNumber == 1)
+            if (pcNumber == 1)
             {
-                PM.bodyShapes = false;
+                bodyShapes = false;
             }
             else
             {
-                PM.bodyShapes = true;
+               bodyShapes = true;
             }
         }
-        else if (PM.sessionNumber == 2)
+        else if (sessionNumber == 2)
         {
-            if (PM.pcNumber == 1)
+            if (pcNumber == 1)
             {
-                PM.bodyShapes = true;
+                bodyShapes = true;
             }
             else
             {
-                PM.bodyShapes = false;
+                bodyShapes = false;
             }
         }
-        else if (PM.sessionNumber == 3)
+        else if (sessionNumber == 3)
         {
-            PM.bodyShapes = true;
+            bodyShapes = true;
         }
         else 
         {
