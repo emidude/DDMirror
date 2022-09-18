@@ -89,20 +89,6 @@ public class PlayerManager : NetworkBehaviour
         AudioHandler = audioObject.GetComponent<AudioHandler>();
         //LOGGER:
         ContinuousLogger = audioObject.GetComponent<ContinuousLogger>();
-        //if(ContinuousLogger.condition == "A")
-        /*if (int.TryParse(ContinuousLogger.participantNumberString, out int participantInt))
-        {
-            Debug.Log("participant int: " + participantInt);
-            participantNumber = participantInt;
-        }*/
-        
-        /* if (int.TryParse(ContinuousLogger.participantNumber, out int participantInt))
-         {
-             Debug.Log("participant int: " + participantInt);
-             participantNumber = participantInt;
-         }*/
-
-
 
 
         //PANELS/////////////////////MISTAEK BELOW IDK?
@@ -115,11 +101,7 @@ public class PlayerManager : NetworkBehaviour
         {
             theLocalPlayer = GameObject.Find("Local VR Rig");// find the rig in the scene
         }
-        /*CL = theLocalPlayer.GetComponent<ContinuousLogger>();
-        if(CL == null)
-        {
-            Debug.Log("CL NULL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        }*/
+        
 
         // now link localHMD, localHands to the Rig so that they are
         // automatically filled when the rig moves
@@ -150,45 +132,7 @@ public class PlayerManager : NetworkBehaviour
         CmdSpawnHeadAndHands();
         CmdDestroyHeadAndHands();
 
-        /*CmdSpawnTest();
-        CmdDestroyTest();*/
-
-        //PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
-
-        /*if (sessionNumber == 0)
-        {
-           bodyShapes = false;
-        }
-        else if (sessionNumber == 1)
-        {
-            if (pcNumber == 1)
-            {
-                bodyShapes = false;
-            }
-            else
-            {
-               bodyShapes = true;
-            }
-        }
-        else if (sessionNumber == 2)
-        {
-            if (pcNumber == 1)
-            {
-                bodyShapes = true;
-            }
-            else
-            {
-                bodyShapes = false;
-            }
-        }
-        else if (sessionNumber == 3)
-        {
-            bodyShapes = true;
-        }
-        else 
-        {
-            Debug.Log("ERRPR!!!!!!!!!!!!!!! SESSION NUMBER NOT 0-3");
-        }*/
+       
         CmdSetCubesCondition();
     }
 
