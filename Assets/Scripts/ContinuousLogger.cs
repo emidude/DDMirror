@@ -12,10 +12,13 @@ public class ContinuousLogger : MonoBehaviour {
     public Transform rightHand;*/
     public SteamVR_Behaviour_Pose leftHand, rightHand;
 
+    public string songName;
+
 
     private StreamWriter continuousWriter;
     private string[] continuousHeader = {
-        "t",
+        "songname",
+        "t", 
         "headX", "headY", "headZ",
         "headRotX", "headRotY", "headRotZ",
         "leftHandX", "leftHandY", "leftHandZ",

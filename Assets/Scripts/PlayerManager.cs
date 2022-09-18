@@ -58,6 +58,7 @@ public class PlayerManager : NetworkBehaviour
     ///test vars:
     /*public GameObject testPF;
     GameObject testGO;*/
+    ContinuousLogger CL;
 
     public override void OnStartServer()
     {
@@ -92,7 +93,11 @@ public class PlayerManager : NetworkBehaviour
         {
             theLocalPlayer = GameObject.Find("Local VR Rig");// find the rig in the scene
         }
-
+        CL = theLocalPlayer.GetComponent<ContinuousLogger>();
+        if(CL == null)
+        {
+            Debug.Log("CL NULL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        }
 
         // now link localHMD, localHands to the Rig so that they are
         // automatically filled when the rig moves
@@ -352,6 +357,7 @@ public class PlayerManager : NetworkBehaviour
         int songID = AH.soundList[songIndex].ID;
         // string msg = "Syncing " + AudioHandler.soundList[songIndex].name;
         //Logger.Event(msg);
+        LogSong(AH.soundList[songIndex].name);
 
         AH.SetAudioToPlay(songID);
         PM.songIndx++;
@@ -409,6 +415,15 @@ public class PlayerManager : NetworkBehaviour
         else
         {
             PM.CmdSpawnCubes();
+        }
+    }
+
+    public void LogSong(string song)
+    {
+        if (isLocalPlayer)
+        {
+            CL.songName = song;
+            Debug.Log("logged song + " + CL.songName);
         }
     }
 
