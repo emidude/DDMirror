@@ -1738,7 +1738,6 @@ MonoBehaviour:
   musicPrefPanel: {fileID: 184317866}
   dancePrefPanel: {fileID: 961613894}
   answeredQnPanel: {fileID: 303753768}
-  AH: {fileID: 1847834353}
 --- !u!114 &444838686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4237,6 +4236,9 @@ MonoBehaviour:
   leftHand: {fileID: 148761559}
   rightHand: {fileID: 148761561}
   songName: 
+  participantNumber: 1
+  session: AH
+  condition: A
 --- !u!1 &1852613889
 GameObject:
   m_ObjectHideFlags: 0

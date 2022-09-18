@@ -13,6 +13,9 @@ public class ContinuousLogger : MonoBehaviour {
     public SteamVR_Behaviour_Pose leftHand, rightHand;
 
     public string songName;
+    public string participantNumber;
+    public string session;
+    public string condition;
 
 
     private StreamWriter continuousWriter;
@@ -35,7 +38,7 @@ public class ContinuousLogger : MonoBehaviour {
     void Start()
     {
         string filename = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-        Logger.filename = filename + ".log";
+        Logger.filename = filename +"participantNumber" + participantNumber + "session"+session+ "condition" + condition+ ".log";
         continuousWriter = new StreamWriter(filename + ".csv");
         continuousWriter.WriteLine(String.Join(",", continuousHeader) + "\n");
     }
