@@ -95,17 +95,7 @@ public class PlayerManager : NetworkBehaviour
             Debug.Log("participant int: " + participantInt);
             participantNumber = participantInt;
         }*/
-        if(ContinuousLogger.condition == "A")
-        {
-            Debug.Log("ContinuousLogger.condition == A");
-            bodyShapes = false;
-
-        }
-        if (ContinuousLogger.condition == "H")
-        {
-            Debug.Log("ContinuousLogger.condition == H");
-            bodyShapes = true;
-        }
+        
         /* if (int.TryParse(ContinuousLogger.participantNumber, out int participantInt))
          {
              Debug.Log("participant int: " + participantInt);
@@ -199,6 +189,7 @@ public class PlayerManager : NetworkBehaviour
         {
             Debug.Log("ERRPR!!!!!!!!!!!!!!! SESSION NUMBER NOT 0-3");
         }*/
+        CmdSetCubesCondition();
     }
 
     void Update()
@@ -245,6 +236,29 @@ public class PlayerManager : NetworkBehaviour
         testGO.transform.position = pos;
         testGO.transform.rotation = rot;
     }*/
+
+    [Command]
+    void CmdSetCubesCondition()
+    {
+        RpcSetCubesCondition();
+    }
+    [ClientRpc]
+    void RpcSetCubesCondition()
+    {
+        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+
+        if (PM.ContinuousLogger.condition == "A")
+        {
+            Debug.Log("ContinuousLogger.condition == A");
+            PM.bodyShapes = false;
+
+        }
+        if (PM.ContinuousLogger.condition == "H")
+        {
+            Debug.Log("ContinuousLogger.condition == H");
+            PM.bodyShapes = true;
+        }
+    }
 
     [Command]
     void CmdSpawnHeadAndHands()

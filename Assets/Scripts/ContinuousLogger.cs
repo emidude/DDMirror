@@ -13,12 +13,12 @@ public class ContinuousLogger : MonoBehaviour {
     public SteamVR_Behaviour_Pose leftHand, rightHand;
 
     public string songName;
-     string participantNumber;
+     string participantNumber = "1";
      string sessionString;
     public string condition;
     
-    public int sessionNumber;
-    public int pcNumber;
+    public int sessionNumber =3;
+    public int pcNumber =1;
     
 
 
@@ -133,7 +133,7 @@ public class ContinuousLogger : MonoBehaviour {
             }
             else
             {
-                condition = "B";
+                condition = "H";
             }
         }
         else if (sessionNumber == 2)
@@ -144,12 +144,12 @@ public class ContinuousLogger : MonoBehaviour {
             }
             else
             {
-                condition = "A";
+                condition = "H";
             }
         }
         else if (sessionNumber == 3)
         {
-            condition = "B";
+            condition = "H";
         }
         else
         {
