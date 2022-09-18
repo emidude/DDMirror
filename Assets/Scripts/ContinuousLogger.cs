@@ -43,6 +43,7 @@ public class ContinuousLogger : MonoBehaviour {
 
     void Update()
     {
+        Debug.Log("songName =" + songName);
         string[] values = {
             songName.ToString(),
             Time.time.ToString(),

@@ -19,13 +19,13 @@ public class AudioHandler : MonoBehaviour
 
     float audioLength;
 
-    ContinuousLogger CL;
+    public ContinuousLogger CL;
 
 
     void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
-        CL = gameObject.GetComponent<ContinuousLogger>();
+       // CL = gameObject.GetComponent<ContinuousLogger>();
     }
 
 
