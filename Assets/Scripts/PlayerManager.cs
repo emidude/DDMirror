@@ -18,7 +18,7 @@ public class PlayerManager : NetworkBehaviour
    
     public GameObject guiObject;
     public SceneHandler SceneHndlr;
-    ContinuousLogger ContinuousLogger;
+    public ContinuousLogger ContinuousLogger;
 
 
     /// </summary>
@@ -240,23 +240,29 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     void CmdSetCubesCondition()
     {
+        Debug.Log("CmdSetCubesCondition()");
         RpcSetCubesCondition();
     }
     [ClientRpc]
     void RpcSetCubesCondition()
     {
+        Debug.Log("RpcSetCubesCondition()");
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
 
         if (PM.ContinuousLogger.condition == "A")
         {
-            Debug.Log("ContinuousLogger.condition == A");
+            Debug.Log("ContinuousLogger.condition == A--------------------------------------------------------");
             PM.bodyShapes = false;
 
         }
-        if (PM.ContinuousLogger.condition == "H")
+        else if (PM.ContinuousLogger.condition == "H")
         {
-            Debug.Log("ContinuousLogger.condition == H");
+            Debug.Log("ContinuousLogger.condition == H----------------------------------------------------------");
             PM.bodyShapes = true;
+        }
+        else if(PM.ContinuousLogger.condition == null)
+        {
+            Debug.Log("NUUUUUULLLLL----------------------------------------------------");
         }
     }
 

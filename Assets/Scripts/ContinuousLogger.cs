@@ -123,6 +123,7 @@ public class ContinuousLogger : MonoBehaviour {
     {
         if (sessionNumber == 0)
         {
+            Debug.Log("condition = A");
             condition = "A";
         }
         else if (sessionNumber == 1)
@@ -130,26 +131,31 @@ public class ContinuousLogger : MonoBehaviour {
             if (pcNumber == 1)
             {
                 condition = "A";
+                Debug.Log("condition = A");
             }
             else
             {
                 condition = "H";
+                Debug.Log("condition = H");
             }
         }
         else if (sessionNumber == 2)
         {
             if (pcNumber == 1)
             {
-                condition = "B";
+                condition = "H";
+                Debug.Log("condition = H");
             }
             else
             {
-                condition = "H";
+                condition = "A";
+                Debug.Log("condition = A");
             }
         }
         else if (sessionNumber == 3)
         {
             condition = "H";
+            Debug.Log("condition = H");
         }
         else
         {
