@@ -1023,27 +1023,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a5fb0ca93b55ef4b8d54b512b103341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &148761562 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3288611201157810163, guid: 8b362f1c48405e241aaacde7355d89d3,
-    type: 3}
-  m_PrefabInstance: {fileID: 148761556}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &148761563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 148761562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffd728597d3f53041b928d6d09d583b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  head: {fileID: 148761560}
-  leftHand: {fileID: 148761559}
-  rightHand: {fileID: 148761561}
 --- !u!1 &184317866
 GameObject:
   m_ObjectHideFlags: 0
@@ -3948,6 +3927,7 @@ GameObject:
   - component: {fileID: 1847834355}
   - component: {fileID: 1847834354}
   - component: {fileID: 1847834353}
+  - component: {fileID: 1847834356}
   m_Layer: 0
   m_Name: Songs
   m_TagString: audioHndlr
@@ -4179,6 +4159,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1847834356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847834352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd728597d3f53041b928d6d09d583b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head: {fileID: 148761560}
+  leftHand: {fileID: 148761559}
+  rightHand: {fileID: 148761561}
+  songName: 
 --- !u!1 &1852613889
 GameObject:
   m_ObjectHideFlags: 0

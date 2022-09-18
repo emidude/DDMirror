@@ -19,26 +19,27 @@ public class AudioHandler : MonoBehaviour
 
     float audioLength;
 
+    ContinuousLogger CL;
+
 
     void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
+        CL = gameObject.GetComponent<ContinuousLogger>();
     }
 
 
     public void SetAudioToPlay(int ID)
-    {
-
-
+    {   
 
         for (int i = 0; i < soundList.Count; i++)
         {
-
 
             if (soundList[i].ID == ID)
             {
 
                 curentSoundInfo = soundList[i];
+                CL.songName = curentSoundInfo.name;
 
                 StartCoroutine(playSequencely());
 
