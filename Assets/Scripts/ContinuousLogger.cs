@@ -38,7 +38,8 @@ public class ContinuousLogger : MonoBehaviour {
     void Start()
     {
         string date = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-        string filename = date+"participantNumber" + participantNumber + "session" + session + "condition" + condition + ".log";
+        //string filename = date+"participantNumber" + participantNumber + "session" + session + "condition" + condition;
+        string filename = date + "participantNumber" + participantNumber + "session" + session + "condition" + condition + ".log";
         Logger.filename = filename;
         continuousWriter = new StreamWriter(filename + ".csv");
         continuousWriter.WriteLine(String.Join(",", continuousHeader) + "\n");
