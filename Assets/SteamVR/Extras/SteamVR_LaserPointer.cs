@@ -91,6 +91,7 @@ namespace Valve.VR.Extras
 
         private void Update()
         {
+
             if (!isActive)
             {
                 isActive = true;

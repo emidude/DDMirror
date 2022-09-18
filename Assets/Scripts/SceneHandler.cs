@@ -86,8 +86,11 @@ public class SceneHandler : NetworkBehaviour
 
                 panelstart.SetActive(false);
                 panelParent.SetActive(false);
-                laserPointer.GetComponent<RenderModel>().Hide();
+
+                //laserPointer.GetComponent<RenderModel>().Hide();
                 //laserPointer.gameObject.SetActive(false);
+
+                this.gameObject.GetComponent<SteamVR_LaserPointer>().enabled = false;
 
                 //player is ready to start
                 //need issue cmd to play first song to all players
