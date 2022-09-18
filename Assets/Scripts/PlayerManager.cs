@@ -60,6 +60,10 @@ public class PlayerManager : NetworkBehaviour
     GameObject testGO;*/
     //ContinuousLogger CL;
 
+    public int participantNumber;
+    public int sessionNumber;
+    public int pcNumber;
+
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -77,7 +81,7 @@ public class PlayerManager : NetworkBehaviour
         base.OnStartLocalPlayer();
 
         //SET ORDERING:
-        songOrdering = new int[] { 4, 2, 2, 3, 6, 9};
+        songOrdering = new int[] { 4, 1, 2, 3, 6, 9};
         //combinations = new int[] { 4, 2, 1, 3, 0, 0};
 
         //AUDIO:
@@ -130,6 +134,43 @@ public class PlayerManager : NetworkBehaviour
 
         /*CmdSpawnTest();
         CmdDestroyTest();*/
+
+        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+
+        if (PM.sessionNumber == 0)
+        {
+            PM.bodyShapes = false;
+        }
+        else if (PM.sessionNumber == 1)
+        {
+            if (PM.pcNumber == 1)
+            {
+                PM.bodyShapes = false;
+            }
+            else
+            {
+                PM.bodyShapes = true;
+            }
+        }
+        else if (PM.sessionNumber == 2)
+        {
+            if (PM.pcNumber == 1)
+            {
+                PM.bodyShapes = true;
+            }
+            else
+            {
+                PM.bodyShapes = false;
+            }
+        }
+        else if (PM.sessionNumber == 3)
+        {
+            PM.bodyShapes = true;
+        }
+        else 
+        {
+            Debug.Log("ERRPR!!!!!!!!!!!!!!! SESSION NUMBER NOT 0-3");
+        }
     }
 
     void Update()
