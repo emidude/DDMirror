@@ -8,10 +8,10 @@ public class PlayerManager : NetworkBehaviour
 {
     public PlayerSync playerSync;
     //public int[] combinations = new int[6];
-    int[] songOrdering = new int[6];
-    public int pcNumber;
-    public int participantNumber;
-    public int sessionNumber;
+    int[] songOrdering = new int[]{1,2,3,4,5 };
+    public int pcNumber =420 ;
+    public int participantNumber=69;
+    public int sessionNumber=1;
     
    //private System.Random _random = new System.Random();
     [SerializeField] AudioClip audio;
@@ -24,7 +24,7 @@ public class PlayerManager : NetworkBehaviour
     public SceneHandler SceneHndlr;
 
 
-   
+    ContinuousLogger CL;
 
 
     /// </summary>
@@ -54,26 +54,17 @@ public class PlayerManager : NetworkBehaviour
     int resolution = 10;
     GameObject[] points;
 
-    //public bool bodyShapes = false;
     public bool bodyShapes = true;
     public bool questionTime = true;
 
     // Players List to manage playerNumber  
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
 
-    //public NetworkIdentity WhoAmI;
-
-    //public SessionAndSongOrder SessionAndSongOrder;
-
-    ///test vars:
-    /*public GameObject testPF;
-    GameObject testGO;*/
+   
 
     public override void OnStartServer()
     {
         base.OnStartServer();
-
-        //WhoAmI = this.netIdentity;
 
         // Add this to the static Players List
         playersList.Add(this);
@@ -89,19 +80,19 @@ public class PlayerManager : NetworkBehaviour
     {
         base.OnStartLocalPlayer();
 
-
         //SET ORDERING:
-        songOrdering = new int[] { };
-        
-
-        //combinations = new int[] { 4, 2, 1, 3, 0, 0};
+        //songOrdering = new int[] { }; //DO THIS WITH OTHER ON THE DAY INPUTS AT THE TOP IN PREAMBLE
 
         //AUDIO:
         audioObject = GameObject.FindGameObjectWithTag("audioHndlr");
         AudioHandler = audioObject.GetComponent<AudioHandler>();
+
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
         SceneHndlr = guiObject.GetComponent<SceneHandler>();
+
+        
+       
 
 
         // find the gaming rig in the scene and link to it
@@ -109,6 +100,49 @@ public class PlayerManager : NetworkBehaviour
         {
             theLocalPlayer = GameObject.Find("Local VR Rig");// find the rig in the scene
         }
+
+        //SETLOGGERSESSIONNAME:
+        //AA AH HA HH
+        CL = theLocalPlayer.GetComponent<ContinuousLogger>();
+        CL.participantNumber = participantNumber.ToString();
+        CL.session = sessionNumber.ToString();
+        if (sessionNumber == 0)
+        {
+            CL.condition = "A";
+            bodyShapes = false;
+        }
+        else if (sessionNumber == 1)//PC1 = Abstract Cubes ; PC2 = Head and Hands Cubes
+        {
+            if (pcNumber == 1)
+            {
+                CL.condition = "A";
+                bodyShapes = false;
+            }
+            else
+            {
+                CL.condition = "H";
+                bodyShapes = true;
+            }
+        }
+        else if (sessionNumber == 2)  //PC1 = Head and Hands Cubes ; //PC2 = Abstract Cubes
+        {
+            if (pcNumber == 1)
+            {
+                CL.condition = "H";
+                bodyShapes = true;
+            }
+            else
+            {
+                CL.condition = "A";
+                bodyShapes = false;
+            }
+        }
+        else if (sessionNumber == 3)
+        {
+            CL.condition = "H";
+            bodyShapes = true;
+        }
+
 
 
         // now link localHMD, localHands to the Rig so that they are
@@ -167,7 +201,7 @@ public class PlayerManager : NetworkBehaviour
                 }
                 else if (sessionNumber == 1)//PC1 = Abstract Cubes ; PC2 = Head and Hands Cubes
                 {
-                    if(pcNumber == 1)
+                    if (pcNumber == 1)
                     {
                         CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
                     }
@@ -176,8 +210,22 @@ public class PlayerManager : NetworkBehaviour
                         CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                     }
                 }
-                
-                
+                else if (sessionNumber == 2)  //PC1 = Head and Hands Cubes ; //PC2 = Abstract Cubes
+                { 
+                    if (pcNumber == 1)
+                    {
+                        CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    }
+                    else
+                    {
+                        CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
+                    }
+                }
+                else if (sessionNumber == 3)
+                {
+                    CmdUpdateHeadAndHands(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                }
+
             }           
         }
     }
@@ -379,8 +427,10 @@ public class PlayerManager : NetworkBehaviour
 
         Debug.Log("rpc playing song" + AH.soundList[songIndex].name + " index=" + songIndex);
         int songID = AH.soundList[songIndex].ID;
-        // string msg = "Syncing " + AudioHandler.soundList[songIndex].name;
-        //Logger.Event(msg);
+        /*string msg = "Syncing " + AudioHandler.soundList[songIndex].name;
+        Logger.Event(msg);*/
+
+        SetSongInLogger(AudioHandler.soundList[songIndex].name);
 
         AH.SetAudioToPlay(songID);
         PM.songIndx++;
@@ -456,6 +506,13 @@ public class PlayerManager : NetworkBehaviour
         }
         
     }*/
-
+   public void SetSongInLogger(string song)
+    {
+        if (isLocalPlayer)
+        {
+            CL.songName = song;
+        }
+        
+    }
 
 }

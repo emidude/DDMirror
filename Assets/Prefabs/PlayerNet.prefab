@@ -177,11 +177,12 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   playerSync: {fileID: 1973644640722397171}
-  songOrdering: 000000000000000000000000000000000000000000000000
+  pcNumber: 1
+  participantNumber: 69
+  sessionNumber: 1
   audio: {fileID: 0}
   guiObject: {fileID: 0}
   SceneHndlr: {fileID: 0}
-  started: 0
   localHead: {fileID: 0}
   localLeftHand: {fileID: 0}
   localRightHand: {fileID: 0}

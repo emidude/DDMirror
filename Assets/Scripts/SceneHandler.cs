@@ -26,7 +26,21 @@ public class SceneHandler : NetworkBehaviour
     int currentQn = 0;
     bool preFirstSong = true;
 
+    ContinuousLogger CL;
 
+    /*public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+        // find the gaming rig in the scene and link to it
+        if (theLocalPlayer == null)
+        {
+            theLocalPlayer = GameObject.Find("Local VR Rig");// find the rig in the scene
+        }
+
+        //SETLOGGERSESSIONNAME:
+        //AA AH HA HH
+        CL = theLocalPlayer.GetComponent<ContinuousLogger>();
+    }*/
 
     void Awake()
     {
@@ -188,6 +202,8 @@ public class SceneHandler : NetworkBehaviour
         {
             PM.CmdDestroyCubes();
         }
+
+        PM.SetSongInLogger("");
 
     }
     

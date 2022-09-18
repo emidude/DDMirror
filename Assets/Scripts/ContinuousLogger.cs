@@ -8,14 +8,17 @@ using Valve.VR;
 public class ContinuousLogger : MonoBehaviour {
 
     public Transform head;
-    /*public Transform leftHand;
-    public Transform rightHand;*/
+   
     public SteamVR_Behaviour_Pose leftHand, rightHand;
 
+    public string session;
+    public string condition;
+    public string songName;
+    public string participantNumber;
 
     private StreamWriter continuousWriter;
     private string[] continuousHeader = {
-        "t",
+        "t", "songName",
         "headX", "headY", "headZ",
         "headRotX", "headRotY", "headRotZ",
         "leftHandX", "leftHandY", "leftHandZ",
@@ -31,8 +34,9 @@ public class ContinuousLogger : MonoBehaviour {
 
     void Start()
     {
+       
         string filename = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-        Logger.filename = filename + ".log";
+        Logger.filename = filename +"_session" + session+ "_condition" +condition + "_participantNumber"+participantNumber +".log";
         continuousWriter = new StreamWriter(filename + ".csv");
         continuousWriter.WriteLine(String.Join(",", continuousHeader) + "\n");
     }
@@ -42,6 +46,7 @@ public class ContinuousLogger : MonoBehaviour {
     {
         string[] values = {
             Time.time.ToString(),
+            songName,
             //head
             head.position.x.ToString(),
             head.position.y.ToString(),
@@ -93,6 +98,18 @@ public class ContinuousLogger : MonoBehaviour {
         continuousWriter.WriteLine(csv + "\n");
     }
 
+    /*void CloseLogger()
+    {
+
+    }
+
+    void OpenLogger(string session, string songName, string participantNumber)
+    {
+        string filename = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+        Logger.filename = filename + "_Session" + session + "_participantNumber" + participantNumber + ".log";
+        continuousWriter = new StreamWriter(filename + ".csv");
+        continuousWriter.WriteLine(String.Join(",", continuousHeader) + "\n");
+    }*/
 
     void OnDestroy()
     {

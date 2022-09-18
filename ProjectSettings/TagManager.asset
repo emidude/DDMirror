@@ -20,6 +20,7 @@ TagManager:
   - slider
   - audioHndlr
   - PanelParent
+  - CtsLogger
   layers:
   - Default
   - TransparentFX
