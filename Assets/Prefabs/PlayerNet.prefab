@@ -181,7 +181,7 @@ MonoBehaviour:
   audio: {fileID: 0}
   guiObject: {fileID: 0}
   SceneHndlr: {fileID: 0}
-  started: 0
+  ContinuousLogger: {fileID: 0}
   localHead: {fileID: 0}
   localLeftHand: {fileID: 0}
   localRightHand: {fileID: 0}
@@ -195,3 +195,6 @@ MonoBehaviour:
   ready: 0
   bodyShapes: 1
   questionTime: 1
+  participantNumber: 420
+  sessionNumber: 1
+  pcNumber: 1

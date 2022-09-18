@@ -13,11 +13,11 @@ public class ContinuousLogger : MonoBehaviour {
     public SteamVR_Behaviour_Pose leftHand, rightHand;
 
     public string songName;
-     string participantNumber = "1";
+     string participantNumber = "10";
      string sessionString;
     public string condition;
     
-    public int sessionNumber =3;
+    public int sessionNumber =1;
     public int pcNumber =1;
     
 
@@ -121,6 +121,7 @@ public class ContinuousLogger : MonoBehaviour {
 
     void CalculateCondition()
     {
+        Debug.Log("calculating conditions in ctslogger, participant numner " + participantNumber);
         if (sessionNumber == 0)
         {
             Debug.Log("condition = A");

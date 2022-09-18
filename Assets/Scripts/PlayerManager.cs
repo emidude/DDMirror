@@ -49,7 +49,7 @@ public class PlayerManager : NetworkBehaviour
     GameObject[] points;
 
     //public bool bodyShapes = false;
-    public bool bodyShapes = true;
+    public bool bodyShapes;
     public bool questionTime = true;
 
     // Players List to manage playerNumber  
@@ -60,10 +60,10 @@ public class PlayerManager : NetworkBehaviour
     GameObject testGO;*/
     //ContinuousLogger CL;
 
-    public int participantNumber = 69;
-    public int sessionNumber=2;
-    public int pcNumber=1;
-
+   /* public int participantNumber = 69;
+    public int sessionNumber;
+    public int pcNumber;
+*/
     public override void OnStartServer()
     {
         base.OnStartServer();
