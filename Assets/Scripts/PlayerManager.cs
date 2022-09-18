@@ -7,7 +7,7 @@ using Valve.VR;
 public class PlayerManager : NetworkBehaviour
 {
     public PlayerSync playerSync;
-    //public int[] combinations = new int[6];
+    
     int[] songOrdering = new int[6];
     public int pcNumber;
     public int participantNumber;
