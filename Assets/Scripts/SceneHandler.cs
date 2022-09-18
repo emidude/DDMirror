@@ -8,6 +8,7 @@ using Valve.VR.Extras;
 using UnityEngine.Events;
 using Valve.VR.InteractionSystem;
 using Mirror;
+using Valve.VR;
 
 
 public class SceneHandler : NetworkBehaviour
@@ -15,6 +16,9 @@ public class SceneHandler : NetworkBehaviour
     public PlayerManager playerManager;
 
     public SteamVR_LaserPointer laserPointer;
+    Vector3 OriginalLaserPointerScale;
+    public SteamVR_Behaviour_Pose HandWithoutLaserPointer;
+    Vector3 OriginalOtherHandScale;
     public LinearMapping linMap;
     public GameObject panelParent;
     public GameObject panelstart;
@@ -38,8 +42,8 @@ public class SceneHandler : NetworkBehaviour
         panelParent.SetActive(true);
         panelstart.SetActive(true);
 
-        
-
+        OriginalLaserPointerScale = laserPointer.transform.localScale;
+        OriginalOtherHandScale = HandWithoutLaserPointer.transform.localScale;
 
     }
 
@@ -87,10 +91,8 @@ public class SceneHandler : NetworkBehaviour
                 panelstart.SetActive(false);
                 panelParent.SetActive(false);
 
-                //laserPointer.GetComponent<RenderModel>().Hide();
-                //laserPointer.gameObject.SetActive(false);
-
-                this.gameObject.GetComponent<SteamVR_LaserPointer>().enabled = false;
+                
+                HideLaserPointer();
 
                 //player is ready to start
                 //need issue cmd to play first song to all players
@@ -114,8 +116,9 @@ public class SceneHandler : NetworkBehaviour
                 //LOGANSWER
                 dancePrefPanel.SetActive(false);
                 answeredQnPanel.SetActive(true);
-                laserPointer.GetComponent<RenderModel>().Hide();
-                //laserPointer.gameObject.SetActive(false);
+
+                HideLaserPointer();
+                
 
                 currentQn = 0;
                 NetworkIdentity networkIdentity = NetworkClient.connection.identity;
@@ -125,6 +128,20 @@ public class SceneHandler : NetworkBehaviour
 
         }
     }
+
+    void HideLaserPointer()
+    {
+        laserPointer.transform.localScale = Vector3.zero;
+        laserPointer.active = false;
+        HandWithoutLaserPointer.transform.localScale = Vector3.zero;
+    }
+    void ShowLaserPointer()
+    {
+        laserPointer.transform.localScale = OriginalLaserPointerScale;
+        laserPointer.active = true;
+        HandWithoutLaserPointer.transform.localScale = OriginalLaserPointerScale;
+    }
+    
 
     public void SetCanvasInactive()
     {
@@ -188,8 +205,8 @@ public class SceneHandler : NetworkBehaviour
         answeredQnPanel.SetActive(false);
 
         numPlayersPanel.SetActive(true);
-        laserPointer.GetComponent<RenderModel>().Show(); //might need to changer .Show(true);  SetVisibility(true, overrideDefault);
-        //laserPointer.gameObject.SetActive(true);
+        
+        ShowLaserPointer();
 
         //disable visuals;
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
