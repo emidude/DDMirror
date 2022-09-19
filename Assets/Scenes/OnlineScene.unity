@@ -4243,7 +4243,8 @@ MonoBehaviour:
   participantNumber: 
   sessionString: 
   condition: 
-  sessionNumber: 1
+  songJustFinished: 
+  sessionNumber: 2
   pcNumber: 1
 --- !u!1 &1852613889
 GameObject:
