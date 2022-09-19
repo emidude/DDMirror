@@ -16,6 +16,7 @@ public class ContinuousLogger : MonoBehaviour {
     public string participantNumber;
     public string sessionString;
     public string condition;
+    public string songJustFinished;
     
     public int sessionNumber;
     public int pcNumber;
@@ -178,9 +179,10 @@ public class ContinuousLogger : MonoBehaviour {
         answers[currentAnswer].particpantNum = participantNumber;
         answers[currentAnswer].sesh = sessionString;
         answers[currentAnswer].cond = condition;
-        answers[currentAnswer].songnam = songName;
+        answers[currentAnswer].songnam = songJustFinished;
         answers[currentAnswer].musicPref = musicPreference.ToString();
         answers[currentAnswer].dancePref = dancePreference.ToString();
+        
         currentAnswer++;
     }
     void CalculateCondition()

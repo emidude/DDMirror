@@ -42,7 +42,9 @@ public class SceneHandler : NetworkBehaviour
         laserPointer.PointerClick += PointerClick;
 
         panelParent.SetActive(true);
-        panelstart.SetActive(true);
+        panelstart.SetActive(true); //TODO:RETURN LATER
+        /*panelstart.SetActive(false);
+        musicPrefer*/
 
         OriginalLaserPointerScale = laserPointer.transform.localScale;
         OriginalOtherHandScale = HandWithoutLaserPointer.transform.localScale;
@@ -122,6 +124,8 @@ public class SceneHandler : NetworkBehaviour
             {
                
                 CLogger.UpdateAnswers(musicPreference.value, dancePreference.value);
+                musicPreference.value = 0.5f;
+                dancePreference.value = 0.5f;
 
                 dancePrefPanel.SetActive(false);
                 answeredQnPanel.SetActive(true);

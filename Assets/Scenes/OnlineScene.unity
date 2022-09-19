@@ -1740,6 +1740,8 @@ MonoBehaviour:
   dancePrefPanel: {fileID: 961613894}
   answeredQnPanel: {fileID: 303753768}
   CLogger: {fileID: 1847834356}
+  musicPreference: {fileID: 29712460}
+  dancePreference: {fileID: 1937052737}
 --- !u!114 &444838686
 MonoBehaviour:
   m_ObjectHideFlags: 0
