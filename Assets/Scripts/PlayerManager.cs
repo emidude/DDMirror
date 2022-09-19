@@ -125,10 +125,8 @@ public class PlayerManager : NetworkBehaviour
 
 
         CmdSpawnCubes();
+        //CmdUpdateCubes(cL.GetVelocity(),cR.GetVelocity());
         CmdDestroyCubes();
-        /*Debug.Log("server active?" + NetworkServer.active);
-        Debug.Log("song idx = " + songIndx);
-        Debug.Log("song ordering(idx)=" +songOrdering[songIndx]);*/
 
         CmdSpawnHeadAndHands();
         CmdDestroyHeadAndHands();
@@ -156,8 +154,7 @@ public class PlayerManager : NetworkBehaviour
                 }
                 else
                 {
-                    //Debug.Log("still doing cubes, bodyShapes = " + bodyShapes);
-                    CmdUpdateCubes(cL.GetVelocity(), cR.GetVelocity());
+                    CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation,cL.GetVelocity(), cR.GetVelocity(),cL.GetAngularVelocity(),cR.GetAngularVelocity() );
                 }
             }           
         }
@@ -185,13 +182,13 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     void CmdSetCubesCondition()
     {
-        Debug.Log("CmdSetCubesCondition()");
+        //Debug.Log("CmdSetCubesCondition()");
         RpcSetCubesCondition();
     }
     [ClientRpc]
     void RpcSetCubesCondition()
     {
-        Debug.Log("RpcSetCubesCondition()");
+        //Debug.Log("RpcSetCubesCondition()");
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
 
         if (PM.ContinuousLogger.condition == "A")
@@ -258,14 +255,14 @@ public class PlayerManager : NetworkBehaviour
             points[i] = point;
             NetworkServer.Spawn(point);
         }
-        if(points == null)
+        /*if(points == null)
         {
             Debug.Log("points == nulll");
             for(int i = 0; i < points.Length; i++)
             {
                 Debug.Log("put in points i x corrd= " + points[i].transform.position.x);
             }
-        }
+        }*/
         
     }
 
@@ -279,10 +276,10 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
-    
+
 
     [Command]
-    void CmdUpdateCubes(Vector3 vL, Vector3 vR)
+    void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR)
     {
         if (points == null)
         {

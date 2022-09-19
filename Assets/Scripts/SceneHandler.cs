@@ -122,17 +122,17 @@ public class SceneHandler : NetworkBehaviour
             }
             else if (currentQn == 1)
             {
-               
+               //SAVE ANSWER
                 CLogger.UpdateAnswers(musicPreference.value, dancePreference.value);
+                //reset slider values
                 musicPreference.value = 0.5f;
                 dancePreference.value = 0.5f;
-
+                //kill ui panels
                 dancePrefPanel.SetActive(false);
                 answeredQnPanel.SetActive(true);
 
                 HideLaserPointer();
                 
-
                 currentQn = 0;
                 NetworkIdentity networkIdentity = NetworkClient.connection.identity;
                 playerManager = networkIdentity.GetComponent<PlayerManager>();

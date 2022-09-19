@@ -4272,7 +4272,7 @@ MonoBehaviour:
   sessionString: 
   condition: 
   songJustFinished: 
-  sessionNumber: 2
+  sessionNumber: 0
   pcNumber: 1
 --- !u!1 &1852613889
 GameObject:
