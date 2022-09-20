@@ -131,7 +131,9 @@ public class GraphLocal : MonoBehaviour
 
 	const float pi = Mathf.PI;
 
+
 	
+
 	static Vector3 SimpleSin(SteamVR_Behaviour_Pose cL, SteamVR_Behaviour_Pose cR, float u, float v, float t)
 	{
 		Vector3 p;
@@ -142,6 +144,9 @@ public class GraphLocal : MonoBehaviour
 		p.z = Mathf.Sin(cL.transform.position.z * v);
 		return p;
 	}
+
+	
+
 
 	static Vector3 MultiSineFunctionSI(SteamVR_Behaviour_Pose cL, SteamVR_Behaviour_Pose cR, float x, float z, float t)
 	{

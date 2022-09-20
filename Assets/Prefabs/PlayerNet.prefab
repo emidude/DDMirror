@@ -195,6 +195,3 @@ MonoBehaviour:
   ready: 0
   bodyShapes: 1
   questionTime: 1
-  participantNumber: 420
-  sessionNumber: 1
-  pcNumber: 1

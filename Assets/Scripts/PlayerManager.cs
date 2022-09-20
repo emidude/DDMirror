@@ -46,25 +46,19 @@ public class PlayerManager : NetworkBehaviour
 
     public bool ready = false;
 
-    int resolution = 10;
-    GameObject[] points;
-
-    //public bool bodyShapes = false;
+    int resolution = 12;
+    GameObject[] points1;
+    GameObject[] points2;
+    GameObject[] points3;
+    float step;
+    
     public bool bodyShapes;
     public bool questionTime = true;
 
     // Players List to manage playerNumber  
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
 
-    ///test vars:
-    /*public GameObject testPF;
-    GameObject testGO;*/
-    //ContinuousLogger CL;
-
-   /* public int participantNumber = 69;
-    public int sessionNumber;
-    public int pcNumber;
-*/
+    
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -124,19 +118,31 @@ public class PlayerManager : NetworkBehaviour
         cR = localRightHand.GetComponent<SteamVR_Behaviour_Pose>();
 
 
-        CmdSpawnCubes();
+        step = 2f / resolution;
+        
+        //CmdDestroyCubes();
         //CmdUpdateCubes(cL.GetVelocity(),cR.GetVelocity());
-        CmdDestroyCubes();
+        /*
 
         CmdSpawnHeadAndHands();
-        CmdDestroyHeadAndHands();
+        CmdDestroyHeadAndHands();*/
 
-       
+
         CmdSetCubesCondition();
+
+        //TODO: SET THIS BACK TO TRUE FOR STUDY - DELETE BELOW:
+        CmdSpawnCubes();
+
+
+
     }
 
     void Update()
     {
+        //TODO: FOR STUDY - DELETE BELOW:
+        CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation, cL.GetVelocity(), cR.GetVelocity(), cL.GetAngularVelocity(), cR.GetAngularVelocity());
+
+
 
         if (isLocalPlayer)
         {
@@ -246,13 +252,33 @@ public class PlayerManager : NetworkBehaviour
         //transform.position = head.position; <-TODO:  need to fix
         transform.position = Vector3.zero;
 
-        points = new GameObject[resolution * resolution];
-        for (int i = 0; i < points.Length; i++)
+        points1 = new GameObject[resolution * resolution];
+        for (int i = 0; i < points1.Length; i++)
         {
             GameObject point = Instantiate(cubePf);
             point.transform.localScale = scale;
             point.transform.SetParent(transform, false);
-            points[i] = point;
+            points1[i] = point;
+            NetworkServer.Spawn(point);
+        }
+
+        points2 = new GameObject[resolution * resolution];
+        for (int i = 0; i < points2.Length; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            point.transform.SetParent(transform, false);
+            points2[i] = point;
+            NetworkServer.Spawn(point);
+        }
+
+        points3 = new GameObject[resolution * resolution];
+        for (int i = 0; i < points3.Length; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            point.transform.SetParent(transform, false);
+            points3[i] = point;
             NetworkServer.Spawn(point);
         }
         /*if(points == null)
@@ -263,16 +289,28 @@ public class PlayerManager : NetworkBehaviour
                 Debug.Log("put in points i x corrd= " + points[i].transform.position.x);
             }
         }*/
-        
+
     }
+
+    
 
     [Command]
     public void CmdDestroyCubes()
     {
-        for (int i = 0; i < points.Length; i++)
+        for (int i = 0; i < points1.Length; i++)
         {
          //   NetworkServer.UnSpawn(points[i]); //leaves visibele but unresponsive
-            NetworkServer.Destroy(points[i]);
+            NetworkServer.Destroy(points1[i]);
+        }
+        for (int i = 0; i < points2.Length; i++)
+        {
+            //   NetworkServer.UnSpawn(points[i]); //leaves visibele but unresponsive
+            NetworkServer.Destroy(points2[i]);
+        }
+        for (int i = 0; i < points3.Length; i++)
+        {
+            //   NetworkServer.UnSpawn(points[i]); //leaves visibele but unresponsive
+            NetworkServer.Destroy(points3[i]);
         }
     }
 
@@ -281,14 +319,14 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR)
     {
-        if (points == null)
+        if (points1 == null || points2==null)
         {
             Debug.Log("points array nullhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         }
         else
         {
             float t = Time.time;
-            float step = 2f / resolution;
+            
             for (int i = 0, z = 0; z < resolution; z++)
             {
                 float v = (z + 0.5f) * step - 1f;
@@ -297,13 +335,23 @@ public class PlayerManager : NetworkBehaviour
                     float u = (x + 0.5f) * step - 1f;
 
                     //TODO: if only 2 or 1 clients also need additonal automatic update of cubes to compensate for players
-                    points[i].transform.localPosition = Graphs.SimpleSin(vL, vR, u, v, t) * 5;
-
+                    points1[i].transform.localPosition = Graphs.TorusSI(HPos, HRot, cLPos, cLRot, cRPos, cRRot, vL, vR, avL, avR, u, v, t) *5;
+                  //  points2[i].transform.localPosition = Graphs.TestSI(HPos, HRot, cLPos, cLRot, cRPos, cRRot, vL, vR, avL, avR, u, v, t);
+                     //points3[i].transform.localPosition = Graphs.BoysSurfaceSI(HPos, HRot, cLPos, cLRot, cRPos, cRRot, vL, vR, avL, avR, u, v, t);
 
                 }
             }
         }
         
+    }
+
+    void UpdatePoints(GameObject[] points)
+    {
+        //points = new GameObject[resolution * resolution];
+        for (int i = 0; i < points.Length; i++)
+        {
+            
+        }
     }
 
     //from this thread
@@ -449,14 +497,22 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
-  /*  public void LogSong(string song)
+    void makeBoysSurface()
     {
-        if (isLocalPlayer)
+        float t = Time.time;
+
+        for (int i = 0, z = 0; z < resolution; z++)
         {
-            CL.songName = song;
-            Debug.Log("logged song + " + CL.songName);
+            float v = (z + 0.5f) * step - 1f;
+            for (int x = 0; x < resolution; x++, i++)
+            {
+                float u = (x + 0.5f) * step - 1f;
+
+                points3[i].transform.localPosition = Graphs.BoysSurfaceSI(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation, cL.GetVelocity(), cR.GetVelocity(), cL.GetAngularVelocity(), cR.GetAngularVelocity(), u, v, t) * 5;
+
+            }
         }
-    }*/
+    }
 
    
 
