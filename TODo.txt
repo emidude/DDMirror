@@ -1,3 +1,2 @@
-try other method for updating - on oter branch
-
-also, need to turn hands and laser pointer on and off w/qn mode
+ points to grid with variable scalar display on scale, 
+then movemnt, rotation based on rotation of controllers, dont use head data for much, local position need to include with position

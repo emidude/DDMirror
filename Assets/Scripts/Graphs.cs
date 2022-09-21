@@ -125,4 +125,56 @@ public class Graphs
 		p.z = s * Mathf.Cos(pi * u);
 		return p;
 	}
+
+	public static Vector3 TorusSI(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR, float u, float v, float t)
+	{
+		Vector3 p;
+		float r1 = cLPos.x + Mathf.Sin(pi * (cRPos.y * u + cRRot.x)) * cLPos.z;
+		float r2 = cRPos.x + Mathf.Sin(pi * (cLPos.y * v + cLRot.x)) * cRPos.z;
+		float s = r2 * Mathf.Cos(pi * v) + r1;
+		p.x = s * Mathf.Sin(pi * u);
+		p.y = r2 * Mathf.Sin(pi * v);
+		p.z = s * Mathf.Cos(pi * u);
+		return p;
+	}
+	/*public static Vector3 BoysSurfaceSI(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR, float x, float z, float t)
+	{
+		Vector3 p;
+		Quaternion qL = cLRot;
+		Quaternion qR = cRRot;
+
+		ComplexNumber Z = new ComplexNumber();
+
+		Z.z.x = x;
+		Z.z.y = z;
+
+		Vector2 one = new Vector2(1, 0);
+		Vector2 z2 = Z.multiply(Z.z, Z.z);
+		Vector2 z3 = Z.multiply(z2, Z.z);
+		Vector2 z4 = Z.multiply(z3, Z.z);
+		Vector2 z6 = Z.multiply(z3, z3);
+
+		*//*Debug.Log("sanity check:");
+		Debug.Log("z4=" + z4 + ", other way to calculate z4=" + Z.multiply(z2, z2));
+		Vector2 z6 = Z.multiply(z3, z3);
+		Debug.Log("another sanity check:");
+		Debug.Log("z6 (3+3)=" + z6 + ", z6 (2 + 4)=" + Z.multiply(z2, z4) + " z6 (4+2)="+ Z.multiply(z4,z2));*//*
+		Vector2 denominator = z6 + Mathf.Sqrt(5) * z3 - one;
+		Vector2 g1C = (-3 / 2) * Z.divide(Z.multiply(one - z4, Z.z), denominator);
+		Vector2 g2C = (-3 / 2) * Z.divide(Z.multiply(one + z4, Z.z), denominator);
+		Vector2 g3C = Z.divide(one + z6, denominator) - one / 2;
+
+		float coef = 1 / (g1C.y * g1C.y + g2C.x * g2C.x + g3C.y * g3C.y);
+
+		p.x = g1C.y / coef;
+		p.y = g2C.x / coef;
+		p.z = g3C.y / coef;
+
+
+
+
+		return p;
+	}*/
+
+
 }
