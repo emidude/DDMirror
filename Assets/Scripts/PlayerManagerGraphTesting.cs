@@ -48,6 +48,7 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
 
     int resolution = 10;
     GameObject[] points;
+    GameObject[] rulerPoints;
 
     //public bool bodyShapes = false;
     public bool bodyShapes;
@@ -143,6 +144,7 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
                 else
                 {
                     CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation,cL.GetVelocity(), cR.GetVelocity(),cL.GetAngularVelocity(),cR.GetAngularVelocity() );
+                //    UpdateRulerVals(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                 }
             }           
         }
@@ -239,10 +241,22 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
         {
             GameObject point = Instantiate(cubePf);
             point.transform.localScale = scale;
+            //TODO: SET PARENT TO HEAD
             point.transform.SetParent(transform, false);
             points[i] = point;
             NetworkServer.Spawn(point);
         }
+
+       /* rulerPoints = new GameObject[21];
+        for (int i = 0; i < 21; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            point.transform.SetParent(transform, false);
+            point.transform.position = new Vector3(i-10, 2, 1);
+            rulerPoints[i] = point;
+            NetworkServer.Spawn(point);
+        }*/
         /*if(points == null)
         {
             Debug.Log("points == nulll");
@@ -251,7 +265,7 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
                 Debug.Log("put in points i x corrd= " + points[i].transform.position.x);
             }
         }*/
-        
+
     }
 
     [Command]
@@ -261,6 +275,11 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
         {
          //   NetworkServer.UnSpawn(points[i]); //leaves visibele but unresponsive
             NetworkServer.Destroy(points[i]);
+        }
+
+        for (int i = 0; i < rulerPoints.Length; i++)
+        {
+            NetworkServer.Destroy(rulerPoints[i]);
         }
     }
 
@@ -285,14 +304,54 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
                     float u = (x + 0.5f) * step - 1f;
 
                     //TODO: if only 2 or 1 clients also need additonal automatic update of cubes to compensate for players
-                    points[i].transform.localPosition = Graphs.TorusSI( HPos,  HRot,  cLPos, cLRot,  cRPos, cRRot,  vL,  vR,  avL,  avR, u, v,t) * 5;
-
+                    //points[i].transform.localPosition = Graphs.TorusSI( HPos,  HRot,  cLPos, cLRot,  cRPos, cRRot,  u, v,t) * 5;
+                    points[i].transform.localPosition = Graphs.movingFigure8(HPos, HRot, cLPos, cLRot, cRPos, cRRot, u, v, t) * 5;
 
                 }
             }
+
+           // UpdateRulerVals(HPos, HRot, cLPos, cLRot, cRPos, cRRot);
         }
         
     }
+
+    void UpdateRulerVals(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
+    {
+        float[] values = { HPos.x , HPos.y, HPos.z,
+            cLPos.x, cLPos.y, cLPos.z,
+            cRPos.x, cRPos.y, cRPos.z,
+        HRot.x,  HRot.y,  HRot.z,  HRot.w,
+        cLRot.x,  cLRot.y,  cLRot.z,  cLRot.w,
+        cRRot.x,  cRRot.y,  cRRot.z,  cRRot.w,
+        };
+            rulerPoints[0].transform.localScale = new Vector3 (0.2f, HPos.x, 0.2f);
+            rulerPoints[1].transform.localScale = new Vector3(0.2f, HPos.y, 0.2f);
+            rulerPoints[2].transform.localScale = new Vector3(0.2f, HPos.z, 0.2f);
+
+        rulerPoints[3].transform.localScale = new Vector3(0.2f, cLPos.x, 0.2f);
+        rulerPoints[4].transform.localScale = new Vector3(0.2f, cLPos.y, 0.2f);
+        rulerPoints[5].transform.localScale = new Vector3(0.2f, cLPos.z, 0.2f);
+
+        rulerPoints[6].transform.localScale = new Vector3(0.2f, cRPos.x, 0.2f);
+        rulerPoints[7].transform.localScale = new Vector3(0.2f, cRPos.y, 0.2f);
+        rulerPoints[8].transform.localScale = new Vector3(0.2f, cRPos.z, 0.2f);
+
+        rulerPoints[9].transform.localScale = new Vector3(0.2f, HRot.x, 0.2f);
+        rulerPoints[10].transform.localScale = new Vector3(0.2f, HRot.y, 0.2f);
+        rulerPoints[11].transform.localScale = new Vector3(0.2f, HRot.z, 0.2f);
+        rulerPoints[12].transform.localScale = new Vector3(0.2f, HRot.w, 0.2f);
+
+        rulerPoints[13].transform.localScale = new Vector3(0.2f, cLRot.x, 0.2f);
+        rulerPoints[14].transform.localScale = new Vector3(0.2f, cLRot.y, 0.2f);
+        rulerPoints[15].transform.localScale = new Vector3(0.2f, cLRot.z, 0.2f);
+        rulerPoints[16].transform.localScale = new Vector3(0.2f, cLRot.w, 0.2f);
+
+        rulerPoints[17].transform.localScale = new Vector3(0.2f, cRRot.x, 0.2f);
+        rulerPoints[18].transform.localScale = new Vector3(0.2f, cRRot.y, 0.2f);
+        rulerPoints[19].transform.localScale = new Vector3(0.2f, cRRot.z, 0.2f);
+        rulerPoints[20].transform.localScale = new Vector3(0.2f, cRRot.w, 0.2f);
+    }
+        
 
     //from this thread
     //https://forum.unity.com/threads/multiplayer-with-steamvr.535321/

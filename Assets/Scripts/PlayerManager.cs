@@ -289,7 +289,7 @@ public class PlayerManager : NetworkBehaviour
                     float u = (x + 0.5f) * step - 1f;
 
                     //TODO: if only 2 or 1 clients also need additonal automatic update of cubes to compensate for players
-                    points[i].transform.localPosition = Graphs.TorusSI( HPos,  HRot,  cLPos, cLRot,  cRPos, cRRot,  vL,  vR,  avL,  avR, u, v,t) * 5;
+                    points[i].transform.localPosition = Graphs.TorusSI( HPos,  HRot,  cLPos, cLRot,  cRPos, cRRot, u, v,t) * 5;
 
 
                 }

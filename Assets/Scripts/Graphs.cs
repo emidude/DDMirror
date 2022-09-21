@@ -126,7 +126,7 @@ public class Graphs
 		return p;
 	}
 
-	public static Vector3 TorusSI(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR, float u, float v, float t)
+	public static Vector3 TorusSI(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, float u, float v, float t)
 	{
 		Vector3 p;
 		float r1 = cLPos.x + Mathf.Sin(pi * (cRPos.y * u + cRRot.x)) * cLPos.z;
@@ -137,6 +137,25 @@ public class Graphs
 		p.z = s * Mathf.Cos(pi * u);
 		return p;
 	}
+
+	
+
+	public static Vector3 movingFigure8(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, float u, float v, float t)
+	{
+		Vector3 p;
+		float r = HRot.x;
+		t /= 10f;
+		/*u = pi * (u + t);
+		v = pi * (v + t);*/
+		u = pi * (cLPos.x * cRPos.y + cLPos.z * cRPos.z + u);
+		v = pi * (cRPos.x * cLPos.y + cLPos.z + v);
+		p.x = (r + Mathf.Cos(u / 2f) * Mathf.Sin(v) - Mathf.Sin(u / 2f) * Mathf.Sin(2 * v)) * Mathf.Cos(u);
+		p.y = (r + Mathf.Cos(u / 2f) * Mathf.Sin(v) - Mathf.Sin(u / 2f) * Mathf.Sin(2 * v)) * Mathf.Sin(u);
+		p.z = Mathf.Sin(u / 2f) * Mathf.Sin(v) + Mathf.Cos(u / 2f) * Mathf.Sin(2 * v);
+		return p;
+	}
+
+
 	/*public static Vector3 BoysSurfaceSI(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR, float x, float z, float t)
 	{
 		Vector3 p;
