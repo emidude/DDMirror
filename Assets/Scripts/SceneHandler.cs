@@ -231,6 +231,7 @@ public class SceneHandler : NetworkBehaviour
         }
         else
         {
+            Debug.Log("destroying cubes");
             PM.CmdDestroyCubes();
         }
 

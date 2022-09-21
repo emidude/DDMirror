@@ -46,7 +46,7 @@ public class PlayerManager : NetworkBehaviour
 
     public bool ready = false;
 
-    int resolution = 10;
+    int resolution = 12;
     GameObject[] points;
 
     //public bool bodyShapes = false;
