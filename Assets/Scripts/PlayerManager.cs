@@ -119,8 +119,9 @@ public class PlayerManager : NetworkBehaviour
 
 
         step = 2f / resolution;
-        
-        //CmdDestroyCubes();
+
+         CmdSpawnCubes();
+        CmdDestroyCubes();
         //CmdUpdateCubes(cL.GetVelocity(),cR.GetVelocity());
         /*
 
@@ -131,7 +132,7 @@ public class PlayerManager : NetworkBehaviour
         CmdSetCubesCondition();
 
         //TODO: SET THIS BACK TO TRUE FOR STUDY - DELETE BELOW:
-       // CmdSpawnCubes();
+       
 
 
 
@@ -297,21 +298,31 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     public void CmdDestroyCubes()
     {
-        for (int i = 0; i < points1.Length; i++)
-        {
-         //   NetworkServer.UnSpawn(points[i]); //leaves visibele but unresponsive
-            NetworkServer.Destroy(points1[i]);
+        if (points1 != null) {
+            for (int i = 0; i < points1.Length; i++)
+            {
+                //   NetworkServer.UnSpawn(points[i]); //leaves visibele but unresponsive
+                NetworkServer.Destroy(points1[i]);
+            }
         }
-        for (int i = 0; i < points2.Length; i++)
+        if (points2 != null)
         {
-            //   NetworkServer.UnSpawn(points[i]); //leaves visibele but unresponsive
-            NetworkServer.Destroy(points2[i]);
+            for (int i = 0; i < points2.Length; i++)
+            {
+                //   NetworkServer.UnSpawn(points[i]); //leaves visibele but unresponsive
+                NetworkServer.Destroy(points2[i]);
+            }
         }
-        for (int i = 0; i < points3.Length; i++)
+
+        if (points3 != null)
         {
-            //   NetworkServer.UnSpawn(points[i]); //leaves visibele but unresponsive
-            NetworkServer.Destroy(points3[i]);
+            for (int i = 0; i < points3.Length; i++)
+            {
+                //   NetworkServer.UnSpawn(points[i]); //leaves visibele but unresponsive
+                NetworkServer.Destroy(points3[i]);
+            }
         }
+            
     }
 
 
