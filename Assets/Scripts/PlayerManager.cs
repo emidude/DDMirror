@@ -131,7 +131,7 @@ public class PlayerManager : NetworkBehaviour
         CmdSetCubesCondition();
 
         //TODO: SET THIS BACK TO TRUE FOR STUDY - DELETE BELOW:
-        CmdSpawnCubes();
+       // CmdSpawnCubes();
 
 
 
@@ -140,7 +140,7 @@ public class PlayerManager : NetworkBehaviour
     void Update()
     {
         //TODO: FOR STUDY - DELETE BELOW:
-        CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation, cL.GetVelocity(), cR.GetVelocity(), cL.GetAngularVelocity(), cR.GetAngularVelocity());
+        //CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation, cL.GetVelocity(), cR.GetVelocity(), cL.GetAngularVelocity(), cR.GetAngularVelocity());
 
 
 
