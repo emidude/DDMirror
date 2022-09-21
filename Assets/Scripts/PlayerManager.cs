@@ -384,7 +384,6 @@ public class PlayerManager : NetworkBehaviour
 
         AH.SetAudioToPlay(songID);
         PM.songIndx++;
-
     }
 
     [Command]
