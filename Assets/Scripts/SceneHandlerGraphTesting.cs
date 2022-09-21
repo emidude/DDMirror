@@ -11,15 +11,15 @@ using Mirror;
 using Valve.VR;
 
 
-public class SceneHandler : NetworkBehaviour
+public class SceneHandlerGraphTesting : NetworkBehaviour
 {
-    public PlayerManager playerManager;
+    public PlayerManagerGraphTesting playerManager;
 
     public SteamVR_LaserPointer laserPointer;
     Vector3 OriginalLaserPointerScale;
     public SteamVR_Behaviour_Pose HandWithoutLaserPointer;
     Vector3 OriginalOtherHandScale;
-    public LinearMapping linMap;
+   // public LinearMapping linMap;
     public GameObject panelParent;
     public GameObject panelstart;
     public GameObject numPlayersPanel;
@@ -41,15 +41,23 @@ public class SceneHandler : NetworkBehaviour
         laserPointer.PointerOut += PointerOutside;
         laserPointer.PointerClick += PointerClick;
 
-        panelParent.SetActive(true);
-        panelstart.SetActive(true); 
+       /* panelParent.SetActive(true);
+        panelstart.SetActive(true); //TODO:RETURN LATER*/
+
+
 
         OriginalLaserPointerScale = laserPointer.transform.localScale;
         OriginalOtherHandScale = HandWithoutLaserPointer.transform.localScale;
 
+        //panelstart.SetActive(false);
+        HideLaserPointer();
     }
 
-   
+    private void Start()
+    {
+        HideLaserPointer();
+    }
+
 
     public void PointerClick(object sender, PointerEventArgs e)
     {
@@ -101,7 +109,7 @@ public class SceneHandler : NetworkBehaviour
                 //need issue cmd to play first song to all players
 
                 NetworkIdentity networkIdentity = NetworkClient.connection.identity;
-                playerManager = networkIdentity.GetComponent<PlayerManager>();
+                playerManager = networkIdentity.GetComponent<PlayerManagerGraphTesting>();
                 playerManager.CmdClickedSubmit();
             }
 
@@ -133,7 +141,7 @@ public class SceneHandler : NetworkBehaviour
                 
                 currentQn = 0;
                 NetworkIdentity networkIdentity = NetworkClient.connection.identity;
-                playerManager = networkIdentity.GetComponent<PlayerManager>();
+                playerManager = networkIdentity.GetComponent<PlayerManagerGraphTesting>();
                 playerManager.CmdClickedSubmit();
             }
 
@@ -220,7 +228,7 @@ public class SceneHandler : NetworkBehaviour
         ShowLaserPointer();
 
         //disable visuals;
-        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+        PlayerManagerGraphTesting PM = NetworkClient.connection.identity.GetComponent<PlayerManagerGraphTesting>();
         PM.questionTime = true;
         if (PM.bodyShapes)
         {

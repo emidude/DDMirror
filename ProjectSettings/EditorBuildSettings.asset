@@ -5,12 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Network.unity
-    guid: a5a0fb71352eb1e49bf53fcf9eab6f35
-  - enabled: 1
-    path: Assets/Scenes/Net2.unity
-    guid: ee7a379701939b64490be247f62c04b6
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Interactions_Example.unity
     guid: e3b77830391f10343929883b18f4d5ae
@@ -20,12 +20,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OnlineScene.unity
     guid: fa91a359d32636844812848e86da676a
-  - enabled: 1
-    path: Assets/Scenes/Online2.unity
-    guid: 1cf887cd1c51fbe43a8fed2c6fa4fa81
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Mirror.unity
     guid: 1b880ba9a3319fe4699f8345d9d2871b
+  - enabled: 1
+    path: Assets/Scenes/MirrorGraphTesting.unity
+    guid: 0458f0d8593b87e4ca89fad56f22666e
+  - enabled: 1
+    path: Assets/Scenes/OnlineSceneGraphTesting.unity
+    guid: 057c747aa7ed521468800804bc3c40fb
   m_configObjects:
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 2f47c8257e8e98a4b9f6f8a20b2d1b45,
       type: 2}
