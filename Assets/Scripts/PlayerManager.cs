@@ -130,8 +130,6 @@ public class PlayerManager : NetworkBehaviour
 
 
         CmdSetCubesCondition();
-
-        //TODO: SET THIS BACK TO TRUE FOR STUDY - DELETE BELOW:
        
 
 
@@ -244,7 +242,7 @@ public class PlayerManager : NetworkBehaviour
     }
 
 
-    /*[Command]
+    [Command]
     void CmdSpawnCubes()
     {
         Debug.Log("spoawing cubes");
@@ -263,7 +261,7 @@ public class PlayerManager : NetworkBehaviour
             NetworkServer.Spawn(point);
         }
 
-        points2 = new GameObject[resolution * resolution];
+        /*points2 = new GameObject[resolution * resolution];
         for (int i = 0; i < points2.Length; i++)
         {
             GameObject point = Instantiate(cubePf);
@@ -282,17 +280,19 @@ public class PlayerManager : NetworkBehaviour
             points3[i] = point;
             NetworkServer.Spawn(point);
         }
-        *//*if(points == null)
+        *//*if (points == null)*//*
         {
             Debug.Log("points == nulll");
-            for(int i = 0; i < points.Length; i++)
+            for (int i = 0; i < points.Length; i++)
             {
                 Debug.Log("put in points i x corrd= " + points[i].transform.position.x);
             }
-        }*//*
+        }*/
 
-    }*/
-    [Command]
+    }
+
+
+    /*[Command]
     void CmdSpawnCubes(GameObject[] points)
     {
         Debug.Log("spoawing cubes");
@@ -311,7 +311,7 @@ public class PlayerManager : NetworkBehaviour
             NetworkServer.Spawn(point);
         }
 
-       /* points2 = new GameObject[resolution * resolution];
+       *//* points2 = new GameObject[resolution * resolution];
         for (int i = 0; i < points2.Length; i++)
         {
             GameObject point = Instantiate(cubePf);
@@ -330,16 +330,16 @@ public class PlayerManager : NetworkBehaviour
             points3[i] = point;
             NetworkServer.Spawn(point);
         }*/
-        /*if(points == null)
+    /*if(points == null)
+    {
+        Debug.Log("points == nulll");
+        for(int i = 0; i < points.Length; i++)
         {
-            Debug.Log("points == nulll");
-            for(int i = 0; i < points.Length; i++)
-            {
-                Debug.Log("put in points i x corrd= " + points[i].transform.position.x);
-            }
-        }*/
+            Debug.Log("put in points i x corrd= " + points[i].transform.position.x);
+        }
+    }*//*
 
-    }
+}*/
 
 
 
@@ -552,7 +552,7 @@ public class PlayerManager : NetworkBehaviour
         }
         else
         {
-            PM.CmdSpawnCubes(points1);
+            PM.CmdSpawnCubes();
         }
     }
 
