@@ -120,8 +120,8 @@ public class PlayerManager : NetworkBehaviour
 
         step = 2f / resolution;
 
-         CmdSpawnCubes();
-        CmdDestroyCubes();
+        /* CmdSpawnCubes();
+        CmdDestroyCubes();*/
         //CmdUpdateCubes(cL.GetVelocity(),cR.GetVelocity());
         /*
 
@@ -244,7 +244,7 @@ public class PlayerManager : NetworkBehaviour
     }
 
 
-    [Command]
+    /*[Command]
     void CmdSpawnCubes()
     {
         Debug.Log("spoawing cubes");
@@ -282,6 +282,54 @@ public class PlayerManager : NetworkBehaviour
             points3[i] = point;
             NetworkServer.Spawn(point);
         }
+        *//*if(points == null)
+        {
+            Debug.Log("points == nulll");
+            for(int i = 0; i < points.Length; i++)
+            {
+                Debug.Log("put in points i x corrd= " + points[i].transform.position.x);
+            }
+        }*//*
+
+    }*/
+    [Command]
+    void CmdSpawnCubes(GameObject[] points)
+    {
+        Debug.Log("spoawing cubes");
+        float step = 2f / resolution;
+        Vector3 scale = Vector3.one * step;
+        //transform.position = head.position; <-TODO:  need to fix
+        transform.position = Vector3.zero;
+
+        points = new GameObject[resolution * resolution];
+        for (int i = 0; i < points.Length; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            point.transform.SetParent(transform, false);
+            points[i] = point;
+            NetworkServer.Spawn(point);
+        }
+
+       /* points2 = new GameObject[resolution * resolution];
+        for (int i = 0; i < points2.Length; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            point.transform.SetParent(transform, false);
+            points2[i] = point;
+            NetworkServer.Spawn(point);
+        }
+
+        points3 = new GameObject[resolution * resolution];
+        for (int i = 0; i < points3.Length; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            point.transform.SetParent(transform, false);
+            points3[i] = point;
+            NetworkServer.Spawn(point);
+        }*/
         /*if(points == null)
         {
             Debug.Log("points == nulll");
@@ -293,7 +341,7 @@ public class PlayerManager : NetworkBehaviour
 
     }
 
-    
+
 
     [Command]
     public void CmdDestroyCubes()
@@ -504,7 +552,7 @@ public class PlayerManager : NetworkBehaviour
         }
         else
         {
-            PM.CmdSpawnCubes();
+            PM.CmdSpawnCubes(points1);
         }
     }
 
