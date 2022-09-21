@@ -268,8 +268,6 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
-
-
     [Command]
     void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR)
     {
