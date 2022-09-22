@@ -158,12 +158,12 @@ public class Graphs
 	public static Vector3 SimpleSymmetric(float x, float y, float z, Quaternion q, float u, float v)
     {
 		Vector3 p;
-        p.x = Mathf.Sin(pi * (x + u));
+        /*p.x = Mathf.Sin(pi * (x + u));
         p.y = Mathf.Sin(pi * (y + v));
-        p.z = Mathf.Sin(pi * (z + u + v));
-        /*p.x = Mathf.Sin(pi * (y + u));
-		p.y = Mathf.Sin(pi * (z + v));
-		p.z = Mathf.Sin(pi * (x + u + v));*/
+        p.z = Mathf.Sin(pi * (z + u + v));*/
+        p.x = Mathf.Sin(pi * (y + u));
+        p.y = Mathf.Sin(pi * (z + v));
+        p.z = Mathf.Sin(pi * (x + u + v));
         return p;
     }
 
