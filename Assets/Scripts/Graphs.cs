@@ -155,6 +155,18 @@ public class Graphs
 		return p;
 	}
 
+	public static Vector3 SimpleSymmetric(float x, float y, float z, Quaternion q, float u, float v)
+    {
+		Vector3 p;
+        p.x = Mathf.Sin(pi * (x + u));
+        p.y = Mathf.Sin(pi * (y + v));
+        p.z = Mathf.Sin(pi * (z + u + v));
+        /*p.x = Mathf.Sin(pi * (y + u));
+		p.y = Mathf.Sin(pi * (z + v));
+		p.z = Mathf.Sin(pi * (x + u + v));*/
+        return p;
+    }
+
 
 	/*public static Vector3 BoysSurfaceSI(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR, float x, float z, float t)
 	{

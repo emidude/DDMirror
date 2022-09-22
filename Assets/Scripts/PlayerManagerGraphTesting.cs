@@ -49,6 +49,9 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
     int resolution = 10;
     GameObject[] points;
     GameObject[] rulerPoints;
+    GameObject[] points1, points2, points3;
+    float step;
+    Vector3 scale;
 
     //public bool bodyShapes = false;
     public bool bodyShapes;
@@ -120,7 +123,17 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
        
         CmdSetCubesCondition();
 
+
         questionTime = false;
+
+        ////////////////////TODO: PUT IN REAL CODE LATER
+        ///
+        ///////////////////////
+
+        step = 2f / resolution;
+        scale = Vector3.one * step;
+
+        Debug.Log("step set to:" + step);
         CmdSpawnCubes();
     }
 
@@ -143,7 +156,8 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
                 }
                 else
                 {
-                    CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation,cL.GetVelocity(), cR.GetVelocity(),cL.GetAngularVelocity(),cR.GetAngularVelocity() );
+                    CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    //CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation,cL.GetVelocity(), cR.GetVelocity(),cL.GetAngularVelocity(),cR.GetAngularVelocity() );
                 //    UpdateRulerVals(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                 }
             }           
@@ -230,13 +244,14 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
     [Command]
     void CmdSpawnCubes()
     {
-        Debug.Log("spoawing cubes");
-        float step = 2f / resolution;
+       /* Debug.Log("spoawing cubes");
+        //float step = 2f / resolution;
+        Debug.Log("step=" + step);*/
         Vector3 scale = Vector3.one * step;
-        //transform.position = head.position; <-TODO:  need to fix
-        transform.position = Vector3.zero;
+        transform.position = localHead.transform.position;// <-TODO:  need to fix
+        //transform.position = Vector3.zero;
 
-        points = new GameObject[resolution * resolution];
+       /* points = new GameObject[resolution * resolution];
         for (int i = 0; i < points.Length; i++)
         {
             GameObject point = Instantiate(cubePf);
@@ -245,18 +260,18 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
             point.transform.SetParent(transform, false);
             points[i] = point;
             NetworkServer.Spawn(point);
-        }
-
-       /* rulerPoints = new GameObject[21];
-        for (int i = 0; i < 21; i++)
-        {
-            GameObject point = Instantiate(cubePf);
-            point.transform.localScale = scale;
-            point.transform.SetParent(transform, false);
-            point.transform.position = new Vector3(i-10, 2, 1);
-            rulerPoints[i] = point;
-            NetworkServer.Spawn(point);
         }*/
+
+        /* rulerPoints = new GameObject[21];
+         for (int i = 0; i < 21; i++)
+         {
+             GameObject point = Instantiate(cubePf);
+             point.transform.localScale = scale;
+             point.transform.SetParent(transform, false);
+             point.transform.position = new Vector3(i-10, 2, 1);
+             rulerPoints[i] = point;
+             NetworkServer.Spawn(point);
+         }*/
         /*if(points == null)
         {
             Debug.Log("points == nulll");
@@ -266,36 +281,83 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
             }
         }*/
 
+
+        points1 = new GameObject[resolution * resolution];
+        for (int i = 0; i < points1.Length; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            //TODO: SET PARENT TO HEAD
+            point.transform.SetParent(transform, false);
+            points1[i] = point;
+            NetworkServer.Spawn(point);
+        }
+
+        points2 = new GameObject[resolution * resolution];
+        for (int i = 0; i < points2.Length; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            //TODO: SET PARENT TO HEAD
+            point.transform.SetParent(transform, false);
+            points2[i] = point;
+            NetworkServer.Spawn(point);
+        }
+
+        points3 = new GameObject[resolution * resolution];
+        for (int i = 0; i < points3.Length; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            //TODO: SET PARENT TO HEAD
+            point.transform.SetParent(transform, false);
+            points3[i] = point;
+            NetworkServer.Spawn(point);
+        }
+
     }
 
     [Command]
     public void CmdDestroyCubes()
     {
-        for (int i = 0; i < points.Length; i++)
+        /*for (int i = 0; i < points.Length; i++)
         {
          //   NetworkServer.UnSpawn(points[i]); //leaves visibele but unresponsive
             NetworkServer.Destroy(points[i]);
-        }
+        }*/
 
-        for (int i = 0; i < rulerPoints.Length; i++)
+       /* for (int i = 0; i < rulerPoints.Length; i++)
         {
             NetworkServer.Destroy(rulerPoints[i]);
+        }*/
+        for (int i = 0; i < points1.Length; i++)
+        {
+            NetworkServer.Destroy(points1[i]);
+        }
+        for (int i = 0; i < points2.Length; i++)
+        {
+            NetworkServer.Destroy(points2[i]);
+        }
+        for (int i = 0; i < points3.Length; i++)
+        {
+            NetworkServer.Destroy(points3[i]);
         }
     }
 
 
 
     [Command]
-    void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR)
+    //void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR)
+    void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     {
-        if (points == null)
+        if (points1 == null || points2 == null || points3 == null)
         {
             Debug.Log("points array nullhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         }
         else
         {
             float t = Time.time;
-            float step = 2f / resolution;
+            //float step = 2f / resolution;
             for (int i = 0, z = 0; z < resolution; z++)
             {
                 float v = (z + 0.5f) * step - 1f;
@@ -305,12 +367,18 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
 
                     //TODO: if only 2 or 1 clients also need additonal automatic update of cubes to compensate for players
                     //points[i].transform.localPosition = Graphs.TorusSI( HPos,  HRot,  cLPos, cLRot,  cRPos, cRRot,  u, v,t) * 5;
-                    points[i].transform.localPosition = Graphs.movingFigure8(HPos, HRot, cLPos, cLRot, cRPos, cRRot, u, v, t) * 5;
+                    //points[i].transform.localPosition = Graphs.movingFigure8(HPos, HRot, cLPos, cLRot, cRPos, cRRot, u, v, t) * 5;
+                    points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x, cLPos.y, cRPos.z, HRot, u, v) * 7;
+                    points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x, cRPos.y, HPos.z, cLRot, u, v) * 7;
+                    points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x, HPos.y, cLPos.z, cRRot, u, v) *7;
+
+
 
                 }
             }
 
-           // UpdateRulerVals(HPos, HRot, cLPos, cLRot, cRPos, cRRot);
+
+            // UpdateRulerVals(HPos, HRot, cLPos, cLRot, cRPos, cRRot);
         }
         
     }
