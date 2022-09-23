@@ -50,6 +50,7 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
     GameObject[] points;
     GameObject[] rulerPoints;
     GameObject[] points1, points2, points3;
+    GameObject[] points3DTest;
     float step;
     Vector3 scale;
 
@@ -315,6 +316,16 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
             NetworkServer.Spawn(point);
         }
 
+        points3DTest = new GameObject[resolution * resolution*resolution];
+        for (int i = 0; i < points3.Length; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            //TODO: SET PARENT TO HEAD
+            point.transform.SetParent(transform, false);
+            points3[i] = point;
+            NetworkServer.Spawn(point);
+        }
     }
 
     [Command]
@@ -342,6 +353,10 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
         {
             NetworkServer.Destroy(points3[i]);
         }
+        for (int i = 0; i < points3DTest.Length; i++)
+        {
+            NetworkServer.Destroy(points3[i]);
+        }
     }
 
 
@@ -356,7 +371,7 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
         }
         else
         {
-            float t = Time.time;
+            //float t = Time.time;
             //float step = 2f / resolution;
             for (int i = 0, z = 0; z < resolution; z++)
             {
@@ -368,9 +383,29 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
                     //TODO: if only 2 or 1 clients also need additonal automatic update of cubes to compensate for players
                     //points[i].transform.localPosition = Graphs.TorusSI( HPos,  HRot,  cLPos, cLRot,  cRPos, cRRot,  u, v,t) * 5;
                     //points[i].transform.localPosition = Graphs.movingFigure8(HPos, HRot, cLPos, cLRot, cRPos, cRRot, u, v, t) * 5;
+
+
                     points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x, cLPos.y, cRPos.z, HRot, u, v) * 7;
+                    //points1[i].transform.localRotation = HRot;
+                    points1[i].transform.rotation = HRot;
+
                     points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x, cRPos.y, HPos.z, cLRot, u, v) * 7;
-                    points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x, HPos.y, cLPos.z, cRRot, u, v) *7;
+                    //points2[i].transform.localRotation = cLRot;
+                    points2[i].transform.rotation = cLRot;
+
+                    points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x, HPos.y, cLPos.z, cRRot, u, v) * 7;
+                    points3[i].transform.localRotation = cRRot;
+
+
+                    /*//hmmmm very bad
+                    points1[i].transform.localPosition = Graphs.SphereSI(HPos.x, cLPos.y, cRPos.z, HRot, u, v);
+                    points2[i].transform.localPosition = Graphs.SphereSI(cLPos.x, cRPos.y, HPos.z, cLRot, u, v);
+                    points3[i].transform.localPosition = Graphs.SphereSI(cRPos.x, HPos.y, cLPos.z, cRRot, u, v);
+
+                    //aslo quite bad
+                    points1[i].transform.localPosition = Graphs.movingFigure8Sym(HPos.x, cLPos.y, cRPos.z, HRot, u, v, 7);
+                    points2[i].transform.localPosition = Graphs.movingFigure8Sym(cLPos.x, cRPos.y, HPos.z, cLRot, u, v, 7);
+                    points3[i].transform.localPosition = Graphs.movingFigure8Sym(cRPos.x, HPos.y, cLPos.z, cRRot, u, v, 7);*/
 
 
 
@@ -379,8 +414,23 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
 
 
             // UpdateRulerVals(HPos, HRot, cLPos, cLRot, cRPos, cRRot);
+
+
+            /*for (int i = 0, a = 0; a < resolution; a++)
+            {
+                float v = (a + 0.5f) * step - 1f;
+                for (int b = 0; b < resolution; b++)
+                {
+                    float u = (b + 0.5f) * step - 1f;
+                    for (int c = 0; c < resolution; c++, i++)
+                    {
+                        float w = (c + 0.5f) * step - 1f;
+                        points3DTest[i].transform.localPosition = Graph.Sine2DFunctionSI(HPos.x, cLPos.y, cRPos.z, HRot, u, v, w, 7);
+                    }
+                }
+
+            }*/
         }
-        
     }
 
     void UpdateRulerVals(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)

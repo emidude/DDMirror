@@ -69,6 +69,21 @@ public class Graphs
 		return p;
 	}
 
+	public static Vector3 Sine2DFunctionSI(float x, float y, float z, Quaternion rot, float u, float v, float w, float scale)
+	{
+		Vector3 p;
+
+		p.x = Mathf.Sin(pi* (y + u));		
+		p.x += Mathf.Sin(rot.eulerAngles.x*Mathf.Deg2Rad);
+
+		p.y = Mathf.Sin(pi * (z + v));
+		p.y += Mathf.Sin(rot.eulerAngles.y * Mathf.Deg2Rad);
+
+		p.z = Mathf.Sin(pi * (x + w));
+		p.z = Mathf.Sin(rot.eulerAngles.z * Mathf.Deg2Rad);
+		return p;
+	}
+
 	public static Vector3 MultiSine2DFunction(float x, float z, float t)
 	{
 		Vector3 p;
@@ -154,6 +169,21 @@ public class Graphs
 		p.z = Mathf.Sin(u / 2f) * Mathf.Sin(v) + Mathf.Cos(u / 2f) * Mathf.Sin(2 * v);
 		return p;
 	}
+	
+	public static Vector3 movingFigure8Sym(float x, float y, float z, Quaternion Rot, float u, float v, float scale)
+	{
+		Vector3 p;
+		float r = z;
+		/*t /= 10f;
+		u = pi * (u + t);
+		v = pi * (v + t);*/
+		u = pi * (x + u);
+		v = pi * (y + v);
+		p.x = (r + Mathf.Cos(u / 2f) * Mathf.Sin(v) - Mathf.Sin(u / 2f) * Mathf.Sin(2 * v)) * Mathf.Cos(u) * scale ;
+		p.y = (r + Mathf.Cos(u / 2f) * Mathf.Sin(v) - Mathf.Sin(u / 2f) * Mathf.Sin(2 * v)) * Mathf.Sin(u)  *scale ;
+		p.z = Mathf.Sin(u / 2f) * Mathf.Sin(v) + Mathf.Cos(u / 2f) * Mathf.Sin(2 * v) * scale;
+		return p;
+	}
 
 	public static Vector3 SimpleSymmetric(float x, float y, float z, Quaternion q, float u, float v)
     {
@@ -167,6 +197,49 @@ public class Graphs
         return p;
     }
 
+	//made wierd circle
+	public static Vector3 RotToPos(float x, float y, float z, Quaternion q, float u, float v, float scale)
+	{
+		Vector3 p;
+		/*p.x = Mathf.Sin(pi * (x + u));
+        p.y = Mathf.Sin(pi * (y + v));
+        p.z = Mathf.Sin(pi * (z + u + v));*/
+
+		/*p.x =  Mathf.Sin(pi * (q.eulerAngles.y*0.01f + z + x +  u)) * scale;
+		p.y =  Mathf.Sin(pi * (q.eulerAngles.z * 0.01f + x + y + v)) * scale ;
+		p.z = Mathf.Sin(pi * (q.eulerAngles.x * 0.01f + y + z + u + v)) * scale ;*/
+
+		
+		p.x = Mathf.Sin(pi * (q.y + z + u)) * scale; 
+		p.y = Mathf.Sin(pi * (q.z + x + v)) *scale;
+		p.z =  Mathf.Sin(pi * (q.x+ y + u + v) *scale);
+
+		return p;
+	}
+
+	public static Vector3 SphereSI(float x, float y, float z, Quaternion q, float u, float v)
+	{
+		Vector3 p;
+		float t = q.eulerAngles.x;
+		float a = 0.8f;
+		a = q.eulerAngles.y;
+		float b = 6f;
+		b = q.eulerAngles.z;
+		float c = 0.1f;
+		c = x;
+		float d = 0.5f;
+		d = y;
+		float e = 4f;
+		e = z;
+
+		float r = a + Mathf.Sin(pi * (b * u + t)) * c;
+		r += Mathf.Sin(pi * (e * v + t)) * c;
+		float s = r * Mathf.Cos(pi * d * v);
+		p.x = s * Mathf.Sin(pi * u);
+		p.y = r * Mathf.Sin(pi * d * v);
+		p.z = s * Mathf.Cos(pi * u);
+		return p;
+	}
 
 	/*public static Vector3 BoysSurfaceSI(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR, float x, float z, float t)
 	{

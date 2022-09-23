@@ -2,6 +2,8 @@
 using Valve.VR;
 using UnityEngine.Networking;
 using Mirror;
+using System;
+
 public class Graph : NetworkBehaviour {
 
 	public Transform pointPrefab;
@@ -245,7 +247,8 @@ public class Graph : NetworkBehaviour {
 		return p;
 	}
 
-	
-
-
+    internal static Vector3 Sine2DFunctionSI(float x, float y, float z, Quaternion hRot, float u, float v1, float w, int v2)
+    {
+        throw new NotImplementedException();
+    }
 }
