@@ -153,7 +153,7 @@ public class Graphs
 		return p;
 	}
 
-	
+	//static void Vector3 calcPos()
 
 	public static Vector3 movingFigure8(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, float u, float v, float t)
 	{
@@ -185,7 +185,7 @@ public class Graphs
 		return p;
 	}
 
-	public static Vector3 SimpleSymmetric(float x, float y, float z, Quaternion q, float u, float v)
+	public static Vector3 SimpleSymmetric(float x, float y, float z, float u, float v)
     {
 		Vector3 p;
         /*p.x = Mathf.Sin(pi * (x + u));
@@ -193,28 +193,64 @@ public class Graphs
         p.z = Mathf.Sin(pi * (z + u + v));*/
         p.x = Mathf.Sin(pi * (y + u));
         p.y = Mathf.Sin(pi * (z + v));
-        p.z = Mathf.Sin(pi * (x + u + v));
+        p.z = Mathf.Sin(pi * (x + (u + v)));
         return p;
     }
 
-	//made wierd circle
-	public static Vector3 RotToPos(float x, float y, float z, Quaternion q, float u, float v, float scale)
+	public static Vector3 SimpleSymmetric3D(float x, float y, float z, float u, float v, float w)
 	{
 		Vector3 p;
 		/*p.x = Mathf.Sin(pi * (x + u));
         p.y = Mathf.Sin(pi * (y + v));
         p.z = Mathf.Sin(pi * (z + u + v));*/
+		p.x = Mathf.Sin(pi * (y + u));
+		p.y = Mathf.Sin(pi * (z + v));
+		p.z = Mathf.Sin(pi * (x + w));
+		return p;
+	}
+	//not good
+	/*public static Vector3 TestMove2D(float x, float y, float z, float u, float v)
+	{
+		Vector3 p;
+		p.x = x+ u;
+		p.y = y + v;
+		p.z = u;
+		return p;
+	}*/
 
-		/*p.x =  Mathf.Sin(pi * (q.eulerAngles.y*0.01f + z + x +  u)) * scale;
+	//made wierd circle
+	public static Vector3 RotToPos(float x, float y, float z, float u, float v, float scale)
+	{
+		Vector3 p;
+        /*p.x = Mathf.Sin(pi * (x + u));
+        p.y = Mathf.Sin(pi * (y + v));
+        p.z = Mathf.Sin(pi * (z + u + v));*/
+
+        /*p.x =  Mathf.Sin(pi * (q.eulerAngles.y*0.01f + z + x +  u)) * scale;
 		p.y =  Mathf.Sin(pi * (q.eulerAngles.z * 0.01f + x + y + v)) * scale ;
 		p.z = Mathf.Sin(pi * (q.eulerAngles.x * 0.01f + y + z + u + v)) * scale ;*/
 
-		
-		p.x = Mathf.Sin(pi * (q.y + z + u)) * scale; 
-		p.y = Mathf.Sin(pi * (q.z + x + v)) *scale;
-		p.z =  Mathf.Sin(pi * (q.x+ y + u + v) *scale);
 
-		return p;
+        /*p.x = Mathf.Sin(pi * (q.y + z + u)) * scale; 
+		p.y = Mathf.Sin(pi * (q.z + x + v)) *scale;
+		p.z =  Mathf.Sin(pi * (q.x+ y + u + v) *scale);*/
+
+        p.x = Mathf.Sin(pi * (y + u)) * scale;
+        p.y = Mathf.Sin(pi * (z + v)) * scale;
+        p.z = Mathf.Sin(pi * (x + u + v) * scale);
+
+        return p;
+	}
+
+	public static Quaternion PosToRot(float x, float y, float z, float u, float v, float scale)
+    {
+		Quaternion q;
+		q.x = u;
+		q.y = x * 0.1f;
+		q.z = y * 0.1f;
+		q.w = z * 0.1f;
+		return q;
+
 	}
 
 	public static Vector3 SphereSI(float x, float y, float z, Quaternion q, float u, float v)

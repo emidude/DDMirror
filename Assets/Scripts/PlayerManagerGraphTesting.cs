@@ -47,6 +47,7 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
     public bool ready = false;
 
     int resolution = 10;
+    int resolution3D = 3;
     GameObject[] points;
     GameObject[] rulerPoints;
     GameObject[] points1, points2, points3;
@@ -157,7 +158,7 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
                 }
                 else
                 {
-                    CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.localPosition, cL.transform.rotation, cR.transform.localPosition, cR.transform.rotation);
                     //CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation,cL.GetVelocity(), cR.GetVelocity(),cL.GetAngularVelocity(),cR.GetAngularVelocity() );
                 //    UpdateRulerVals(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                 }
@@ -316,16 +317,17 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
             NetworkServer.Spawn(point);
         }
 
-        points3DTest = new GameObject[resolution * resolution*resolution];
-        for (int i = 0; i < points3.Length; i++)
+        /*points3DTest = new GameObject[resolution3D * resolution3D * resolution3D];
+        for (int i = 0; i < points3DTest.Length; i++)
         {
+            Debug.Log("spawning i " + i);
             GameObject point = Instantiate(cubePf);
             point.transform.localScale = scale;
             //TODO: SET PARENT TO HEAD
             point.transform.SetParent(transform, false);
-            points3[i] = point;
+            points3DTest[i] = point;
             NetworkServer.Spawn(point);
-        }
+        }*/
     }
 
     [Command]
@@ -353,10 +355,10 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
         {
             NetworkServer.Destroy(points3[i]);
         }
-        for (int i = 0; i < points3DTest.Length; i++)
+       /* for (int i = 0; i < points3DTest.Length; i++)
         {
-            NetworkServer.Destroy(points3[i]);
-        }
+            NetworkServer.Destroy(points3DTest[i]);
+        }*/
     }
 
 
@@ -371,6 +373,7 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
         }
         else
         {
+            float distArmsApart = Vector3.Distance(cLPos , cRPos) + 3;
             //float t = Time.time;
             //float step = 2f / resolution;
             for (int i = 0, z = 0; z < resolution; z++)
@@ -380,22 +383,51 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
                 {
                     float u = (x + 0.5f) * step - 1f;
 
-                    //TODO: if only 2 or 1 clients also need additonal automatic update of cubes to compensate for players
+
                     //points[i].transform.localPosition = Graphs.TorusSI( HPos,  HRot,  cLPos, cLRot,  cRPos, cRRot,  u, v,t) * 5;
                     //points[i].transform.localPosition = Graphs.movingFigure8(HPos, HRot, cLPos, cLRot, cRPos, cRRot, u, v, t) * 5;
 
 
-                    points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x, cLPos.y, cRPos.z, HRot, u, v) * 7;
+                    //kind of ok: could have scale factor - here 7 based on locsl distyance between controllers or sth
+                    points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x / distArmsApart, cLPos.y / distArmsApart, cRPos.z / distArmsApart, u, v) * (distArmsApart);
                     //points1[i].transform.localRotation = HRot;
-                    points1[i].transform.rotation = HRot;
+                    //points1[i].transform.rotation = Graphs.PosToRot(HPos.x, cLPos.y, cRPos.z, u, v, 7);
 
-                    points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x, cRPos.y, HPos.z, cLRot, u, v) * 7;
+                    distArmsApart = Vector3.Distance(HPos, cLPos)+3;
+                    points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x / distArmsApart, cRPos.y / distArmsApart, HPos.z / distArmsApart, u, v) *  distArmsApart;
+                    //points2[i].transform.localRotation = cLRot;
+                    // points2[i].transform.rotation = cLRot;
+                    distArmsApart = Vector3.Distance(HPos, cRPos)+3;
+
+                    points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart,  u, v) *  distArmsApart;
+                    //points3[i].transform.localRotation = cRRot;
+
+                    //unjumbled: more identifiable as human parts
+                    /*points1[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x / 7, cLPos.y / 7, cLPos.z / 7, u, v) * 7;
+                    points1[i].transform.localRotation = cLRot;
+                    //
+                    // points1[i].transform.rotation = Graphs.PosToRot(HPos.x, cLPos.y, cRPos.z, u, v, 7);
+
+                    points2[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / 7, cRPos.y / 7, cRPos.z / 7, u, v) * 7;
+                    //
+                    points2[i].transform.rotation = cRRot;
+
+                    points3[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x / 7, HPos.y / 7, HPos.z / 7, u, v) * 7;
+                    //points3[i].transform.localRotation = cRRot;
+                    points3[i].transform.localRotation = HRot;*/
+
+
+                    //too squahed
+                    /*points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x , cLPos.y , cRPos.z, HRot, u, v) ;
+                    //points1[i].transform.localRotation = HRot;
+                    points1[i].transform.rotation = Graphs.PosToRot(HPos.x, cLPos.y, cRPos.z, u, v, 7);
+
+                    points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x , cRPos.y , HPos.z , cLRot, u, v) ;
                     //points2[i].transform.localRotation = cLRot;
                     points2[i].transform.rotation = cLRot;
 
-                    points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x, HPos.y, cLPos.z, cRRot, u, v) * 7;
-                    points3[i].transform.localRotation = cRRot;
-
+                    points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x , HPos.y , cLPos.z , cRRot, u, v);
+                    points3[i].transform.localRotation = cRRot;*/
 
                     /*//hmmmm very bad
                     points1[i].transform.localPosition = Graphs.SphereSI(HPos.x, cLPos.y, cRPos.z, HRot, u, v);
@@ -415,7 +447,7 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
 
             // UpdateRulerVals(HPos, HRot, cLPos, cLRot, cRPos, cRRot);
 
-
+            //too heavy
             /*for (int i = 0, a = 0; a < resolution; a++)
             {
                 float v = (a + 0.5f) * step - 1f;
@@ -425,7 +457,8 @@ public class PlayerManagerGraphTesting : NetworkBehaviour
                     for (int c = 0; c < resolution; c++, i++)
                     {
                         float w = (c + 0.5f) * step - 1f;
-                        points3DTest[i].transform.localPosition = Graph.Sine2DFunctionSI(HPos.x, cLPos.y, cRPos.z, HRot, u, v, w, 7);
+                        Debug.Log("i = " + i);
+                        points3DTest[i].transform.localPosition = Graphs.TestMove3D(HPos.x, cLPos.y, cRPos.z, u, v, w);
                     }
                 }
 
