@@ -1,8 +1,0 @@
-songname,t,headX,headY,headZ,headRotX,headRotY,headRotZ,leftHandX,leftHandY,leftHandZ,leftHandRotX,leftHandRotY,leftHandRotZ,leftHandVelX,leftHandVelY,leftHandVelZ,leftHandAngVelX,leftHandAngVelY,leftHandAngVelZ,rightHandX,rightHandY,rightHandZ,rightHandRotX,rightHandRotY,rightHandRotZ,rightHandVelX,rightHandVelY,rightHandVelZ,rightHandAngVelX,rightHandAngVelY,rightHandAngVelZ
-
-,0,0,0,0,0,0,0,-0.25,1,0,0,0,0,0,0,0,0,0,0,0.25,1,0,0,0,0,0,0,0,0,0,0
-
-,0.02,0,0,0,0,0,0,-0.25,1,0,0,0,0,0,0,0,0,0,0,0.25,1,0,0,0,0,0,0,0,0,0,0
-
-,0.3533334,0,0,0,0,0,0,0.5315354,0.08382308,0.05560631,348.0357,35.99355,345.0678,0.002856901,-0.001876758,0.0009271852,0.00204899,0.004154789,0.0001563434,0.4145133,0.09964967,0.08687139,346.5263,22.26154,355.8714,-0.004527258,0.004484532,-0.001360302,-0.002392077,-0.003798565,-0.002683288
-
