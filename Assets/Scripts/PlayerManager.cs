@@ -47,7 +47,10 @@ public class PlayerManager : NetworkBehaviour
     public bool ready = false;
 
     int resolution = 10;
-    GameObject[] points;
+    //GameObject[] points;
+    GameObject[] points1, points2, points3;
+    float step;
+    Vector3 scale;
 
     //public bool bodyShapes = false;
     public bool bodyShapes;
@@ -56,7 +59,11 @@ public class PlayerManager : NetworkBehaviour
     // Players List to manage playerNumber  
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
 
-  
+    private Vector3[] _vertices;
+    public GameObject[] vertices1Pf, vertices2Pf, vertices3Pf;
+    bool hypercubeRotations = true;
+
+
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -116,6 +123,9 @@ public class PlayerManager : NetworkBehaviour
         cR = localRightHand.GetComponent<SteamVR_Behaviour_Pose>();
 
 
+        step = 2f / resolution;
+        scale = Vector3.one * step;
+
         CmdSpawnCubes();
         //CmdUpdateCubes(cL.GetVelocity(),cR.GetVelocity());
         CmdDestroyCubes();
@@ -123,6 +133,7 @@ public class PlayerManager : NetworkBehaviour
         CmdSpawnHeadAndHands();
         CmdDestroyHeadAndHands();
 
+       
        
         CmdSetCubesCondition();
     }
@@ -146,7 +157,9 @@ public class PlayerManager : NetworkBehaviour
                 }
                 else
                 {
-                    CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation,cL.GetVelocity(), cR.GetVelocity(),cL.GetAngularVelocity(),cR.GetAngularVelocity() );
+                    //CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation,cL.GetVelocity(), cR.GetVelocity(),cL.GetAngularVelocity(),cR.GetAngularVelocity() );
+                    CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+
                 }
             }           
         }
@@ -233,65 +246,143 @@ public class PlayerManager : NetworkBehaviour
     void CmdSpawnCubes()
     {
         Debug.Log("spoawing cubes");
-        float step = 2f / resolution;
-        Vector3 scale = Vector3.one * step;
+       
         //transform.position = head.position; <-TODO:  need to fix
         transform.position = Vector3.zero;
 
-        points = new GameObject[resolution * resolution];
-        for (int i = 0; i < points.Length; i++)
+        points1 = new GameObject[resolution * resolution];
+        for (int i = 0; i < points1.Length; i++)
         {
             GameObject point = Instantiate(cubePf);
             point.transform.localScale = scale;
+            //TODO: SET PARENT TO HEAD
             point.transform.SetParent(transform, false);
-            points[i] = point;
+            points1[i] = point;
             NetworkServer.Spawn(point);
         }
-        /*if(points == null)
+
+        points2 = new GameObject[resolution * resolution];
+        for (int i = 0; i < points2.Length; i++)
         {
-            Debug.Log("points == nulll");
-            for(int i = 0; i < points.Length; i++)
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            //TODO: SET PARENT TO HEAD
+            point.transform.SetParent(transform, false);
+            points2[i] = point;
+            NetworkServer.Spawn(point);
+        }
+
+        points3 = new GameObject[resolution * resolution];
+        for (int i = 0; i < points3.Length; i++)
+        {
+            GameObject point = Instantiate(cubePf);
+            point.transform.localScale = scale;
+            //TODO: SET PARENT TO HEAD
+            point.transform.SetParent(transform, false);
+            points3[i] = point;
+            NetworkServer.Spawn(point);
+        }
+
+        if (hypercubeRotations)
+        {
+            _vertices = new Vector3[UtilsGeom4D.kTesseractPoints.Length];
+            vertices1Pf = new GameObject[UtilsGeom4D.kTesseractPoints.Length];
+            vertices2Pf = new GameObject[UtilsGeom4D.kTesseractPoints.Length];
+            vertices3Pf = new GameObject[UtilsGeom4D.kTesseractPoints.Length];
+
+
+            for (int i = 0; i < vertices1Pf.Length; i++)
             {
-                Debug.Log("put in points i x corrd= " + points[i].transform.position.x);
+                GameObject v1 = Instantiate(cubePf);
+                v1.transform.localScale = Vector3.one * 0.4f;
+                GameObject v2 = Instantiate(cubePf);
+                v2.transform.localScale = Vector3.one * 0.4f;
+                GameObject v3 = Instantiate(cubePf);
+                v3.transform.localScale = Vector3.one * 0.4f;
+                vertices1Pf[i] = v1;
+                vertices2Pf[i] = v2;
+                vertices3Pf[i] = v3;
+                NetworkServer.Spawn(v1);
+                NetworkServer.Spawn(v2);
+                NetworkServer.Spawn(v3);
+
             }
-        }*/
-        
+        }
+
     }
+
 
     [Command]
     public void CmdDestroyCubes()
     {
-        for (int i = 0; i < points.Length; i++)
+        for (int i = 0; i < points1.Length; i++)
         {
-         //   NetworkServer.UnSpawn(points[i]); //leaves visibele but unresponsive
-            NetworkServer.Destroy(points[i]);
+            NetworkServer.Destroy(points1[i]);
+        }
+        for (int i = 0; i < points2.Length; i++)
+        {
+            NetworkServer.Destroy(points2[i]);
+        }
+        for (int i = 0; i < points3.Length; i++)
+        {
+            NetworkServer.Destroy(points3[i]);
+        }
+
+        if (hypercubeRotations)
+        {
+            for (int i = 0; i < vertices1Pf.Length; i++)
+            {
+                NetworkServer.Destroy(vertices1Pf[i]);
+                NetworkServer.Destroy(vertices2Pf[i]);
+                NetworkServer.Destroy(vertices3Pf[i]);
+            }
         }
     }
 
     [Command]
-    void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR)
+    //void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR)
+    void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     {
-        if (points == null)
+        if (points1 == null || points2 == null || points3 == null )
         {
             Debug.Log("points array nullhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         }
         else
         {
-            float t = Time.time;
-            float step = 2f / resolution;
-            for (int i = 0, z = 0; z < resolution; z++)
+            //float t = Time.time;
+            //float step = 2f / resolution;
+            if (hypercubeRotations)
             {
-                float v = (z + 0.5f) * step - 1f;
-                for (int x = 0; x < resolution; x++, i++)
+                UpdateSimpleSinPoints(cLPos, cRPos, HPos);
+                Update4DPoints(cLRot, cRRot, HRot, 0.01f, localHead.transform, cL.transform, cR.transform);
+            }
+            else
+            {
+                for (int i = 0, z = 0; z < resolution; z++)
                 {
-                    float u = (x + 0.5f) * step - 1f;
+                    float v = (z + 0.5f) * step - 1f;
+                    for (int x = 0; x < resolution; x++, i++)
+                    {
+                        float u = (x + 0.5f) * step - 1f;
 
-                    //TODO: if only 2 or 1 clients also need additonal automatic update of cubes to compensate for players
-                    points[i].transform.localPosition = Graphs.TorusSI( HPos,  HRot,  cLPos, cLRot,  cRPos, cRRot,  vL,  vR,  avL,  avR, u, v,t) * 5;
+                        float m = 5;
+                        //points1[i].transform.localPosition = Graphs.TorusSI( HPos,  HRot,  cLPos, cLRot,  cRPos, cRRot,  vL,  vR,  avL,  avR, u, v,t) * 5;
+                        float dist = Vector3.Distance(cLPos, cRPos);
+                        //points1[i].transform.localPosition = Graphs.TorusSI2(dist, HPos.x/dist, HPos.y/dist, HPos.z/dist, HRot.x, HRot.y, HRot.z, HRot.w, u, v) * 5;
+                        points1[i].transform.localPosition = Graphs.TorusSI2(dist, HPos.x / m, HPos.y / m, HPos.z / m, HRot.x, HRot.y, HRot.z, HRot.w, u, v) * m;
+                        dist = Vector3.Distance(HPos, cRPos);
+                        //points2[i].transform.localPosition = Graphs.TorusSI2(dist, cLPos.x/dist, cLPos.y/dist, cLPos.z/dist, cLRot.x, cLRot.y, cLRot.z, cLRot.w, u, v) * 5;
+                        points2[i].transform.localPosition = Graphs.TorusSI2(dist, cLPos.x / m, cLPos.y / m, cLPos.z / m, cLRot.x, cLRot.y, cLRot.z, cLRot.w, u, v) * m;
 
-
+                        dist = Vector3.Distance(HPos, cLPos);
+                        points3[i].transform.localPosition = Graphs.TorusSI2(dist, cRPos.x / m, cRPos.y / m, cRPos.z / m, cRRot.x, cRRot.y, cRRot.z, cRRot.w, u, v) * m;
+                    }
                 }
             }
+            
+
+            
+            
         }
         
     }
@@ -438,16 +529,131 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
-  /*  public void LogSong(string song)
+    void UpdateSimpleSinPoints(Vector3 cLPos, Vector3 cRPos, Vector3 HPos)
     {
-        if (isLocalPlayer)
+        float distArmsApart = Vector3.Distance(cLPos, cRPos) + 3;
+        /*float t = Time.time;
+        float step = 2f / resolution;*/
+        for (int i = 0, z = 0; z < resolution; z++)
         {
-            CL.songName = song;
-            Debug.Log("logged song + " + CL.songName);
-        }
-    }*/
+            float v = (z + 0.5f) * step - 1f;
+            for (int x = 0; x < resolution; x++, i++)
+            {
+                float u = (x + 0.5f) * step - 1f;
 
-   
+                points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x / distArmsApart, cLPos.y / distArmsApart, cRPos.z / distArmsApart, u, v) * (distArmsApart);
+                distArmsApart = Vector3.Distance(HPos, cLPos) + 3;
+                points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x / distArmsApart, cRPos.y / distArmsApart, HPos.z / distArmsApart, u, v) * distArmsApart;
+                distArmsApart = Vector3.Distance(HPos, cRPos) + 3;
+                points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
+            }
+        }
+    }
+
+    void UpdateTorusPoints(Vector3 cLPos, Vector3 cRPos, Vector3 HPos, Quaternion HRot, Quaternion cLRot, Quaternion cRRot, float m)
+    {
+        for (int i = 0, z = 0; z < resolution; z++)
+        {
+            float v = (z + 0.5f) * step - 1f;
+            for (int x = 0; x < resolution; x++, i++)
+            {
+                float u = (x + 0.5f) * step - 1f;
+
+                //points1[i].transform.localPosition = Graphs.TorusSI( HPos,  HRot,  cLPos, cLRot,  cRPos, cRRot,  vL,  vR,  avL,  avR, u, v,t) * 5;
+                float dist = Vector3.Distance(cLPos, cRPos);
+                //points1[i].transform.localPosition = Graphs.TorusSI2(dist, HPos.x/dist, HPos.y/dist, HPos.z/dist, HRot.x, HRot.y, HRot.z, HRot.w, u, v) * 5;
+                points1[i].transform.localPosition = Graphs.TorusSI2(dist, HPos.x / m, HPos.y / m, HPos.z / m, HRot.x, HRot.y, HRot.z, HRot.w, u, v) * m;
+                dist = Vector3.Distance(HPos, cRPos);
+                //points2[i].transform.localPosition = Graphs.TorusSI2(dist, cLPos.x/dist, cLPos.y/dist, cLPos.z/dist, cLRot.x, cLRot.y, cLRot.z, cLRot.w, u, v) * 5;
+                points2[i].transform.localPosition = Graphs.TorusSI2(dist, cLPos.x / m, cLPos.y / m, cLPos.z / m, cLRot.x, cLRot.y, cLRot.z, cLRot.w, u, v) * m;
+
+                dist = Vector3.Distance(HPos, cLPos);
+                points3[i].transform.localPosition = Graphs.TorusSI2(dist, cRPos.x / m, cRPos.y / m, cRPos.z / m, cRRot.x, cRRot.y, cRRot.z, cRRot.w, u, v) * m;
+            }
+        }        
+    }
+
+    void UpdateCubes4d(Quaternion q1, Quaternion q2, float ddd, Transform viewPoint)
+    {
+        /*viewPoint = localHead.transform;
+        viewPoint.position *= ddd;*/
+        /*rotationXW = cL.transform.rotation.eulerAngles.x;
+        rotationXY = cL.transform.rotation.eulerAngles.y;
+        rotationYW = cL.transform.rotation.eulerAngles.z;
+        rotationYZ = cR.transform.rotation.eulerAngles.x;
+        rotationZW = cR.transform.rotation.eulerAngles.y;
+        rotationZX = cR.transform.rotation.eulerAngles.z;*/
+        float rotationXW = q1.eulerAngles.x * ddd;
+        float rotationXY = q1.eulerAngles.y * ddd;
+        float rotationYW = q1.eulerAngles.z * ddd;
+        float rotationYZ = q2.eulerAngles.x * ddd;
+        float rotationZW = q2.eulerAngles.y * ddd;
+        float rotationZX = q2.eulerAngles.z * ddd;
+        GenerateVertices(_vertices, rotationXY, rotationYZ, rotationZX, rotationXW, rotationYW, rotationZW, viewPoint);      
+    }
+    void Update4DPoints(Quaternion cLRot, Quaternion cRRot, Quaternion HRot, float scaling, Transform headT, Transform LT, Transform RT)
+    {
+        
+        UpdateCubes4d(cLRot, cLRot, scaling, headT);
+        for (int a = 0; a < vertices1Pf.Length; a++)
+        {
+            vertices1Pf[a].transform.position = _vertices[a] * scaling;
+        }
+        UpdateCubes4d(cRRot, HRot, scaling, LT);
+        for (int a = 0; a < vertices2Pf.Length; a++)
+        {
+            vertices2Pf[a].transform.position = _vertices[a] * scaling;
+        }
+        UpdateCubes4d(cLRot, HRot, scaling, RT);
+        for (int a = 0; a < vertices3Pf.Length; a++)
+        {
+            vertices3Pf[a].transform.position = _vertices[a] * scaling;
+        }
+    }
+
+    public void GenerateVertices(Vector3[] vertices, float rotationXY, float rotationYZ, float rotationZX, float rotationXW, float rotationYW, float rotationZW , Transform viewPoint )
+    {
+        // setup rotations
+        Matrix4x4 matrixXY = UtilsGeom4D.CreateRotationMatrixXY(rotationXY * Mathf.Deg2Rad);
+        Matrix4x4 matrixYZ = UtilsGeom4D.CreateRotationMatrixYZ(rotationYZ * Mathf.Deg2Rad);
+        Matrix4x4 matrixZX = UtilsGeom4D.CreateRotationMatrixZX(rotationZX * Mathf.Deg2Rad);
+
+        Matrix4x4 matrixXW = UtilsGeom4D.CreateRotationMatrixXW(rotationXW * Mathf.Deg2Rad);
+        Matrix4x4 matrixYW = UtilsGeom4D.CreateRotationMatrixYW(rotationYW * Mathf.Deg2Rad);
+        Matrix4x4 matrixZW = UtilsGeom4D.CreateRotationMatrixZW(rotationZW * Mathf.Deg2Rad);
+
+        Matrix4x4 matrix = matrixXY * matrixYZ * matrixZX * matrixXW * matrixYW * matrixZW;
+
+        // calculate view point vectors
+        Vector3 tp = transform.position;
+        /*Vector3 co = viewPoint.right;
+        Vector3 cp = viewPoint.position;    
+        Vector3 cu = viewPoint.up;*/
+        Vector3 cp = new Vector3(0, 1, -1);
+        Vector3 cu = Vector3.up;
+        Vector3 co = Vector3.right;
+
+
+
+        Vector4 toDir = new Vector4(tp.x, tp.y, tp.z, 0);
+        Vector4 fromDir = new Vector4(cp.x, cp.y, cp.z, 0);
+        Vector4 upDir = new Vector4(cu.x, cu.y, cu.z, 0);
+        Vector4 overDir = new Vector4(co.x, co.y, co.z, 0);
+        float viewingAngle = 20;
+        // update mesh vertices based on rotations and view directions
+        UtilsGeom4D.ProjectTo3DPerspective(UtilsGeom4D.kTesseractPoints, matrix, ref vertices, viewingAngle, fromDir, toDir, upDir, overDir);
+    }
+
+    /*  public void LogSong(string song)
+      {
+          if (isLocalPlayer)
+          {
+              CL.songName = song;
+              Debug.Log("logged song + " + CL.songName);
+          }
+      }*/
+
+
 
 
 }
