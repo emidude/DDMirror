@@ -8,7 +8,7 @@ public class PlayerManager : NetworkBehaviour
 {
     public PlayerSync playerSync;
 
-    public int[] songOrdering = { 2, 4, 5 };
+    public int[] songOrdering = { 1, 8, 2 };
 
     [SerializeField] AudioClip audio;
     //bool readyToStart = false;
