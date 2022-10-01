@@ -7,9 +7,9 @@ using Valve.VR;
 public class PlayerManager : NetworkBehaviour
 {
     public PlayerSync playerSync;
-    //public int[] combinations = new int[6];
-    public int[] songOrdering = new int[6];
-   //private System.Random _random = new System.Random();
+
+    public int[] songOrdering = { 2, 4, 5 };
+
     [SerializeField] AudioClip audio;
     //bool readyToStart = false;
     GameObject audioObject;
@@ -34,8 +34,8 @@ public class PlayerManager : NetworkBehaviour
     [SerializeField] private GameObject networkedRightHand;
 
     GameObject theLocalPlayer;
-    SteamVR_TrackedObject trackedObjHead, trackedObjLeft, trackedObjRight;
-    bool isLinkedToVR;
+    /*SteamVR_TrackedObject trackedObjHead, trackedObjLeft, trackedObjRight;
+    bool isLinkedToVR;*/
 
     GameObject defaultHead, defaultLeftHand, defaultRightHand;
     GameObject HeadGO, LeftHandGO, RightHandGO;

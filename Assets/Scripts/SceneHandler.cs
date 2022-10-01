@@ -26,6 +26,7 @@ public class SceneHandler : NetworkBehaviour
     public GameObject musicPrefPanel;
     public GameObject dancePrefPanel;
     public GameObject answeredQnPanel;
+    public GameObject finishedSessionPanel;
 
     int currentQn = 0;
     bool preFirstSong = true;
@@ -34,6 +35,8 @@ public class SceneHandler : NetworkBehaviour
     GameObject AHO;*/
     public ContinuousLogger CLogger;
     public LinearMapping musicPreference, dancePreference;
+
+    int curentSong = 0;
 
     void Awake()
     {
@@ -209,20 +212,29 @@ public class SceneHandler : NetworkBehaviour
 
     public void FinishedSong()
     {
+        curentSong++;
+
         Debug.Log("finished song");
         panelParent.SetActive(true);
 
-        panelstart.SetActive(false);
-        musicPrefPanel.SetActive(true);
-        dancePrefPanel.SetActive(false);
-        answeredQnPanel.SetActive(false);
-
-        //numPlayersPanel.SetActive(true);
-        
-        ShowLaserPointer();
-
-        //disable visuals;
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+
+        if (curentSong < PM.songOrdering.Length)
+        {
+            //numPlayersPanel.SetActive(true);
+            panelstart.SetActive(false);
+            musicPrefPanel.SetActive(true);
+            dancePrefPanel.SetActive(false);
+            answeredQnPanel.SetActive(false);
+
+            ShowLaserPointer();
+        }
+        else
+        {
+            finishedSessionPanel.SetActive(true);
+        }
+   
+        //disable visuals;        
         PM.questionTime = true;
         if (PM.bodyShapes)
         {

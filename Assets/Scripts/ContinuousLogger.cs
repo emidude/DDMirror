@@ -13,13 +13,14 @@ public class ContinuousLogger : MonoBehaviour {
     public SteamVR_Behaviour_Pose leftHand, rightHand;
 
     public string songName;
-    public string participantNumber;
     public string sessionString;
     public string condition;
     public string songJustFinished;
-    
+
+    public string participantNumber;
     public int sessionNumber;
     public int pcNumber;
+    public int studyOrder;
 
     private StreamWriter answersWriter;
     int currentAnswer = 0;
@@ -42,6 +43,7 @@ public class ContinuousLogger : MonoBehaviour {
 
     static string[] answersHeader = {
         "particpantNumber",
+        "studyOrder",
         "session",
         "condition",
         "songname",
@@ -54,6 +56,7 @@ public class ContinuousLogger : MonoBehaviour {
     struct answer
     {
         public string particpantNum;
+        public string studyOrder;
         public string sesh;
         public string cond;
         public string songnam;
@@ -161,11 +164,12 @@ public class ContinuousLogger : MonoBehaviour {
         for (int s = 0; s < 20; s++)
         {
             values[0] = answers[s].particpantNum;
-            values[1] = answers[s].sesh;
-            values[2] = answers[s].cond;
-            values[3] = answers[s].songnam;
-            values[4] = answers[s].musicPref;
-            values[5] = answers[s].dancePref;
+            values[1] = answers[s].studyOrder;
+            values[2] = answers[s].sesh;
+            values[3] = answers[s].cond;
+            values[4] = answers[s].songnam;
+            values[5] = answers[s].musicPref;
+            values[6] = answers[s].dancePref;
 
             string csv = String.Join(",", values);
             answersWriter.WriteLine(csv + "\n");
@@ -177,6 +181,7 @@ public class ContinuousLogger : MonoBehaviour {
     public void UpdateAnswers(float musicPreference, float dancePreference)
     {
         answers[currentAnswer].particpantNum = participantNumber;
+        answers[currentAnswer].studyOrder = studyOrder.ToString();
         answers[currentAnswer].sesh = sessionString;
         answers[currentAnswer].cond = condition;
         answers[currentAnswer].songnam = songJustFinished;
