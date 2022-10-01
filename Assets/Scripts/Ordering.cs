@@ -85,7 +85,7 @@ public class Ordering: MonoBehaviour
 
         string date = DateTime.Now.ToString("yyyyMMdd_HHmmss");
         string filename = "ORDERING_" +  date ;
-        OrderWriter = new StreamWriter(filename + ".csv");
+        OrderWriter = new StreamWriter(filename);
         OrderWriter.WriteLine(String.Join(",", OrderHeader) + "\n");
 
         string[] values = new string[4];

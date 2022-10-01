@@ -1,0 +1,10 @@
+order,session number,session name,song order
+
+0,3,E_E,{ 1 , 7 , 4 };
+
+1,0,A_A,{ 0 , 3 , 9 };
+
+2,1,A_E,{ 8 , 2 , 11 };
+
+3,2,E_A,{ 5 , 6 , 10 };
+
