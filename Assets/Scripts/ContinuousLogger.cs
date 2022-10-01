@@ -18,9 +18,10 @@ public class ContinuousLogger : MonoBehaviour {
     public string songJustFinished;
 
     public string participantNumber;
-    public int sessionNumber;
     public int pcNumber;
     public int studyOrder;
+    public int sessionNumber;
+
 
     private StreamWriter answersWriter;
     int currentAnswer = 0;
