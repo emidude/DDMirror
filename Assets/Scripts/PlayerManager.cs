@@ -80,9 +80,10 @@ public class PlayerManager : NetworkBehaviour
     {
         base.OnStartLocalPlayer();
 
-        //SET ORDERING:
+        
+        /*//SET ORDERING: <- NO DONE ABOVE
         songOrdering = new int[] { 4, 1, 2, 3, 6, 9};
-        //combinations = new int[] { 4, 2, 1, 3, 0, 0};
+        //combinations = new int[] { 4, 2, 1, 3, 0, 0};*/
 
         //AUDIO:
         audioObject = GameObject.FindGameObjectWithTag("audioHndlr");
