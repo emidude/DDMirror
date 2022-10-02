@@ -146,7 +146,7 @@ public class PlayerManager : NetworkBehaviour
         {
             if (!questionTime)
             {
-                if (float.IsNaN(cL.GetVelocity().x) || float.IsNaN(cL.GetVelocity().y) || float.IsNaN(cL.GetVelocity().z) || float.IsNaN(cR.GetVelocity().x) || float.IsNaN(cR.GetVelocity().y) || float.IsNaN(cR.GetVelocity().z))
+                if (float.IsNaN(localHead.transform.position.x) || float.IsNaN(localHead.transform.position.y) || float.IsNaN(localHead.transform.position.z) || float.IsNaN(cL.transform.position.x) || float.IsNaN(cL.transform.position.y) || float.IsNaN(cL.transform.position.z) || float.IsNaN(cR.transform.position.x) || float.IsNaN(cR.transform.position.y) || float.IsNaN(cR.transform.position.z))
                 {
                    // Debug.Log("NAN");
                 }

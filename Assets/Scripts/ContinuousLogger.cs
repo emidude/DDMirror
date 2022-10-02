@@ -161,7 +161,7 @@ public class ContinuousLogger : MonoBehaviour {
         answersWriter = new StreamWriter(filename + ".csv");
         answersWriter.WriteLine(String.Join(",", answersHeader) + "\n");
 
-        string[] values = new string[6];
+        string[] values = new string[7];
         for (int s = 0; s < 20; s++)
         {
             values[0] = answers[s].particpantNum;
