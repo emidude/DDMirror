@@ -422,9 +422,35 @@ public class PlayerManager : NetworkBehaviour
                 }
 
 
-                UpdateSimpleSinPoints(cLPos,cRPos,HPos);
+                //UpdateSimpleSinPoints(cLPos,cRPos,HPos);
+                float distArmsApart = Vector3.Distance(cLPos, cRPos) * 2f + 3;
+                /*float t = Time.time;
+                float step = 2f / resolution;*/
+                for (int i = 0, z = 0; z < resolution; z++)
+                {
+                    float v = ((z + 0.5f) * step - 1f) * 3;
+                    for (int x = 0; x < resolution; x++, i++)
+                    {
+                        float u = ((x + 0.5f) * step - 1f) * 3;
 
-               // UpdateTorusPoints(cLPos, cRPos, HPos, HRot, cLRot, cRRot, 8);
+
+                        points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x, cLPos.y, cRPos.z, u, v) * distArmsApart;
+                        distArmsApart = Vector3.Distance(HPos, cLPos) * 2 + 3;
+                        points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x / distArmsApart, cRPos.y / distArmsApart, HPos.z / distArmsApart, u, v) * distArmsApart;
+                        distArmsApart = Vector3.Distance(HPos, cRPos) * 2 + 3;
+                        points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
+
+                        /* points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x , cLPos.y , cRPos.z , u, v) ;
+                         distArmsApart = Vector3.Distance(HPos, cLPos) * 2 + 3;
+                         points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x , cRPos.y , HPos.z , u, v) ;
+                         distArmsApart = Vector3.Distance(HPos, cRPos) * 2 + 3;
+                         points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) ;*/
+
+
+                    }
+                }
+
+                // UpdateTorusPoints(cLPos, cRPos, HPos, HRot, cLRot, cRRot, 8);
 
                 /* for (int i = 0, z = 0; z < resolution; z++)
                  {

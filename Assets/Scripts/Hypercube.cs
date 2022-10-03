@@ -46,7 +46,16 @@ public class Hypercube : MonoBehaviour
     static Vector3 project(float dist, Vector4 v, float scale)
     {
 		float w = 1 / (dist - v.w);
-		return new Vector3(v.x * w * scale, v.y * w * scale, v.z * w * scale);
+		Vector3 projected = new Vector3(v.x * w * scale, v.y * w * scale, v.z * w * scale);
+		if (float.IsFinite(projected.x) && float.IsFinite(projected.y) && float.IsFinite(projected.x))
+		{
+			return projected;
+		}
+		else
+		{
+			Debug.Log("proj vec infinity :(");
+			return new Vector3(v.x * scale, v.y * scale, v.z * scale);
+		}
     }
 
     static Vector4 rotate(float XY, float YZ, float ZW, float XW, float YW, float XZ, Vector4 v)
