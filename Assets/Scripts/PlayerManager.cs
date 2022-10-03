@@ -62,7 +62,7 @@ public class PlayerManager : NetworkBehaviour
 
     private Vector3[] _vertices;
     public GameObject[] vertices1Pf, vertices2Pf, vertices3Pf;
-    bool hypercubeRotations = true;
+    bool hypercubeRotations = false;
     float hcScale = 2;
     const float PI = Mathf.PI;
     public GameObject Testpf1, TestPf2, TestPf3;
@@ -313,7 +313,7 @@ public class PlayerManager : NetworkBehaviour
             NetworkServer.Spawn(point);
         }
 
-        /*if (hypercubeRotations)
+        if (hypercubeRotations)
         {
             // _vertices = new Vector3[UtilsGeom4D.kTesseractPoints.Length];
             vertices1Pf = new GameObject[16];
@@ -326,7 +326,7 @@ public class PlayerManager : NetworkBehaviour
                 GameObject v1 = Instantiate(cubePf);
                 v1.transform.localScale = scale;
                 GameObject v2 = Instantiate(cubePf);
-                v2.transform.localScale =scale;
+                v2.transform.localScale = scale;
                 GameObject v3 = Instantiate(cubePf);
                 v3.transform.localScale = scale;
                 vertices1Pf[i] = v1;
@@ -337,7 +337,7 @@ public class PlayerManager : NetworkBehaviour
                 NetworkServer.Spawn(v3);
 
             }
-        }*/
+        }
 
     }
 
