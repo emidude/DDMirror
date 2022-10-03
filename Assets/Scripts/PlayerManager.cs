@@ -313,7 +313,7 @@ public class PlayerManager : NetworkBehaviour
             NetworkServer.Spawn(point);
         }
 
-        if (hypercubeRotations)
+        /*if (hypercubeRotations)
         {
             // _vertices = new Vector3[UtilsGeom4D.kTesseractPoints.Length];
             vertices1Pf = new GameObject[16];
@@ -337,7 +337,7 @@ public class PlayerManager : NetworkBehaviour
                 NetworkServer.Spawn(v3);
 
             }
-        }
+        }*/
 
     }
 
