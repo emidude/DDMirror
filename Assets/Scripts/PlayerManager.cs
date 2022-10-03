@@ -49,7 +49,7 @@ public class PlayerManager : NetworkBehaviour
 
     int resolution = 10;
     //GameObject[] points;
-    GameObject[] points1, points2, points3;
+    public GameObject[] points1, points2, points3;
     float step;
     Vector3 scale;
 
@@ -313,8 +313,8 @@ public class PlayerManager : NetworkBehaviour
             NetworkServer.Spawn(point);
         }
 
-        if (hypercubeRotations)
-        {
+        //if (hypercubeRotations)
+        //{
             // _vertices = new Vector3[UtilsGeom4D.kTesseractPoints.Length];
             vertices1Pf = new GameObject[16];
             vertices2Pf = new GameObject[16];
@@ -337,7 +337,7 @@ public class PlayerManager : NetworkBehaviour
                 NetworkServer.Spawn(v3);
 
             }
-        }
+        //}
 
     }
 
