@@ -62,7 +62,7 @@ public class PlayerManager : NetworkBehaviour
     bool hypercubeRotations = true;
    
     public GameObject Testpf1, TestPf2, TestPf3;
-    public GameObject[] points1Pf, points2Pf, points3Pf;
+   // public GameObject[] points1Pf, points2Pf, points3Pf;
 
     public override void OnStartServer()
     {
@@ -266,7 +266,7 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("spoawing cubesjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
        
         //transform.position = head.position; <-TODO:  need to fix
-        transform.position = Vector3.zero;
+       /* transform.position = Vector3.zero;
         scale = Vector3.one * 0.2f;
         points1Pf = new GameObject[resolution * resolution];
         points2Pf = new GameObject[resolution * resolution];
@@ -287,7 +287,7 @@ public class PlayerManager : NetworkBehaviour
             NetworkServer.Spawn(p2);
             NetworkServer.Spawn(p3);
 
-        }
+        }*/
 
         vertices1Pf = new GameObject[16];
         vertices2Pf = new GameObject[16];
@@ -321,13 +321,13 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     public void CmdDestroyCubes()
     {
-        for (int i = 0; i < points1Pf.Length; i++)
+        /*for (int i = 0; i < points1Pf.Length; i++)
         {
             NetworkServer.Destroy(points1Pf[i]);
             NetworkServer.Destroy(points2Pf[i]);
             NetworkServer.Destroy(points3Pf[i]);
 
-        }
+        }*/
 
         for (int i = 0; i < vertices1Pf.Length; i++)
         {
@@ -342,10 +342,10 @@ public class PlayerManager : NetworkBehaviour
     //void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR)
     void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     {
-        if (points1Pf == null || points1Pf == null || points1Pf == null )
+        /*if (points1Pf == null || points1Pf == null || points1Pf == null )
         {
             Debug.Log("points array nullhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-        }
+        }*/
         else
         {
             Vector3 cL_Deg = cLRot.eulerAngles * Mathf.Deg2Rad;
@@ -364,7 +364,7 @@ public class PlayerManager : NetworkBehaviour
             }
 
 
-            //UpdateSimpleSinPoints(cLPos,cRPos,HPos);
+           /* //UpdateSimpleSinPoints(cLPos,cRPos,HPos);
             float distArmsApart = Vector3.Distance(cLPos, cRPos) * 2f + 3;
             for (int i = 0, z = 0; z < resolution; z++)
             {
@@ -375,20 +375,20 @@ public class PlayerManager : NetworkBehaviour
 
 
                     points1Pf[i].transform.position = Graphs.SimpleSymmetric(HPos.x, cLPos.y, cRPos.z, u, v) * distArmsApart;
-                    //distArmsApart = Vector3.Distance(HPos, cLPos) * 2 + 3;
+                    distArmsApart = Vector3.Distance(HPos, cLPos) * 2 + 3;
                     points2Pf[i].transform.position = Graphs.SimpleSymmetric(cLPos.x / distArmsApart, cRPos.y / distArmsApart, HPos.z / distArmsApart, u, v) * distArmsApart;
-                    //distArmsApart = Vector3.Distance(HPos, cRPos) * 2 + 3;
+                    distArmsApart = Vector3.Distance(HPos, cRPos) * 2 + 3;
                     points3Pf[i].transform.position = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
 
-                    /* points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x , cLPos.y , cRPos.z , u, v) ;
+                    *//* points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x , cLPos.y , cRPos.z , u, v) ;
                      distArmsApart = Vector3.Distance(HPos, cLPos) * 2 + 3;
                      points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x , cRPos.y , HPos.z , u, v) ;
                      distArmsApart = Vector3.Distance(HPos, cRPos) * 2 + 3;
-                     points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) ;*/
+                     points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) ;*//*
 
 
                 }
-            }
+            }*/
 
 
             
