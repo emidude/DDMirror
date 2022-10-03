@@ -48,7 +48,7 @@ public class PlayerManager : NetworkBehaviour
     public bool ready = false;
 
     int resolution = 10;
-    public GameObject[] points1, points2, points3;
+    //public GameObject[] points1, points2, points3;
     float step;
     Vector3 scale;
 
@@ -62,6 +62,7 @@ public class PlayerManager : NetworkBehaviour
     bool hypercubeRotations = true;
    
     public GameObject Testpf1, TestPf2, TestPf3;
+    public GameObject[] points1Pf, points2Pf, points3Pf;
 
     public override void OnStartServer()
     {
@@ -276,66 +277,52 @@ public class PlayerManager : NetworkBehaviour
         //transform.position = head.position; <-TODO:  need to fix
         transform.position = Vector3.zero;
         scale = Vector3.one * 0.2f;
-        points1 = new GameObject[resolution * resolution];
-        Debug.Log("points1.Length=" + points1.Length);
-        for (int i = 0; i < points1.Length; i++)
+        points1Pf = new GameObject[resolution * resolution];
+        points2Pf = new GameObject[resolution * resolution];
+        points3Pf = new GameObject[resolution * resolution];
+
+        for (int i = 0; i < points1Pf.Length; i++)
         {
-            GameObject point = Instantiate(cubePf);
-            point.transform.localScale = scale;
-            //TODO: SET PARENT TO HEAD
-            point.transform.SetParent(transform, false);
-            points1[i] = point;
-            NetworkServer.Spawn(point);
+            GameObject p1 = Instantiate(cubePf);
+            p1.transform.localScale = scale;
+            GameObject p2 = Instantiate(cubePf);
+            p2.transform.localScale = scale;
+            GameObject p3 = Instantiate(cubePf);
+            p3.transform.localScale = scale;
+            points1Pf[i] = p1;
+            points2Pf[i] = p2;
+            points3Pf[i] = p3;
+            NetworkServer.Spawn(p1);
+            NetworkServer.Spawn(p2);
+            NetworkServer.Spawn(p3);
+
         }
 
+        vertices1Pf = new GameObject[16];
+        vertices2Pf = new GameObject[16];
+        vertices3Pf = new GameObject[16];
 
-        points2 = new GameObject[resolution * resolution];
-        for (int i = 0; i < points2.Length; i++)
+
+        for (int i = 0; i < vertices1Pf.Length; i++)
         {
-            GameObject point = Instantiate(cubePf);
-            point.transform.localScale = scale;
-            //TODO: SET PARENT TO HEAD
-            point.transform.SetParent(transform, false);
-            points2[i] = point;
-            NetworkServer.Spawn(point);
+            GameObject v1 = Instantiate(cubePf);
+            v1.transform.localScale = scale;
+            GameObject v2 = Instantiate(cubePf);
+            v2.transform.localScale = scale;
+            GameObject v3 = Instantiate(cubePf);
+            v3.transform.localScale = scale;
+            vertices1Pf[i] = v1;
+            vertices2Pf[i] = v2;
+            vertices3Pf[i] = v3;
+            NetworkServer.Spawn(v1);
+            NetworkServer.Spawn(v2);
+            NetworkServer.Spawn(v3);
+
         }
 
-        points3 = new GameObject[resolution * resolution];
-        for (int i = 0; i < points3.Length; i++)
-        {
-            GameObject point = Instantiate(cubePf);
-            point.transform.localScale = scale;
-            //TODO: SET PARENT TO HEAD
-            point.transform.SetParent(transform, false);
-            points3[i] = point;
-            NetworkServer.Spawn(point);
-        }
-
-        //if (hypercubeRotations)
-        //{
-            // _vertices = new Vector3[UtilsGeom4D.kTesseractPoints.Length];
-            vertices1Pf = new GameObject[16];
-            vertices2Pf = new GameObject[16];
-            vertices3Pf = new GameObject[16];
-
-
-            for (int i = 0; i < vertices1Pf.Length; i++)
-            {
-                GameObject v1 = Instantiate(cubePf);
-                v1.transform.localScale = scale;
-                GameObject v2 = Instantiate(cubePf);
-                v2.transform.localScale = scale;
-                GameObject v3 = Instantiate(cubePf);
-                v3.transform.localScale = scale;
-                vertices1Pf[i] = v1;
-                vertices2Pf[i] = v2;
-                vertices3Pf[i] = v3;
-                NetworkServer.Spawn(v1);
-                NetworkServer.Spawn(v2);
-                NetworkServer.Spawn(v3);
-
-            }
-        //}
+        
+             //TODO: SET PARENT TO HEAD
+             //point.transform.SetParent(transform, false)
 
     }
 
@@ -343,165 +330,77 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     public void CmdDestroyCubes()
     {
-        for (int i = 0; i < points1.Length; i++)
+        for (int i = 0; i < points1Pf.Length; i++)
         {
-            NetworkServer.Destroy(points1[i]);
-        }
-        for (int i = 0; i < points2.Length; i++)
-        {
-            NetworkServer.Destroy(points2[i]);
-        }
-        for (int i = 0; i < points3.Length; i++)
-        {
-            NetworkServer.Destroy(points3[i]);
+            NetworkServer.Destroy(points1Pf[i]);
+            NetworkServer.Destroy(points2Pf[i]);
+            NetworkServer.Destroy(points3Pf[i]);
+
         }
 
-        if (hypercubeRotations)
+        for (int i = 0; i < vertices1Pf.Length; i++)
         {
-            for (int i = 0; i < vertices1Pf.Length; i++)
-            {
-                NetworkServer.Destroy(vertices1Pf[i]);
-                NetworkServer.Destroy(vertices2Pf[i]);
-                NetworkServer.Destroy(vertices3Pf[i]);
-            }
+            NetworkServer.Destroy(vertices1Pf[i]);
+            NetworkServer.Destroy(vertices2Pf[i]);
+            NetworkServer.Destroy(vertices3Pf[i]);
         }
+
     }
 
     [Command]
     //void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR)
     void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     {
-        if (points1 == null || points2 == null || points3 == null )
+        if (points1Pf == null || points1Pf == null || points1Pf == null )
         {
             Debug.Log("points array nullhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         }
         else
-        {       
-            if (hypercubeRotations)
-            {                
-                Vector3 cL_Deg = cLRot.eulerAngles * Mathf.Deg2Rad ;
-                Vector3 cR_Deg = cRRot.eulerAngles * Mathf.Deg2Rad ;
-                Vector3 H_Deg = HRot.eulerAngles * Mathf.Deg2Rad ;
-
-               
-                for (int i= 0; i< 16; i++)
-                {
-                    /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 1.5f, 2, i);
-                    vertices2Pf[i].transform.position = Hypercube.UpdateVertices(H_Deg.x, H_Deg.y, H_Deg.z, cRPos.x, cRPos.y, cRPos.z, 1.5f, 2, i);
-                    vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 1.5f, 2, i);*/
-
-                    /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 1, 2, i);
-                    vertices2Pf[i].transform.position = Hypercube.UpdateVertices(H_Deg.x, H_Deg.y, H_Deg.z, cRPos.x, cRPos.y, cRPos.z, 1, 2, i);
-                    vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 1, 2, i);*/
-
-                    /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 4, 5, i);
-                    vertices2Pf[i].transform.position = Hypercube.UpdateVertices(H_Deg.x, H_Deg.y, H_Deg.z, cRPos.x, cRPos.y, cRPos.z, 4, 5, i);
-                    vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 4, 5, i);*/
-
-                    /* vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 0, 1, i);
-                     vertices2Pf[i].transform.position = Hypercube.UpdateVertices(HRot.z, HRot.w, cRRot.x, cRRot.y, cRRot.z, cRRot.w, 0, 1, i);
-                     vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 0, 1, i);
- */
-                    vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 1, 2, i);
-                    vertices2Pf[i].transform.position = Hypercube.UpdateVertices(HRot.z, HRot.w, cRRot.x, cRRot.y, cRRot.z, cRRot.w, 1, 2, i);
-                    vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 1, 2, i);
+        {
+            Vector3 cL_Deg = cLRot.eulerAngles * Mathf.Deg2Rad;
+            Vector3 cR_Deg = cRRot.eulerAngles * Mathf.Deg2Rad;
+            Vector3 H_Deg = HRot.eulerAngles * Mathf.Deg2Rad;
 
 
-                }
-
-
-                //UpdateSimpleSinPoints(cLPos,cRPos,HPos);
-                float distArmsApart = Vector3.Distance(cLPos, cRPos) * 2f + 3;
-                /*float t = Time.time;
-                float step = 2f / resolution;*/
-                for (int i = 0, z = 0; z < resolution; z++)
-                {
-                    float v = ((z + 0.5f) * step - 1f) * 3;
-                    for (int x = 0; x < resolution; x++, i++)
-                    {
-                        float u = ((x + 0.5f) * step - 1f) * 3;
-
-
-                        points1[i].transform.position = Graphs.SimpleSymmetric(HPos.x, cLPos.y, cRPos.z, u, v) * distArmsApart;
-                        distArmsApart = Vector3.Distance(HPos, cLPos) * 2 + 3;
-                        points2[i].transform.position = Graphs.SimpleSymmetric(cLPos.x / distArmsApart, cRPos.y / distArmsApart, HPos.z / distArmsApart, u, v) * distArmsApart;
-                        distArmsApart = Vector3.Distance(HPos, cRPos) * 2 + 3;
-                        points3[i].transform.position = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
-
-                        /* points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x , cLPos.y , cRPos.z , u, v) ;
-                         distArmsApart = Vector3.Distance(HPos, cLPos) * 2 + 3;
-                         points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x , cRPos.y , HPos.z , u, v) ;
-                         distArmsApart = Vector3.Distance(HPos, cRPos) * 2 + 3;
-                         points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) ;*/
-
-
-                    }
-                }
-
-                // UpdateTorusPoints(cLPos, cRPos, HPos, HRot, cLRot, cRRot, 8);
-
-                /* for (int i = 0, z = 0; z < resolution; z++)
-                 {
-                     float v = (z + 0.5f) * step - 1f;
-                     for (int x = 0; x < resolution; x++, i++)
-                     {
-                         float u = (x + 0.5f) * step - 1f;
-
-                         float m = 8;
-                         // points1[i].transform.localPosition = Graphs.SphereSI(HPos.z, cLPos.x, cRPos.y,  u, v) * 5;
-                         float dist = Vector3.Distance(cLPos, cRPos);
-                         //points1[i].transform.localPosition = Graphs.TorusSI2(dist, HPos.x/dist, HPos.y/dist, HPos.z/dist, HRot.x/dist, HRot.y/dist, HRot.z/dist, HRot.w/dist, u, v) * 10;
-                         //points1[i].transform.localPosition = Graphs.TorusSI2(dist, HPos.x / m, HPos.y / m, HPos.z / m, HRot.x/m, HRot.y/m, HRot.z/m, HRot.w/m, u, v) * m*2;
-                         dist = Vector3.Distance(HPos, cRPos);
-                         //points2[i].transform.localPosition = Graphs.TorusSI2(dist, cLPos.x/dist, cLPos.y/dist, cLPos.z/dist, cLRot.x, cLRot.y, cLRot.z, cLRot.w, u, v) * 5;
-                         points2[i].transform.localPosition = Graphs.TorusSI2(dist, cLPos.x / m, cLPos.y / m, cLPos.z / m, cLRot.x / m, cLRot.y / m, cLRot.z / m, cLRot.w / m, u, v) * m;
-
-                         dist = Vector3.Distance(HPos, cLPos);
-                         points3[i].transform.localPosition = Graphs.TorusSI2(dist, cRPos.x / m, cRPos.y / m, cRPos.z / m, cRRot.x / m, cRRot.y / m, cRRot.z / m, cRRot.w / m, u, v) * m;
-
-
-                     }
-                 }*/
-
-                /*for (int i = 0, z = 0; z < resolution; z++)
-                {
-                    float v = (z + 0.5f) * step - 1f;
-                    for (int x = 0; x < resolution; x++, i++)
-                    {
-                        float u = (x + 0.5f) * step - 1f;
-
-                        float m = 8;
-                         points1[i].transform.localPosition = Graphs.SphereSI(HPos.z, cLPos.x, cRPos.y,  u, v) * 5;
-                        points2[i].transform.localPosition = Graphs.SphereSI(cLPos.z, cRPos.x, HPos.y, u, v) * 5;
-                        points3[i].transform.localPosition = Graphs.SphereSI(cRPos.z, HPos.x, cLPos.y, u, v) * 5;
-                       
-
-                    }
-                }*/
-            }
-            else
+            for (int i = 0; i < 16; i++)
             {
-                for (int i = 0, z = 0; z < resolution; z++)
+                
+                vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 1, 2, i);
+                vertices2Pf[i].transform.position = Hypercube.UpdateVertices(HRot.z, HRot.w, cRRot.x, cRRot.y, cRRot.z, cRRot.w, 1, 2, i);
+                vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 1, 2, i);
+
+
+            }
+
+
+            //UpdateSimpleSinPoints(cLPos,cRPos,HPos);
+            float distArmsApart = Vector3.Distance(cLPos, cRPos) * 2f + 3;
+            for (int i = 0, z = 0; z < resolution; z++)
+            {
+                float v = ((z + 0.5f) * step - 1f) * 3;
+                for (int x = 0; x < resolution; x++, i++)
                 {
-                    float v = (z + 0.5f) * step - 1f;
-                    for (int x = 0; x < resolution; x++, i++)
-                    {
-                        float u = (x + 0.5f) * step - 1f;
+                    float u = ((x + 0.5f) * step - 1f) * 3;
 
-                        float m = 5;
-                        //points1[i].transform.localPosition = Graphs.TorusSI( HPos,  HRot,  cLPos, cLRot,  cRPos, cRRot,  vL,  vR,  avL,  avR, u, v,t) * 5;
-                        float dist = Vector3.Distance(cLPos, cRPos);
-                        //points1[i].transform.localPosition = Graphs.TorusSI2(dist, HPos.x/dist, HPos.y/dist, HPos.z/dist, HRot.x, HRot.y, HRot.z, HRot.w, u, v) * 5;
-                        points1[i].transform.localPosition = Graphs.TorusSI2(dist, HPos.x / m, HPos.y / m, HPos.z / m, HRot.x, HRot.y, HRot.z, HRot.w, u, v) * m;
-                        dist = Vector3.Distance(HPos, cRPos);
-                        //points2[i].transform.localPosition = Graphs.TorusSI2(dist, cLPos.x/dist, cLPos.y/dist, cLPos.z/dist, cLRot.x, cLRot.y, cLRot.z, cLRot.w, u, v) * 5;
-                        points2[i].transform.localPosition = Graphs.TorusSI2(dist, cLPos.x / m, cLPos.y / m, cLPos.z / m, cLRot.x, cLRot.y, cLRot.z, cLRot.w, u, v) * m;
 
-                        dist = Vector3.Distance(HPos, cLPos);
-                        points3[i].transform.localPosition = Graphs.TorusSI2(dist, cRPos.x / m, cRPos.y / m, cRPos.z / m, cRRot.x, cRRot.y, cRRot.z, cRRot.w, u, v) * m;
-                    }
+                    points1Pf[i].transform.position = Graphs.SimpleSymmetric(HPos.x, cLPos.y, cRPos.z, u, v) * distArmsApart;
+                    //distArmsApart = Vector3.Distance(HPos, cLPos) * 2 + 3;
+                    points2Pf[i].transform.position = Graphs.SimpleSymmetric(cLPos.x / distArmsApart, cRPos.y / distArmsApart, HPos.z / distArmsApart, u, v) * distArmsApart;
+                    //distArmsApart = Vector3.Distance(HPos, cRPos) * 2 + 3;
+                    points3Pf[i].transform.position = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
+
+                    /* points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x , cLPos.y , cRPos.z , u, v) ;
+                     distArmsApart = Vector3.Distance(HPos, cLPos) * 2 + 3;
+                     points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x , cRPos.y , HPos.z , u, v) ;
+                     distArmsApart = Vector3.Distance(HPos, cRPos) * 2 + 3;
+                     points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) ;*/
+
+
                 }
             }
+
+
+            
             
 
             
@@ -667,11 +566,11 @@ public class PlayerManager : NetworkBehaviour
                 float u = ((x + 0.5f) * step - 1f)*3;
 
 
-                points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x, cLPos.y , cRPos.z , u, v) * distArmsApart;
+                points1Pf[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x, cLPos.y , cRPos.z , u, v) * distArmsApart;
                 distArmsApart = Vector3.Distance(HPos, cLPos) * 2 + 3;
-                points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x / distArmsApart, cRPos.y / distArmsApart, HPos.z / distArmsApart, u, v) * distArmsApart;
+                points2Pf[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x / distArmsApart, cRPos.y / distArmsApart, HPos.z / distArmsApart, u, v) * distArmsApart;
                 distArmsApart = Vector3.Distance(HPos, cRPos) * 2 + 3;
-                points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
+                points3Pf[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
 
                 /* points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x , cLPos.y , cRPos.z , u, v) ;
                  distArmsApart = Vector3.Distance(HPos, cLPos) * 2 + 3;
@@ -696,13 +595,13 @@ public class PlayerManager : NetworkBehaviour
                 //points1[i].transform.localPosition = Graphs.TorusSI( HPos,  HRot,  cLPos, cLRot,  cRPos, cRRot,  vL,  vR,  avL,  avR, u, v,t) * 5;
                 float dist = Vector3.Distance(cLPos, cRPos);
                 //points1[i].transform.localPosition = Graphs.TorusSI2(dist, HPos.x/dist, HPos.y/dist, HPos.z/dist, HRot.x, HRot.y, HRot.z, HRot.w, u, v) * 5;
-                points1[i].transform.localPosition = Graphs.TorusSI2(dist, HPos.x / m, HPos.y / m, HPos.z / m, HRot.x/m, HRot.y/m, HRot.z/m, HRot.w/m, u, v) * m;
+                points1Pf[i].transform.localPosition = Graphs.TorusSI2(dist, HPos.x / m, HPos.y / m, HPos.z / m, HRot.x/m, HRot.y/m, HRot.z/m, HRot.w/m, u, v) * m;
                 dist = Vector3.Distance(HPos, cRPos);
                 //points2[i].transform.localPosition = Graphs.TorusSI2(dist, cLPos.x/dist, cLPos.y/dist, cLPos.z/dist, cLRot.x, cLRot.y, cLRot.z, cLRot.w, u, v) * 5;
-                points2[i].transform.localPosition = Graphs.TorusSI2(dist, cLPos.x / m, cLPos.y / m, cLPos.z / m, cLRot.x/m, cLRot.y/m, cLRot.z/m, cLRot.w/m, u, v) * m;
+                points2Pf[i].transform.localPosition = Graphs.TorusSI2(dist, cLPos.x / m, cLPos.y / m, cLPos.z / m, cLRot.x/m, cLRot.y/m, cLRot.z/m, cLRot.w/m, u, v) * m;
 
                 dist = Vector3.Distance(HPos, cLPos);
-                points3[i].transform.localPosition = Graphs.TorusSI2(dist, cRPos.x / m, cRPos.y / m, cRPos.z / m, cRRot.x/m, cRRot.y/m, cRRot.z/m, cRRot.w/m, u, v) * m;
+                points3Pf[i].transform.localPosition = Graphs.TorusSI2(dist, cRPos.x / m, cRPos.y / m, cRPos.z / m, cRRot.x/m, cRRot.y/m, cRRot.z/m, cRRot.w/m, u, v) * m;
             }
         }        
     }
