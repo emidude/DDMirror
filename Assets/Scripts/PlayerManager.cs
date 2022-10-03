@@ -61,7 +61,7 @@ public class PlayerManager : NetworkBehaviour
 
     private Vector3[] _vertices;
     public GameObject[] vertices1Pf, vertices2Pf, vertices3Pf;
-    bool hypercubeRotations = true;
+    bool hypercubeRotations = false;
 
 
     public override void OnStartServer()
