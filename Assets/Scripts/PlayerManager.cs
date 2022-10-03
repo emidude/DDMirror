@@ -279,7 +279,7 @@ public class PlayerManager : NetworkBehaviour
        
         //transform.position = head.position; <-TODO:  need to fix
         transform.position = Vector3.zero;
-        //scale = Vector3.one * 0.2f;
+        scale = Vector3.one * 0.2f;
         points1 = new GameObject[resolution * resolution];
         for (int i = 0; i < points1.Length; i++)
         {
