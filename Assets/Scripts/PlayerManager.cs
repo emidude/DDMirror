@@ -80,22 +80,15 @@ public class PlayerManager : NetworkBehaviour
     {
         base.OnStartLocalPlayer();
 
-        
-        /*//SET ORDERING: <- NO DONE ABOVE
-        songOrdering = new int[] { 4, 1, 2, 3, 6, 9};
-        //combinations = new int[] { 4, 2, 1, 3, 0, 0};*/
-
         //AUDIO:
         audioObject = GameObject.FindGameObjectWithTag("audioHndlr");
         AudioHandler = audioObject.GetComponent<AudioHandler>();
         //LOGGER:
         ContinuousLogger = audioObject.GetComponent<ContinuousLogger>();
 
-
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
         SceneHndlr = guiObject.GetComponent<SceneHandler>();
-
 
         // find the gaming rig in the scene and link to it
         if (theLocalPlayer == null)
@@ -103,7 +96,6 @@ public class PlayerManager : NetworkBehaviour
             theLocalPlayer = GameObject.Find("Local VR Rig");// find the rig in the scene
         }
         
-
         // now link localHMD, localHands to the Rig so that they are
         // automatically filled when the rig moves
         localHead = Camera.main.gameObject; // get HMD
@@ -128,7 +120,6 @@ public class PlayerManager : NetworkBehaviour
         scale = Vector3.one * 0.2f;
 
         CmdSpawnCubes();
-        //CmdUpdateCubes(cL.GetVelocity(),cR.GetVelocity());
         CmdDestroyCubes();
 
         CmdSpawnHeadAndHands();
