@@ -283,7 +283,7 @@ public class PlayerManager : NetworkBehaviour
             GameObject point = Instantiate(cubePf);
             point.transform.localScale = scale;
             //TODO: SET PARENT TO HEAD
-            //point.transform.SetParent(transform, false);
+            point.transform.SetParent(transform, false);
             points1[i] = point;
             NetworkServer.Spawn(point);
         }
@@ -295,7 +295,7 @@ public class PlayerManager : NetworkBehaviour
             GameObject point = Instantiate(cubePf);
             point.transform.localScale = scale;
             //TODO: SET PARENT TO HEAD
-            //point.transform.SetParent(transform, false);
+            point.transform.SetParent(transform, false);
             points2[i] = point;
             NetworkServer.Spawn(point);
         }
@@ -306,7 +306,7 @@ public class PlayerManager : NetworkBehaviour
             GameObject point = Instantiate(cubePf);
             point.transform.localScale = scale;
             //TODO: SET PARENT TO HEAD
-            //point.transform.SetParent(transform, false);
+            point.transform.SetParent(transform, false);
             points3[i] = point;
             NetworkServer.Spawn(point);
         }
@@ -376,19 +376,9 @@ public class PlayerManager : NetworkBehaviour
             Debug.Log("points array nullhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         }
         else
-        {
-            //float t = Time.time;
-            //float step = 2f / resolution;
+        {       
             if (hypercubeRotations)
-            {
-                //Debug.Log("doing hyoercube rotations");   
-                //UpdateSimpleSinPoints(cLPos, cRPos, HPos);
-                //Update4DPoints(cLRot, cRRot, HRot, 0.01f, localHead.transform, cL.transform, cR.transform);
-
-                /* Vector3 cL_Deg = cLRot.eulerAngles * Mathf.Deg2Rad * 0.5f;
-                 Vector3 cR_Deg = cRRot.eulerAngles * Mathf.Deg2Rad * 0.5f;
-                 Vector3 H_Deg = HRot.eulerAngles * Mathf.Deg2Rad * 0.5f;*/
-
+            {                
                 Vector3 cL_Deg = cLRot.eulerAngles * Mathf.Deg2Rad ;
                 Vector3 cR_Deg = cRRot.eulerAngles * Mathf.Deg2Rad ;
                 Vector3 H_Deg = HRot.eulerAngles * Mathf.Deg2Rad ;
