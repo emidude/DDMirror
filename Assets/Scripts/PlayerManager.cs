@@ -48,23 +48,19 @@ public class PlayerManager : NetworkBehaviour
     public bool ready = false;
 
     int resolution = 10;
-    //GameObject[] points;
     public GameObject[] points1, points2, points3;
     float step;
     Vector3 scale;
 
-    //public bool bodyShapes = false;
     public bool bodyShapes;
     public bool questionTime = true;
 
     // Players List to manage playerNumber  
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
 
-    private Vector3[] _vertices;
     public GameObject[] vertices1Pf, vertices2Pf, vertices3Pf;
-    bool hypercubeRotations = false;
-    float hcScale = 2;
-    const float PI = Mathf.PI;
+    bool hypercubeRotations = true;
+   
     public GameObject Testpf1, TestPf2, TestPf3;
 
     public override void OnStartServer()
@@ -281,15 +277,17 @@ public class PlayerManager : NetworkBehaviour
         transform.position = Vector3.zero;
         scale = Vector3.one * 0.2f;
         points1 = new GameObject[resolution * resolution];
+        Debug.Log("points1.Length=" + points1.Length);
         for (int i = 0; i < points1.Length; i++)
         {
             GameObject point = Instantiate(cubePf);
             point.transform.localScale = scale;
             //TODO: SET PARENT TO HEAD
-            point.transform.SetParent(transform, false);
+            //point.transform.SetParent(transform, false);
             points1[i] = point;
             NetworkServer.Spawn(point);
         }
+
 
         points2 = new GameObject[resolution * resolution];
         for (int i = 0; i < points2.Length; i++)
@@ -297,7 +295,7 @@ public class PlayerManager : NetworkBehaviour
             GameObject point = Instantiate(cubePf);
             point.transform.localScale = scale;
             //TODO: SET PARENT TO HEAD
-            point.transform.SetParent(transform, false);
+            //point.transform.SetParent(transform, false);
             points2[i] = point;
             NetworkServer.Spawn(point);
         }
@@ -308,7 +306,7 @@ public class PlayerManager : NetworkBehaviour
             GameObject point = Instantiate(cubePf);
             point.transform.localScale = scale;
             //TODO: SET PARENT TO HEAD
-            point.transform.SetParent(transform, false);
+            //point.transform.SetParent(transform, false);
             points3[i] = point;
             NetworkServer.Spawn(point);
         }
