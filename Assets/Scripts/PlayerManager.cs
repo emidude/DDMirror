@@ -346,9 +346,9 @@ public class PlayerManager : NetworkBehaviour
         {
             Debug.Log("points array nullhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         }*/
-        else
-        {
-            Vector3 cL_Deg = cLRot.eulerAngles * Mathf.Deg2Rad;
+        /*else
+        {*/ //}
+        Vector3 cL_Deg = cLRot.eulerAngles * Mathf.Deg2Rad;
             Vector3 cR_Deg = cRRot.eulerAngles * Mathf.Deg2Rad;
             Vector3 H_Deg = HRot.eulerAngles * Mathf.Deg2Rad;
 
@@ -396,7 +396,7 @@ public class PlayerManager : NetworkBehaviour
 
             
             
-        }
+        
         
     }
 
@@ -544,11 +544,11 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
-    void UpdateSimpleSinPoints(Vector3 cLPos, Vector3 cRPos, Vector3 HPos)
+    /*void UpdateSimpleSinPoints(Vector3 cLPos, Vector3 cRPos, Vector3 HPos)
     {
         float distArmsApart = Vector3.Distance(cLPos, cRPos)*2f + 3;
-        /*float t = Time.time;
-        float step = 2f / resolution;*/
+        *//*float t = Time.time;
+        float step = 2f / resolution;*//*
         for (int i = 0, z = 0; z < resolution; z++)
         {
             float v = ((z + 0.5f) * step - 1f)*3;
@@ -563,18 +563,18 @@ public class PlayerManager : NetworkBehaviour
                 distArmsApart = Vector3.Distance(HPos, cRPos) * 2 + 3;
                 points3Pf[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
 
-                /* points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x , cLPos.y , cRPos.z , u, v) ;
+                *//* points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x , cLPos.y , cRPos.z , u, v) ;
                  distArmsApart = Vector3.Distance(HPos, cLPos) * 2 + 3;
                  points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x , cRPos.y , HPos.z , u, v) ;
                  distArmsApart = Vector3.Distance(HPos, cRPos) * 2 + 3;
-                 points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) ;*/
+                 points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) ;*//*
 
 
             }
         }
-    }
+    }*/
 
-    void UpdateTorusPoints(Vector3 cLPos, Vector3 cRPos, Vector3 HPos, Quaternion HRot, Quaternion cLRot, Quaternion cRRot, float m)
+    /*void UpdateTorusPoints(Vector3 cLPos, Vector3 cRPos, Vector3 HPos, Quaternion HRot, Quaternion cLRot, Quaternion cRRot, float m)
     {
         for (int i = 0, z = 0; z < resolution; z++)
         {
@@ -595,7 +595,7 @@ public class PlayerManager : NetworkBehaviour
                 points3Pf[i].transform.localPosition = Graphs.TorusSI2(dist, cRPos.x / m, cRPos.y / m, cRPos.z / m, cRRot.x/m, cRRot.y/m, cRRot.z/m, cRRot.w/m, u, v) * m;
             }
         }        
-    }
+    }*/
 
     
 
