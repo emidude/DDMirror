@@ -118,9 +118,9 @@ public class Graphs
 		Vector3 p;
 		float r = 0.8f + Mathf.Sin(pi * (6f * u + a)) * 0.1f;
 		r += Mathf.Sin(pi * (4f * v + b)) * 0.1f;
-		float s = r * Mathf.Cos(pi * 0.5f * v + c);
+		float s = r * Mathf.Cos(pi * c * v );
 		p.x = s * Mathf.Sin(pi * u);
-		p.y = r * Mathf.Sin(pi * 0.5f * v);
+		p.y = r * Mathf.Sin(pi * c * v);
 		p.z = s * Mathf.Cos(pi * u);
 		return p;
 	}
