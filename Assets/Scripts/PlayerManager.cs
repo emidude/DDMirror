@@ -383,7 +383,7 @@ public class PlayerManager : NetworkBehaviour
             //float step = 2f / resolution;
             if (hypercubeRotations)
             {
-                Debug.Log("doing hyoercube rotations");   
+                //Debug.Log("doing hyoercube rotations");   
                 //UpdateSimpleSinPoints(cLPos, cRPos, HPos);
                 //Update4DPoints(cLRot, cRRot, HRot, 0.01f, localHead.transform, cL.transform, cR.transform);
 
@@ -434,11 +434,11 @@ public class PlayerManager : NetworkBehaviour
                         float u = ((x + 0.5f) * step - 1f) * 3;
 
 
-                        points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x, cLPos.y, cRPos.z, u, v) * distArmsApart;
+                        points1[i].transform.position = Graphs.SimpleSymmetric(HPos.x, cLPos.y, cRPos.z, u, v) * distArmsApart;
                         distArmsApart = Vector3.Distance(HPos, cLPos) * 2 + 3;
-                        points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x / distArmsApart, cRPos.y / distArmsApart, HPos.z / distArmsApart, u, v) * distArmsApart;
+                        points2[i].transform.position = Graphs.SimpleSymmetric(cLPos.x / distArmsApart, cRPos.y / distArmsApart, HPos.z / distArmsApart, u, v) * distArmsApart;
                         distArmsApart = Vector3.Distance(HPos, cRPos) * 2 + 3;
-                        points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
+                        points3[i].transform.position = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
 
                         /* points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x , cLPos.y , cRPos.z , u, v) ;
                          distArmsApart = Vector3.Distance(HPos, cLPos) * 2 + 3;
