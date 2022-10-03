@@ -195,6 +195,9 @@ MonoBehaviour:
   ready: 0
   bodyShapes: 1
   questionTime: 1
-  participantNumber: 420
-  sessionNumber: 1
-  pcNumber: 1
+  vertices1Pf: []
+  vertices2Pf: []
+  vertices3Pf: []
+  Testpf1: {fileID: 1223016012747116, guid: 999f7d7f786ca684981531641c3b6340, type: 3}
+  TestPf2: {fileID: 1223016012747116, guid: 0b1f7026b8bde2341b97f9e0eee053e3, type: 3}
+  TestPf3: {fileID: 1223016012747116, guid: 1e19b0dce3985dd44a25924ac50f7af0, type: 3}

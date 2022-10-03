@@ -113,6 +113,17 @@ public class Graphs
 		p.z = s * Mathf.Cos(pi * u);
 		return p;
 	}
+	public static Vector3 SphereSI(float a, float b, float c,  float u, float v)
+	{
+		Vector3 p;
+		float r = 0.8f + Mathf.Sin(pi * (6f * u + a)) * 0.1f;
+		r += Mathf.Sin(pi * (4f * v + b)) * 0.1f;
+		float s = r * Mathf.Cos(pi * 0.5f * v + c);
+		p.x = s * Mathf.Sin(pi * u);
+		p.y = r * Mathf.Sin(pi * 0.5f * v);
+		p.z = s * Mathf.Cos(pi * u);
+		return p;
+	}
 
 	public static Vector3 Torus(float u, float v, float t)
 	{
@@ -125,8 +136,20 @@ public class Graphs
 		p.z = s * Mathf.Cos(pi * u);
 		return p;
 	}
+	public static Vector3 TorusSI3(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, float u, float v)
+	{
+		Vector3 p;
+		float r1 = 0.65f + Mathf.Sin(pi * (6f * u + cLPos.x)) * 0.1f;
+		float r2 = 0.2f + Mathf.Sin(pi * (4f * v + cLPos.y)) * 0.05f;
+		float s = r2 * Mathf.Cos(pi * v + cLPos.z) + r1;
+		p.x = s * Mathf.Sin(pi * u + cRRot.z);
+		p.y = r2 * Mathf.Sin(pi * v + cRRot.y);
+		p.z = s * Mathf.Cos(pi * u + cRRot.x);
+		return p;
+	}
 
-	public static Vector3 TorusSI(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR, float u, float v, float t)
+
+	public static Vector3 TorusSI(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot,  float u, float v)
 	{
 		Vector3 p;
 		float r1 = cLPos.x + Mathf.Sin(pi * (cLPos.y * u + cRRot.x)) * cLPos.z;
