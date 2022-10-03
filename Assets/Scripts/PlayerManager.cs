@@ -383,7 +383,7 @@ public class PlayerManager : NetworkBehaviour
             //float step = 2f / resolution;
             if (hypercubeRotations)
             {
-                
+                Debug.Log("doing hyoercube rotations");   
                 //UpdateSimpleSinPoints(cLPos, cRPos, HPos);
                 //Update4DPoints(cLRot, cRRot, HRot, 0.01f, localHead.transform, cL.transform, cR.transform);
 
@@ -634,6 +634,7 @@ public class PlayerManager : NetworkBehaviour
         }
         else
         {
+            Debug.Log("spawning cubes");
              PM.CmdSpawnCubes();
             //PM.CmdSpawnTest();
         }
