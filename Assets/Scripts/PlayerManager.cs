@@ -159,7 +159,7 @@ public class PlayerManager : NetworkBehaviour
                     || float.IsInfinity(cL.transform.rotation.x) || float.IsInfinity(cL.transform.rotation.y) || float.IsInfinity(cL.transform.rotation.z) || float.IsInfinity(cL.transform.rotation.w)
                     || float.IsInfinity(cR.transform.rotation.x) || float.IsInfinity(cR.transform.rotation.y) || float.IsInfinity(cR.transform.rotation.z) || float.IsInfinity(cR.transform.rotation.w))
                     {
-                   // Debug.Log("NAN");
+                    Debug.Log("NAN");
                 }
                 else if (bodyShapes)
                 {
@@ -275,7 +275,7 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     void CmdSpawnCubes()
     {
-        Debug.Log("spoawing cubes");
+        Debug.Log("spoawing cubesjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
        
         //transform.position = head.position; <-TODO:  need to fix
         transform.position = Vector3.zero;
