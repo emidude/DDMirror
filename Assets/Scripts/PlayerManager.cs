@@ -75,7 +75,6 @@ public class PlayerManager : NetworkBehaviour
             Debug.Log(playersList[i].netIdentity);
         }
 
-        //songOrdering = new int[] { 10, 2, 7 };
     }
 
     public override void OnStartLocalPlayer()
