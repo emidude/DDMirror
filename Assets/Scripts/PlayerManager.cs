@@ -539,8 +539,8 @@ public class PlayerManager : NetworkBehaviour
         else
         {
             Debug.Log("spawning cubes");
-             //PM.CmdSpawnCubes();
-            PM.CmdSpawnTest();
+             PM.CmdSpawnCubes();
+            //PM.CmdSpawnTest();
         }
     }
 
