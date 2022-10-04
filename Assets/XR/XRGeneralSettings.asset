@@ -62,8 +62,7 @@ MonoBehaviour:
   m_RequiresSettingsUpdate: 0
   m_AutomaticLoading: 0
   m_AutomaticRunning: 0
-  m_Loaders:
-  - {fileID: 11400000, guid: 8adcc956a5ac03f4ba7f1b9c3f7eb0cf, type: 2}
+  m_Loaders: []
 --- !u!114 &6994427691215239681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,4 +76,4 @@ MonoBehaviour:
   m_Name: WSA Settings
   m_EditorClassIdentifier: 
   m_LoaderManagerInstance: {fileID: 6790934208354234368}
-  m_InitManagerOnStart: 1
+  m_InitManagerOnStart: 0
