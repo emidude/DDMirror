@@ -59,8 +59,8 @@ public class PlayerManager : NetworkBehaviour
     // Players List to manage playerNumber  
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
 
-    private Vector3[] _vertices;
-    public GameObject[] vertices1Pf, vertices2Pf, vertices3Pf;
+
+   // public GameObject[] vertices1Pf, vertices2Pf, vertices3Pf;
    // bool hypercubeRotations = false;
 
 
@@ -591,86 +591,9 @@ public class PlayerManager : NetworkBehaviour
         }        
     }
 
-    void UpdateCubes4d(Quaternion q1, Quaternion q2, float ddd, Transform viewPoint)
-    {
-        /*viewPoint = localHead.transform;
-        viewPoint.position *= ddd;*/
-        /*rotationXW = cL.transform.rotation.eulerAngles.x;
-        rotationXY = cL.transform.rotation.eulerAngles.y;
-        rotationYW = cL.transform.rotation.eulerAngles.z;
-        rotationYZ = cR.transform.rotation.eulerAngles.x;
-        rotationZW = cR.transform.rotation.eulerAngles.y;
-        rotationZX = cR.transform.rotation.eulerAngles.z;*/
-        float rotationXW = q1.eulerAngles.x * ddd;
-        float rotationXY = q1.eulerAngles.y * ddd;
-        float rotationYW = q1.eulerAngles.z * ddd;
-        float rotationYZ = q2.eulerAngles.x * ddd;
-        float rotationZW = q2.eulerAngles.y * ddd;
-        float rotationZX = q2.eulerAngles.z * ddd;
-        GenerateVertices(_vertices, rotationXY, rotationYZ, rotationZX, rotationXW, rotationYW, rotationZW, viewPoint);      
-    }
-    void Update4DPoints(Quaternion cLRot, Quaternion cRRot, Quaternion HRot, float scaling, Transform headT, Transform LT, Transform RT)
-    {
-        
-        UpdateCubes4d(cLRot, cLRot, scaling, headT);
-        for (int a = 0; a < vertices1Pf.Length; a++)
-        {
-            vertices1Pf[a].transform.position = _vertices[a] * scaling;
-        }
-        UpdateCubes4d(cRRot, HRot, scaling, LT);
-        for (int a = 0; a < vertices2Pf.Length; a++)
-        {
-            vertices2Pf[a].transform.position = _vertices[a] * scaling;
-        }
-        UpdateCubes4d(cLRot, HRot, scaling, RT);
-        for (int a = 0; a < vertices3Pf.Length; a++)
-        {
-            vertices3Pf[a].transform.position = _vertices[a] * scaling;
-        }
-    }
+   
 
-    public void GenerateVertices(Vector3[] vertices, float rotationXY, float rotationYZ, float rotationZX, float rotationXW, float rotationYW, float rotationZW , Transform viewPoint )
-    {
-        // setup rotations
-        Matrix4x4 matrixXY = UtilsGeom4D.CreateRotationMatrixXY(rotationXY * Mathf.Deg2Rad);
-        Matrix4x4 matrixYZ = UtilsGeom4D.CreateRotationMatrixYZ(rotationYZ * Mathf.Deg2Rad);
-        Matrix4x4 matrixZX = UtilsGeom4D.CreateRotationMatrixZX(rotationZX * Mathf.Deg2Rad);
-
-        Matrix4x4 matrixXW = UtilsGeom4D.CreateRotationMatrixXW(rotationXW * Mathf.Deg2Rad);
-        Matrix4x4 matrixYW = UtilsGeom4D.CreateRotationMatrixYW(rotationYW * Mathf.Deg2Rad);
-        Matrix4x4 matrixZW = UtilsGeom4D.CreateRotationMatrixZW(rotationZW * Mathf.Deg2Rad);
-
-        Matrix4x4 matrix = matrixXY * matrixYZ * matrixZX * matrixXW * matrixYW * matrixZW;
-
-        // calculate view point vectors
-        Vector3 tp = transform.position;
-        /*Vector3 co = viewPoint.right;
-        Vector3 cp = viewPoint.position;    
-        Vector3 cu = viewPoint.up;*/
-        Vector3 cp = new Vector3(0, 1, -1);
-        Vector3 cu = Vector3.up;
-        Vector3 co = Vector3.right;
-
-
-
-        Vector4 toDir = new Vector4(tp.x, tp.y, tp.z, 0);
-        Vector4 fromDir = new Vector4(cp.x, cp.y, cp.z, 0);
-        Vector4 upDir = new Vector4(cu.x, cu.y, cu.z, 0);
-        Vector4 overDir = new Vector4(co.x, co.y, co.z, 0);
-        float viewingAngle = 20;
-        // update mesh vertices based on rotations and view directions
-        UtilsGeom4D.ProjectTo3DPerspective(UtilsGeom4D.kTesseractPoints, matrix, ref vertices, viewingAngle, fromDir, toDir, upDir, overDir);
-    }
-
-    /*  public void LogSong(string song)
-      {
-          if (isLocalPlayer)
-          {
-              CL.songName = song;
-              Debug.Log("logged song + " + CL.songName);
-          }
-      }*/
-
+  
 
 
 
