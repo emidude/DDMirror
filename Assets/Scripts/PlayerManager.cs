@@ -8,7 +8,7 @@ public class PlayerManager : NetworkBehaviour
 {
     public PlayerSync playerSync;
 
-    public int[] songOrdering = { 10, 2, 7 };
+    public int[] songOrdering; 
 
     [SerializeField] AudioClip audio;
     //bool readyToStart = false;
@@ -74,6 +74,8 @@ public class PlayerManager : NetworkBehaviour
         {
             Debug.Log(playersList[i].netIdentity);
         }
+
+        //songOrdering = new int[] { 10, 2, 7 };
     }
 
     public override void OnStartLocalPlayer()
@@ -86,6 +88,8 @@ public class PlayerManager : NetworkBehaviour
         //LOGGER:
         ContinuousLogger = audioObject.GetComponent<ContinuousLogger>();
 
+        //ORDERING:
+        songOrdering = new int[] { 10, 2, 7 };
 
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
@@ -556,7 +560,11 @@ public class PlayerManager : NetworkBehaviour
             }
 
 
-            Debug.Log("FINALLY EVERYONE READY!!!!!!! (songOrdering[songIndx]="+songOrdering[songIndx]);
+            Debug.Log("FINALLY EVERYONE READY!!!!!!! (songOrdering[songIndx]="+songOrdering[songIndx] + " index=" + songIndx);
+            for(int i = 0; i< songOrdering.Length; i++)
+            {
+                Debug.Log(songOrdering[i]);
+            }
             RpcPlaySong();
         }     
     }
