@@ -8,7 +8,7 @@ public class PlayerManager : NetworkBehaviour
 {
     public PlayerSync playerSync;
 
-    public int[] songOrdering = { 2, 4, 5 };
+    public int[] songOrdering = { 10, 2, 7 };
 
     [SerializeField] AudioClip audio;
     //bool readyToStart = false;
@@ -79,10 +79,6 @@ public class PlayerManager : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
-
-        //SET ORDERING:
-        songOrdering = new int[] { 4, 1, 2, 3, 6, 9};
-        //combinations = new int[] { 4, 2, 1, 3, 0, 0};
 
         //AUDIO:
         audioObject = GameObject.FindGameObjectWithTag("audioHndlr");
@@ -390,16 +386,21 @@ public class PlayerManager : NetworkBehaviour
              vertices2Pf[i].transform.position = Hypercube.UpdateVertices(HRot.z, HRot.w, cRRot.x, cRRot.y, cRRot.z, cRRot.w, 0, 1, i);
              vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 0, 1, i);
 */
-            //if find no toher
-            /* vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 1, 2, i);
-             vertices2Pf[i].transform.position = Hypercube.UpdateVertices(HRot.z, HRot.w, cRRot.x, cRRot.y, cRRot.z, cRRot.w, 1, 2, i);
-             vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 1, 2, i);
- */
 
-            vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 3, 3, i);
-            vertices2Pf[i].transform.position = Hypercube.UpdateVertices(H_Deg.x, H_Deg.y, H_Deg.z, cL_Deg.x, cL_Deg.y, cL_Deg.z, 3, 3, i);
-            vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cR_Deg.x, cR_Deg.y, cR_Deg.z, H_Deg.x, H_Deg.y, H_Deg.z, 3, 3, i);
+            //super glitchy!
+            /* vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x * 0.1f, cL_Deg.y * 0.1f, cL_Deg.z * 0.1f, cR_Deg.x * 0.1f, cR_Deg.y * 0.1f, cR_Deg.z * 0.1f, 3, 3, i);
+             vertices2Pf[i].transform.position = Hypercube.UpdateVertices(H_Deg.x * 0.1f, H_Deg.y * 0.1f, H_Deg.z * 0.1f, cL_Deg.x * 0.1f, cL_Deg.y * 0.1f, cL_Deg.z * 0.1f, 3, 3, i);
+             vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cR_Deg.x * 0.1f, cR_Deg.y * 0.1f, cR_Deg.z * 0.1f, H_Deg.x * 0.1f, H_Deg.y * 0.1f, H_Deg.z * 0.1f, 3, 3, i);*/
 
+            //best so far
+            vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 1.5f, 2, i);
+            vertices2Pf[i].transform.position = Hypercube.UpdateVertices(HRot.z, HRot.w, cRRot.x, cRRot.y, cRRot.z, cRRot.w, 1.5f, 2, i);
+            vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 1.5f, 2, i);
+
+            //cant tell diff between this and above
+            /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 2, 2, i);
+            vertices2Pf[i].transform.position = Hypercube.UpdateVertices(HRot.z, HRot.w, cRRot.x, cRRot.y, cRRot.z, cRRot.w, 2, 2, i);
+            vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 2, 2, i);*/
 
         }
 
