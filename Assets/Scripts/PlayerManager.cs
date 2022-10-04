@@ -349,9 +349,25 @@ public class PlayerManager : NetworkBehaviour
         }
         else
         {
-            UpdateSimpleSinPoints(cLPos, cRPos, HPos);
+            float distArmsApart = Vector3.Distance(cLPos, cRPos) + 3;
+            /*float t = Time.time;
+            float step = 2f / resolution;*/
+            for (int i = 0, z = 0; z < resolution; z++)
+            {
+                float v = (z + 0.5f) * step - 1f;
+                for (int x = 0; x < resolution; x++, i++)
+                {
+                    float u = (x + 0.5f) * step - 1f;
 
-            
+                    points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x / distArmsApart, cLPos.y / distArmsApart, cRPos.z / distArmsApart, u, v) * (distArmsApart);
+                    distArmsApart = Vector3.Distance(HPos, cLPos) + 3;
+                    points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x / distArmsApart, cRPos.y / distArmsApart, HPos.z / distArmsApart, u, v) * distArmsApart;
+                    distArmsApart = Vector3.Distance(HPos, cRPos) + 3;
+                    points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
+                }
+            }
+
+
             /*if (hypercubeRotations)
             {
                 UpdateSimpleSinPoints(cLPos, cRPos, HPos);
@@ -380,10 +396,10 @@ public class PlayerManager : NetworkBehaviour
                     }
                 }
             }*/
-            
 
-            
-            
+
+
+
         }
         
     }
