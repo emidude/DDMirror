@@ -254,7 +254,7 @@ public class PlayerManager : NetworkBehaviour
         for (int i = 0; i < points1.Length; i++)
         {
             GameObject point = Instantiate(cubePf);
-            point.transform.localScale = scale;
+            point.transform.localScale = Vector3.one*0.2f;
             //TODO: SET PARENT TO HEAD
             point.transform.SetParent(transform, false);
             points1[i] = point;
