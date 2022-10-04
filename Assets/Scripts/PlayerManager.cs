@@ -48,7 +48,7 @@ public class PlayerManager : NetworkBehaviour
 
     int resolution = 10;
     //GameObject[] points;
-    GameObject[] points1, points2, points3;
+    GameObject[] points1;//, points2, points3;
     float step;
     Vector3 scale;
 
@@ -261,7 +261,7 @@ public class PlayerManager : NetworkBehaviour
             NetworkServer.Spawn(point);
         }
 
-        points2 = new GameObject[resolution * resolution];
+        /*points2 = new GameObject[resolution * resolution];
         for (int i = 0; i < points2.Length; i++)
         {
             GameObject point = Instantiate(cubePf);
@@ -281,7 +281,7 @@ public class PlayerManager : NetworkBehaviour
             point.transform.SetParent(transform, false);
             points3[i] = point;
             NetworkServer.Spawn(point);
-        }
+        }*/
 
         /*if (hypercubeRotations)
         {
@@ -319,14 +319,14 @@ public class PlayerManager : NetworkBehaviour
         {
             NetworkServer.Destroy(points1[i]);
         }
-        for (int i = 0; i < points2.Length; i++)
+       /* for (int i = 0; i < points2.Length; i++)
         {
             NetworkServer.Destroy(points2[i]);
         }
         for (int i = 0; i < points3.Length; i++)
         {
             NetworkServer.Destroy(points3[i]);
-        }
+        }*/
 
         /*if (hypercubeRotations)
         {
@@ -343,7 +343,8 @@ public class PlayerManager : NetworkBehaviour
     //void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot, Vector3 vL, Vector3 vR, Vector3 avL, Vector3 avR)
     void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     {
-        if (points1 == null || points2 == null || points3 == null )
+        // if (points1 == null || points2 == null || points3 == null )
+        if (points1 == null )
         {
             Debug.Log("points array nullhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         }
@@ -360,10 +361,10 @@ public class PlayerManager : NetworkBehaviour
                     float u = (x + 0.5f) * step - 1f;
 
                     points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x / distArmsApart, cLPos.y / distArmsApart, cRPos.z / distArmsApart, u, v) * (distArmsApart);
-                    distArmsApart = Vector3.Distance(HPos, cLPos) + 3;
+                    /*distArmsApart = Vector3.Distance(HPos, cLPos) + 3;
                     points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x / distArmsApart, cRPos.y / distArmsApart, HPos.z / distArmsApart, u, v) * distArmsApart;
                     distArmsApart = Vector3.Distance(HPos, cRPos) + 3;
-                    points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
+                    points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;*/
                 }
             }
 
@@ -559,10 +560,10 @@ public class PlayerManager : NetworkBehaviour
                 float u = (x + 0.5f) * step - 1f;
 
                 points1[i].transform.localPosition = Graphs.SimpleSymmetric(HPos.x / distArmsApart, cLPos.y / distArmsApart, cRPos.z / distArmsApart, u, v) * (distArmsApart);
-                distArmsApart = Vector3.Distance(HPos, cLPos) + 3;
+/*                distArmsApart = Vector3.Distance(HPos, cLPos) + 3;
                 points2[i].transform.localPosition = Graphs.SimpleSymmetric(cLPos.x / distArmsApart, cRPos.y / distArmsApart, HPos.z / distArmsApart, u, v) * distArmsApart;
                 distArmsApart = Vector3.Distance(HPos, cRPos) + 3;
-                points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
+                points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;*/
             }
         }
     }
@@ -580,12 +581,12 @@ public class PlayerManager : NetworkBehaviour
                 float dist = Vector3.Distance(cLPos, cRPos);
                 //points1[i].transform.localPosition = Graphs.TorusSI2(dist, HPos.x/dist, HPos.y/dist, HPos.z/dist, HRot.x, HRot.y, HRot.z, HRot.w, u, v) * 5;
                 points1[i].transform.localPosition = Graphs.TorusSI2(dist, HPos.x / m, HPos.y / m, HPos.z / m, HRot.x, HRot.y, HRot.z, HRot.w, u, v) * m;
-                dist = Vector3.Distance(HPos, cRPos);
+/*                dist = Vector3.Distance(HPos, cRPos);
                 //points2[i].transform.localPosition = Graphs.TorusSI2(dist, cLPos.x/dist, cLPos.y/dist, cLPos.z/dist, cLRot.x, cLRot.y, cLRot.z, cLRot.w, u, v) * 5;
                 points2[i].transform.localPosition = Graphs.TorusSI2(dist, cLPos.x / m, cLPos.y / m, cLPos.z / m, cLRot.x, cLRot.y, cLRot.z, cLRot.w, u, v) * m;
 
                 dist = Vector3.Distance(HPos, cLPos);
-                points3[i].transform.localPosition = Graphs.TorusSI2(dist, cRPos.x / m, cRPos.y / m, cRPos.z / m, cRRot.x, cRRot.y, cRRot.z, cRRot.w, u, v) * m;
+                points3[i].transform.localPosition = Graphs.TorusSI2(dist, cRPos.x / m, cRPos.y / m, cRPos.z / m, cRRot.x, cRRot.y, cRRot.z, cRRot.w, u, v) * m;*/
             }
         }        
     }
