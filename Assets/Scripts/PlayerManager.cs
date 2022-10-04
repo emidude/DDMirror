@@ -381,6 +381,7 @@ public class PlayerManager : NetworkBehaviour
             vertices2Pf[i].transform.position = Hypercube.UpdateVertices(H_Deg.x, H_Deg.y, H_Deg.z, cRPos.x, cRPos.y, cRPos.z, 1, 2, i);
             vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 1, 2, i);*/
 
+            //too fast
             /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 4, 5, i);
             vertices2Pf[i].transform.position = Hypercube.UpdateVertices(H_Deg.x, H_Deg.y, H_Deg.z, cRPos.x, cRPos.y, cRPos.z, 4, 5, i);
             vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 4, 5, i);*/
@@ -389,13 +390,15 @@ public class PlayerManager : NetworkBehaviour
              vertices2Pf[i].transform.position = Hypercube.UpdateVertices(HRot.z, HRot.w, cRRot.x, cRRot.y, cRRot.z, cRRot.w, 0, 1, i);
              vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 0, 1, i);
 */
+            //if find no toher
             /* vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 1, 2, i);
              vertices2Pf[i].transform.position = Hypercube.UpdateVertices(HRot.z, HRot.w, cRRot.x, cRRot.y, cRRot.z, cRRot.w, 1, 2, i);
-             vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 1, 2, i);*/
+             vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 1, 2, i);
+ */
 
-            vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 4, 5, i);
-            vertices2Pf[i].transform.position = Hypercube.UpdateVertices(H_Deg.x, H_Deg.y, H_Deg.z, cRPos.x, cRPos.y, cRPos.z, 4, 5, i);
-            vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 4, 5, i);
+            vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 3, 3, i);
+            vertices2Pf[i].transform.position = Hypercube.UpdateVertices(H_Deg.x, H_Deg.y, H_Deg.z, cL_Deg.x, cL_Deg.y, cL_Deg.z, 3, 3, i);
+            vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cR_Deg.x, cR_Deg.y, cR_Deg.z, H_Deg.x, H_Deg.y, H_Deg.z, 3, 3, i);
 
 
         }
