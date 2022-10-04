@@ -351,8 +351,9 @@ public class PlayerManager : NetworkBehaviour
         else
         {
             float distArmsApart = Vector3.Distance(cLPos, cRPos) + 3;
-            /*float t = Time.time;
-            float step = 2f / resolution;*/
+            /*float t = Time.time;*/
+            //float step = 2f / resolution;
+            step = 0.2f;
             for (int i = 0, z = 0; z < resolution; z++)
             {
                 float v = (z + 0.5f) * step - 1f;
