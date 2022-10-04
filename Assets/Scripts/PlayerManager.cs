@@ -61,7 +61,7 @@ public class PlayerManager : NetworkBehaviour
 
     private Vector3[] _vertices;
     public GameObject[] vertices1Pf, vertices2Pf, vertices3Pf;
-    bool hypercubeRotations = false;
+   // bool hypercubeRotations = false;
 
 
     public override void OnStartServer()
@@ -283,7 +283,7 @@ public class PlayerManager : NetworkBehaviour
             NetworkServer.Spawn(point);
         }
 
-        if (hypercubeRotations)
+        /*if (hypercubeRotations)
         {
             _vertices = new Vector3[UtilsGeom4D.kTesseractPoints.Length];
             vertices1Pf = new GameObject[UtilsGeom4D.kTesseractPoints.Length];
@@ -307,7 +307,7 @@ public class PlayerManager : NetworkBehaviour
                 NetworkServer.Spawn(v3);
 
             }
-        }
+        }*/
 
     }
 
@@ -328,7 +328,7 @@ public class PlayerManager : NetworkBehaviour
             NetworkServer.Destroy(points3[i]);
         }
 
-        if (hypercubeRotations)
+        /*if (hypercubeRotations)
         {
             for (int i = 0; i < vertices1Pf.Length; i++)
             {
@@ -336,7 +336,7 @@ public class PlayerManager : NetworkBehaviour
                 NetworkServer.Destroy(vertices2Pf[i]);
                 NetworkServer.Destroy(vertices3Pf[i]);
             }
-        }
+        }*/
     }
 
     [Command]
@@ -349,9 +349,10 @@ public class PlayerManager : NetworkBehaviour
         }
         else
         {
-            //float t = Time.time;
-            //float step = 2f / resolution;
-            if (hypercubeRotations)
+            UpdateSimpleSinPoints(cLPos, cRPos, HPos);
+
+            
+            /*if (hypercubeRotations)
             {
                 UpdateSimpleSinPoints(cLPos, cRPos, HPos);
                 Update4DPoints(cLRot, cRRot, HRot, 0.01f, localHead.transform, cL.transform, cR.transform);
@@ -378,7 +379,7 @@ public class PlayerManager : NetworkBehaviour
                         points3[i].transform.localPosition = Graphs.TorusSI2(dist, cRPos.x / m, cRPos.y / m, cRPos.z / m, cRRot.x, cRRot.y, cRRot.z, cRRot.w, u, v) * m;
                     }
                 }
-            }
+            }*/
             
 
             
