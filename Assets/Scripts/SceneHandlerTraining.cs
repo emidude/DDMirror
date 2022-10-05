@@ -51,7 +51,7 @@ public class SceneHandlerTraining : MonoBehaviour
         
         if (e.target.tag == "submit")
         {
-            e.target.gameObject.GetComponent<Image>().color = Color.blue;
+            e.target.gameObject.GetComponent<Image>().color = Color.green;
 
            
 
