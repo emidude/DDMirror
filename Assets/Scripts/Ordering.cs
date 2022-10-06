@@ -8,17 +8,17 @@ public class Ordering: MonoBehaviour
 {
     private System.Random _random = new System.Random();
     //public int[] combinations = new int[6];
-    public int[] sessionOrdering = new int[4];
-    public int[] songOrdering = new int[12];
+    public int[] sessionOrdering;
+    public int[] songOrdering = new int[4];
     /*public int[] embodiedCombinations = new int[6];
     public int[] disembodiedCombinations = new int[6];
     public int[] embodiedSongOrdering = new int[6];
     public int[] disembodiedSongOrdering = new int[6];*/
 
-    int[] session_AA_SongOrdering = new int[3];
-    int[] session_AE_SongOrdering = new int[3];
-    int[] session_EA_SongOrdering = new int[3];
-    int[] session_EE_SongOrdering = new int[3];
+    int[] session_AA_SongOrdering = new int[1];
+    int[] session_AE_SongOrdering = new int[1];
+    int[] session_EA_SongOrdering = new int[1];
+    int[] session_EE_SongOrdering = new int[1];
 
 
     string[] sessionOrderingString =
@@ -40,15 +40,16 @@ public class Ordering: MonoBehaviour
 
     private void Start()
     {
+        songOrdering = new int[4];
         //set song ordering for this session
-        for (int i = 0; i < 12; i++)
+        for (int i = 0; i < 4; i++)
         {
             songOrdering[i] = i;
         }
         //randomise Song order:
         Shuffle(songOrdering);
         Debug.Log("song ordering is :");
-        for (int i = 0; i < songOrdering.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
             Debug.Log(songOrdering[i]);
         }
@@ -72,38 +73,33 @@ public class Ordering: MonoBehaviour
 
 
         
-        for (int i = 0, s =0 ; i < songOrdering.Length; i+=3)
+        for (int i = 0; i < songOrdering.Length; i++)
         {
-            Debug.Log("Order = " + s + ", Session = " +  sessionOrdering[s] + " - " + sessionOrderingString[sessionOrdering[s]] + ": {" +
-                songOrdering[i] + " , " + 
-                songOrdering[i+1] + " , " + 
-                songOrdering[i+2] + " };"
+            Debug.Log("Order = " + i + ", Session = " +  sessionOrdering[i] + " - " + sessionOrderingString[sessionOrdering[i]] + ": {" +
+                songOrdering[i]  + " };"
                );
 
-            s++;
         }
 
-        string date = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+       /* string date = DateTime.Now.ToString("yyyyMMdd_HHmmss");
         string filename = "ORDERING_" +  date ;
         OrderWriter = new StreamWriter(filename + ".txt");
         OrderWriter.WriteLine(String.Join(",", OrderHeader) + "\n");
 
         string[] values = new string[4];
 
-        for (int i = 0, s = 0; i < songOrdering.Length; i += 3)
+        for (int i = 0, s = 0; i < songOrdering.Length; i += 1)
         {
             values[0] = s.ToString();
             values[1] = sessionOrdering[s].ToString();
             values[2] = sessionOrderingString[sessionOrdering[s]].ToString();
-            values[3] = "{ " + songOrdering[i].ToString() + " , " +
-                songOrdering[i + 1] + " , " +
-                songOrdering[i + 2] + " };";
+            values[3] = "{ " + songOrdering[i].ToString() + " };";
 
             string csv = String.Join(",", values);
             OrderWriter.WriteLine(csv + "\n");
             s++;
         }
-        OrderWriter.Close();
+        OrderWriter.Close();*/
 
         //BELOW - OLD REQUIRES MATCH SETUP 
             /*//set Player combinations for 10 songs, each player will do: 4 '3 player' songs, 4 '2 player' songs and 4 '1 player' songs.

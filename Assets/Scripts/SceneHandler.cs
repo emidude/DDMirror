@@ -107,6 +107,7 @@ public class SceneHandler : NetworkBehaviour
 
                 NetworkIdentity networkIdentity = NetworkClient.connection.identity;
                 playerManager = networkIdentity.GetComponent<PlayerManager>();
+                playerManager.calibratingArmSpa = false;
                 playerManager.CmdClickedSubmit();
             }
 

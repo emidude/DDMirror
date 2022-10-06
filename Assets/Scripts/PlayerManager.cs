@@ -61,8 +61,12 @@ public class PlayerManager : NetworkBehaviour
 
 
     public GameObject[] vertices1Pf, vertices2Pf, vertices3Pf;
-   // bool hypercubeRotations = false;
+    // bool hypercubeRotations = false;
 
+    public bool calibratingArmSpa;
+
+    float maxLx, maxLy, maxLz, maxRy, maxRx, maxRz, minLx, minLy, minLz, minRx, minRy, minRz;
+    const float TWOPI = Mathf.PI * 2;
 
     public override void OnStartServer()
     {
@@ -136,6 +140,16 @@ public class PlayerManager : NetworkBehaviour
        
        
         CmdSetCubesCondition();
+
+        //set min calibrating values to be really high:
+
+        /*minLx = 100f;
+        minLy = 100f;
+        minLz = 100f;
+        minRx = 100f;
+        minRy = 100f;
+        minRz = 100f;
+        calibratingArmSpa = true;*/
     }
 
     void Update()
@@ -143,6 +157,36 @@ public class PlayerManager : NetworkBehaviour
 
         if (isLocalPlayer)
         {
+            /*if (calibratingArmSpa)
+            {
+                if (!(float.IsFinite(localHead.transform.position.x) || float.IsFinite(localHead.transform.position.y) || float.IsFinite(localHead.transform.position.z)
+                   || float.IsFinite(cL.transform.position.x) || float.IsFinite(cL.transform.position.y) || float.IsFinite(cL.transform.position.z)
+                   || float.IsFinite(cR.transform.position.x) || float.IsFinite(cR.transform.position.y) || float.IsFinite(cR.transform.position.z)
+                   || float.IsFinite(localHead.transform.rotation.x) || float.IsFinite(localHead.transform.rotation.y) || float.IsFinite(localHead.transform.rotation.z) || float.IsFinite(localHead.transform.rotation.w)
+                   || float.IsFinite(cL.transform.rotation.x) || float.IsFinite(cL.transform.rotation.y) || float.IsFinite(cL.transform.rotation.z) || float.IsFinite(cL.transform.rotation.w)
+                   || float.IsFinite(cR.transform.rotation.x) || float.IsFinite(cR.transform.rotation.y) || float.IsFinite(cR.transform.rotation.z) || float.IsFinite(cR.transform.rotation.w)))
+                {
+                    // Debug.Log("NAN");
+                    maxLx = Mathf.Max(maxLx, cL.transform.localPosition.x);
+                    maxLy = Mathf.Max(maxLy, cL.transform.localPosition.y);
+                    maxLz = Mathf.Max(maxLz, cL.transform.localPosition.z);
+                    
+                    minLx = Mathf.Min(minLx, cL.transform.localPosition.x);
+                    minLy = Mathf.Min(minLy, cL.transform.localPosition.y);
+                    minLz = Mathf.Min(minLz, cL.transform.localPosition.z);
+
+
+                    maxRx = Mathf.Max(maxRx, cR.transform.localPosition.x);
+                    maxLy = Mathf.Max(maxRy, cR.transform.localPosition.y);
+                    maxLz = Mathf.Max(maxRz, cR.transform.localPosition.z);
+
+                    minRx = Mathf.Min(minRx, cR.transform.localPosition.x);
+                    minRy = Mathf.Min(minRy, cR.transform.localPosition.y);
+                    minRz = Mathf.Min(minRz, cR.transform.localPosition.z);
+                }
+                
+            }*/
+
             if (!questionTime)
             {
                 if (! (float.IsFinite(localHead.transform.position.x) || float.IsFinite(localHead.transform.position.y) || float.IsFinite(localHead.transform.position.z) 
@@ -163,7 +207,8 @@ public class PlayerManager : NetworkBehaviour
                 else
                 {
                     //CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation,cL.GetVelocity(), cR.GetVelocity(),cL.GetAngularVelocity(),cR.GetAngularVelocity() );
-                    CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                 //  CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    CmdUpdateCubes(localHead.transform.localPosition, localHead.transform.rotation, cL.transform.localPosition, cL.transform.rotation, cR.transform.localPosition, cR.transform.rotation);
 
                 }
             }           
@@ -348,7 +393,7 @@ public class PlayerManager : NetworkBehaviour
             float distArmsApart = Vector3.Distance(cLPos, cRPos) + 3;
             /*float t = Time.time;*/
             //float step = 2f / resolution;
-            step = 0.2f;
+            /*step = 0.2f;
             for (int i = 0, z = 0; z < resolution; z++)
             {
                 float v = (z + 0.5f) * step - 1f;
@@ -362,19 +407,59 @@ public class PlayerManager : NetworkBehaviour
                     distArmsApart = Vector3.Distance(HPos, cRPos) + 3;
                     points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
                 }
-            }
+            }*/
 
 
         Vector3 cL_Deg = cLRot.eulerAngles * Mathf.Deg2Rad;
         Vector3 cR_Deg = cRRot.eulerAngles * Mathf.Deg2Rad;
         Vector3 H_Deg = HRot.eulerAngles * Mathf.Deg2Rad;
 
+        /*float rotLx = Mathf.Lerp(minLx, maxLx, cLPos.x) * TWOPI;
+        float rotLy = Mathf.Lerp(minLy, maxLy, cLPos.y) * TWOPI;
+        float rotLz = Mathf.Lerp(minLz, maxLz, cLPos.z) * TWOPI;
+
+        float rotRx = Mathf.Lerp(minRx, maxRx, cRPos.x) * TWOPI;
+        float rotRy = Mathf.Lerp(minRy, maxRy, cRPos.y) * TWOPI;
+        float rotRz = Mathf.Lerp(minRz, maxRz, cRPos.z) * TWOPI;*/
+
+        float rotLx = Mathf.LerpUnclamped(0, TWOPI, cLPos.x * 0.5f);
+        float rotLy = Mathf.LerpUnclamped(0, TWOPI, cLPos.y * 0.5f);
+        float rotLz = Mathf.LerpUnclamped(0, TWOPI, cLPos.z * 0.5f);
+
+        float rotRx = Mathf.LerpUnclamped(0, TWOPI, cRPos.x * 0.5f);
+        float rotRy = Mathf.LerpUnclamped(0, TWOPI, cRPos.y * 0.5f);
+        float rotRz = Mathf.LerpUnclamped(0, TWOPI, cRPos.z * 0.5f);
+
+        /*float rotLx = Mathf.LerpUnclamped(0, TWOPI, cLPos.x );
+        float rotLy = Mathf.LerpUnclamped(0, TWOPI, cLPos.y );
+        float rotLz = Mathf.LerpUnclamped(0, TWOPI, cLPos.z );
+
+        float rotRx = Mathf.LerpUnclamped(0, TWOPI, cRPos.x );
+        float rotRy = Mathf.LerpUnclamped(0, TWOPI, cRPos.y );
+        float rotRz = Mathf.LerpUnclamped(0, TWOPI, cRPos.z );*/
+
 
         for (int i = 0; i < 16; i++)
         {
-            /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 1.5f, 2, i);
-            vertices2Pf[i].transform.position = Hypercube.UpdateVertices(H_Deg.x, H_Deg.y, H_Deg.z, cRPos.x, cRPos.y, cRPos.z, 1.5f, 2, i);
-            vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 1.5f, 2, i);*/
+            //1
+            /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 3f, 2, i, HPos.y);
+            vertices2Pf[i].transform.position = Hypercube.UpdateVertices(H_Deg.x, H_Deg.y, H_Deg.z, cRPos.x, cRPos.y, cRPos.z, 3f, 2, i, HPos.y);
+            vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 3f, 2, i, HPos.y);*/
+
+            //fast
+            //vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 3f, 2, i, HPos.y);
+
+            //not complete motions, right speed
+            //vertices2Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cRPos.x, cRPos.y, cRPos.z, 3f, 2, i, HPos.y);
+
+            //vertices3Pf[i].transform.position = Hypercube.UpdateVertices(rotLx, rotLy, rotLz, rotRx, rotRy, rotRz, 3f, 2, i, HPos.y);
+
+            vertices1Pf[i].transform.position = Hypercube.UpdateVertices(rotLx, rotLy, rotLz, rotRx, rotRy, rotRz, Vector3.Distance(cLPos,cRPos)* 3f, 2, i, HPos);
+            vertices1Pf[i].transform.rotation = cLRot;
+
+            vertices2Pf[i].transform.position = Hypercube.UpdateVertices( rotRx, rotRy, rotRz, rotLx, rotLy, rotLz, Vector3.Distance( cRPos, cLPos) * 3f, 2, i, HPos);
+            vertices2Pf[i].transform.rotation = cRRot;
+
 
             /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 1, 2, i);
             vertices2Pf[i].transform.position = Hypercube.UpdateVertices(H_Deg.x, H_Deg.y, H_Deg.z, cRPos.x, cRPos.y, cRPos.z, 1, 2, i);
@@ -396,10 +481,10 @@ public class PlayerManager : NetworkBehaviour
              vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cR_Deg.x * 0.1f, cR_Deg.y * 0.1f, cR_Deg.z * 0.1f, H_Deg.x * 0.1f, H_Deg.y * 0.1f, H_Deg.z * 0.1f, 3, 3, i);*/
 
             //best so far
-            vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 1.5f, 2, i);
+            /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 1.5f, 2, i);
             vertices2Pf[i].transform.position = Hypercube.UpdateVertices(HRot.z, HRot.w, cRRot.x, cRRot.y, cRRot.z, cRRot.w, 1.5f, 2, i);
             vertices3Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 1.5f, 2, i);
-
+*/
             //cant tell diff between this and above
             /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 2, 2, i);
             vertices2Pf[i].transform.position = Hypercube.UpdateVertices(HRot.z, HRot.w, cRRot.x, cRRot.y, cRRot.z, cRRot.w, 2, 2, i);

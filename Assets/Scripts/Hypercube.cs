@@ -33,20 +33,23 @@ public class Hypercube : MonoBehaviour
 	new Vector4(-1, -1, -1, 1),
 	new Vector4(-1, -1, -1, -1)
 	};
-	
 
-	public static Vector3 UpdateVertices(float XY, float YZ, float ZW, float XW, float YW, float XZ, float dist, float scale, int vIdx) 
+
+//	public static Vector3 UpdateVertices(float XY, float YZ, float ZW, float XW, float YW, float XZ, float dist, float scale, int vIdx, float yTrans)
+
+	public static Vector3 UpdateVertices(float XY, float YZ, float ZW, float XW, float YW, float XZ, float dist, float scale, int vIdx, Vector3 head) 
 	{
 		//Debug.Log("points[vIdx]= " + points[vIdx]);
 		Vector4 rotated = rotate(XY, YZ, ZW, XW, YW, XZ, points[vIdx]);
 	//Debug.Log(vIdx + " rotated = " + rotated);
-		return project(dist, rotated, scale);
+		return project(dist, rotated, scale, head);
 	}
 	//dist = 2
-    static Vector3 project(float dist, Vector4 v, float scale)
+    static Vector3 project(float dist, Vector4 v, float scale, Vector3 head)
     {
 		float w = 1 / (dist - v.w);
-		return new Vector3(v.x * w * scale, v.y * w * scale, v.z * w * scale);
+		//scale upwards:
+		return new Vector3(v.x * w * scale + head.x, v.y * w * scale + head.y, v.z * w * scale + head.z);
     }
 
     static Vector4 rotate(float XY, float YZ, float ZW, float XW, float YW, float XZ, Vector4 v)
