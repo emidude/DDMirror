@@ -41,6 +41,7 @@ public class Ordering: MonoBehaviour
     private void Start()
     {
         songOrdering = new int[4];
+        sessionOrdering = new int[4];
         //set song ordering for this session
         for (int i = 0; i < 4; i++)
         {

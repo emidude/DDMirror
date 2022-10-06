@@ -48,7 +48,7 @@ public class PlayerManager : NetworkBehaviour
 
     int resolution = 10;
     //GameObject[] points;
-    GameObject[] points1, points2, points3;
+  //  GameObject[] points1, points2, points3;
     float step = 0.2f;
     Vector3 scale;
 
@@ -60,7 +60,7 @@ public class PlayerManager : NetworkBehaviour
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
 
 
-    public GameObject[] vertices1Pf, vertices2Pf, vertices3Pf;
+    public GameObject[] vertices1Pf, vertices2Pf; //, vertices3Pf;
     // bool hypercubeRotations = false;
 
     public bool calibratingArmSpa;
@@ -92,7 +92,7 @@ public class PlayerManager : NetworkBehaviour
         ContinuousLogger = audioObject.GetComponent<ContinuousLogger>();
 
         //ORDERING:
-        songOrdering = new int[] { 10, 2, 7 };
+        songOrdering = new int[] { 1 };
 
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
@@ -300,7 +300,7 @@ public class PlayerManager : NetworkBehaviour
         //transform.position = head.position; <-TODO:  need to fix
         transform.position = Vector3.zero;
 
-        points1 = new GameObject[resolution * resolution];
+        /*points1 = new GameObject[resolution * resolution];
         for (int i = 0; i < points1.Length; i++)
         {
             GameObject point = Instantiate(cubePf);
@@ -331,11 +331,11 @@ public class PlayerManager : NetworkBehaviour
             point.transform.SetParent(transform, false);
             points3[i] = point;
             NetworkServer.Spawn(point);
-        }
+        }*/
 
         vertices1Pf = new GameObject[16];
         vertices2Pf = new GameObject[16];
-        vertices3Pf = new GameObject[16];
+       // vertices3Pf = new GameObject[16];
 
 
         for (int i = 0; i < vertices1Pf.Length; i++)
@@ -344,14 +344,14 @@ public class PlayerManager : NetworkBehaviour
             v1.transform.localScale = Vector3.one * 0.2f;
             GameObject v2 = Instantiate(cubePf);
             v2.transform.localScale = Vector3.one * 0.2f;
-            GameObject v3 = Instantiate(cubePf);
-            v3.transform.localScale = Vector3.one * 0.2f;
+           /* GameObject v3 = Instantiate(cubePf);
+            v3.transform.localScale = Vector3.one * 0.2f;*/
             vertices1Pf[i] = v1;
             vertices2Pf[i] = v2;
-            vertices3Pf[i] = v3;
+     //       vertices3Pf[i] = v3;
             NetworkServer.Spawn(v1);
             NetworkServer.Spawn(v2);
-            NetworkServer.Spawn(v3);
+       //     NetworkServer.Spawn(v3);
 
         }
 
@@ -363,7 +363,7 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     public void CmdDestroyCubes()
     {
-        for (int i = 0; i < points1.Length; i++)
+  /*      for (int i = 0; i < points1.Length; i++)
         {
             NetworkServer.Destroy(points1[i]);
         }
@@ -374,14 +374,14 @@ public class PlayerManager : NetworkBehaviour
         for (int i = 0; i < points3.Length; i++)
         {
             NetworkServer.Destroy(points3[i]);
-        }
+        }*/
 
         
             for (int i = 0; i < vertices1Pf.Length; i++)
             {
                 NetworkServer.Destroy(vertices1Pf[i]);
                 NetworkServer.Destroy(vertices2Pf[i]);
-                NetworkServer.Destroy(vertices3Pf[i]);
+       //         NetworkServer.Destroy(vertices3Pf[i]);
             }
         
     }
@@ -673,11 +673,11 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
-    void UpdateSimpleSinPoints(Vector3 cLPos, Vector3 cRPos, Vector3 HPos)
+    /*void UpdateSimpleSinPoints(Vector3 cLPos, Vector3 cRPos, Vector3 HPos)
     {
         float distArmsApart = Vector3.Distance(cLPos, cRPos) + 3;
-        /*float t = Time.time;
-        float step = 2f / resolution;*/
+        *//*float t = Time.time;
+        float step = 2f / resolution;*//*
         for (int i = 0, z = 0; z < resolution; z++)
         {
             float v = (z + 0.5f) * step - 1f;
@@ -715,7 +715,7 @@ public class PlayerManager : NetworkBehaviour
                 points3[i].transform.localPosition = Graphs.TorusSI2(dist, cRPos.x / m, cRPos.y / m, cRPos.z / m, cRRot.x, cRRot.y, cRRot.z, cRRot.w, u, v) * m;
             }
         }        
-    }
+    }*/
 
    
 
