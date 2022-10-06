@@ -581,7 +581,6 @@ public class PlayerManager : NetworkBehaviour
         if (PM.bodyShapes)
         {
             PM.CmdSpawnHeadAndHands();
-            //PM.CmdSpawnTest();
         }
         else
         {
