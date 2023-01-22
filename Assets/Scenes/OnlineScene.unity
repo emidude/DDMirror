@@ -4266,7 +4266,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - name: Jump Around
-    ID: 5
+    ID: 2
     About: House Of Pain
     clipsToPlay:
     - {fileID: 8300000, guid: 7705226ace1299a409c52771dbdcf8f3, type: 3}
@@ -4460,10 +4460,10 @@ MonoBehaviour:
   sessionString: 
   condition: 
   songJustFinished: 
-  participantNumber: 1
-  sessionNumber: 2
+  participantNumber: 3
+  sessionNumber: 0
   pcNumber: 1
-  studyOrder: 0
+  studyOrder: 3
 --- !u!1 &1852613889
 GameObject:
   m_ObjectHideFlags: 0
