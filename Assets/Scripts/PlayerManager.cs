@@ -428,9 +428,9 @@ public class PlayerManager : NetworkBehaviour
             rotationLerpParam[i] = positionScaleFactors[i] / 8;
         }
 
-       
 
-        for (int i = 0; i < res; i++)
+        //BASIC WORKING
+        /*for (int i = 0; i < res; i++)
         {
             //setting relative body distances
             rightHandCubes[i].transform.position = new Vector3(0,distArms * Mathf.Sin(t), distLHead * Mathf.Cos(t)) * scale + startingHeadPos;
@@ -448,12 +448,32 @@ public class PlayerManager : NetworkBehaviour
             rightHandCubes[i].transform.rotation = Quaternion.Slerp(cRRot, Quaternion.Inverse(cRRot), rotationLerpParam[i]);
             leftHandCubes[i].transform.rotation = Quaternion.Slerp(cLRot, Quaternion.Inverse(cLRot), rotationLerpParam[i]);
             headCubes[i].transform.rotation = Quaternion.Slerp(HRot, Quaternion.Inverse(HRot), rotationLerpParam[i]);
+        }*/
+
+        for (int i = 0; i < res; i++)
+        {
+            //setting relative body distances
+            RParents[i].transform.position = new Vector3(0, distArms * Mathf.Sin(t), distLHead * Mathf.Cos(t)) * scale + startingHeadPos;
+            LParents[i].transform.position = new Vector3(distRHead * Mathf.Sin(t), 0, distArms * Mathf.Cos(t)) * scale + startingHeadPos;
+            HParents[i].transform.position = new Vector3(distLHead * Mathf.Sin(t), distRHead * Mathf.Cos(t), 0) * scale + startingHeadPos;
+            t += tStep;
+
+            //updating postiion of cubes based on device position
+            RParents[i].transform.position += cRPos * positionScaleFactors[i];
+            LParents[i].transform.position += cLPos * positionScaleFactors[i];
+            HParents[i].transform.position += HPos * positionScaleFactors[i];
+
+            //rotation
+            //rotation = Quaternion.Slerp(from.rotation, to.rotation, timeCount);
+            RParents[i].transform.rotation = Quaternion.Slerp(cRRot, Quaternion.Inverse(cRRot), rotationLerpParam[i]);
+            LParents[i].transform.rotation = Quaternion.Slerp(cLRot, Quaternion.Inverse(cLRot), rotationLerpParam[i]);
+            HParents[i].transform.rotation = Quaternion.Slerp(HRot, Quaternion.Inverse(HRot), rotationLerpParam[i]);
         }
     }
 
 
 
-   [Command]
+    [Command]
     void CmdUpdateCubes(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     {
         
