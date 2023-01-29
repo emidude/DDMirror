@@ -52,7 +52,6 @@ public class PlayerManager : NetworkBehaviour
     float step = 0.2f;
     Vector3 scale;
 
-    //public bool bodyShapes = false;
     public bool bodyShapes;
     public bool questionTime = true;
 
