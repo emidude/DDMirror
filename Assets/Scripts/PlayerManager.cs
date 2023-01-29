@@ -60,7 +60,7 @@ public class PlayerManager : NetworkBehaviour
     static readonly List<PlayerManager> playersList = new List<PlayerManager>();
 
 
-    public GameObject[] rightHandCubes, leftHandCubes,  headCubes, RParents, LParents, HParents;
+    public GameObject[] rightHandCubes, leftHandCubes, headCubes;// RParents, LParents, HParents;
     // bool hypercubeRotations = false;
 
     public bool calibratingArmSpa;
@@ -342,31 +342,32 @@ public class PlayerManager : NetworkBehaviour
         leftHandCubes = new GameObject[16];
         headCubes = new GameObject[16];
 
-        RParents = new GameObject[16];
+      /*  RParents = new GameObject[16];
         LParents = new GameObject[16];
-        HParents = new GameObject[16];
+        HParents = new GameObject[16];*/
 
         for (int i = 0; i < rightHandCubes.Length; i++)
         {
             GameObject vR = Instantiate(cubePf);
             vR.transform.localScale = Vector3.one * 0.2f;
+/*
             GameObject PR = new GameObject();
             RParents[i] = PR;
             //RParents[i].transform.rotation = Quaternion.LookRotation(new Vector3(0,0,1),  Vector3.up);
-            vR.transform.SetParent(RParents[i].transform,false);
+            vR.transform.SetParent(RParents[i].transform,false);*/
 
             GameObject vL = Instantiate(cubePf);
             vL.transform.localScale = Vector3.one * 0.2f;
-            GameObject PL = new GameObject();
+           /* GameObject PL = new GameObject();
             LParents[i] = PL;
-            vL.transform.SetParent(LParents[i].transform, false);
+            vL.transform.SetParent(LParents[i].transform, false);*/
 
 
             GameObject vH = Instantiate(cubePf);
             vH.transform.localScale = Vector3.one * 0.2f;
-            GameObject PH = new GameObject();
+           /* GameObject PH = new GameObject();
             HParents[i] = PH;
-            vH.transform.SetParent(HParents[i].transform, false);
+            vH.transform.SetParent(HParents[i].transform, false);*/
 
             rightHandCubes[i] = vR;
             leftHandCubes[i] = vL;
@@ -430,12 +431,12 @@ public class PlayerManager : NetworkBehaviour
 
 
         //BASIC WORKING
-        /*for (int i = 0; i < res; i++)
+        for (int i = 0; i < res; i++)
         {
             //setting relative body distances
-            rightHandCubes[i].transform.position = new Vector3(0,distArms * Mathf.Sin(t), distLHead * Mathf.Cos(t)) * scale + startingHeadPos;
-            leftHandCubes[i].transform.position = new Vector3(distRHead * Mathf.Sin(t),0, distArms * Mathf.Cos(t))* scale + startingHeadPos;
-            headCubes[i].transform.position = new Vector3(distLHead * Mathf.Sin(t), distRHead * Mathf.Cos(t),0) * scale + startingHeadPos;
+            rightHandCubes[i].transform.position = new Vector3(0, distArms * Mathf.Sin(t), distLHead * Mathf.Cos(t)) * scale + startingHeadPos;
+            leftHandCubes[i].transform.position = new Vector3(distRHead * Mathf.Sin(t), 0, distArms * Mathf.Cos(t)) * scale + startingHeadPos;
+            headCubes[i].transform.position = new Vector3(distLHead * Mathf.Sin(t), distRHead * Mathf.Cos(t), 0) * scale + startingHeadPos;
             t += tStep;
 
             //updating postiion of cubes based on device position
@@ -448,9 +449,10 @@ public class PlayerManager : NetworkBehaviour
             rightHandCubes[i].transform.rotation = Quaternion.Slerp(cRRot, Quaternion.Inverse(cRRot), rotationLerpParam[i]);
             leftHandCubes[i].transform.rotation = Quaternion.Slerp(cLRot, Quaternion.Inverse(cLRot), rotationLerpParam[i]);
             headCubes[i].transform.rotation = Quaternion.Slerp(HRot, Quaternion.Inverse(HRot), rotationLerpParam[i]);
-        }*/
+        }
 
-        for (int i = 0; i < res; i++)
+        //PARENTS - DOES NOT NETWORK PROPERLY
+        /*for (int i = 0; i < res; i++)
         {
             //setting relative body distances
             RParents[i].transform.position = new Vector3(0, distArms * Mathf.Sin(t), distLHead * Mathf.Cos(t)) * scale + startingHeadPos;
@@ -468,7 +470,7 @@ public class PlayerManager : NetworkBehaviour
             RParents[i].transform.rotation = Quaternion.Slerp(cRRot, Quaternion.Inverse(cRRot), rotationLerpParam[i]);
             LParents[i].transform.rotation = Quaternion.Slerp(cLRot, Quaternion.Inverse(cLRot), rotationLerpParam[i]);
             HParents[i].transform.rotation = Quaternion.Slerp(HRot, Quaternion.Inverse(HRot), rotationLerpParam[i]);
-        }
+        }*/
     }
 
 
