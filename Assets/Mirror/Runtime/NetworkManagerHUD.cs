@@ -71,7 +71,9 @@ namespace Mirror
                     manager.StartClient();
                 }
                 // This updates networkAddress every frame from the TextField
-                manager.networkAddress = GUILayout.TextField(manager.networkAddress);
+                ///////////////// COMMENTED OUT BELOW TO HARD CODE IN NETWORK ADDRESS
+                // manager.networkAddress = GUILayout.TextField(manager.networkAddress);
+                manager.networkAddress = GUILayout.TextField("138.37.90.183");
                 GUILayout.EndHorizontal();
 
                 // Server Only
