@@ -438,6 +438,14 @@ public class PlayerManager : NetworkBehaviour
             headCubes[i].transform.position = new Vector3(distLHead * Mathf.Sin(t), distRHead * Mathf.Cos(t), 0) * scale + startingHeadPos;
             t += tStep;
 
+            //rotate elipse so more visible//DID NOT WORK WENT GLITCHY LOCAL ROTS
+            /* rightHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(1, 0, 0),90 ); //YZ plane
+             leftHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(0, 1, 0), 90); //XZ plane
+             rightHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(0, 0, 1), 90); //XY plane*/
+            /*rightHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(0, 1, 1), 45); //YZ plane
+            leftHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(1, 0, 1), 90); //XZ plane
+            rightHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(1, 1, 0), 90); //XY plane*/
+
             //updating postiion of cubes based on device position
             rightHandCubes[i].transform.position += cRPos * positionScaleFactors[i];
             leftHandCubes[i].transform.position += cLPos * positionScaleFactors[i];
