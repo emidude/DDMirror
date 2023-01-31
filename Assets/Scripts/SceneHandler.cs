@@ -133,7 +133,18 @@ public class SceneHandler : NetworkBehaviour
                 dancePreference.value = 0.5f;
                 //kill ui panels
                 dancePrefPanel.SetActive(false);
-                answeredQnPanel.SetActive(true);
+
+
+                PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+                if (curentSong < PM.songOrdering.Length)
+                {
+                    answeredQnPanel.SetActive(true);
+                }
+                else
+                {
+                    finishedSessionPanel.SetActive(true);
+                }
+
 
                 HideLaserPointer();
                 
@@ -220,7 +231,14 @@ public class SceneHandler : NetworkBehaviour
 
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
 
-        if (curentSong < PM.songOrdering.Length)
+        panelstart.SetActive(false);
+        musicPrefPanel.SetActive(true);
+        dancePrefPanel.SetActive(false);
+        answeredQnPanel.SetActive(false);
+        ShowLaserPointer();
+
+        //BELOW DOES NOT WORK -LAST SONG GOES straight to finished session panel without qn panels
+        /*if (curentSong < PM.songOrdering.Length)
         {
             //numPlayersPanel.SetActive(true);
             panelstart.SetActive(false);
@@ -233,8 +251,8 @@ public class SceneHandler : NetworkBehaviour
         else
         {
             finishedSessionPanel.SetActive(true);
-        }
-   
+        }*/
+
         //disable visuals;        
         PM.questionTime = true;
         if (PM.bodyShapes)
