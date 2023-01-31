@@ -133,12 +133,14 @@ public class SceneHandler : NetworkBehaviour
                 dancePreference.value = 0.5f;
                 //kill ui panels
                 dancePrefPanel.SetActive(false);
-
-
+                
                 PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+
                 if (curentSong < PM.songOrdering.Length)
                 {
                     answeredQnPanel.SetActive(true);
+                    currentQn = 0;
+                    PM.CmdClickedSubmit();
                 }
                 else
                 {
@@ -148,10 +150,7 @@ public class SceneHandler : NetworkBehaviour
 
                 HideLaserPointer();
                 
-                currentQn = 0;
-                NetworkIdentity networkIdentity = NetworkClient.connection.identity;
-                playerManager = networkIdentity.GetComponent<PlayerManager>();
-                playerManager.CmdClickedSubmit();
+                
             }
 
         }
