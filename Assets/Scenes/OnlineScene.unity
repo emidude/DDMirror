@@ -4461,9 +4461,9 @@ MonoBehaviour:
   condition: 
   songJustFinished: 
   participantNumber: 4
-  sessionNumber: 3
+  sessionNumber: 2
   pcNumber: 1
-  studyOrder: 2
+  studyOrder: 3
 --- !u!1 &1852613889
 GameObject:
   m_ObjectHideFlags: 0
