@@ -69,6 +69,8 @@ public class PlayerManager : NetworkBehaviour
 
     Vector3 startingHeadPos;
 
+    float rotInc = 360 / 16;
+
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -93,7 +95,7 @@ public class PlayerManager : NetworkBehaviour
         ContinuousLogger = audioObject.GetComponent<ContinuousLogger>();
 
         //ORDERING:
-        songOrdering = new int[] { 0 };
+        songOrdering = new int[] { 1 };
 
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
@@ -212,8 +214,8 @@ public class PlayerManager : NetworkBehaviour
                     //CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation,cL.GetVelocity(), cR.GetVelocity(),cL.GetAngularVelocity(),cR.GetAngularVelocity() );
                     //  CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                     // CmdUpdateCubes(localHead.transform.localPosition, localHead.transform.rotation, cL.transform.localPosition, cL.transform.rotation, cR.transform.localPosition, cR.transform.rotation);
-                    CmdUpdateCubesP(localHead.transform.localPosition, localHead.transform.rotation, cL.transform.localPosition, cL.transform.rotation, cR.transform.localPosition, cR.transform.rotation);
-                  //  CmdUpdateCubesP(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    //CmdUpdateCubesP(localHead.transform.localPosition, localHead.transform.rotation, cL.transform.localPosition, cL.transform.rotation, cR.transform.localPosition, cR.transform.rotation);
+                    CmdUpdateCubesP(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                 }
             }           
         }
@@ -422,41 +424,63 @@ public class PlayerManager : NetworkBehaviour
         float scale = 3;
 
         float[] positionScaleFactors = { -4, -3, -2, -1, 0, 1, 2, 3, 4, 3, 2, 1, 0, -1, -2, -3 };
-        float[] rotationLerpParam = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3, 2, 1 };
+        float[] rotationLerpParam = { 4, 5, 6, 7, 8, 7, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3 };
         for (int i = 0; i < 16; i++)
         {
             rotationLerpParam[i] = rotationLerpParam[i] / 8;
         }
 
+        /*Quaternion q;
+        Vector3 e;*/
 
         //BASIC WORKING
         for (int i = 0; i < res; i++)
         {
             //setting relative body distances
-            rightHandCubes[i].transform.position = new Vector3(0, distArms * Mathf.Sin(t), distRHead * Mathf.Cos(t)) * scale + startingHeadPos;
+            /* rightHandCubes[i].transform.position = new Vector3(distArms * Mathf.Sin(t), 0, distRHead * Mathf.Cos(t)) * scale + startingHeadPos;
+             leftHandCubes[i].transform.position = new Vector3(distLHead * Mathf.Sin(t), distArms * Mathf.Cos(t),0) * scale + startingHeadPos;
+             headCubes[i].transform.position = new Vector3(0,distRHead * Mathf.Sin(t), distLHead * Mathf.Cos(t)) * scale + startingHeadPos;*/
+            rightHandCubes[i].transform.position = new Vector3(distArms * Mathf.Sin(t), 0, distRHead * Mathf.Cos(t)) * scale + startingHeadPos;
             leftHandCubes[i].transform.position = new Vector3(distLHead * Mathf.Sin(t), 0, distArms * Mathf.Cos(t)) * scale + startingHeadPos;
-            headCubes[i].transform.position = new Vector3(distRHead * Mathf.Cos(t), distLHead * Mathf.Sin(t), 0) * scale + startingHeadPos;
+            headCubes[i].transform.position = new Vector3(distRHead * Mathf.Cos(t), 0, distLHead * Mathf.Sin(t)) * scale + startingHeadPos;
             t += tStep;
 
             //rotate elipse so more visible//DID NOT WORK WENT GLITCHY LOCAL ROTS
             /* rightHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(1, 0, 0),90 ); //YZ plane
              leftHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(0, 1, 0), 90); //XZ plane
              rightHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(0, 0, 1), 90); //XY plane*/
-            /*rightHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(0, 1, 1), 45); //YZ plane
-            leftHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(1, 0, 1), 90); //XZ plane
-            rightHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(1, 1, 0), 90); //XY plane*/
+            /*rightHandCubes[i].transform.RotateAround(startingHeadPos, Vector3.forward, 90); //YZ plane
+            leftHandCubes[i].transform.RotateAround(startingHeadPos, Vector3.forward, 90); //XZ plane
+            rightHandCubes[i].transform.RotateAround(startingHeadPos, Vector3.forward, 90); //XY plane*/
 
             //updating postiion of cubes based on device position
-            rightHandCubes[i].transform.position += cRPos * positionScaleFactors[i];
-            leftHandCubes[i].transform.position += cLPos * positionScaleFactors[i];
-            headCubes[i].transform.position += HPos * positionScaleFactors[i];
+            rightHandCubes[i].transform.position += (cRPos - startingHeadPos) * positionScaleFactors[i];
+            //leftHandCubes[i].transform.position += (cLPos - Vector3.up * startingHeadPos.y) * positionScaleFactors[i];
+            leftHandCubes[i].transform.position += (cLPos - startingHeadPos) * positionScaleFactors[i];
+
+            headCubes[i].transform.position += (HPos - startingHeadPos) * positionScaleFactors[i];
 
             //rotation
-            //rotation = Quaternion.Slerp(from.rotation, to.rotation, timeCount);
-            rightHandCubes[i].transform.rotation = Quaternion.Slerp(cRRot, Quaternion.Inverse(cRRot), rotationLerpParam[i]);
-            leftHandCubes[i].transform.rotation = Quaternion.Slerp(cLRot, Quaternion.Inverse(cLRot), rotationLerpParam[i]);
-            headCubes[i].transform.rotation = Quaternion.Slerp(HRot, Quaternion.Inverse(HRot), rotationLerpParam[i]);
+            rightHandCubes[i].transform.rotation = cRRot*Quaternion.Slerp(cRRot, Quaternion.Inverse(cRRot), rotationLerpParam[i]);
+            leftHandCubes[i].transform.rotation = cLRot*Quaternion.Slerp(cLRot, Quaternion.Inverse(cLRot), rotationLerpParam[i]);
+            headCubes[i].transform.rotation = HRot * Quaternion.Slerp(HRot, Quaternion.Inverse(HRot), rotationLerpParam[i]);
+
+            //euler rotation:
+            /*Vector3 increment = Vector3.one * rotInc * i;
+            q = cRRot;
+            q.eulerAngles += q.eulerAngles + increment;
+            rightHandCubes[i].transform.rotation = q;
+
+            q = cLRot;
+            q.eulerAngles += q.eulerAngles + increment;
+            leftHandCubes[i].transform.rotation = q;
+
+            q = HRot;
+            q.eulerAngles += q.eulerAngles + increment;
+            headCubes[i].transform.rotation = q;*/
         }
+
+
 
         //PARENTS - DOES NOT NETWORK PROPERLY
         /*for (int i = 0; i < res; i++)
