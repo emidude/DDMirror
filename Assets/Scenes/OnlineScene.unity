@@ -4460,9 +4460,9 @@ MonoBehaviour:
   sessionString: 
   condition: 
   songJustFinished: 
-  participantNumber: 6
+  participantNumber: 7
   sessionNumber: 1
-  pcNumber: 1
+  pcNumber: 2
   studyOrder: 3
 --- !u!1 &1852613889
 GameObject:
