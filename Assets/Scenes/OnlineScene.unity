@@ -4461,7 +4461,7 @@ MonoBehaviour:
   condition: 
   songJustFinished: 
   participantNumber: 5
-  sessionNumber: 2
+  sessionNumber: 0
   pcNumber: 2
   studyOrder: 3
 --- !u!1 &1852613889
