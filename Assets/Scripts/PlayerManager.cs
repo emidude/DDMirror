@@ -95,7 +95,7 @@ public class PlayerManager : NetworkBehaviour
         ContinuousLogger = audioObject.GetComponent<ContinuousLogger>();
 
         //ORDERING:
-        songOrdering = new int[] { 2 };
+        songOrdering = new int[] { 1 };
 
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
@@ -437,12 +437,12 @@ public class PlayerManager : NetworkBehaviour
         for (int i = 0; i < res; i++)
         {
             //setting relative body distances
-            /* rightHandCubes[i].transform.position = new Vector3(distArms * Mathf.Sin(t), 0, distRHead * Mathf.Cos(t)) * scale + startingHeadPos;
-             leftHandCubes[i].transform.position = new Vector3(distLHead * Mathf.Sin(t), distArms * Mathf.Cos(t),0) * scale + startingHeadPos;
-             headCubes[i].transform.position = new Vector3(0,distRHead * Mathf.Sin(t), distLHead * Mathf.Cos(t)) * scale + startingHeadPos;*/
             rightHandCubes[i].transform.position = new Vector3(distArms * Mathf.Sin(t), 0, distRHead * Mathf.Cos(t)) * scale + startingHeadPos;
+            leftHandCubes[i].transform.position = new Vector3(distLHead * Mathf.Sin(t), distArms * Mathf.Cos(t), 0) * scale + startingHeadPos;
+            headCubes[i].transform.position = new Vector3(0, distRHead * Mathf.Sin(t), distLHead * Mathf.Cos(t)) * scale + startingHeadPos;
+            /*rightHandCubes[i].transform.position = new Vector3(distArms * Mathf.Sin(t), 0, distRHead * Mathf.Cos(t)) * scale + startingHeadPos;
             leftHandCubes[i].transform.position = new Vector3(distLHead * Mathf.Sin(t), 0, distArms * Mathf.Cos(t)) * scale + startingHeadPos;
-            headCubes[i].transform.position = new Vector3(distRHead * Mathf.Cos(t), 0, distLHead * Mathf.Sin(t)) * scale + startingHeadPos;
+            headCubes[i].transform.position = new Vector3(distRHead * Mathf.Cos(t), 0, distLHead * Mathf.Sin(t)) * scale + startingHeadPos;*/
             t += tStep;
 
             //rotate elipse so more visible//DID NOT WORK WENT GLITCHY LOCAL ROTS
