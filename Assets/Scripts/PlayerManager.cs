@@ -274,7 +274,7 @@ public class PlayerManager : NetworkBehaviour
     {
         Debug.Log("spawning head n hands");
         HeadGO = Instantiate(cubePf);
-        HeadGO.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        HeadGO.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         HeadGO.transform.SetParent(transform, false);
         NetworkServer.Spawn(HeadGO);
 
