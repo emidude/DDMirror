@@ -66,7 +66,7 @@ public class Ordering: MonoBehaviour
         }
         //randomise Song order:
         Shuffle(sessionOrdering);
-        Debug.Log("song ordering is :");
+        Debug.Log("session ordering is :");
         for (int i = 0; i < sessionOrdering.Length; i++)
         {
             Debug.Log(sessionOrdering[i]);
@@ -76,7 +76,7 @@ public class Ordering: MonoBehaviour
         
         for (int i = 0; i < songOrdering.Length; i++)
         {
-            Debug.Log("Order = " + i + ", Session = " +  sessionOrdering[i] + " - " + sessionOrderingString[sessionOrdering[i]] + ": {" +
+            Debug.Log("Order = " + i + ", Session = " +  sessionOrdering[i] + " - " + sessionOrderingString[sessionOrdering[i]] + ": song= {" +
                 songOrdering[i]  + " };"
                );
 
