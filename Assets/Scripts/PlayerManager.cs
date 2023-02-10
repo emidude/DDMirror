@@ -46,12 +46,6 @@ public class PlayerManager : NetworkBehaviour
 
     public bool ready = false;
 
-    int resolution = 10;
-    //GameObject[] points;
-  //  GameObject[] points1, points2, points3;
-    float step = 0.2f;
-    Vector3 scale;
-
     public bool bodyShapes;
     public bool questionTime = true;
 
@@ -60,16 +54,15 @@ public class PlayerManager : NetworkBehaviour
 
 
     public GameObject[] rightHandCubes, leftHandCubes, headCubes;// RParents, LParents, HParents;
-    // bool hypercubeRotations = false;
+
 
     public bool calibratingArmSpa;
 
-    float maxLx, maxLy, maxLz, maxRy, maxRx, maxRz, minLx, minLy, minLz, minRx, minRy, minRz;
+    
     const float TWOPI = Mathf.PI * 2;
 
     Vector3 startingHeadPos;
 
-    float rotInc = 360 / 16;
 
     public override void OnStartServer()
     {
@@ -162,35 +155,6 @@ public class PlayerManager : NetworkBehaviour
 
         if (isLocalPlayer)
         {
-            /*if (calibratingArmSpa)
-            {
-                if (!(float.IsFinite(localHead.transform.position.x) || float.IsFinite(localHead.transform.position.y) || float.IsFinite(localHead.transform.position.z)
-                   || float.IsFinite(cL.transform.position.x) || float.IsFinite(cL.transform.position.y) || float.IsFinite(cL.transform.position.z)
-                   || float.IsFinite(cR.transform.position.x) || float.IsFinite(cR.transform.position.y) || float.IsFinite(cR.transform.position.z)
-                   || float.IsFinite(localHead.transform.rotation.x) || float.IsFinite(localHead.transform.rotation.y) || float.IsFinite(localHead.transform.rotation.z) || float.IsFinite(localHead.transform.rotation.w)
-                   || float.IsFinite(cL.transform.rotation.x) || float.IsFinite(cL.transform.rotation.y) || float.IsFinite(cL.transform.rotation.z) || float.IsFinite(cL.transform.rotation.w)
-                   || float.IsFinite(cR.transform.rotation.x) || float.IsFinite(cR.transform.rotation.y) || float.IsFinite(cR.transform.rotation.z) || float.IsFinite(cR.transform.rotation.w)))
-                {
-                    // Debug.Log("NAN");
-                    maxLx = Mathf.Max(maxLx, cL.transform.localPosition.x);
-                    maxLy = Mathf.Max(maxLy, cL.transform.localPosition.y);
-                    maxLz = Mathf.Max(maxLz, cL.transform.localPosition.z);
-                    
-                    minLx = Mathf.Min(minLx, cL.transform.localPosition.x);
-                    minLy = Mathf.Min(minLy, cL.transform.localPosition.y);
-                    minLz = Mathf.Min(minLz, cL.transform.localPosition.z);
-
-
-                    maxRx = Mathf.Max(maxRx, cR.transform.localPosition.x);
-                    maxLy = Mathf.Max(maxRy, cR.transform.localPosition.y);
-                    maxLz = Mathf.Max(maxRz, cR.transform.localPosition.z);
-
-                    minRx = Mathf.Min(minRx, cR.transform.localPosition.x);
-                    minRy = Mathf.Min(minRy, cR.transform.localPosition.y);
-                    minRz = Mathf.Min(minRz, cR.transform.localPosition.z);
-                }
-                
-            }*/
 
             if (!questionTime)
             {
@@ -290,12 +254,41 @@ public class PlayerManager : NetworkBehaviour
     }
 
     [Command]
+    void CmdSpawnHeadAndHandsReverse()
+    {
+        Debug.Log("spawning head n hands");
+        HeadGO = Instantiate(cubePf);
+        HeadGO.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        HeadGO.transform.SetParent(transform, false);
+        NetworkServer.Spawn(HeadGO);
+
+        LeftHandGO = Instantiate(cubePf);
+        LeftHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        LeftHandGO.transform.SetParent(transform, false);
+        NetworkServer.Spawn(LeftHandGO);
+
+        RightHandGO = Instantiate(cubePf);
+        RightHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        RightHandGO.transform.SetParent(transform, false);
+        NetworkServer.Spawn(RightHandGO);
+    }
+
+    [Command]
     public void CmdDestroyHeadAndHands()
     {
         NetworkServer.Destroy(HeadGO);
         NetworkServer.Destroy(LeftHandGO);
         NetworkServer.Destroy(RightHandGO);
     }
+
+    [Command]
+    public void CmdDestroyHeadAndHandsReverse()
+    {
+        NetworkServer.Destroy(HeadGO);
+        NetworkServer.Destroy(LeftHandGO);
+        NetworkServer.Destroy(RightHandGO);
+    }
+
 
 
     [Command]
@@ -306,69 +299,27 @@ public class PlayerManager : NetworkBehaviour
         //transform.position = head.position; <-TODO:  need to fix
         transform.position = Vector3.zero;
 
-        /*points1 = new GameObject[resolution * resolution];
-        for (int i = 0; i < points1.Length; i++)
-        {
-            GameObject point = Instantiate(cubePf);
-            point.transform.localScale = Vector3.one*0.2f;
-            //TODO: SET PARENT TO HEAD
-            point.transform.SetParent(transform, false);
-            points1[i] = point;
-            NetworkServer.Spawn(point);
-        }
-
-        points2 = new GameObject[resolution * resolution];
-        for (int i = 0; i < points2.Length; i++)
-        {
-            GameObject point = Instantiate(cubePf);
-            point.transform.localScale = Vector3.one * 0.2f;
-            //TODO: SET PARENT TO HEAD
-            point.transform.SetParent(transform, false);
-            points2[i] = point;
-            NetworkServer.Spawn(point);
-        }
-
-        points3 = new GameObject[resolution * resolution];
-        for (int i = 0; i < points3.Length; i++)
-        {
-            GameObject point = Instantiate(cubePf);
-            point.transform.localScale = Vector3.one * 0.2f;
-            //TODO: SET PARENT TO HEAD
-            point.transform.SetParent(transform, false);
-            points3[i] = point;
-            NetworkServer.Spawn(point);
-        }*/
 
         rightHandCubes = new GameObject[16];
         leftHandCubes = new GameObject[16];
         headCubes = new GameObject[16];
 
-      /*  RParents = new GameObject[16];
-        LParents = new GameObject[16];
-        HParents = new GameObject[16];*/
+      
 
         for (int i = 0; i < rightHandCubes.Length; i++)
         {
             GameObject vR = Instantiate(cubePf);
             vR.transform.localScale = Vector3.one * 0.2f;
-/*
-            GameObject PR = new GameObject();
-            RParents[i] = PR;
-            //RParents[i].transform.rotation = Quaternion.LookRotation(new Vector3(0,0,1),  Vector3.up);
-            vR.transform.SetParent(RParents[i].transform,false);*/
+
 
             GameObject vL = Instantiate(cubePf);
             vL.transform.localScale = Vector3.one * 0.2f;
-           /* GameObject PL = new GameObject();
-            LParents[i] = PL;
-            vL.transform.SetParent(LParents[i].transform, false);*/
+          
 
 
             GameObject vH = Instantiate(cubePf);
             vH.transform.localScale = Vector3.one * 0.2f;
-           /* GameObject PH = new GameObject();
-            HParents[i] = PH;
-            vH.transform.SetParent(HParents[i].transform, false);*/
+          
 
             rightHandCubes[i] = vR;
             leftHandCubes[i] = vL;
@@ -379,27 +330,13 @@ public class PlayerManager : NetworkBehaviour
 
         }
 
-        
-
     }
 
 
     [Command]
     public void CmdDestroyCubes()
     {
-  /*      for (int i = 0; i < points1.Length; i++)
-        {
-            NetworkServer.Destroy(points1[i]);
-        }
-        for (int i = 0; i < points2.Length; i++)
-        {
-            NetworkServer.Destroy(points2[i]);
-        }
-        for (int i = 0; i < points3.Length; i++)
-        {
-            NetworkServer.Destroy(points3[i]);
-        }*/
-
+  
         
             for (int i = 0; i < rightHandCubes.Length; i++)
             {
