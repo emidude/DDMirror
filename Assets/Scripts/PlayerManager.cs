@@ -126,12 +126,15 @@ public class PlayerManager : NetworkBehaviour
         /*step = 2f / resolution;
         scale = Vector3.one * step;*/
 
-        CmdSpawnCubes();
-        //CmdUpdateCubes(cL.GetVelocity(),cR.GetVelocity());
-        CmdDestroyCubes();
+        /*CmdSpawnCubes();
+        CmdDestroyCubes();*/
+        CmdSpawnHeadAndHandsReverse();
+        CmdDestroyHeadAndHandsReverse();
+
 
         CmdSpawnHeadAndHands();
         CmdDestroyHeadAndHands();
+
 
        
        
@@ -179,7 +182,8 @@ public class PlayerManager : NetworkBehaviour
                     //  CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                     // CmdUpdateCubes(localHead.transform.localPosition, localHead.transform.rotation, cL.transform.localPosition, cL.transform.rotation, cR.transform.localPosition, cR.transform.rotation);
                     //CmdUpdateCubesP(localHead.transform.localPosition, localHead.transform.rotation, cL.transform.localPosition, cL.transform.rotation, cR.transform.localPosition, cR.transform.rotation);
-                    CmdUpdateCubesP(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    //CmdUpdateCubesP(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    CmdUpdateHeadAndHandsReverse(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                 }
             }           
         }
@@ -238,7 +242,7 @@ public class PlayerManager : NetworkBehaviour
     {
         Debug.Log("spawning head n hands");
         HeadGO = Instantiate(cubePf);
-        HeadGO.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        HeadGO.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         HeadGO.transform.SetParent(transform, false);
         NetworkServer.Spawn(HeadGO);
 
@@ -258,7 +262,7 @@ public class PlayerManager : NetworkBehaviour
     {
         Debug.Log("spawning head n hands");
         HeadGO = Instantiate(cubePf);
-        HeadGO.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        HeadGO.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         HeadGO.transform.SetParent(transform, false);
         NetworkServer.Spawn(HeadGO);
 
@@ -291,7 +295,7 @@ public class PlayerManager : NetworkBehaviour
 
 
 
-    [Command]
+  /*  [Command]
     void CmdSpawnCubes()
     {
         Debug.Log("spoawing cubes");
@@ -345,9 +349,9 @@ public class PlayerManager : NetworkBehaviour
                 NetworkServer.Destroy(headCubes[i]);
             }
         
-    }
+    }*/
 
-    [Command]
+  /*  [Command]
     void CmdUpdateCubesP(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot) {
 
         //NOTE: pos = NOT local pos, needs to be global in space
@@ -367,31 +371,31 @@ public class PlayerManager : NetworkBehaviour
             rotationLerpParam[i] = rotationLerpParam[i] / 8;
         }
 
-        /*Quaternion q;
-        Vector3 e;*/
+        *//*Quaternion q;
+        Vector3 e;*//*
 
         //BASIC WORKING
         for (int i = 0; i < res; i++)
         {
-            /* //setting relative body distances
+            *//* //setting relative body distances
              rightHandCubes[i].transform.position = new Vector3(distArms * Mathf.Sin(t), 0, distRHead * Mathf.Cos(t)) * scale + startingHeadPos;
              leftHandCubes[i].transform.position = new Vector3(distLHead * Mathf.Sin(t), distArms * Mathf.Cos(t), 0) * scale + startingHeadPos;
              headCubes[i].transform.position = new Vector3(0, distRHead * Mathf.Sin(t), distLHead * Mathf.Cos(t)) * scale + startingHeadPos;
              *//*rightHandCubes[i].transform.position = new Vector3(distArms * Mathf.Sin(t), 0, distRHead * Mathf.Cos(t)) * scale + startingHeadPos;
              leftHandCubes[i].transform.position = new Vector3(distLHead * Mathf.Sin(t), 0, distArms * Mathf.Cos(t)) * scale + startingHeadPos;
-             headCubes[i].transform.position = new Vector3(distRHead * Mathf.Cos(t), 0, distLHead * Mathf.Sin(t)) * scale + startingHeadPos;*/
+             headCubes[i].transform.position = new Vector3(distRHead * Mathf.Cos(t), 0, distLHead * Mathf.Sin(t)) * scale + startingHeadPos;*//*
             rightHandCubes[i].transform.position = new Vector3(distArms * Mathf.Sin(t), 0, distRHead * Mathf.Cos(t)) * scale + startingHeadPos;
             leftHandCubes[i].transform.position = new Vector3(distLHead * Mathf.Cos(t), 0, distArms * Mathf.Sin(t)) * scale + startingHeadPos;
             headCubes[i].transform.position = new Vector3(distRHead * Mathf.Cos(t), 0, distLHead * Mathf.Sin(t)) * scale + startingHeadPos;
             t += tStep;
 
             //rotate elipse so more visible//DID NOT WORK WENT GLITCHY LOCAL ROTS
-            /* rightHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(1, 0, 0),90 ); //YZ plane
+            *//* rightHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(1, 0, 0),90 ); //YZ plane
              leftHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(0, 1, 0), 90); //XZ plane
              rightHandCubes[i].transform.RotateAround(startingHeadPos, new Vector3(0, 0, 1), 90); //XY plane*/
             /*rightHandCubes[i].transform.RotateAround(startingHeadPos, Vector3.forward, 90); //YZ plane
             leftHandCubes[i].transform.RotateAround(startingHeadPos, Vector3.forward, 90); //XZ plane
-            rightHandCubes[i].transform.RotateAround(startingHeadPos, Vector3.forward, 90); //XY plane*/
+            rightHandCubes[i].transform.RotateAround(startingHeadPos, Vector3.forward, 90); //XY plane*//*
 
             //updating postiion of cubes based on device position
             rightHandCubes[i].transform.position += (cRPos - startingHeadPos) * positionScaleFactors[i];
@@ -406,7 +410,7 @@ public class PlayerManager : NetworkBehaviour
             headCubes[i].transform.rotation = HRot * Quaternion.Slerp(HRot, Quaternion.Inverse(HRot), rotationLerpParam[i]);
 
             //euler rotation:
-            /*Vector3 increment = Vector3.one * rotInc * i;
+            *//*Vector3 increment = Vector3.one * rotInc * i;
             q = cRRot;
             q.eulerAngles += q.eulerAngles + increment;
             rightHandCubes[i].transform.rotation = q;
@@ -417,13 +421,13 @@ public class PlayerManager : NetworkBehaviour
 
             q = HRot;
             q.eulerAngles += q.eulerAngles + increment;
-            headCubes[i].transform.rotation = q;*/
+            headCubes[i].transform.rotation = q;*//*
         }
 
 
 
         //PARENTS - DOES NOT NETWORK PROPERLY
-        /*for (int i = 0; i < res; i++)
+        *//*for (int i = 0; i < res; i++)
         {
             //setting relative body distances
             RParents[i].transform.position = new Vector3(0, distArms * Mathf.Sin(t), distLHead * Mathf.Cos(t)) * scale + startingHeadPos;
@@ -441,7 +445,7 @@ public class PlayerManager : NetworkBehaviour
             RParents[i].transform.rotation = Quaternion.Slerp(cRRot, Quaternion.Inverse(cRRot), rotationLerpParam[i]);
             LParents[i].transform.rotation = Quaternion.Slerp(cLRot, Quaternion.Inverse(cLRot), rotationLerpParam[i]);
             HParents[i].transform.rotation = Quaternion.Slerp(HRot, Quaternion.Inverse(HRot), rotationLerpParam[i]);
-        }*/
+        }*//*
     }
 
 
@@ -451,9 +455,9 @@ public class PlayerManager : NetworkBehaviour
     {
         
             float distArmsApart = Vector3.Distance(cLPos, cRPos) + 3;
-            /*float t = Time.time;*/
+            *//*float t = Time.time;*//*
             //float step = 2f / resolution;
-            /*step = 0.2f;
+            *//*step = 0.2f;
             for (int i = 0, z = 0; z < resolution; z++)
             {
                 float v = (z + 0.5f) * step - 1f;
@@ -467,20 +471,20 @@ public class PlayerManager : NetworkBehaviour
                     distArmsApart = Vector3.Distance(HPos, cRPos) + 3;
                     points3[i].transform.localPosition = Graphs.SimpleSymmetric(cRPos.x / distArmsApart, HPos.y / distArmsApart, cLPos.z / distArmsApart, u, v) * distArmsApart;
                 }
-            }*/
+            }*//*
 
 
         Vector3 cL_Deg = cLRot.eulerAngles * Mathf.Deg2Rad;
         Vector3 cR_Deg = cRRot.eulerAngles * Mathf.Deg2Rad;
         Vector3 H_Deg = HRot.eulerAngles * Mathf.Deg2Rad;
 
-        /*float rotLx = Mathf.Lerp(minLx, maxLx, cLPos.x) * TWOPI;
+        *//*float rotLx = Mathf.Lerp(minLx, maxLx, cLPos.x) * TWOPI;
         float rotLy = Mathf.Lerp(minLy, maxLy, cLPos.y) * TWOPI;
         float rotLz = Mathf.Lerp(minLz, maxLz, cLPos.z) * TWOPI;
 
         float rotRx = Mathf.Lerp(minRx, maxRx, cRPos.x) * TWOPI;
         float rotRy = Mathf.Lerp(minRy, maxRy, cRPos.y) * TWOPI;
-        float rotRz = Mathf.Lerp(minRz, maxRz, cRPos.z) * TWOPI;*/
+        float rotRz = Mathf.Lerp(minRz, maxRz, cRPos.z) * TWOPI;*//*
 
         float rotLx = Mathf.LerpUnclamped(0, TWOPI, cLPos.x * 0.5f);
         float rotLy = Mathf.LerpUnclamped(0, TWOPI, cLPos.y * 0.5f);
@@ -490,21 +494,21 @@ public class PlayerManager : NetworkBehaviour
         float rotRy = Mathf.LerpUnclamped(0, TWOPI, cRPos.y * 0.5f);
         float rotRz = Mathf.LerpUnclamped(0, TWOPI, cRPos.z * 0.5f);
 
-        /*float rotLx = Mathf.LerpUnclamped(0, TWOPI, cLPos.x );
+        *//*float rotLx = Mathf.LerpUnclamped(0, TWOPI, cLPos.x );
         float rotLy = Mathf.LerpUnclamped(0, TWOPI, cLPos.y );
         float rotLz = Mathf.LerpUnclamped(0, TWOPI, cLPos.z );
 
         float rotRx = Mathf.LerpUnclamped(0, TWOPI, cRPos.x );
         float rotRy = Mathf.LerpUnclamped(0, TWOPI, cRPos.y );
-        float rotRz = Mathf.LerpUnclamped(0, TWOPI, cRPos.z );*/
+        float rotRz = Mathf.LerpUnclamped(0, TWOPI, cRPos.z );*//*
 
 
         for (int i = 0; i < 16; i++)
         {
             //1
-            /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 3f, 2, i, HPos.y);
+            *//*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 3f, 2, i, HPos.y);
             leftHandCubes[i].transform.position = Hypercube.UpdateVertices(H_Deg.x, H_Deg.y, H_Deg.z, cRPos.x, cRPos.y, cRPos.z, 3f, 2, i, HPos.y);
-            headCubes[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 3f, 2, i, HPos.y);*/
+            headCubes[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 3f, 2, i, HPos.y);*//*
 
             //fast
             //vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 3f, 2, i, HPos.y);
@@ -521,38 +525,38 @@ public class PlayerManager : NetworkBehaviour
             leftHandCubes[i].transform.rotation = cRRot;
 
 
-            /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 1, 2, i);
+            *//*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 1, 2, i);
             leftHandCubes[i].transform.position = Hypercube.UpdateVertices(H_Deg.x, H_Deg.y, H_Deg.z, cRPos.x, cRPos.y, cRPos.z, 1, 2, i);
-            headCubes[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 1, 2, i);*/
+            headCubes[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 1, 2, i);*//*
 
             //too fast
-            /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 4, 5, i);
+            *//*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cLPos.x, cLPos.y, cLPos.z, cR_Deg.x, cR_Deg.y, cR_Deg.z, 4, 5, i);
             leftHandCubes[i].transform.position = Hypercube.UpdateVertices(H_Deg.x, H_Deg.y, H_Deg.z, cRPos.x, cRPos.y, cRPos.z, 4, 5, i);
             headCubes[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 4, 5, i);*/
 
             /* vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 0, 1, i);
              leftHandCubes[i].transform.position = Hypercube.UpdateVertices(HRot.z, HRot.w, cRRot.x, cRRot.y, cRRot.z, cRRot.w, 0, 1, i);
              headCubes[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 0, 1, i);
-*/
+*//*
 
             //super glitchy!
-            /* vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x * 0.1f, cL_Deg.y * 0.1f, cL_Deg.z * 0.1f, cR_Deg.x * 0.1f, cR_Deg.y * 0.1f, cR_Deg.z * 0.1f, 3, 3, i);
+            *//* vertices1Pf[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x * 0.1f, cL_Deg.y * 0.1f, cL_Deg.z * 0.1f, cR_Deg.x * 0.1f, cR_Deg.y * 0.1f, cR_Deg.z * 0.1f, 3, 3, i);
              leftHandCubes[i].transform.position = Hypercube.UpdateVertices(H_Deg.x * 0.1f, H_Deg.y * 0.1f, H_Deg.z * 0.1f, cL_Deg.x * 0.1f, cL_Deg.y * 0.1f, cL_Deg.z * 0.1f, 3, 3, i);
-             headCubes[i].transform.position = Hypercube.UpdateVertices(cR_Deg.x * 0.1f, cR_Deg.y * 0.1f, cR_Deg.z * 0.1f, H_Deg.x * 0.1f, H_Deg.y * 0.1f, H_Deg.z * 0.1f, 3, 3, i);*/
+             headCubes[i].transform.position = Hypercube.UpdateVertices(cR_Deg.x * 0.1f, cR_Deg.y * 0.1f, cR_Deg.z * 0.1f, H_Deg.x * 0.1f, H_Deg.y * 0.1f, H_Deg.z * 0.1f, 3, 3, i);*//*
 
             //best so far
-            /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 1.5f, 2, i);
+            *//*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 1.5f, 2, i);
             leftHandCubes[i].transform.position = Hypercube.UpdateVertices(HRot.z, HRot.w, cRRot.x, cRRot.y, cRRot.z, cRRot.w, 1.5f, 2, i);
             headCubes[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 1.5f, 2, i);
-*/
+*//*
             //cant tell diff between this and above
-            /*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 2, 2, i);
+            *//*vertices1Pf[i].transform.position = Hypercube.UpdateVertices(HRot.x, HRot.y, cLRot.x, cLRot.y, cLRot.z, cLRot.w, 2, 2, i);
             leftHandCubes[i].transform.position = Hypercube.UpdateVertices(HRot.z, HRot.w, cRRot.x, cRRot.y, cRRot.z, cRRot.w, 2, 2, i);
-            headCubes[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 2, 2, i);*/
+            headCubes[i].transform.position = Hypercube.UpdateVertices(cL_Deg.x, cL_Deg.y, cL_Deg.z, HPos.x, HPos.y, HPos.z, 2, 2, i);*//*
 
         }
 
-        /*if (hypercubeRotations)
+        *//*if (hypercubeRotations)
         {
             UpdateSimpleSinPoints(cLPos, cRPos, HPos);
             Update4DPoints(cLRot, cRRot, HRot, 0.01f, localHead.transform, cL.transform, cR.transform);
@@ -579,14 +583,14 @@ public class PlayerManager : NetworkBehaviour
                     points3[i].transform.localPosition = Graphs.TorusSI2(dist, cRPos.x / m, cRPos.y / m, cRPos.z / m, cRRot.x, cRRot.y, cRRot.z, cRRot.w, u, v) * m;
                 }
             }
-        }*/
+        }*//*
 
 
 
 
 
 
-    }
+    }*/
 
     //from this thread
     //https://forum.unity.com/threads/multiplayer-with-steamvr.535321/
@@ -649,6 +653,19 @@ public class PlayerManager : NetworkBehaviour
        
             RightHandGO.transform.position = cRPos;
             RightHandGO.transform.rotation = cRRot;  
+    }
+
+    [Command]
+    void CmdUpdateHeadAndHandsReverse(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
+    {
+        HeadGO.transform.localPosition = HPos;
+        HeadGO.transform.rotation = Quaternion.Euler(-HRot.eulerAngles.x, HRot.eulerAngles.y, HRot.eulerAngles.z);
+
+        LeftHandGO.transform.localPosition = new Vector3( HPos.x - cLPos.x ,cLPos.y, cLPos.z);
+        LeftHandGO.transform.rotation = cLRot;
+
+        RightHandGO.transform.position = new Vector3(HPos.x - cRPos.x, cRPos.y, cRPos.z);
+        RightHandGO.transform.rotation = cRRot;
     }
 
     [Command] //client tells server to run this method
@@ -729,7 +746,7 @@ public class PlayerManager : NetworkBehaviour
         }
         else
         {
-            PM.CmdSpawnCubes();
+            PM.CmdSpawnHeadAndHandsReverse();
         }
     }
 

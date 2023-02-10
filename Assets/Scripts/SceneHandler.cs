@@ -263,7 +263,7 @@ public class SceneHandler : NetworkBehaviour
         }
         else
         {
-            PM.CmdDestroyCubes();
+            PM.CmdDestroyHeadAndHandsReverse();
         }
 
         
