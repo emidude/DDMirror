@@ -355,18 +355,19 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("spoawing cubes here");
 
         for (int i = 0; i < totalCubes-1; i++) //totalCubes-1 because removed central cube which matches body position
-        //for (int i = 0; i < totalCubes; i++)
         {
+            Debug.Log("i=" + i);
             GameObject vR = Instantiate(cubePf);
             vR.transform.localScale = Vector3.one * 0.2f;
             //vR.transform.position = R_PosCenters[i];
-
+            Debug.Log("1");
             GameObject vL = Instantiate(cubePf);
             vL.transform.localScale = Vector3.one * 0.2f;
-  
-            GameObject vH = Instantiate(cubePf);
-            vH.transform.localScale = Vector3.one * 0.4f;          
 
+            Debug.Log("2");
+            GameObject vH = Instantiate(cubePf);
+            vH.transform.localScale = Vector3.one * 0.4f;
+            Debug.Log("3");
 
             rightHandCubes[i] = vR;
             leftHandCubes[i] = vL;
