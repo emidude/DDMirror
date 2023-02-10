@@ -39,10 +39,13 @@ public class PlayerManager : NetworkBehaviour
 
     GameObject defaultHead, defaultLeftHand, defaultRightHand;
     GameObject HeadGO, LeftHandGO, RightHandGO;
+    
 
     SteamVR_Behaviour_Pose cL, cR;
 
     public GameObject cubePf;
+    public GameObject testcube;
+    GameObject[] testCubes;
 
     public bool ready = false;
 
@@ -275,6 +278,18 @@ public class PlayerManager : NetworkBehaviour
         RightHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         RightHandGO.transform.SetParent(transform, false);
         NetworkServer.Spawn(RightHandGO);
+
+        testCubes = new GameObject[8];
+        for (int i = 0; i < 8; i++)
+        {
+          
+            GameObject cap = Instantiate(cubePf);
+            cap.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            cap.transform.SetParent(transform, false);
+            NetworkServer.Spawn(cap);
+            testCubes[i] = cap;
+        }
+        
     }
 
     [Command]
@@ -291,6 +306,11 @@ public class PlayerManager : NetworkBehaviour
         NetworkServer.Destroy(HeadGO);
         NetworkServer.Destroy(LeftHandGO);
         NetworkServer.Destroy(RightHandGO);
+
+        for (int i = 0; i < 8; i++)
+        {
+            NetworkServer.Destroy(testCubes[i]);
+        }
     }
 
 
@@ -658,14 +678,38 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     void CmdUpdateHeadAndHandsReverse(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     {
+        Vector3 Normal = HRot * Vector3.forward; //NORMAL VECTOR GOOD
+        Normal = Normal.normalized;
+
+        Vector3 HeadY = new Vector3(0, HPos.y, 0);
+        Vector3 HeadXZ = new Vector3(HPos.x, 0, HPos.z);
+
+        Vector3 V = new Vector3(HPos.x - cRPos.x, 0, HPos.z - cRPos.z);
+
+
+        Vector3 projN = calcProjN(V, Normal);
+
         HeadGO.transform.localPosition = HPos;
-        HeadGO.transform.rotation = Quaternion.Euler(-HRot.eulerAngles.x, HRot.eulerAngles.y, HRot.eulerAngles.z);
+        //HeadGO.transform.rotation = Quaternion.Euler(-HRot.eulerAngles.x, HRot.eulerAngles.y, HRot.eulerAngles.z);
+        HeadGO.transform.rotation = HRot;
 
-        LeftHandGO.transform.localPosition = new Vector3( HPos.x - cLPos.x ,cLPos.y, cLPos.z);
-        LeftHandGO.transform.rotation = cLRot;
-
-        RightHandGO.transform.position = new Vector3(HPos.x - cRPos.x, cRPos.y, cRPos.z);
+        RightHandGO.transform.position = V - 2 * projN + Vector3.up*cRPos.y  ;
         RightHandGO.transform.rotation = cRRot;
+
+        for (int i = 0; i < 8 ; i++)
+        {
+            testCubes[i].transform.position = RightHandGO.transform.position * 0.2f * i + HeadXZ;
+        }
+
+        LeftHandGO.transform.localPosition = Normal * 2 + HeadY;
+        LeftHandGO.transform.rotation = Quaternion.Euler(cLRot.eulerAngles.x, cLRot.eulerAngles.y, -cLRot.eulerAngles.z);
+
+
+    }
+
+    Vector3 calcProjN(Vector3 V, Vector3 N)
+    {
+        return Vector3.Dot(V, N) * N;
     }
 
     [Command] //client tells server to run this method

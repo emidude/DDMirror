@@ -192,9 +192,12 @@ MonoBehaviour:
   networkedRightHand: {fileID: 6920451147500346153, guid: 4e1a378f949f6b04badd9fd8cb7367d8,
     type: 3}
   cubePf: {fileID: 1223016012747116, guid: 16c2e13a22648d544ba10e09297cd061, type: 3}
+  testcubes: {fileID: 1933170947035675467, guid: 21b202d62a00c404aa5c596c1699375e,
+    type: 3}
   ready: 0
   bodyShapes: 1
   questionTime: 1
-  participantNumber: 420
-  sessionNumber: 1
-  pcNumber: 1
+  rightHandCubes: []
+  leftHandCubes: []
+  headCubes: []
+  calibratingArmSpa: 0
