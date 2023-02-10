@@ -183,7 +183,7 @@ public class PlayerManager : NetworkBehaviour
                     // CmdUpdateCubes(localHead.transform.localPosition, localHead.transform.rotation, cL.transform.localPosition, cL.transform.rotation, cR.transform.localPosition, cR.transform.rotation);
                     //CmdUpdateCubesP(localHead.transform.localPosition, localHead.transform.rotation, cL.transform.localPosition, cL.transform.rotation, cR.transform.localPosition, cR.transform.rotation);
                     //CmdUpdateCubesP(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
-                    CmdUpdateHeadAndHandsReverse(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    CmdUpdateHeadAndHandsReverse(localHead.transform.position, localHead.transform.rotation, cL.transform.localPosition, cL.transform.rotation, cR.transform.localPosition, cR.transform.rotation);
                 }
             }           
         }
@@ -661,11 +661,9 @@ public class PlayerManager : NetworkBehaviour
         HeadGO.transform.localPosition = HPos;
         HeadGO.transform.rotation = Quaternion.Euler(-HRot.eulerAngles.x, HRot.eulerAngles.y, HRot.eulerAngles.z);
 
-        LeftHandGO.transform.localPosition = new Vector3( HPos.x - cLPos.x ,cLPos.y, cLPos.z);
-        LeftHandGO.transform.rotation = cLRot;
+        LeftHandGO.transform.position = cLPos;
 
-        RightHandGO.transform.position = new Vector3(HPos.x - cRPos.x, cRPos.y, cRPos.z);
-        RightHandGO.transform.rotation = cRRot;
+        RightHandGO.transform.position = HRot * Vector3.forward * 2;
     }
 
     [Command] //client tells server to run this method
