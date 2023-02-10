@@ -46,11 +46,6 @@ public class PlayerManager : NetworkBehaviour
 
     public bool ready = false;
 
-    int resolution = 10;
-    //GameObject[] points;
-  //  GameObject[] points1, points2, points3;
-    float step = 0.2f;
-    Vector3 scale;
 
     public bool bodyShapes;
     public bool questionTime = true;
@@ -62,17 +57,15 @@ public class PlayerManager : NetworkBehaviour
     public GameObject[] rightHandCubes, leftHandCubes, headCubes;// RParents, LParents, HParents;
     // bool hypercubeRotations = false;
     public Vector3[] R_PosCenters, L_PosCenters, H_PosCenters;
-    int size = 5;
-    int totalCubes=125; //hardcoded becasue cant be fucked to find the right place to declare totalCubes=size*size*size, getting weird netwroking errors
-
+    int size = 4;
+    //int totalCubes=125; //hardcoded becasue cant be fucked to find the right place to declare totalCubes=size*size*size, getting weird netwroking errors
+    int totalCubes = 64;
     public bool calibratingArmSpa;
 
-    float maxLx, maxLy, maxLz, maxRy, maxRx, maxRz, minLx, minLy, minLz, minRx, minRy, minRz;
+    
     const float TWOPI = Mathf.PI * 2;
 
-    Vector3 startingHeadPos;
 
-    float rotInc = 360 / 16;
 
     public override void OnStartServer()
     {
@@ -159,7 +152,6 @@ public class PlayerManager : NetworkBehaviour
         minRz = 100f;
         calibratingArmSpa = true;*/
 
-        startingHeadPos = localHead.transform.position;
 
         
     }
@@ -169,35 +161,7 @@ public class PlayerManager : NetworkBehaviour
 
         if (isLocalPlayer)
         {
-            /*if (calibratingArmSpa)
-            {
-                if (!(float.IsFinite(localHead.transform.position.x) || float.IsFinite(localHead.transform.position.y) || float.IsFinite(localHead.transform.position.z)
-                   || float.IsFinite(cL.transform.position.x) || float.IsFinite(cL.transform.position.y) || float.IsFinite(cL.transform.position.z)
-                   || float.IsFinite(cR.transform.position.x) || float.IsFinite(cR.transform.position.y) || float.IsFinite(cR.transform.position.z)
-                   || float.IsFinite(localHead.transform.rotation.x) || float.IsFinite(localHead.transform.rotation.y) || float.IsFinite(localHead.transform.rotation.z) || float.IsFinite(localHead.transform.rotation.w)
-                   || float.IsFinite(cL.transform.rotation.x) || float.IsFinite(cL.transform.rotation.y) || float.IsFinite(cL.transform.rotation.z) || float.IsFinite(cL.transform.rotation.w)
-                   || float.IsFinite(cR.transform.rotation.x) || float.IsFinite(cR.transform.rotation.y) || float.IsFinite(cR.transform.rotation.z) || float.IsFinite(cR.transform.rotation.w)))
-                {
-                    // Debug.Log("NAN");
-                    maxLx = Mathf.Max(maxLx, cL.transform.localPosition.x);
-                    maxLy = Mathf.Max(maxLy, cL.transform.localPosition.y);
-                    maxLz = Mathf.Max(maxLz, cL.transform.localPosition.z);
-                    
-                    minLx = Mathf.Min(minLx, cL.transform.localPosition.x);
-                    minLy = Mathf.Min(minLy, cL.transform.localPosition.y);
-                    minLz = Mathf.Min(minLz, cL.transform.localPosition.z);
-
-
-                    maxRx = Mathf.Max(maxRx, cR.transform.localPosition.x);
-                    maxLy = Mathf.Max(maxRy, cR.transform.localPosition.y);
-                    maxLz = Mathf.Max(maxRz, cR.transform.localPosition.z);
-
-                    minRx = Mathf.Min(minRx, cR.transform.localPosition.x);
-                    minRy = Mathf.Min(minRy, cR.transform.localPosition.y);
-                    minRz = Mathf.Min(minRz, cR.transform.localPosition.z);
-                }
-                
-            }*/
+           
 
             if (!questionTime)
             {
@@ -360,11 +324,11 @@ public class PlayerManager : NetworkBehaviour
             GameObject vR = Instantiate(cubePf);
             vR.transform.localScale = Vector3.one * 0.2f;
             //vR.transform.position = R_PosCenters[i];
-            Debug.Log("1");
+
             GameObject vL = Instantiate(cubePf);
             vL.transform.localScale = Vector3.one * 0.2f;
 
-            Debug.Log("2");
+
             GameObject vH = Instantiate(cubePf);
             vH.transform.localScale = Vector3.one * 0.4f;
             Debug.Log("3");
@@ -372,9 +336,11 @@ public class PlayerManager : NetworkBehaviour
             rightHandCubes[i] = vR;
             leftHandCubes[i] = vL;
             headCubes[i] = vH;
+            Debug.Log("1");
             NetworkServer.Spawn(vR);
             NetworkServer.Spawn(vL);
             NetworkServer.Spawn(vH);
+            Debug.Log("2");
 
         }
 
