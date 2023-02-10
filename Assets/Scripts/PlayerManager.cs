@@ -63,7 +63,7 @@ public class PlayerManager : NetworkBehaviour
     // bool hypercubeRotations = false;
     public Vector3[] R_PosCenters, L_PosCenters, H_PosCenters;
     int size = 5;
-    int totalCubes;
+    int totalCubes=125; //hardcoded becasue cant be fucked to find the right place to declare totalCubes=size*size*size, getting weird netwroking errors
 
     public bool calibratingArmSpa;
 
@@ -136,7 +136,6 @@ public class PlayerManager : NetworkBehaviour
         /*step = 2f / resolution;
         scale = Vector3.one * step;*/
 
-        totalCubes = size * size * size;
         setTransformsGrid();
 
         CmdSpawnCubes();
@@ -308,10 +307,6 @@ public class PlayerManager : NetworkBehaviour
 
     void setTransformsGrid()
     {
-        /*R_PosCenters = new Vector3[totalCubes];
-        L_PosCenters = new Vector3[totalCubes];
-        H_PosCenters = new Vector3[totalCubes];*/
-        totalCubes = size * size * size;
         R_PosCenters = new Vector3[totalCubes - 1];
         L_PosCenters = new Vector3[totalCubes - 1];
         H_PosCenters = new Vector3[totalCubes - 1];
