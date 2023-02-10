@@ -136,6 +136,9 @@ public class PlayerManager : NetworkBehaviour
         /*step = 2f / resolution;
         scale = Vector3.one * step;*/
 
+        totalCubes = size * size * size;
+        setTransformsGrid();
+
         CmdSpawnCubes();
         //CmdUpdateCubes(cL.GetVelocity(),cR.GetVelocity());
         CmdDestroyCubes();
@@ -159,8 +162,7 @@ public class PlayerManager : NetworkBehaviour
 
         startingHeadPos = localHead.transform.position;
 
-        totalCubes = size * size * size;
-        setTransformsGrid();
+        
     }
 
     void Update()
@@ -306,12 +308,13 @@ public class PlayerManager : NetworkBehaviour
 
     void setTransformsGrid()
     {
-        R_PosCenters = new Vector3[totalCubes];
+        /*R_PosCenters = new Vector3[totalCubes];
         L_PosCenters = new Vector3[totalCubes];
-        H_PosCenters = new Vector3[totalCubes];
-        /*R_PosCenters = new Vector3[totalCubes - 1];
+        H_PosCenters = new Vector3[totalCubes];*/
+        totalCubes = size * size * size;
+        R_PosCenters = new Vector3[totalCubes - 1];
         L_PosCenters = new Vector3[totalCubes - 1];
-        H_PosCenters = new Vector3[totalCubes - 1];*/
+        H_PosCenters = new Vector3[totalCubes - 1];
 
         float centeringAdjust = size / 2;
         float stretch = 2f;
@@ -322,35 +325,19 @@ public class PlayerManager : NetworkBehaviour
             {
                 for (int k = 0; k < size ; k++)
                 {
-                    //TO FIND CENTRAL CUBE AND DELETE - HARDCODED FOR SIZE=5, IF CHANGE SIZE WILL GET ERRORS!!!!!!!!!!!
-                    /*if (i - centeringAdjust==0 && j - centeringAdjust==0&& k - centeringAdjust == 0)
+                   
+                    if (i - centeringAdjust == 0 && j - centeringAdjust == 0 && k - centeringAdjust == 0)
                     {
-                        Debug.Log("zero point, i="+i+"j="+j+"k="+k+"t="+t);
-                    }*/
-                   /* if (t < 62)  //THIS IS SPECIFIC TO SIZE=5
+                        Debug.Log("removing 0 point so no cubes at body positon, occurs at i=" + i + "j=" + j + "k=" + k);
+                    }
+                    else
                     {
                         R_PosCenters[t] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
                         L_PosCenters[t] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
                         H_PosCenters[t] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
                         t++;
                     }
-                    else if (t>62)
-                    {
-                        R_PosCenters[t-1] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
-                        L_PosCenters[t-1] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
-                        H_PosCenters[t-1] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
-                        t++;
-                        //Debug.Log("centres: H=" + H_PosCenters[i] + " L="+ L_PosCenters[i] + " R="+ R_PosCenters[i]);
-                    }
-                    else
-                    {
-                        t++;
-                    }*/
-
-                    R_PosCenters[t] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
-                    L_PosCenters[t] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
-                    H_PosCenters[t] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
-                    t++;
+                            
 
                 }
             }
@@ -360,26 +347,24 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     void CmdSpawnCubes()
     {
-        Debug.Log("spoawing cubes");
+        Debug.Log("spoawing cubes, total cubes="+ totalCubes);
        
         //transform.position = head.position; <-TODO:  need to fix
         transform.position = Vector3.zero;
 
+        int arraySize = totalCubes - 1;
+        rightHandCubes = new GameObject[arraySize];
+        leftHandCubes = new GameObject[arraySize];
+        headCubes = new GameObject[arraySize];
 
-        /*rightHandCubes = new GameObject[totalCubes-1];
-        leftHandCubes = new GameObject[totalCubes-1];
-        headCubes = new GameObject[totalCubes-1];*/
-        rightHandCubes = new GameObject[totalCubes];
-        leftHandCubes = new GameObject[totalCubes];
-        headCubes = new GameObject[totalCubes];
+        Debug.Log("spoawing cubes here");
 
-
-        // for (int i = 0; i < totalCubes-1; i++) //totalCubes-1 because removed central cube which matches body position
-        for (int i = 0; i < totalCubes; i++)
+        for (int i = 0; i < totalCubes-1; i++) //totalCubes-1 because removed central cube which matches body position
+        //for (int i = 0; i < totalCubes; i++)
         {
             GameObject vR = Instantiate(cubePf);
             vR.transform.localScale = Vector3.one * 0.2f;
-            vR.transform.position = R_PosCenters[i];
+            //vR.transform.position = R_PosCenters[i];
 
             GameObject vL = Instantiate(cubePf);
             vL.transform.localScale = Vector3.one * 0.2f;
@@ -406,28 +391,26 @@ public class PlayerManager : NetworkBehaviour
     public void CmdDestroyCubes()
     {
 
-        
-            for (int i = 0; i < totalCubes; i++)
+
+        for (int i = 0; i < totalCubes-1; i++)
             {
-                NetworkServer.Destroy(rightHandCubes[i]);
+
+            NetworkServer.Destroy(rightHandCubes[i]);
                 NetworkServer.Destroy(leftHandCubes[i]);
                 NetworkServer.Destroy(headCubes[i]);
+
             }
         
     }
 
+   
+
     [Command]
     void CmdUpdateCubesDistrBS(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     {
-        for (int i = 0; i < totalCubes; i++)
+        for (int i = 0; i < totalCubes-1; i++)
         {
- /*           if (i == 62)
-            {
-                i++;
-            }
-            else{*/
-            
-                rightHandCubes[i].transform.position = R_PosCenters[i] + cRPos;
+            rightHandCubes[i].transform.position = R_PosCenters[i] + cRPos;
                 leftHandCubes[i].transform.position = L_PosCenters[i] + cLPos;
                 headCubes[i].transform.position = H_PosCenters[i] + HPos;
 
@@ -824,6 +807,7 @@ public class PlayerManager : NetworkBehaviour
         else
         {
             PM.CmdSpawnCubes();
+           
         }
     }
 
