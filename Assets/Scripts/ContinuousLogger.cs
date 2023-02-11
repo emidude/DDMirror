@@ -179,7 +179,7 @@ public class ContinuousLogger : MonoBehaviour {
         
         currentAnswer++;
     }
-    void CalculateCondition()
+    public void CalculateCondition()
     {
         Debug.Log("calculating conditions in ctslogger, participant numner " + participantNumber);
         if (sessionNumber == 0)

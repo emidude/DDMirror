@@ -16,6 +16,7 @@ public class PlayerManager : NetworkBehaviour
     GameObject audioObject;
     AudioHandler AudioHandler;
     int songIndx = 0;
+    int sessionIndx = 0;
    
     public GameObject guiObject;
     public SceneHandler SceneHndlr;
@@ -234,6 +235,9 @@ public class PlayerManager : NetworkBehaviour
     {
         //Debug.Log("RpcSetCubesCondition()");
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+        PM.ContinuousLogger.sessionNumber = PM.sessionOrdering[PM.sessionIndx];
+        PM.ContinuousLogger.CalculateCondition();
+        PM.sessionIndx++;
 
         if (PM.ContinuousLogger.condition == "A")
         {
@@ -406,19 +410,6 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     public void CmdDestroyCubes()
     {
-  /*      for (int i = 0; i < points1.Length; i++)
-        {
-            NetworkServer.Destroy(points1[i]);
-        }
-        for (int i = 0; i < points2.Length; i++)
-        {
-            NetworkServer.Destroy(points2[i]);
-        }
-        for (int i = 0; i < points3.Length; i++)
-        {
-            NetworkServer.Destroy(points3[i]);
-        }*/
-
         
             for (int i = 0; i < rightHandCubes.Length; i++)
             {
@@ -824,6 +815,8 @@ public class PlayerManager : NetworkBehaviour
         SH.SetCanvasInactive();
         PM.questionTime = false;
         PM.ready = false; //might no longer need
+
+        PM.CmdSetCubesCondition();
 
         if (PM.bodyShapes)
         {
