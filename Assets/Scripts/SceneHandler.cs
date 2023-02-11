@@ -27,9 +27,15 @@ public class SceneHandler : NetworkBehaviour
     public GameObject dancePrefPanel;
     public GameObject answeredQnPanel;
     public GameObject finishedSessionPanel;
+    public GameObject humanRobotPanel;
+    public GameObject handle1;
+    public GameObject handle2;
+    Vector3 handle1startingPos;
 
     int currentQn = 0;
     bool preFirstSong = true;
+    bool selectedHumanRobotAnswer = false;
+    int selectedHuman = 3;
 
     /*public AudioHandler AH;
     GameObject AHO;*/
@@ -52,6 +58,7 @@ public class SceneHandler : NetworkBehaviour
         OriginalLaserPointerScale = laserPointer.transform.localScale;
         OriginalOtherHandScale = HandWithoutLaserPointer.transform.localScale;
 
+        handle1startingPos = handle1.transform.position;
     }
 
    
@@ -59,35 +66,25 @@ public class SceneHandler : NetworkBehaviour
     public void PointerClick(object sender, PointerEventArgs e)
     {
         //FOR MULTIPLE CHOICE PANEL:
- /*       if (e.target.tag == "zero")
+        if (e.target.tag == "human")
         {
+            GameObject.FindWithTag("robot").GetComponent<Image>().color = Color.white;
+            e.target.gameObject.GetComponent<Image>().color = Color.green;
 
-            e.target.gameObject.GetComponent<Image>().color = Color.white;
-            //log answer
-
-
-            numPlayersPanel.SetActive(false);
-            musicPrefPanel.SetActive(true);
-            currentQn++;
-
+            selectedHumanRobotAnswer = true;
+            selectedHuman = 1;
 
         }
-        else if (e.target.tag == "one")
+        
+        else if (e.target.tag == "robot")
         {
-            e.target.gameObject.GetComponent<Image>().color = Color.white;
+            GameObject.FindWithTag("human").GetComponent<Image>().color = Color.white;
+            e.target.gameObject.GetComponent<Image>().color = Color.green;
 
-            numPlayersPanel.SetActive(false);
-            musicPrefPanel.SetActive(true);
-            currentQn++;
+            selectedHumanRobotAnswer = true;
+            selectedHuman = 0;
+
         }
-        else if (e.target.tag == "two")
-        {
-            e.target.gameObject.GetComponent<Image>().color = Color.white;
-
-            numPlayersPanel.SetActive(false);
-            musicPrefPanel.SetActive(true);
-            currentQn++;
-        }*/
         if (e.target.tag == "submit")
         {
             e.target.gameObject.GetComponent<Image>().color = Color.white;
@@ -99,7 +96,7 @@ public class SceneHandler : NetworkBehaviour
                 panelstart.SetActive(false);
                 panelParent.SetActive(false);
 
-                
+
                 HideLaserPointer();
 
                 //player is ready to start
@@ -111,29 +108,51 @@ public class SceneHandler : NetworkBehaviour
                 playerManager.CmdClickedSubmit();
             }
 
-            else if (currentQn == 0) {
+            else if (currentQn == 0)
+            {
                 //just answered numplayers qn, now on music pref panel
 
-               // musicPreference = 
-                   // musicPrefPanel.gameObject.GetComponentInChildren<LinearMapping>().value;
+                // musicPreference = 
+                // musicPrefPanel.gameObject.GetComponentInChildren<LinearMapping>().value;
 
-                musicPrefPanel.SetActive(false);                
+                musicPrefPanel.SetActive(false);
                 dancePrefPanel.SetActive(true);
 
-                
+
 
                 currentQn++;
             }
             else if (currentQn == 1)
             {
-               //SAVE ANSWER
-                CLogger.UpdateAnswers(musicPreference.value, dancePreference.value);
+                dancePrefPanel.SetActive(false);
+                humanRobotPanel.SetActive(true);
+                currentQn++;
+              
+            }    
+            else if(currentQn==2 && selectedHumanRobotAnswer)
+            {
+                GameObject.FindWithTag("robot").GetComponent<Image>().color = Color.white;
+                GameObject.FindWithTag("human").GetComponent<Image>().color = Color.white;
+                selectedHumanRobotAnswer = false;
+                
+                humanRobotPanel.SetActive(false);
+
+                //SAVE ANSWER
+                CLogger.UpdateAnswers(musicPreference.value, dancePreference.value, selectedHuman, curentSong);
+
+
                 //reset slider values
                 musicPreference.value = 0.5f;
                 dancePreference.value = 0.5f;
-                //kill ui panels
-                dancePrefPanel.SetActive(false);
-                
+
+                //resetActual slider handle
+                handle1.transform.position = handle1startingPos;
+                handle2.transform.position = handle1startingPos;
+
+                //reset human selection
+                selectedHuman = 3;
+
+
                 PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
 
                 if (curentSong < PM.songOrdering.Length)
@@ -179,7 +198,7 @@ public class SceneHandler : NetworkBehaviour
     public void PointerInside(object sender, PointerEventArgs e)
     {
        
-        if (e.target.tag == "zero")
+        if (e.target.tag == "human" && selectedHuman!=1)
         {
             e.target.gameObject.GetComponent<Image>().color = Color.yellow;
         }
@@ -187,7 +206,7 @@ public class SceneHandler : NetworkBehaviour
         {
             e.target.gameObject.GetComponent<Image>().color = Color.yellow;
         }
-        else if (e.target.tag == "two")
+        else if (e.target.tag == "robot" && selectedHuman!=0)
         {
             e.target.gameObject.GetComponent<Image>().color = Color.yellow;
         }
@@ -200,12 +219,12 @@ public class SceneHandler : NetworkBehaviour
 
     public void PointerOutside(object sender, PointerEventArgs e)
     {
-        if (e.target.tag == "zero")
+        if (e.target.tag == "human" && selectedHuman!=1)
         {
             e.target.gameObject.GetComponent<Image>().color = Color.white;
 
         }
-        else if (e.target.tag == "one")
+        else if (e.target.tag == "robot" && selectedHuman!=0)
         {
             e.target.gameObject.GetComponent<Image>().color = Color.white;
         }
@@ -234,6 +253,7 @@ public class SceneHandler : NetworkBehaviour
         musicPrefPanel.SetActive(true);
         dancePrefPanel.SetActive(false);
         answeredQnPanel.SetActive(false);
+        humanRobotPanel.SetActive(false);
         ShowLaserPointer();
 
         //BELOW DOES NOT WORK -LAST SONG GOES straight to finished session panel without qn panels

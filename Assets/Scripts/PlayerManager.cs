@@ -104,7 +104,7 @@ public class PlayerManager : NetworkBehaviour
 
         //ORDERING:
         sessionOrdering = new int[] { 3, 2, 1, 0 };
-        songOrdering = new int[] {8,8,8, 2,3,5,4 };
+        songOrdering = new int[] {8,8,8,8 };
 
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
@@ -797,11 +797,11 @@ public class PlayerManager : NetworkBehaviour
             }
 
 
-            Debug.Log("FINALLY EVERYONE READY!!!!!!! (songOrdering[songIndx]="+songOrdering[songIndx] + " index=" + songIndx);
+            /*Debug.Log("FINALLY EVERYONE READY!!!!!!! (songOrdering[songIndx]="+songOrdering[songIndx] + " index=" + songIndx);
             for(int i = 0; i< songOrdering.Length; i++)
             {
                 Debug.Log(songOrdering[i]);
-            }
+            }*/
             RpcPlaySong();
         }     
     }
@@ -832,7 +832,12 @@ public class PlayerManager : NetworkBehaviour
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
         PM.ContinuousLogger.sessionNumber = PM.sessionOrdering[PM.sessionIndx];
         PM.ContinuousLogger.CalculateCondition();
+
+        PM.ContinuousLogger.sessionString = PM.ContinuousLogger.sessionNumber.ToString();
+        PM.ContinuousLogger.studyOrder = sessionIndx;
+
         PM.sessionIndx++;
+       
     }
    
 

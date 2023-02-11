@@ -20,6 +20,10 @@ TagManager:
   - slider
   - audioHndlr
   - PanelParent
+  - robot
+  - human
+  - sliderHandle
+  - sliderHandle2
   layers:
   - Default
   - TransparentFX

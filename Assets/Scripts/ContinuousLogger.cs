@@ -48,7 +48,8 @@ public class ContinuousLogger : MonoBehaviour {
         "condition",
         "songname",
         "musicPreference",
-        "dancePreference"
+        "dancePreference",
+        "correctlyIdHuman"
     };
 
     //string[][] answers = new string[6][];
@@ -62,6 +63,7 @@ public class ContinuousLogger : MonoBehaviour {
         public string songnam;
         public string musicPref;
         public string dancePref;
+        public string humanId;
     }
 
     answer[] answers = new answer[20];
@@ -145,12 +147,12 @@ public class ContinuousLogger : MonoBehaviour {
 
     void LogAnswers()
     {
-        string filename = "ANSWERS_" + "participantNumber" + participantNumber + "session" + sessionString + "condition" + condition ;
+        string filename = "ANSWERS_" + "participantNumber" + participantNumber + "_Robot_OR_human";
         answersWriter = new StreamWriter(filename + ".csv");
         answersWriter.WriteLine(String.Join(",", answersHeader) + "\n");
 
-        string[] values = new string[7];
-        for (int s = 0; s < 20; s++)
+        string[] values = new string[8];
+        for (int s = 0; s < 4; s++)
         {
             values[0] = answers[s].particpantNum;
             values[1] = answers[s].studyOrder;
@@ -159,6 +161,7 @@ public class ContinuousLogger : MonoBehaviour {
             values[4] = answers[s].songnam;
             values[5] = answers[s].musicPref;
             values[6] = answers[s].dancePref;
+            values[7] = answers[s].humanId;
 
             string csv = String.Join(",", values);
             answersWriter.WriteLine(csv + "\n");
@@ -167,7 +170,7 @@ public class ContinuousLogger : MonoBehaviour {
 
     }
 
-    public void UpdateAnswers(float musicPreference, float dancePreference)
+    public void UpdateAnswers(float musicPreference, float dancePreference, int pickedHuman, int currentSong)
     {
         answers[currentAnswer].particpantNum = participantNumber;
         answers[currentAnswer].studyOrder = studyOrder.ToString();
@@ -176,7 +179,10 @@ public class ContinuousLogger : MonoBehaviour {
         answers[currentAnswer].songnam = songJustFinished;
         answers[currentAnswer].musicPref = musicPreference.ToString();
         answers[currentAnswer].dancePref = dancePreference.ToString();
-        
+        answers[currentAnswer].humanId = pickedHuman.ToString();
+
+        Debug.Log("currentSong=" + currentSong);
+        Debug.Log("currentAnswer="+currentAnswer);
         currentAnswer++;
     }
     public void CalculateCondition()
