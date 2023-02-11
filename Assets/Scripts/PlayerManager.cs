@@ -235,9 +235,7 @@ public class PlayerManager : NetworkBehaviour
     {
         //Debug.Log("RpcSetCubesCondition()");
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
-        PM.ContinuousLogger.sessionNumber = PM.sessionOrdering[PM.sessionIndx];
-        PM.ContinuousLogger.CalculateCondition();
-        PM.sessionIndx++;
+        
 
         if (PM.ContinuousLogger.condition == "A")
         {
@@ -788,6 +786,8 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("num player ready = " + numPlayersReady);
         if(numPlayersReady == NetworkServer.connections.Count)
         {
+            RpcSetPlayersDanceCondition();
+            RpcSetCubesCondition();
             RpcSetPlayersDanceMode();
             numPlayersReady = 0;
             //ready = false; //THIS ONLY GETS CALLED ONCE FROM THE LAST PLAYER WHO WAS READY LAST TIME
@@ -808,15 +808,13 @@ public class PlayerManager : NetworkBehaviour
 
     [ClientRpc]  
     void RpcSetPlayersDanceMode()
-    {
-        
+    {  
         PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
         SceneHandler SH = PM.SceneHndlr;
         SH.SetCanvasInactive();
         PM.questionTime = false;
         PM.ready = false; //might no longer need
 
-        PM.CmdSetCubesCondition();
 
         if (PM.bodyShapes)
         {
@@ -827,6 +825,16 @@ public class PlayerManager : NetworkBehaviour
             PM.CmdSpawnCubes();
         }
     }
+
+    [ClientRpc]
+    void RpcSetPlayersDanceCondition()
+    {
+        PlayerManager PM = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+        PM.ContinuousLogger.sessionNumber = PM.sessionOrdering[PM.sessionIndx];
+        PM.ContinuousLogger.CalculateCondition();
+        PM.sessionIndx++;
+    }
+   
 
     /*void UpdateSimpleSinPoints(Vector3 cLPos, Vector3 cRPos, Vector3 HPos)
     {
