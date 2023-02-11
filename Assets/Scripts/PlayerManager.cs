@@ -47,8 +47,7 @@ public class PlayerManager : NetworkBehaviour
     public bool ready = false;
 
     int resolution = 10;
-    //GameObject[] points;
-  //  GameObject[] points1, points2, points3;
+    
     float step = 0.2f;
     Vector3 scale;
 
