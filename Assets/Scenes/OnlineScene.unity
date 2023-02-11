@@ -4205,7 +4205,7 @@ MonoBehaviour:
     ID: 0
     About: Ehrling
     clipsToPlay:
-    - {fileID: 8300000, guid: 9ee973930d599dd4f9ba2ee966dd4b3e, type: 3}
+    - {fileID: 8300000, guid: 73ec6d9d75be76846a634fda1c820ce0, type: 3}
     onStop:
       m_PersistentCalls:
         m_Calls:
@@ -4237,7 +4237,7 @@ MonoBehaviour:
     ID: 1
     About: Gigi D'Agostino
     clipsToPlay:
-    - {fileID: 8300000, guid: bb8f7ad94efead947b9fc6cc5bec93d5, type: 3}
+    - {fileID: 8300000, guid: 105cc7c1f882f3a428abd2dfac24f9d5, type: 3}
     onStop:
       m_PersistentCalls:
         m_Calls:
@@ -4269,7 +4269,7 @@ MonoBehaviour:
     ID: 2
     About: House Of Pain
     clipsToPlay:
-    - {fileID: 8300000, guid: 7705226ace1299a409c52771dbdcf8f3, type: 3}
+    - {fileID: 8300000, guid: 05d27712cd730de4c84585a7cb295e01, type: 3}
     onStop:
       m_PersistentCalls:
         m_Calls:
@@ -4301,7 +4301,135 @@ MonoBehaviour:
     ID: 3
     About: Kyary Pamyu Pamyu
     clipsToPlay:
-    - {fileID: 8300000, guid: ace3b32fe8da0854a81bd171c83cbb50, type: 3}
+    - {fileID: 8300000, guid: ad0766af9eb27ad47ab711291e09eb23, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1847834353}
+          m_TargetAssemblyTypeName: AudioHandler, Assembly-CSharp
+          m_MethodName: LogSongNull
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Call Me Maybe
+    ID: 4
+    About: 'Carly Rae Jepsen '
+    clipsToPlay:
+    - {fileID: 8300000, guid: c8a1597e2045bae48b9158af953b72a3, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1847834353}
+          m_TargetAssemblyTypeName: AudioHandler, Assembly-CSharp
+          m_MethodName: LogSongNull
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Praise You
+    ID: 5
+    About: Fatboy Slim
+    clipsToPlay:
+    - {fileID: 8300000, guid: 66502e32fec63634fa748a5c8adf611c, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1847834353}
+          m_TargetAssemblyTypeName: AudioHandler, Assembly-CSharp
+          m_MethodName: LogSongNull
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: In The End
+    ID: 6
+    About: Linkin Park
+    clipsToPlay:
+    - {fileID: 8300000, guid: 60d547c1e9018d04a92971cb115cb920, type: 3}
+    onStop:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 444838685}
+          m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+          m_MethodName: FinishedSong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1847834353}
+          m_TargetAssemblyTypeName: AudioHandler, Assembly-CSharp
+          m_MethodName: LogSongNull
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: We Are Your Friends
+    ID: 7
+    About: Justice
+    clipsToPlay:
+    - {fileID: 8300000, guid: 4db94ffc5ba5d974ea1894d0e9902dbf, type: 3}
     onStop:
       m_PersistentCalls:
         m_Calls:
