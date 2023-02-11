@@ -430,7 +430,7 @@ public class PlayerManager : NetworkBehaviour
     [Command]
     void CmdUpdateCubesDistrBS(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
     {
-        Debug.Log("total cubes=" + totalCubes + "rightHandCubes.lenght=" + rightHandCubes.Length + "R_PosCenters.lngth=" + R_PosCenters.Length);
+        //Debug.Log("total cubes=" + totalCubes + "rightHandCubes.lenght=" + rightHandCubes.Length + "R_PosCenters.lngth=" + R_PosCenters.Length);
         for (int i = 0; i < totalCubes - 1; i++)
         {
             rightHandCubes[i].transform.position = R_PosCenters[i] + cRPos;
