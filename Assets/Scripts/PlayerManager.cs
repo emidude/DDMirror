@@ -104,7 +104,7 @@ public class PlayerManager : NetworkBehaviour
 
         //ORDERING:
         sessionOrdering = new int[] { 3, 2, 1, 0 };
-        songOrdering = new int[] { 2,3,5,4 };
+        songOrdering = new int[] {8,8,8, 2,3,5,4 };
 
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
@@ -153,7 +153,7 @@ public class PlayerManager : NetworkBehaviour
 
        
        
-        CmdSetCubesCondition();
+      //  CmdSetCubesCondition();
 
         //set min calibrating values to be really high:
 
