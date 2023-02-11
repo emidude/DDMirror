@@ -382,7 +382,7 @@ public class PlayerManager : NetworkBehaviour
 
 
             GameObject vH = Instantiate(cubePf);
-            vH.transform.localScale = Vector3.one * 0.2f;
+            vH.transform.localScale = Vector3.one * 0.4f;
            /* GameObject PH = new GameObject();
             HParents[i] = PH;
             vH.transform.SetParent(HParents[i].transform, false);*/
