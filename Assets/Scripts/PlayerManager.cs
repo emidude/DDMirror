@@ -833,7 +833,8 @@ public class PlayerManager : NetworkBehaviour
         PM.ContinuousLogger.sessionNumber = PM.sessionOrdering[PM.sessionIndx];
         PM.ContinuousLogger.CalculateCondition();
 
-        PM.ContinuousLogger.sessionString = PM.ContinuousLogger.sessionNumber.ToString();
+        // PM.ContinuousLogger.sessionString = PM.ContinuousLogger.sessionNumber.ToString();
+        PM.ContinuousLogger.sessionString = PM.sessionOrdering[PM.sessionIndx].ToString();
         PM.ContinuousLogger.studyOrder = sessionIndx;
 
         PM.sessionIndx++;
