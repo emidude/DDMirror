@@ -9,7 +9,7 @@ public class Ordering: MonoBehaviour
     private System.Random _random = new System.Random();
     //public int[] combinations = new int[6];
     public int[] sessionOrdering;
-    public int[] songOrdering = new int[4];
+    public int[] songOrdering = new int[8];
     /*public int[] embodiedCombinations = new int[6];
     public int[] disembodiedCombinations = new int[6];
     public int[] embodiedSongOrdering = new int[6];
@@ -40,17 +40,17 @@ public class Ordering: MonoBehaviour
 
     private void Start()
     {
-        songOrdering = new int[4];
-        sessionOrdering = new int[4];
+        songOrdering = new int[8];
+        sessionOrdering = new int[8];
         //set song ordering for this session
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 8; i++)
         {
             songOrdering[i] = i;
         }
         //randomise Song order:
         Shuffle(songOrdering);
         Debug.Log("song ordering is :");
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 8; i++)
         {
             Debug.Log(songOrdering[i]);
         }
@@ -60,9 +60,17 @@ public class Ordering: MonoBehaviour
         // 2 = A + E
         // 3 = E + A
         // 4 = E + E
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 8; i++)
         {
-            sessionOrdering[i] = i;
+            if (i < 4)
+            {
+                sessionOrdering[i] = i;
+            }
+            else
+            {
+                sessionOrdering[i] = i - 4;
+            }
+           
         }
         //randomise Song order:
         Shuffle(sessionOrdering);
