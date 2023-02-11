@@ -70,6 +70,13 @@ public class PlayerManager : NetworkBehaviour
 
     float rotInc = 360 / 16;
 
+
+    public Vector3[] R_PosCenters, L_PosCenters, H_PosCenters;
+    int size = 4;
+    //int totalCubes=125; //hardcoded becasue cant be fucked to find the right place to declare totalCubes=size*size*size, getting weird netwroking errors
+    int totalCubes = 64;
+
+
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -132,6 +139,8 @@ public class PlayerManager : NetworkBehaviour
         /*step = 2f / resolution;
         scale = Vector3.one * step;*/
 
+        CmdSetTransformsGrid();
+
         CmdSpawnCubes();
         //CmdUpdateCubes(cL.GetVelocity(),cR.GetVelocity());
         CmdDestroyCubes();
@@ -161,35 +170,7 @@ public class PlayerManager : NetworkBehaviour
 
         if (isLocalPlayer)
         {
-            /*if (calibratingArmSpa)
-            {
-                if (!(float.IsFinite(localHead.transform.position.x) || float.IsFinite(localHead.transform.position.y) || float.IsFinite(localHead.transform.position.z)
-                   || float.IsFinite(cL.transform.position.x) || float.IsFinite(cL.transform.position.y) || float.IsFinite(cL.transform.position.z)
-                   || float.IsFinite(cR.transform.position.x) || float.IsFinite(cR.transform.position.y) || float.IsFinite(cR.transform.position.z)
-                   || float.IsFinite(localHead.transform.rotation.x) || float.IsFinite(localHead.transform.rotation.y) || float.IsFinite(localHead.transform.rotation.z) || float.IsFinite(localHead.transform.rotation.w)
-                   || float.IsFinite(cL.transform.rotation.x) || float.IsFinite(cL.transform.rotation.y) || float.IsFinite(cL.transform.rotation.z) || float.IsFinite(cL.transform.rotation.w)
-                   || float.IsFinite(cR.transform.rotation.x) || float.IsFinite(cR.transform.rotation.y) || float.IsFinite(cR.transform.rotation.z) || float.IsFinite(cR.transform.rotation.w)))
-                {
-                    // Debug.Log("NAN");
-                    maxLx = Mathf.Max(maxLx, cL.transform.localPosition.x);
-                    maxLy = Mathf.Max(maxLy, cL.transform.localPosition.y);
-                    maxLz = Mathf.Max(maxLz, cL.transform.localPosition.z);
-                    
-                    minLx = Mathf.Min(minLx, cL.transform.localPosition.x);
-                    minLy = Mathf.Min(minLy, cL.transform.localPosition.y);
-                    minLz = Mathf.Min(minLz, cL.transform.localPosition.z);
-
-
-                    maxRx = Mathf.Max(maxRx, cR.transform.localPosition.x);
-                    maxLy = Mathf.Max(maxRy, cR.transform.localPosition.y);
-                    maxLz = Mathf.Max(maxRz, cR.transform.localPosition.z);
-
-                    minRx = Mathf.Min(minRx, cR.transform.localPosition.x);
-                    minRy = Mathf.Min(minRy, cR.transform.localPosition.y);
-                    minRz = Mathf.Min(minRz, cR.transform.localPosition.z);
-                }
-                
-            }*/
+           
 
             if (!questionTime)
             {
@@ -214,7 +195,8 @@ public class PlayerManager : NetworkBehaviour
                     //  CmdUpdateCubes(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                     // CmdUpdateCubes(localHead.transform.localPosition, localHead.transform.rotation, cL.transform.localPosition, cL.transform.rotation, cR.transform.localPosition, cR.transform.rotation);
                     //CmdUpdateCubesP(localHead.transform.localPosition, localHead.transform.rotation, cL.transform.localPosition, cL.transform.rotation, cR.transform.localPosition, cR.transform.rotation);
-                    CmdUpdateCubesP(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                   // CmdUpdateCubesP(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
+                    CmdUpdateCubesDistrBS(localHead.transform.position, localHead.transform.rotation, cL.transform.position, cL.transform.rotation, cR.transform.position, cR.transform.rotation);
                 }
             }           
         }
@@ -296,6 +278,42 @@ public class PlayerManager : NetworkBehaviour
         NetworkServer.Destroy(RightHandGO);
     }
 
+    [Command]
+    void CmdSetTransformsGrid()
+    {
+        //SET TRANSFORMS GRID:
+        R_PosCenters = new Vector3[totalCubes - 1];
+        L_PosCenters = new Vector3[totalCubes - 1];
+        H_PosCenters = new Vector3[totalCubes - 1];
+
+        float centeringAdjust = size / 2;
+        float stretch = 2f;
+
+        for (int i = 0, t = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                for (int k = 0; k < size; k++)
+                {
+
+                    if (i - centeringAdjust == 0 && j - centeringAdjust == 0 && k - centeringAdjust == 0)
+                    {
+                          Debug.Log("removing 0 point so no cubes at body positon, occurs at i=" + i + "j=" + j + "k=" + k);
+                    }
+                    else
+                    {
+                        R_PosCenters[t] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
+                        L_PosCenters[t] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
+                        H_PosCenters[t] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
+                        t++;
+                    }
+
+
+                }
+            }
+        }
+    }
+
 
     [Command]
     void CmdSpawnCubes()
@@ -303,44 +321,44 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("spoawing cubes");
        
         //transform.position = head.position; <-TODO:  need to fix
-        transform.position = Vector3.zero;
+        transform.position = Vector3.zero; //TODO: NOT SURE NEED THIS ANYMROE TRY WITHOUT
 
-        /*points1 = new GameObject[resolution * resolution];
-        for (int i = 0; i < points1.Length; i++)
-        {
-            GameObject point = Instantiate(cubePf);
-            point.transform.localScale = Vector3.one*0.2f;
-            //TODO: SET PARENT TO HEAD
-            point.transform.SetParent(transform, false);
-            points1[i] = point;
-            NetworkServer.Spawn(point);
-        }
+       /* //SET TRANSFORMS GRID:
+        R_PosCenters = new Vector3[totalCubes - 1];
+        L_PosCenters = new Vector3[totalCubes - 1];
+        H_PosCenters = new Vector3[totalCubes - 1];
 
-        points2 = new GameObject[resolution * resolution];
-        for (int i = 0; i < points2.Length; i++)
-        {
-            GameObject point = Instantiate(cubePf);
-            point.transform.localScale = Vector3.one * 0.2f;
-            //TODO: SET PARENT TO HEAD
-            point.transform.SetParent(transform, false);
-            points2[i] = point;
-            NetworkServer.Spawn(point);
-        }
+        float centeringAdjust = size / 2;
+        float stretch = 2f;
 
-        points3 = new GameObject[resolution * resolution];
-        for (int i = 0; i < points3.Length; i++)
+        for (int i = 0, t = 0; i < size; i++)
         {
-            GameObject point = Instantiate(cubePf);
-            point.transform.localScale = Vector3.one * 0.2f;
-            //TODO: SET PARENT TO HEAD
-            point.transform.SetParent(transform, false);
-            points3[i] = point;
-            NetworkServer.Spawn(point);
+            for (int j = 0; j < size; j++)
+            {
+                for (int k = 0; k < size; k++)
+                {
+
+                    if (i - centeringAdjust == 0 && j - centeringAdjust == 0 && k - centeringAdjust == 0)
+                    {
+                      //  Debug.Log("removing 0 point so no cubes at body positon, occurs at i=" + i + "j=" + j + "k=" + k);
+                    }
+                    else
+                    {
+                        R_PosCenters[t] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
+                        L_PosCenters[t] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
+                        H_PosCenters[t] = new Vector3(i - centeringAdjust, j - centeringAdjust, k - centeringAdjust) * stretch;
+                        t++;
+                    }
+
+
+                }
+            }
         }*/
 
-        rightHandCubes = new GameObject[16];
-        leftHandCubes = new GameObject[16];
-        headCubes = new GameObject[16];
+
+        rightHandCubes = new GameObject[totalCubes - 1];
+        leftHandCubes = new GameObject[totalCubes - 1];
+        headCubes = new GameObject[totalCubes - 1];
 
       /*  RParents = new GameObject[16];
         LParents = new GameObject[16];
@@ -407,6 +425,26 @@ public class PlayerManager : NetworkBehaviour
                 NetworkServer.Destroy(headCubes[i]);
             }
         
+    }
+
+    [Command]
+    void CmdUpdateCubesDistrBS(Vector3 HPos, Quaternion HRot, Vector3 cLPos, Quaternion cLRot, Vector3 cRPos, Quaternion cRRot)
+    {
+        Debug.Log("total cubes=" + totalCubes + "rightHandCubes.lenght=" + rightHandCubes.Length + "R_PosCenters.lngth=" + R_PosCenters.Length);
+        for (int i = 0; i < totalCubes - 1; i++)
+        {
+            rightHandCubes[i].transform.position = R_PosCenters[i] + cRPos;
+            leftHandCubes[i].transform.position = L_PosCenters[i] + cLPos;
+            headCubes[i].transform.position = H_PosCenters[i] + HPos;
+
+            rightHandCubes[i].transform.rotation = cRRot;
+            leftHandCubes[i].transform.rotation = cLRot;
+            headCubes[i].transform.rotation = HRot;
+
+
+
+        }
+
     }
 
     [Command]
