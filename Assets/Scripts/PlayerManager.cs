@@ -9,7 +9,6 @@ public class PlayerManager : NetworkBehaviour
     public PlayerSync playerSync;
 
     public int[] songOrdering;
-    public int[] sessionOrdering;
 
     [SerializeField] AudioClip audio;
     //bool readyToStart = false;
@@ -102,7 +101,6 @@ public class PlayerManager : NetworkBehaviour
         ContinuousLogger = audioObject.GetComponent<ContinuousLogger>();
 
         //ORDERING:
-        sessionOrdering = new int[] { 3, 2, 1, 0 };
         songOrdering = new int[] { 2,3,5,4 };
 
         //PANELS/////////////////////MISTAEK BELOW IDK?
