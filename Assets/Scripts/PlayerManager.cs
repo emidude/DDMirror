@@ -261,12 +261,12 @@ public class PlayerManager : NetworkBehaviour
         NetworkServer.Spawn(HeadGO);
 
         LeftHandGO = Instantiate(cubePf);
-        LeftHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        LeftHandGO.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         LeftHandGO.transform.SetParent(transform, false);
         NetworkServer.Spawn(LeftHandGO);
 
         RightHandGO = Instantiate(cubePf);
-        RightHandGO.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        RightHandGO.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         RightHandGO.transform.SetParent(transform, false);
         NetworkServer.Spawn(RightHandGO);
     }
