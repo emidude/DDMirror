@@ -104,7 +104,7 @@ public class PlayerManager : NetworkBehaviour
 
         //ORDERING:
         sessionOrdering = new int[] { 3, 2, 1, 0 };
-        songOrdering = new int[] {8,8,8,8 };
+        songOrdering = new int[] {2,3,5,4 };
 
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
