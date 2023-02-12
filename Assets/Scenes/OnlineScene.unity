@@ -4792,6 +4792,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 961613895}
     m_Modifications:
+    - target: {fileID: 8576532707180631554, guid: 4ed664bc30314ff46ac8a4e2a3bb5502,
+        type: 3}
+      propertyPath: maintainMomemntum
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8576532707180631558, guid: 4ed664bc30314ff46ac8a4e2a3bb5502,
         type: 3}
       propertyPath: overridePreviewLeftHandPrefab

@@ -150,7 +150,7 @@ public class ContinuousLogger : MonoBehaviour {
         answersWriter.WriteLine(String.Join(",", answersHeader) + "\n");
 
         string[] values = new string[7];
-        for (int s = 0; s < 20; s++)
+        for (int s = 0; s < 1; s++)
         {
             values[0] = answers[s].particpantNum;
             values[1] = answers[s].studyOrder;
