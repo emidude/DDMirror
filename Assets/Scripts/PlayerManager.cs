@@ -73,8 +73,9 @@ public class PlayerManager : NetworkBehaviour
 
     public Vector3[] R_PosCenters, L_PosCenters, H_PosCenters;
     int size = 4;
-    //int totalCubes=125; //hardcoded becasue cant be fucked to find the right place to declare totalCubes=size*size*size, getting weird netwroking errors
     int totalCubes = 64;
+    //int totalCubes=125; //hardcoded becasue cant be fucked to find the right place to declare totalCubes=size*size*size, getting weird netwroking errors
+
 
 
     public override void OnStartServer()
