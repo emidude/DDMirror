@@ -1,0 +1,87 @@
+Suitable embodiment qnaire
+
+bo, sl, a
+
+
+https://www.frontiersin.org/articles/10.3389/frvir.2020.575943/full
+Avatar Embodiment. A Standardized Questionnaire
+Tabitha C. Peck1* Mar Gonzalez-Franco 2021
+
+Not suitable since many of the questions are about touch and sensation
+The authors recommend asking about feet touching a virtual floor in the case where no touch is part of the study, however in the dance application there is no floor and no virtual feet. 
+
+R1 “I felt out of my body”
+
+R2 “I felt as if my (real) body were drifting toward the virtual body or as if the virtual body were drifting toward my (real) body”
+
+R3 “I felt as if the movements of the virtual body were influencing my own movements”
+
+R4 “It felt as if my (real) body were turning into an “avatar” body”
+
+R5 “At some point it felt as if my real body was starting to take on the posture or shape of the virtual body that I saw”
+
+R6 “I felt like I was wearing different clothes from when I came to the laboratory”
+
+R7 “I felt as if my body had changed”
+
+R8 “I felt a ____ sensation in my body when I saw ____”
+
+R9 “I felt that my own body could be affected by ____”
+
+R10 “I felt as if the virtual body was my body”
+
+R11 “At some point it felt that the virtual body resembled my own (real) body, in terms of shape, skin tone or other visual features.”
+
+R12 “I felt as if my body was located where I saw the virtual body”
+
+R13 “I felt like I could control the virtual body as if it was my own body”
+
+R14 “It seemed as if I felt the touch of the ____* in the location where I saw the virtual body touched”
+
+R15 “It seemed as if the touch I felt was caused by the ____* touching the virtual body”
+
+R16 “It seemed as if my body was touching the ____*”
+
+References in the questionnaire to body would need to be updated only if a body part is being explored. Blank spaces ____ depend on the experiment. The ____ marked with * can refer to the touch of the ground and the feet in touch with the virtual floor, this interpretation is preferable to removing the questions if there are no further tactile stimuli.
+
+
+
+
+
+https://ieeexplore.ieee.org/document/9199571
+Construction of the Virtual Embodiment Questionnaire (VEQ)
+Publisher: IEEE
+PDF
+Daniel Roth; Marc Erich Latoschik
+
+does not address the component of self location
+
+also very focused on human shaped avatar: 
+
+"The virutal body felt like a human body"
+
+(ALTHOUGH change interesting componenet")
+
+
+
+----
+
+https://ieeexplore.ieee.org/abstract/document/8998371
+study used an earlier version of gonzalez peck qnaire and removed "Each participant's subjective sense of embodiment was calculated using a subset of questions from the GFP embodiment questionnaire that were relevant to the current experiment setup"
+ 
+"Gonzalez-Franco and Peck (GFP) embodiment questionnaire is comprised of commonly used SoE questions [14]. The GFP embodiment questionnaire measures body ownership (the perception of owning a self-avatar), agency and motor control (an enhanced SoE in which one thinks one's actions control the self-avatar), and external appearance (for avatars that may not look exactly like the user or may alter the user's age [4], race [31], or other discerning feature)."
+
+That one is also not suitable since its not really relevant to consider the race or age of the cubes
+eg "Q20. “I felt like I was wearing different clothes from when I came to the laboratory”"
+https://www.frontiersin.org/articles/10.3389/frobt.2018.00074/full (Gonzalez-Franco and Peck 2018)
+
+
+---
+
+Eubanks 2020 - https://ieeexplore.ieee.org/abstract/document/9284776/figures#figures
+used 10 scale with multiple BO qns but dropped these to 1 in dissertaiion after factor analysis
+https://utd-ir.tdl.org/bitstream/handle/10735.1/9164/EUBANKS-DISSERTATION-2020.pdf?sequence=1&isAllowed=y
+
+
+Final factor analysis questions from this (eubanks dissertation paper) qnaire ws then used for prelimninary short qnaire, whith single BO qn.
+
