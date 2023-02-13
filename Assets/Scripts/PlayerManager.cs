@@ -103,8 +103,8 @@ public class PlayerManager : NetworkBehaviour
         ContinuousLogger = audioObject.GetComponent<ContinuousLogger>();
 
         //ORDERING:
-        sessionOrdering = new int[] {0,2,1,3 };
-        songOrdering = new int[] {0,2,3,6};
+        sessionOrdering = new int[] {2,0,3,1 };
+        songOrdering = new int[] {7,6,4,0};
 
         //PANELS/////////////////////MISTAEK BELOW IDK?
         guiObject = GameObject.FindGameObjectWithTag("PanelParent");
