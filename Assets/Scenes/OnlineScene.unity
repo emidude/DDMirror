@@ -4851,9 +4851,9 @@ MonoBehaviour:
   sessionString: 
   condition: 
   songJustFinished: 
-  participantNumber: 5
+  participantNumber: 7
   sessionNumber: 0
-  pcNumber: 2
+  pcNumber: 1
   studyOrder: 0
 --- !u!1 &1852613889
 GameObject:
@@ -5058,6 +5058,11 @@ PrefabInstance:
     - target: {fileID: 8576532707180631554, guid: 4ed664bc30314ff46ac8a4e2a3bb5502,
         type: 3}
       propertyPath: maintainMomemntum
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8576532707180631554, guid: 4ed664bc30314ff46ac8a4e2a3bb5502,
+        type: 3}
+      propertyPath: momemtumDampenRate
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8576532707180631558, guid: 4ed664bc30314ff46ac8a4e2a3bb5502,
