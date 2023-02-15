@@ -103,7 +103,7 @@ public class PlayerManager : NetworkBehaviour
         ContinuousLogger = audioObject.GetComponent<ContinuousLogger>();
 
         //ORDERING:
-        sessionOrdering = new int[] {1,3,2,0 };
+        sessionOrdering = new int[] {1,3,0,2 };
         songOrdering = new int[] {6,0,1,5};
 
         //PANELS/////////////////////MISTAEK BELOW IDK?
