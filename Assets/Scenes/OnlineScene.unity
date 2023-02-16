@@ -1745,9 +1745,9 @@ MonoBehaviour:
   dancePrefPanel: {fileID: 961613894}
   answeredQnPanel: {fileID: 303753768}
   finishedSessionPanel: {fileID: 1739297708}
-  humanRobotPanel: {fileID: 1252130303}
-  handle1: {fileID: 1292282737}
-  handle2: {fileID: 1937052738}
+  humanRobotPanel: {fileID: 0}
+  handle1: {fileID: 0}
+  handle2: {fileID: 0}
   CLogger: {fileID: 1847834356}
   musicPreference: {fileID: 29712460}
   dancePreference: {fileID: 1937052737}
@@ -3478,12 +3478,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1292282735}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1292282737 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8576532707180631615, guid: 4ed664bc30314ff46ac8a4e2a3bb5502,
-    type: 3}
-  m_PrefabInstance: {fileID: 1292282735}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1319115623
 GameObject:
   m_ObjectHideFlags: 0
@@ -4851,7 +4845,7 @@ MonoBehaviour:
   sessionString: 
   condition: 
   songJustFinished: 
-  participantNumber: 13
+  participantNumber: 15
   sessionNumber: 0
   pcNumber: 1
   studyOrder: 0
@@ -5177,12 +5171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f8e9e70f68ee3418ad85992778c116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1937052738 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8576532707180631615, guid: 4ed664bc30314ff46ac8a4e2a3bb5502,
-    type: 3}
-  m_PrefabInstance: {fileID: 1937052735}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2083662913
 GameObject:
   m_ObjectHideFlags: 0
