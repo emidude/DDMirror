@@ -81,7 +81,7 @@ public class CsvReader : MonoBehaviour
             {
                 if (lineNumber % 2 == 0)
                 {
-                    Debug.Log(line);
+                   // Debug.Log(line);
 
                     if (lineNumber != 0)
                     {
@@ -135,7 +135,7 @@ public class CsvReader : MonoBehaviour
             {
                 if (lineNumber % 2 == 0)
                 {
-                    Debug.Log(line);
+                   // Debug.Log(line);
 
                     if (lineNumber != 0)
                     {
@@ -177,6 +177,14 @@ public class CsvReader : MonoBehaviour
             }
         }
 
+        Debug.Log(lineNumber);
+        Debug.Log(idx);
+
+        int P1StartIdx = GetPsongStartIdx(timeSeriesFileP1);
+        int P2StartIdx = GetPsongStartIdx(timeSeriesFileP2);
+
+        idxP1 = P1StartIdx;
+        idxP2 = P2StartIdx;
         /*Debug.Log(lineNumber);
 
         for (int i = 0; i < P1headX.Length; i++) 
@@ -254,6 +262,46 @@ public class CsvReader : MonoBehaviour
         P2RightHandGO.transform.position = new Vector3(P2rightHandX[idxP2], P2rightHandY[idxP2], P2rightHandZ[idxP2]);
         P2RightHandGO.transform.eulerAngles = new Vector3(P2ROT_rightHandX[idxP2], P2ROT_rightHandY[idxP2], P2ROT_rightHandZ[idxP2]);
 
+    }
+
+    int GetPsongStartIdx(string timeSeriesFile)
+    {
+        int lineNumber = 0;
+        int idx = 0;
+        bool notFoundStartYet = true;
+        int songStartIdx = 0;
+
+        using (StreamReader reader = new StreamReader(timeSeriesFile))
+        {
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                if (lineNumber % 2 == 0)
+                {
+                    Debug.Log(line);
+
+                    if (lineNumber != 0)
+                    {
+                        string[] parts = line.Split(',');
+                     
+                        if(parts[0] != "" && notFoundStartYet)
+                        {
+                            Debug.Log("song starts here! + Pidx = " + idx);
+                            notFoundStartYet = false;
+                            songStartIdx = idx;
+                        }
+                        
+                    }
+
+                    idx++;
+                }
+
+                lineNumber++;
+
+            }
+        }
+
+        return songStartIdx;
     }
 
 }
