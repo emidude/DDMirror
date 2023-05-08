@@ -6,9 +6,14 @@ using System;
 
 public class CsvReader : MonoBehaviour
 {
+    public float slowness = 0.005f;
+    float timeInterval;
 
     string timeSeriesFileP1 = @"Assets/CSVFiles/20230202_183359participantNumber6session1conditionA.log.csv";
     string timeSeriesFileP2 = @"Assets/CSVFiles/20230202_182214participantNumber6session3conditionH.log.csv";
+
+    string P1Name = "P6_";
+    string P2Name = "P7_";
 
     //P1
     float[] P1rightHandX = new float[29056];
@@ -199,11 +204,16 @@ public class CsvReader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(idx< 29056)
+        if(timeInterval > 0)
+        {
+            timeInterval -= Time.deltaTime;
+        }
+        else if(idx< 29056)
         {
             UpdateHeadAndHands(idxP1, idxP2);
             idxP1++;
             idxP2++;
+            timeInterval = slowness;
         }
         
     }
@@ -211,32 +221,45 @@ public class CsvReader : MonoBehaviour
     void SpawnHeadAndHands()
     {
         Debug.Log("spawning head n hands");
-
+        string cubeName = "";
 
         P1HeadGO = Instantiate(cubePf);
         P1HeadGO.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         P1HeadGO.transform.SetParent(transform, false);
+        cubeName = P1Name + "head";
+        P1HeadGO.name = cubeName;
 
         P1LeftHandGO = Instantiate(cubePf);
         P1LeftHandGO.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         P1LeftHandGO.transform.SetParent(transform, false);
+        cubeName = P1Name + "leftHand";
+        P1LeftHandGO.name = cubeName;
 
         P1RightHandGO = Instantiate(cubePf);
         P1RightHandGO.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         P1RightHandGO.transform.SetParent(transform, false);
+        cubeName = P1Name + "rightHand";
+        P1RightHandGO.name = cubeName;
 
 
         P2HeadGO = Instantiate(cubePf);
         P2HeadGO.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         P2HeadGO.transform.SetParent(transform, false);
+        cubeName = P2Name + "head";
+        P2HeadGO.name = cubeName;
 
         P2LeftHandGO = Instantiate(cubePf);
         P2LeftHandGO.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         P2LeftHandGO.transform.SetParent(transform, false);
+        cubeName = P2Name + "leftHand";
+        P2LeftHandGO.name = cubeName;
 
         P2RightHandGO = Instantiate(cubePf);
         P2RightHandGO.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         P2RightHandGO.transform.SetParent(transform, false);
+        cubeName = P2Name + "rightHand";
+        P2RightHandGO.name = cubeName;
+
 
     }
 
@@ -303,5 +326,7 @@ public class CsvReader : MonoBehaviour
 
         return songStartIdx;
     }
+
+
 
 }
