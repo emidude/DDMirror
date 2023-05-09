@@ -6,6 +6,32 @@ using System;
 
 public class CsvReader : MonoBehaviour
 {
+    public Material colMat;
+    public Material originalMat;
+
+    public Color P1headColour = new Color(1f, 0f, 0f, 1f);
+    public Color P1leftColour = new Color(1f,0.2f, 0.5f,1f);
+    public Color P1rightColour = new Color(1f, 0.5f, 0.2f, 1f);
+
+    public Color P2headColour = new Color(0f, 0f, 1f, 1f);
+    public Color P2leftColour = new Color(0.9f, 0.5f, 1f, 1f);
+    public Color P2rightColour = new Color(0.5f, 0.2f, 1f, 1f);
+
+    Color old_P1headColour;
+    Color old_P1leftColour;
+     Color old_P1rightColour;
+
+     Color old_P2headColour;
+     Color old_P2leftColour ;
+     Color old_P2rightColour;
+
+    public bool P1colorSwitch = false;
+    bool old_P1colorSwitch;
+
+    public bool P2colorSwitch = false;
+    bool old_P2colorSwitch;
+
+
     public float slowness = 0.005f;
     float timeInterval;
 
@@ -15,8 +41,18 @@ public class CsvReader : MonoBehaviour
     string P1Name = "P6_";
     string P2Name = "P7_";
 
-    string P1DanceCondition = "ED";
-    string P2DanceCondition = "HH";
+    public string P1DanceCondition = "ED";
+    public string P2DanceCondition = "HH";
+
+    public bool P1distributed = true;
+    public bool P1headhands = false;
+    public bool P2distributed = false;
+    public bool P2headhands = true;
+
+    bool old_P1distributed = true;
+    bool old_P1headhands = false;
+    bool old_P2distributed = false;
+    bool old_P2headhands = true;
 
     //P1
     float[] P1rightHandX = new float[29056];
@@ -43,6 +79,8 @@ public class CsvReader : MonoBehaviour
     float[] P1ROT_headX = new float[29056];
     float[] P1ROT_headY = new float[29056];
     float[] P1ROT_headZ = new float[29056];
+
+    string[] P1Time = new string[30000];
 
 
     //P2
@@ -71,6 +109,7 @@ public class CsvReader : MonoBehaviour
     float[] P2ROT_headY = new float[29056];
     float[] P2ROT_headZ = new float[29056];
 
+    string[] P2Time = new string[30000];
 
     int lineNumber = 0;
     int idx = 0;
@@ -85,8 +124,23 @@ public class CsvReader : MonoBehaviour
     const float TWOPI = Mathf.PI * 2;
     Vector3 P1startingHeadPos, P2startingHeadPos;
 
+    bool rewind = false;
+    bool paused = false;
+    bool forwards = true;
+
     void Start()
     {
+         old_P1headColour = P1headColour;
+         old_P1leftColour = P1leftColour;
+         old_P1rightColour = P1rightColour;
+
+         old_P2headColour = P2headColour;
+         old_P2leftColour = P2leftColour;
+         old_P2rightColour = P2rightColour;
+
+        old_P1colorSwitch = P1colorSwitch;
+        old_P2colorSwitch = P2colorSwitch;
+
         using (StreamReader reader1 = new StreamReader(timeSeriesFileP1))
         {
             string line;
@@ -125,6 +179,8 @@ public class CsvReader : MonoBehaviour
                             P1ROT_rightHandX[idx] = Single.Parse(parts[23]);
                             P1ROT_rightHandY[idx] = Single.Parse(parts[24]);
                             P1ROT_rightHandZ[idx] = Single.Parse(parts[25]);
+
+                            P1Time[idx] = parts[1];
                         }
                     }
 
@@ -179,6 +235,8 @@ public class CsvReader : MonoBehaviour
                             P2ROT_rightHandX[idx] = Single.Parse(parts[23]);
                             P2ROT_rightHandY[idx] = Single.Parse(parts[24]);
                             P2ROT_rightHandZ[idx] = Single.Parse(parts[25]);
+
+                            P2Time[idx] = parts[1];
                         }
                     }
 
@@ -246,47 +304,236 @@ public class CsvReader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(timeInterval > 0)
+        if (Input.GetKeyDown("space"))
         {
-            timeInterval -= Time.deltaTime;
+            Debug.Log("P1 csv idx = " + idxP1 + ", P1 time = " + P1Time[idxP1] + ".  P2 csv idx = " + idxP2 + ", P2 time = " + P2Time[idxP2]);
         }
-        else if(idx< 29056)
+        if (Input.GetKeyDown("left"))
         {
-            UpdateHeadAndHands(idxP1, idxP2);
-
-            //P1
-            Vector3 P1HV3 = new Vector3(P1headX[idxP1], P1headY[idxP1], P1headZ[idxP1]);
-            Quaternion P1HQ = Quaternion.identity;
-            P1HQ.eulerAngles = new Vector3(P1ROT_headX[idxP1], P1ROT_headY[idxP1], P1ROT_headZ[idxP1]);
-
-            Vector3 P1LV3 = new Vector3(P1leftHandX[idxP1], P1leftHandY[idxP1], P1leftHandZ[idxP1]);
-            Quaternion P1LQ = Quaternion.identity;
-            P1LQ.eulerAngles = new Vector3(P1ROT_leftHandX[idxP1], P1ROT_leftHandY[idxP1], P1ROT_leftHandZ[idxP1]);
-
-            Vector3 P1RV3 = new Vector3(P1rightHandX[idxP1], P1rightHandX[idxP1], P1rightHandX[idxP1]);
-            Quaternion P1RQ = Quaternion.identity;
-            P1RQ.eulerAngles = new Vector3(P1ROT_rightHandX[idxP1], P1ROT_rightHandX[idxP1], P1ROT_rightHandX[idxP1]);
-
-            //P2
-            Vector3 P2HV3 = new Vector3(P2headX[idxP2], P2headY[idxP2], P2headZ[idxP2]);
-            Quaternion P2HQ = Quaternion.identity;
-            P2HQ.eulerAngles = new Vector3(P2ROT_headX[idxP2], P2ROT_headY[idxP2], P2ROT_headZ[idxP2]);
-
-            Vector3 P2LV3 = new Vector3(P2leftHandX[idxP2], P2leftHandY[idxP2], P2leftHandZ[idxP2]);
-            Quaternion P2LQ = Quaternion.identity;
-            P2LQ.eulerAngles = new Vector3(P2ROT_leftHandX[idxP2], P2ROT_leftHandY[idxP2], P2ROT_leftHandZ[idxP2]);
-
-            Vector3 P2RV3 = new Vector3(P2rightHandX[idxP2], P2rightHandX[idxP2], P2rightHandX[idxP2]);
-            Quaternion P2RQ = Quaternion.identity;
-            P2RQ.eulerAngles = new Vector3(P2ROT_rightHandX[idxP2], P2ROT_rightHandX[idxP2], P2ROT_rightHandX[idxP2]);
-
-            UpdateDistribuitedCubesP(P1HV3, P1HQ, P1LV3, P1LQ, P1RV3, P1RQ, P1startingHeadPos, P2HV3, P2HQ, P2LV3, P2LQ, P2RV3, P2RQ, P2startingHeadPos );
-
-            idxP1++;
-            idxP2++;
-            timeInterval = slowness;
+            Debug.Log("rewinding");
+            rewind = true;
+            paused = false;
+            forwards = false;
         }
-        
+        if (Input.GetKeyDown("right"))
+        {
+            Debug.Log("forwardsing");
+            rewind = false;
+            paused = false;
+            forwards = true;
+        }
+        //if (Input.GetKeyDown("down"))
+        if(Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            Debug.Log("paused");
+            rewind = false;
+            paused = true;
+            forwards = false;
+        }
+        if (Input.GetKeyDown("a"))
+        {
+            slowness += 0.0005f;
+        }
+        if (Input.GetKeyDown("s"))
+        {
+            slowness -= 0.0005f;
+        }
+
+
+        if (P1distributed && !old_P1distributed)
+        {
+            BigifyEDCubes(P1headCubes, P1leftHandCubes, P1rightHandCubes);
+            old_P1distributed = P1distributed;
+        }
+        else if (!P1distributed && old_P1distributed)
+        {
+            SmolifyEDCubes(P1headCubes, P1leftHandCubes, P1rightHandCubes);
+            old_P1distributed = P1distributed;
+        }
+
+        if (P1headhands && !old_P1headhands)
+        {
+            BigifyHHCubes(P1HeadGO, P1LeftHandGO, P1RightHandGO);
+            old_P1headhands = P1headhands;
+        }
+        else if (!P1headhands && old_P1headhands)
+        {
+            SmolifyHHCubes(P1HeadGO, P1LeftHandGO, P1RightHandGO);
+            old_P1headhands = P1headhands;
+
+        }
+
+        if (P2distributed && !old_P2distributed)
+        {
+            BigifyEDCubes(P2headCubes, P2leftHandCubes, P2rightHandCubes);
+            old_P2distributed = P2distributed;
+        }
+        else if (!P2distributed && old_P2distributed)
+        {
+            SmolifyEDCubes(P2headCubes, P2leftHandCubes, P2rightHandCubes);
+            old_P2distributed = P2distributed;
+        }
+
+        if (P2headhands && !old_P2headhands)
+        {
+            BigifyHHCubes(P2HeadGO, P2LeftHandGO, P2RightHandGO);
+            old_P2headhands = P2headhands;
+
+        }
+        else if (!P2headhands && old_P2headhands)
+        {
+            SmolifyHHCubes(P2HeadGO, P2LeftHandGO, P2RightHandGO);
+            old_P2headhands = P2headhands;
+        }
+
+
+
+
+
+        if(P1headColour!=old_P1headColour ||
+            P1leftColour != old_P1leftColour ||
+            P1rightColour != old_P1rightColour
+            )
+        {
+           // Debug.Log("here");
+
+            ColourEDSeparate(P1headCubes, P1leftHandCubes, P1rightHandCubes, P1headColour, P1leftColour, P1rightColour);
+            ColourHHSeparate(P1HeadGO, P1LeftHandGO, P1RightHandGO,  P1headColour, P1leftColour, P1rightColour);
+        }
+        else if (P1colorSwitch && !old_P1colorSwitch)
+        {
+           // Debug.Log("here");
+            ColourEDSeparate(P1headCubes, P1leftHandCubes, P1rightHandCubes, P1headColour, P1leftColour, P1rightColour);
+            ColourHHSeparate(P1HeadGO, P1LeftHandGO, P1RightHandGO, P1headColour, P1leftColour, P1rightColour);
+            old_P1colorSwitch = P1colorSwitch;
+        }
+        else if(!P1colorSwitch && old_P1colorSwitch)
+        {
+            //switch back
+            ColourEDOriginal(P1headCubes, P1leftHandCubes, P1rightHandCubes);
+            ColourHHOriginal(P1HeadGO, P1LeftHandGO, P1RightHandGO);
+
+            old_P1colorSwitch = P1colorSwitch;
+          //  Debug.Log("here");
+
+        }
+
+        if (P2headColour != old_P2headColour ||
+           P2leftColour != old_P2leftColour ||
+           P2rightColour != old_P2rightColour
+           )
+        {
+          //  Debug.Log("here");
+
+            ColourEDSeparate(P2headCubes, P2leftHandCubes, P2rightHandCubes, P2headColour, P2leftColour, P2rightColour);
+            ColourHHSeparate(P2HeadGO, P2LeftHandGO, P2RightHandGO, P2headColour, P2leftColour, P2rightColour);
+        }
+        else if (P2colorSwitch && !old_P2colorSwitch)
+        {
+          //  Debug.Log("here");
+
+            ColourEDSeparate(P2headCubes, P2leftHandCubes, P2rightHandCubes, P2headColour, P2leftColour, P2rightColour);
+            ColourHHSeparate(P2HeadGO, P2LeftHandGO, P2RightHandGO, P2headColour, P2leftColour, P2rightColour);
+            old_P2colorSwitch = P2colorSwitch;
+        }
+        else if (!P2colorSwitch && old_P2colorSwitch)
+        {
+          //  Debug.Log("here");
+            ColourEDOriginal(P2headCubes, P2leftHandCubes, P2rightHandCubes);
+            ColourHHOriginal(P2HeadGO, P2LeftHandGO, P2RightHandGO);
+            old_P2colorSwitch = P2colorSwitch;
+            //switch back
+        }
+
+        if (forwards)
+        {
+            if (timeInterval > 0)
+            {
+                timeInterval -= Time.deltaTime;
+            }
+            else if (idx < 29056)
+            {
+                UpdateHeadAndHands(idxP1, idxP2);
+
+                //P1
+                Vector3 P1HV3 = new Vector3(P1headX[idxP1], P1headY[idxP1], P1headZ[idxP1]);
+                Quaternion P1HQ = Quaternion.identity;
+                P1HQ.eulerAngles = new Vector3(P1ROT_headX[idxP1], P1ROT_headY[idxP1], P1ROT_headZ[idxP1]);
+
+                Vector3 P1LV3 = new Vector3(P1leftHandX[idxP1], P1leftHandY[idxP1], P1leftHandZ[idxP1]);
+                Quaternion P1LQ = Quaternion.identity;
+                P1LQ.eulerAngles = new Vector3(P1ROT_leftHandX[idxP1], P1ROT_leftHandY[idxP1], P1ROT_leftHandZ[idxP1]);
+
+                Vector3 P1RV3 = new Vector3(P1rightHandX[idxP1], P1rightHandX[idxP1], P1rightHandX[idxP1]);
+                Quaternion P1RQ = Quaternion.identity;
+                P1RQ.eulerAngles = new Vector3(P1ROT_rightHandX[idxP1], P1ROT_rightHandX[idxP1], P1ROT_rightHandX[idxP1]);
+
+                //P2
+                Vector3 P2HV3 = new Vector3(P2headX[idxP2], P2headY[idxP2], P2headZ[idxP2]);
+                Quaternion P2HQ = Quaternion.identity;
+                P2HQ.eulerAngles = new Vector3(P2ROT_headX[idxP2], P2ROT_headY[idxP2], P2ROT_headZ[idxP2]);
+
+                Vector3 P2LV3 = new Vector3(P2leftHandX[idxP2], P2leftHandY[idxP2], P2leftHandZ[idxP2]);
+                Quaternion P2LQ = Quaternion.identity;
+                P2LQ.eulerAngles = new Vector3(P2ROT_leftHandX[idxP2], P2ROT_leftHandY[idxP2], P2ROT_leftHandZ[idxP2]);
+
+                Vector3 P2RV3 = new Vector3(P2rightHandX[idxP2], P2rightHandX[idxP2], P2rightHandX[idxP2]);
+                Quaternion P2RQ = Quaternion.identity;
+                P2RQ.eulerAngles = new Vector3(P2ROT_rightHandX[idxP2], P2ROT_rightHandX[idxP2], P2ROT_rightHandX[idxP2]);
+
+                UpdateDistribuitedCubesP(P1HV3, P1HQ, P1LV3, P1LQ, P1RV3, P1RQ, P1startingHeadPos, P2HV3, P2HQ, P2LV3, P2LQ, P2RV3, P2RQ, P2startingHeadPos);
+
+                idxP1++;
+                idxP2++;
+                timeInterval = slowness;
+            }
+
+        }
+
+        if (rewind)
+        {
+            if (timeInterval > 0)
+            {
+                timeInterval -= Time.deltaTime;
+            }
+            else if (idx < 29056)
+            {
+                UpdateHeadAndHands(idxP1, idxP2);
+
+                //P1
+                Vector3 P1HV3 = new Vector3(P1headX[idxP1], P1headY[idxP1], P1headZ[idxP1]);
+                Quaternion P1HQ = Quaternion.identity;
+                P1HQ.eulerAngles = new Vector3(P1ROT_headX[idxP1], P1ROT_headY[idxP1], P1ROT_headZ[idxP1]);
+
+                Vector3 P1LV3 = new Vector3(P1leftHandX[idxP1], P1leftHandY[idxP1], P1leftHandZ[idxP1]);
+                Quaternion P1LQ = Quaternion.identity;
+                P1LQ.eulerAngles = new Vector3(P1ROT_leftHandX[idxP1], P1ROT_leftHandY[idxP1], P1ROT_leftHandZ[idxP1]);
+
+                Vector3 P1RV3 = new Vector3(P1rightHandX[idxP1], P1rightHandX[idxP1], P1rightHandX[idxP1]);
+                Quaternion P1RQ = Quaternion.identity;
+                P1RQ.eulerAngles = new Vector3(P1ROT_rightHandX[idxP1], P1ROT_rightHandX[idxP1], P1ROT_rightHandX[idxP1]);
+
+                //P2
+                Vector3 P2HV3 = new Vector3(P2headX[idxP2], P2headY[idxP2], P2headZ[idxP2]);
+                Quaternion P2HQ = Quaternion.identity;
+                P2HQ.eulerAngles = new Vector3(P2ROT_headX[idxP2], P2ROT_headY[idxP2], P2ROT_headZ[idxP2]);
+
+                Vector3 P2LV3 = new Vector3(P2leftHandX[idxP2], P2leftHandY[idxP2], P2leftHandZ[idxP2]);
+                Quaternion P2LQ = Quaternion.identity;
+                P2LQ.eulerAngles = new Vector3(P2ROT_leftHandX[idxP2], P2ROT_leftHandY[idxP2], P2ROT_leftHandZ[idxP2]);
+
+                Vector3 P2RV3 = new Vector3(P2rightHandX[idxP2], P2rightHandX[idxP2], P2rightHandX[idxP2]);
+                Quaternion P2RQ = Quaternion.identity;
+                P2RQ.eulerAngles = new Vector3(P2ROT_rightHandX[idxP2], P2ROT_rightHandX[idxP2], P2ROT_rightHandX[idxP2]);
+
+                UpdateDistribuitedCubesP(P1HV3, P1HQ, P1LV3, P1LQ, P1RV3, P1RQ, P1startingHeadPos, P2HV3, P2HQ, P2LV3, P2LQ, P2RV3, P2RQ, P2startingHeadPos);
+
+                idxP1--;
+                idxP2--;
+                timeInterval = slowness;
+            }
+        }
+
     }
 
     void SpawnHeadAndHands()
@@ -413,7 +660,7 @@ public class CsvReader : MonoBehaviour
             {
                 if (lineNumber % 2 == 0)
                 {
-                    Debug.Log(line);
+                   // Debug.Log(line);
 
                     if (lineNumber != 0)
                     {
@@ -742,13 +989,72 @@ public class CsvReader : MonoBehaviour
 
     void BigifyHHCubes(GameObject headCube, GameObject leftHandCube, GameObject rightHandCube)
     {
-
         headCube.transform.localScale = Vector3.one * 0.4f;
 
         leftHandCube.transform.localScale = Vector3.one * 0.1f;
 
         rightHandCube.transform.localScale = Vector3.one * 0.1f;
+    }
 
+    void ColourEDSeparate(GameObject[] headCubes, GameObject[] leftHandCubes, GameObject[] rightHandCubes, Color headCol, Color leftCol, Color rightCol)
+    {
+        for (int i = 0; i < headCubes.Length; i++)
+        {
+            headCubes[i].GetComponent<Renderer>().material = colMat;
+
+            headCubes[i].GetComponent<Renderer>().material.SetColor("_Color", headCol);
+        }
+
+        for (int i = 0; i < leftHandCubes.Length; i++)
+        {
+            leftHandCubes[i].GetComponent<Renderer>().material = colMat;
+
+            leftHandCubes[i].GetComponent<Renderer>().material.SetColor("_Color", leftCol);
+        }
+
+        for (int i = 0; i < rightHandCubes.Length; i++)
+        {
+            rightHandCubes[i].GetComponent<Renderer>().material = colMat;
+
+            rightHandCubes[i].GetComponent<Renderer>().material.SetColor("_Color", rightCol);
+        }
+    }
+
+    void ColourEDOriginal(GameObject[] headCubes, GameObject[] leftHandCubes, GameObject[] rightHandCubes)
+    {
+        for (int i = 0; i < headCubes.Length; i++)
+        {
+            headCubes[i].GetComponent<Renderer>().material = originalMat;
+        }
+
+        for (int i = 0; i < leftHandCubes.Length; i++)
+        {
+            leftHandCubes[i].GetComponent<Renderer>().material = originalMat;
+        }
+
+        for (int i = 0; i < rightHandCubes.Length; i++)
+        {
+            rightHandCubes[i].GetComponent<Renderer>().material = originalMat;
+        }
+    }
+
+    void ColourHHSeparate(GameObject headCube, GameObject leftHandCube, GameObject rightHandCube, Color headCol, Color leftCol, Color rightCol)
+    {
+        headCube.GetComponent<Renderer>().material = colMat;
+        leftHandCube.GetComponent<Renderer>().material = colMat;
+        rightHandCube.GetComponent<Renderer>().material = colMat;
+
+        headCube.GetComponent<Renderer>().material.SetColor("_Color", headCol);              
+            leftHandCube.GetComponent<Renderer>().material.SetColor("_Color", leftCol);               
+            rightHandCube.GetComponent<Renderer>().material.SetColor("_Color", rightCol);
+        
+    }
+
+    void ColourHHOriginal(GameObject headCube, GameObject leftHandCube, GameObject rightHandCube)
+    {
+        headCube.GetComponent<Renderer>().material = originalMat;
+        leftHandCube.GetComponent<Renderer>().material = originalMat;
+        rightHandCube.GetComponent<Renderer>().material = originalMat;
 
     }
 

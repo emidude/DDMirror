@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.5372549, g: 0.5372549, b: 0.5372549, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 0e7c2f4d70314c8499cce94162ef09e8,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -246,6 +247,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f376cccb405d74eb61a22658465140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colMat: {fileID: 2100000, guid: 0875b47be5c2d4a4ebc2310528e09487, type: 2}
+  originalMat: {fileID: 2100000, guid: 9f2acf09ca9ff604097c8b724b111ff4, type: 2}
+  P1headColour: {r: 1, g: 0.1077913, b: 0, a: 1}
+  P1leftColour: {r: 1, g: 0, b: 0.5939965, a: 1}
+  P1rightColour: {r: 1, g: 0.59524024, b: 0, a: 1}
+  P2headColour: {r: 0, g: 0, b: 1, a: 1}
+  P2leftColour: {r: 0.11213954, g: 0.6792453, b: 0.34144756, a: 1}
+  P2rightColour: {r: 0.40722752, g: 1, b: 1, a: 1}
+  P1colorSwitch: 0
+  P2colorSwitch: 0
+  slowness: 0.005
+  P1DanceCondition: ED
+  P2DanceCondition: HH
+  P1distributed: 1
+  P1headhands: 0
+  P2distributed: 0
+  P2headhands: 1
   cubePf: {fileID: 1645494586563644427, guid: 20db19aa24a744d438e09dd1c82ee343, type: 3}
 --- !u!4 &358161024
 Transform:
