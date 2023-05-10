@@ -258,7 +258,9 @@ MonoBehaviour:
   P1colorSwitch: 0
   P2colorSwitch: 0
   slowness: 0.005
-  P1DanceCondition: ED
+  P1Name: P6_
+  P2Name: P7_
+  P1DanceCondition: HH
   P2DanceCondition: HH
   P1distributed: 1
   P1headhands: 0

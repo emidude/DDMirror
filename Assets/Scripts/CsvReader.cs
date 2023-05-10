@@ -35,19 +35,79 @@ public class CsvReader : MonoBehaviour
     public float slowness = 0.005f;
     float timeInterval;
 
-    string timeSeriesFileP1 = @"Assets/CSVFiles/20230202_183359participantNumber6session1conditionA.log.csv";
-    string timeSeriesFileP2 = @"Assets/CSVFiles/20230202_182214participantNumber6session3conditionH.log.csv";
+    string P6_C0_ED = @"Assets/CSVFiles/P6P7/20230202_181006participantNumber6session0conditionA.log.csv";
+    string P6_C1_ED = @"Assets/CSVFiles/P6P7/20230202_183359participantNumber6session1conditionA.log.csv";
+    string P6_C2_HH = @"Assets/CSVFiles/P6P7/20230202_175354participantNumber6session2conditionH.log.csv";
+    string P6_C3_HH = @"Assets/CSVFiles/P6P7/20230202_182214participantNumber6session3conditionH.log.csv";
 
-    string P1Name = "P6_";
-    string P2Name = "P7_";
+    string P7_C0_ED = @"Assets/CSVFiles/P6P7/20230202_181014participantNumber7session0conditionA.log.csv";
+    string P7_C1_HH = @"Assets/CSVFiles/P6P7/20230202_183407participantNumber7session1conditionH.log.csv";
+    string P7_C2_ED = @"Assets/CSVFiles/P6P7/20230202_175402participantNumber7session2conditionA.log.csv";
+    string P7_C3_HH = @"Assets/CSVFiles/P6P7/20230202_182222participantNumber7session3conditionH.log.csv";
 
-    public string P1DanceCondition = "ED";
-    public string P2DanceCondition = "HH";
+    string P8_C0_ED = @"Assets/CSVFiles/P8P9/20230204_154905participantNumber8session0conditionA.log.csv";
+    string P8_C1_ED = @"Assets/CSVFiles/P8P9/20230204_152810participantNumber8session1conditionA.log.csv";
+    string P8_C2_HH = @"Assets/CSVFiles/P8P9/20230204_153907participantNumber8session2conditionH.log.csv";
+    string P8_C3_HH = @"Assets/CSVFiles/P8P9/20230204_151736participantNumber8session3conditionH.log.csv";
 
-    public bool P1distributed = true;
-    public bool P1headhands = false;
-    public bool P2distributed = false;
-    public bool P2headhands = true;
+    string P9_C0_ED = @"Assets/CSVFiles/P8P9/20230204_154917participantNumber9session0conditionA.log.csv";
+    string P9_C1_HH = @"Assets/CSVFiles/P8P9/20230204_152820participantNumber9session1conditionH.log.csv";
+    string P9_C2_ED = @"Assets/CSVFiles/P8P9/20230204_153914participantNumber9session2conditionA.log.csv";
+    string P9_C3_HH = @"Assets/CSVFiles/P8P9/20230204_151743participantNumber9session3conditionH.log.csv";
+
+    string P12_C0_ED = @"Assets/CSVFiles/P12P13/20230206_130000participantNumber12session0conditionA.log.csv";
+    string P12_C1_ED = @"Assets/CSVFiles/P12P13/20230206_123526participantNumber12session1conditionA.log.csv";
+    string P12_C2_HH = @"Assets/CSVFiles/P12P13/20230206_124804participantNumber12session2conditionH.log.csv";
+    string P12_C3_HH = @"Assets/CSVFiles/P12P13/20230206_131100participantNumber12session3conditionH.log.csv";
+
+    string P13_C0_ED = @"Assets/CSVFiles/P12P13/20230206_130009participantNumber13session0conditionA.log.csv";
+    string P13_C1_HH = @"Assets/CSVFiles/P12P13/20230206_123545participantNumber13session1conditionH.log.csv";
+    string P13_C2_ED = @"Assets/CSVFiles/P12P13/20230206_124810participantNumber13session2conditionA.log.csv";
+    string P13_C3_HH = @"Assets/CSVFiles/P12P13/20230206_131106participantNumber13session3conditionH.log.csv";
+
+    string P14_C0_ED = @"Assets/CSVFiles/P14P15/20230206_153758participantNumber14session0conditionA.log.csv";
+    string P14_C1_ED = @"Assets/CSVFiles/P14P15/20230206_155043participantNumber14session1conditionA.log.csv";
+    string P14_C2_HH = @"Assets/CSVFiles/P14P15/20230206_160217participantNumber14session2conditionH.log.csv";
+    string P14_C3_HH = @"Assets/CSVFiles/P14P15/20230206_152320participantNumber14session3conditionH.log.csv";
+
+    string P15_C0_ED = @"Assets/CSVFiles/P14P15/20230206_153830participantNumber15session0conditionA.log.csv";
+    string P15_C1_HH = @"Assets/CSVFiles/P14P15/20230206_155050participantNumber15session1conditionH.log.csv";
+    string P15_C2_ED = @"Assets/CSVFiles/P14P15/20230206_160224participantNumber15session2conditionA.log.csv";
+    string P15_C3_HH = @"Assets/CSVFiles/P14P15/20230206_152326participantNumber15session3conditionH.log.csv";
+
+    string P16_C0_ED = @"Assets/CSVFiles/P16P17/20230206_205236participantNumber16session0conditionA.log.csv";
+    string P16_C1_ED = @"Assets/CSVFiles/P16P17/20230206_201208participantNumber16session1conditionA.log.csv";
+    string P16_C2_HH = @"Assets/CSVFiles/P16P17/20230206_203947participantNumber16session2conditionH.log.csv";
+    string P16_C3_HH = @"Assets/CSVFiles/P16P17/20230206_202432participantNumber16session3conditionH.log.csv";
+
+    string P17_C0_ED = @"Assets/CSVFiles/P16P17/20230206_205250participantNumber17session0conditionA.log.csv";
+    string P17_C1_HH = @"Assets/CSVFiles/P16P17/20230206_201302participantNumber17session1conditionH.log.csv";
+    string P17_C2_ED = @"Assets/CSVFiles/P16P17/20230206_204003participantNumber17session2conditionA.log.csv";
+    string P17_C3_HH = @"Assets/CSVFiles/P16P17/20230206_202441participantNumber17session3conditionH.log.csv";
+
+    string P20_C0_ED = @"Assets/CSVFiles/P20P21/20230207_190845participantNumber20session0conditionA.log.csv";
+    string P20_C1_ED = @"Assets/CSVFiles/P20P21/20230207_185131participantNumber20session1conditionA.log.csv";
+    string P20_C2_HH = @"Assets/CSVFiles/P20P21/20230207_183444participantNumber20session2conditionH.log.csv";
+    string P20_C3_HH = @"Assets/CSVFiles/P20P21/20230207_192135participantNumber20session3conditionH.log.csv";
+
+    string P21_C0_ED = @"Assets/CSVFiles/P20P21/20230207_190856participantNumber21session0conditionA.log.csv";
+    string P21_C1_HH = @"Assets/CSVFiles/P20P21/20230207_185141participantNumber21session1conditionH.log.csv";
+    string P21_C2_HH = @"Assets/CSVFiles/P20P21/20230207_183453participantNumber21session2conditionA.log.csv";
+    string P21_C3_ED = @"Assets/CSVFiles/P20P21/20230207_192144participantNumber21session3conditionH.log.csv";
+
+    string timeSeriesFileP1;
+    string timeSeriesFileP2;
+
+    public string P1Name;
+    public string P2Name;
+
+    public string P1DanceCondition;
+    public string P2DanceCondition;
+
+    public bool P1distributed;
+    public bool P1headhands;
+    public bool P2distributed;
+    public bool P2headhands;
 
     bool old_P1distributed = true;
     bool old_P1headhands = false;
@@ -130,8 +190,45 @@ public class CsvReader : MonoBehaviour
 
     void Start()
     {
-         old_P1headColour = P1headColour;
-         old_P1leftColour = P1leftColour;
+        timeSeriesFileP1 = P13_C3_HH;
+        timeSeriesFileP2 = P12_C3_HH;
+        
+        P1Name = GetParticipantName(timeSeriesFileP1);
+        P1DanceCondition = GetParticipantDanceCondition(timeSeriesFileP1);
+
+        P2Name = GetParticipantName(timeSeriesFileP2);
+        P2DanceCondition = GetParticipantDanceCondition(timeSeriesFileP2);
+
+
+        if (P1DanceCondition == "ED")
+        {
+            P1distributed = true;
+            P1headhands = false;
+        }
+        else if (P1DanceCondition == "HH")
+        {
+            P1distributed = false;
+            P1headhands = true;
+        }
+
+        if (P2DanceCondition == "ED")
+        {
+            P2distributed = true;
+            P2headhands = false;
+        }
+        else if (P2DanceCondition == "HH")
+        {
+            P2distributed = false;
+            P2headhands = true;
+        }
+
+        //Debug.Log(P1Name + P1DanceCondition + P2Name + P2DanceCondition);
+
+
+        
+
+        old_P1headColour = P1headColour;
+        old_P1leftColour = P1leftColour;
          old_P1rightColour = P1rightColour;
 
          old_P2headColour = P2headColour;
@@ -192,8 +289,8 @@ public class CsvReader : MonoBehaviour
             }
         }
 
-        Debug.Log(lineNumber);
-        Debug.Log(idx);
+       // Debug.Log(lineNumber);
+     //   Debug.Log(idx);
         lineNumber = 0;
         idx = 0;
 
@@ -248,8 +345,8 @@ public class CsvReader : MonoBehaviour
             }
         }
 
-        Debug.Log(lineNumber);
-        Debug.Log(idx);
+       // Debug.Log(lineNumber);
+       // Debug.Log(idx);
 
         int P1StartIdx = GetPsongStartIdx(timeSeriesFileP1);
         int P2StartIdx = GetPsongStartIdx(timeSeriesFileP2);
@@ -268,34 +365,12 @@ public class CsvReader : MonoBehaviour
         P1startingHeadPos = GetStartingHeadPos(timeSeriesFileP1);
         P2startingHeadPos = GetStartingHeadPos(timeSeriesFileP2);
 
-        /* if (P1DanceCondition == "HH")
-         {
-             //SpawnHeadAndHands(P1HeadGO, );
-             string cubeName = "";
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///
 
-             P1HeadGO = Instantiate(cubePf);
-             P1HeadGO.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
-             P1HeadGO.transform.SetParent(transform, false);
-             cubeName = P1Name + "head";
-             P1HeadGO.name = cubeName;
+       // P1startingHeadPos = Vector3.zero;
+       // P2startingHeadPos = Vector3.zero;
 
-             P1LeftHandGO = Instantiate(cubePf);
-             P1LeftHandGO.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-             P1LeftHandGO.transform.SetParent(transform, false);
-             cubeName = P1Name + "leftHand";
-             P1LeftHandGO.name = cubeName;
-
-             P1RightHandGO = Instantiate(cubePf);
-             P1RightHandGO.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-             P1RightHandGO.transform.SetParent(transform, false);
-             cubeName = P1Name + "rightHand";
-             P1RightHandGO.name = cubeName;
-         }
-         else if (P1DanceCondition == "ED")
-         {
-
-         }
-         SpawnDistributedCubes();*/
 
         SpawnAllCubes(P1DanceCondition, P2DanceCondition);
 
@@ -332,10 +407,12 @@ public class CsvReader : MonoBehaviour
         }
         if (Input.GetKeyDown("a"))
         {
+            Debug.Log("slwong");
             slowness += 0.0005f;
         }
         if (Input.GetKeyDown("s"))
         {
+            Debug.Log("fasting");
             slowness -= 0.0005f;
         }
 
@@ -538,7 +615,7 @@ public class CsvReader : MonoBehaviour
 
     void SpawnHeadAndHands()
     {
-        Debug.Log("spawning head n hands");
+       // Debug.Log("spawning head n hands");
         string cubeName = "";
 
         P1HeadGO = Instantiate(cubePf);
@@ -627,7 +704,7 @@ public class CsvReader : MonoBehaviour
                      
                         if(parts[0] != "" && notFoundStartYet)
                         {
-                            Debug.Log("song starts here! + Pidx = " + idx);
+                          //  Debug.Log("song starts here! + Pidx = " + idx);
                             notFoundStartYet = false;
                             songStartIdx = idx;
                         }
@@ -668,11 +745,11 @@ public class CsvReader : MonoBehaviour
 
                         if (parts[0] != "" && notFoundStartYet)
                         {
-                            Debug.Log("song starts here! + Pidx = " + idx);
+                            //Debug.Log("song starts here! + Pidx = " + idx);
                             notFoundStartYet = false;
                            // songStartIdx = idx;
                            startHeadPos = new Vector3( Single.Parse(parts[2]),  Single.Parse(parts[3]), Single.Parse(parts[4]));
-                            Debug.Log("startHeadPos=" + startHeadPos);
+                           // Debug.Log("startHeadPos=" + startHeadPos);
                         }
 
                     }
@@ -690,7 +767,7 @@ public class CsvReader : MonoBehaviour
 
     void SpawnDistributedCubes()
     {
-        Debug.Log("spoawing cubes");
+       // Debug.Log("spoawing cubes");
 
         string cubeName = "";
 
@@ -938,17 +1015,17 @@ public class CsvReader : MonoBehaviour
         for (int i = 0; i < headCubes.Length; i++)
         {
             headCubes[i].transform.localScale = Vector3.zero;
-            Debug.Log("smolifying " + headCubes[i].name);
+            //Debug.Log("smolifying " + headCubes[i].name);
         }
         for (int i = 0; i < leftHandCubes.Length; i++)
         {
             leftHandCubes[i].transform.localScale = Vector3.zero;
-            Debug.Log("smolifying " + leftHandCubes[i].name);
+            //Debug.Log("smolifying " + leftHandCubes[i].name);
         }
         for (int i = 0; i < rightHandCubes.Length; i++)
         {
             rightHandCubes[i].transform.localScale = Vector3.zero;
-            Debug.Log("smolifying " + rightHandCubes[i].name);
+            //Debug.Log("smolifying " + rightHandCubes[i].name);
 
         }
 
@@ -958,14 +1035,14 @@ public class CsvReader : MonoBehaviour
     {
         
             headCube.transform.localScale = Vector3.zero;
-        Debug.Log("smolifying " + headCube.name);
+        //Debug.Log("smolifying " + headCube.name);
 
 
         leftHandCube.transform.localScale = Vector3.zero;
-        Debug.Log("smolifying " + leftHandCube.name);
+        //Debug.Log("smolifying " + leftHandCube.name);
 
         rightHandCube.transform.localScale = Vector3.zero;
-        Debug.Log("smolifying " + rightHandCube.name);
+        //Debug.Log("smolifying " + rightHandCube.name);
 
 
     }
@@ -1058,5 +1135,103 @@ public class CsvReader : MonoBehaviour
 
     }
 
+    string GetParticipantName(string path)
+    {
+        string[] pathParts = path.Split('/');
+        string filename = pathParts[pathParts.Length - 1];
+        //string[] nameParts = filename.Split(new char[] { '.', '_' });
+        string[] nameParts = filename.Split(new char[] { '_' });
+        string participantNumber = "";
+        foreach (string namePart in nameParts)
+        {
+            if (namePart.Contains("participantNumber"))
+            {
+                int startIndex = namePart.IndexOf("participantNumber") + "participantNumber".Length;
+                int endIndex = namePart.IndexOf("session");
+                if (endIndex == -1) endIndex = namePart.Length;
+                participantNumber = namePart.Substring(startIndex, endIndex - startIndex);
+            }
+        }
+
+        //the following concats so name = ParticpantNumber_StudyConditionNumber_ParticipantDanceCondition
+        //but currently only want participantNumber
+        //but keeping as might want other vars for csv or sth
+
+        /*string sessionNumber = "";
+        foreach (string namePart in nameParts)
+        {
+            if (namePart.Contains("session"))
+            {
+                int startIndex = namePart.IndexOf("session") + "session".Length;
+                int endIndex = namePart.IndexOf("condition");
+                if (endIndex == -1) endIndex = namePart.Length;
+                sessionNumber = namePart.Substring(startIndex, endIndex - startIndex);
+            }
+        }
+        string conditionLetter = "";
+        foreach (string namePart in nameParts)
+        {
+            if (namePart.Contains("condition"))
+            {
+                int startIndex = namePart.IndexOf("condition") + "condition".Length;
+                int endIndex = namePart.IndexOf(".log");
+                if (endIndex == -1) endIndex = namePart.Length;
+                conditionLetter = namePart.Substring(startIndex, endIndex - startIndex);
+                if (conditionLetter == "A")
+                {
+                    conditionLetter = "ED";
+                }
+                else if (conditionLetter == "H")
+                {
+                    conditionLetter = "HH";
+                }
+                else
+                {
+                    Debug.Log("ERROR: condition number faulty");
+                }
+            }
+        }
+
+
+        string nnnnname = "P" + participantNumber + "_C" + sessionNumber + "_" + conditionLetter;*/
+
+        string nnnnname = "P" + participantNumber + "_";
+
+        return nnnnname;
+    }
+
+    string GetParticipantDanceCondition(string path)
+    {
+        string[] pathParts = path.Split('/');
+        string filename = pathParts[pathParts.Length - 1];
+        //string[] nameParts = filename.Split(new char[] { '.', '_' });
+        string[] nameParts = filename.Split(new char[] { '_' });
+        string participantNumber = "";
+       
+        string conditionLetter = "";
+        foreach (string namePart in nameParts)
+        {
+            if (namePart.Contains("condition"))
+            {
+                int startIndex = namePart.IndexOf("condition") + "condition".Length;
+                int endIndex = namePart.IndexOf(".log");
+                if (endIndex == -1) endIndex = namePart.Length;
+                conditionLetter = namePart.Substring(startIndex, endIndex - startIndex);
+                if (conditionLetter == "A")
+                {
+                    conditionLetter = "ED";
+                }
+                else if (conditionLetter == "H")
+                {
+                    conditionLetter = "HH";
+                }
+                else
+                {
+                    Debug.Log("ERROR: condition number faulty");
+                }
+            }
+        }
+        return conditionLetter;
+    }
 
 }
