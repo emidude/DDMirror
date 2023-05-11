@@ -24,6 +24,7 @@ TagManager:
   - human
   - sliderHandle
   - sliderHandle2
+  - tagInput
   layers:
   - Default
   - TransparentFX

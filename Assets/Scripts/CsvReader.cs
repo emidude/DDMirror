@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using UnityEngine.UI;
 
 public class CsvReader : MonoBehaviour
 {
@@ -188,8 +189,14 @@ public class CsvReader : MonoBehaviour
     bool paused = false;
     bool forwards = true;
 
+    public GameObject textInputGO;
+    public InputField textInputField;
+    public TagLogger TL;
+
     void Start()
     {
+        textInputGO.SetActive(false);
+
         timeSeriesFileP1 = P13_C3_HH;
         timeSeriesFileP2 = P12_C3_HH;
         
@@ -198,6 +205,10 @@ public class CsvReader : MonoBehaviour
 
         P2Name = GetParticipantName(timeSeriesFileP2);
         P2DanceCondition = GetParticipantDanceCondition(timeSeriesFileP2);
+
+        string expmtCondition = GetExpmntCondition(timeSeriesFileP1);
+
+        TL.WriteTagHeader(P1Name, P2Name, expmtCondition, P1DanceCondition, P2DanceCondition);
 
 
         if (P1DanceCondition == "ED")
@@ -379,16 +390,17 @@ public class CsvReader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+       /* if (Input.GetKeyDown("space"))
         {
             Debug.Log("P1 csv idx = " + idxP1 + ", P1 time = " + P1Time[idxP1] + ".  P2 csv idx = " + idxP2 + ", P2 time = " + P2Time[idxP2]);
-        }
+        }*/
         if (Input.GetKeyDown("left"))
         {
             Debug.Log("rewinding");
             rewind = true;
             paused = false;
             forwards = false;
+            textInputGO.SetActive(false);
         }
         if (Input.GetKeyDown("right"))
         {
@@ -396,21 +408,24 @@ public class CsvReader : MonoBehaviour
             rewind = false;
             paused = false;
             forwards = true;
+            textInputGO.SetActive(false);
+
         }
         //if (Input.GetKeyDown("down"))
-        if(Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             Debug.Log("paused");
             rewind = false;
             paused = true;
             forwards = false;
+            textInputGO.SetActive(true);
         }
-        if (Input.GetKeyDown("a"))
+        if (Input.GetKeyDown("1"))
         {
             Debug.Log("slwong");
             slowness += 0.0005f;
         }
-        if (Input.GetKeyDown("s"))
+        if (Input.GetKeyDown("2"))
         {
             Debug.Log("fasting");
             slowness -= 0.0005f;
@@ -1232,6 +1247,39 @@ public class CsvReader : MonoBehaviour
             }
         }
         return conditionLetter;
+    }
+
+    string GetExpmntCondition(string path)
+    {
+        string[] pathParts = path.Split('/');
+        string filename = pathParts[pathParts.Length - 1];
+       
+        string[] nameParts = filename.Split(new char[] { '_' });
+       
+        string sessionNumber = "";
+        foreach (string namePart in nameParts)
+        {
+            if (namePart.Contains("session"))
+            {
+                int startIndex = namePart.IndexOf("session") + "session".Length;
+                int endIndex = namePart.IndexOf("condition");
+                if (endIndex == -1) endIndex = namePart.Length;
+                sessionNumber = namePart.Substring(startIndex, endIndex - startIndex);
+            }
+        }
+        return sessionNumber;
+    }
+
+    public void OnSubmitStringAAAAAAAAAA()
+    {      
+        string t = textInputField.text;
+
+        Debug.Log("Text =" + t +  " P1 csv idx = " + idxP1 + ", P1 time = " + P1Time[idxP1] + ".  P2 csv idx = " + idxP2 + ", P2 time = " + P2Time[idxP2]);
+
+        string p1Time = P1Time[idxP1];
+        string p2Time = P2Time[idxP2];
+        TL.TagTextInput(idxP1.ToString(), p1Time, idxP2.ToString(), p2Time, t);
+        textInputField.text = "";
     }
 
 }
