@@ -197,8 +197,8 @@ public class CsvReader : MonoBehaviour
     {
         textInputGO.SetActive(false);
 
-        timeSeriesFileP1 = P13_C3_HH;
-        timeSeriesFileP2 = P12_C3_HH;
+        timeSeriesFileP1 = P8_C3_HH;
+        timeSeriesFileP2 = P9_C3_HH;
         
         P1Name = GetParticipantName(timeSeriesFileP1);
         P1DanceCondition = GetParticipantDanceCondition(timeSeriesFileP1);

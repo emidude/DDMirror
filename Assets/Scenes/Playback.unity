@@ -519,14 +519,14 @@ MonoBehaviour:
   P1colorSwitch: 0
   P2colorSwitch: 0
   slowness: 0.005
-  P1Name: P6_
-  P2Name: P7_
-  P1DanceCondition: HH
-  P2DanceCondition: HH
-  P1distributed: 1
+  P1Name: 
+  P2Name: 
+  P1DanceCondition: 
+  P2DanceCondition: 
+  P1distributed: 0
   P1headhands: 0
   P2distributed: 0
-  P2headhands: 1
+  P2headhands: 0
   cubePf: {fileID: 1645494586563644427, guid: 20db19aa24a744d438e09dd1c82ee343, type: 3}
   textInputGO: {fileID: 1632709724}
   textInputField: {fileID: 54761970}
